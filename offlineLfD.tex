@@ -149,8 +149,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{abstract}
-Learning from demonstration algorithms has historically been divided into two categories, supervised and active. Empirically it has been shown active learning from demonstrations perform better than supervised, which has been attributed to training on the distribution induced by the robot's policy. We argue that this success is also because of the supervisor's policy not being in the same function class of the robot's policy, or not realizable. When the supervisor's policy is realizable, we show theoretically active learning from demonstration techniques can lead to slower convergence to the true supervisor's policy. We also demonstrate situations where active learning from demonstration techniques fail to converge, but supervised is guaranteed to. Experimentally, we use boosting to obtain realizibility and apply supervised learning to a  robot manipulation task, singulation. 
-
+Learning from demonstration algorithms has historically been divided into two categories, supervised and active. Empirically it has been shown in robotics, active learning from demonstrations perform better than supervised, which has been attributed to training on the distribution induced by the robot's policy. We argue that this success is also because the supervisor's policy  is not in the same function class of the robot's policy, or not realizable. However with recent advances in boosting and deep learning, situations where realizibility is possible could be more prevalent.  We show theoretically, when the supervisor's policy is realizable, active learning from demonstration techniques can lead to slower convergence to the true supervisor's policy. We also show when the supervisor's policy is only realizable on states they are likely to visit. , active techniques can fail to converge, but supervised learning is guaranteed to.
  \end{abstract}
 
 
@@ -426,12 +425,47 @@ The key take away from from this theorem  is that at a non-asymptotic rate of de
 
 In active LfD, instead of collecting all $m$ demonstrations as samples from $p(\tau |\tilde{\pi})$, at each $k$ iteration  samples are taken from the current policy distribution $p(\tau|\hat{\theta}_k)$.  
 
-Since, we assume the supervisor's policy is realizable in all parts of the workspace, then we can still determine $\tilde{\pi}$ from this sampled data. However, because we previously showed that the $\hat{\theta}$ will converge to $\tilde{\pi}$, then sampling from a distribution that isn't $p(\tau|\tilde{\pi})$ could result in querying the supervisor for demonstrations that are not informative. \mlnote{writing a formal proof for this, will update} Thus, resulting in a potentially slower convergence. We demonstrate this effect experimentally in Sec. \ref{sec:gdw}. 
+Since, we assume the supervisor's policy is realizable in all parts of the workspace, then we can still determine $\tilde{\pi}$ from this sampled data. However, because we previously showed that the $\hat{\theta}$ will converge to $\tilde{\pi}$, then sampling from a distribution that isn't $p(\tau|\tilde{\pi})$ could result in querying the supervisor for demonstrations that are not informative. 
+
+\begin{theorem}\label{thm:sup}
+For a policy, $\hat{\theta}$ found via DAgger, from $m$ trajectories collected from the supervisor the following is true with probability at least $1- 2\mbox{exp} (-m\delta^2/8)$
+
+$$E_{p(\tau|\tilde{\pi})} l(\pi_{\hat{\theta}}, \tilde{\pi}) \leq B(k)+ 2R_{\Theta}(m) + \delta+ O(\frac{1}{\sqrt{m}})$$\\
+
+\end{theorem}
+
+\begin{proof}
+We start out by trying to bound the surrogate loss on the distributions trained on and the best policy: 
+
+\begin{align*}
+&E_{\sum p(\tau|\theta_k)} l(\pi_{\hat{\theta}_k}) - E_{\sum p(\tau|\theta_k)} l(\theta^*)\\
+&=  E_{\sum p(\tau|\theta_k)} l(\pi_{\hat{\theta}_k}) - E_{\sum p(E_{\sum p(\tau|\tilde{\pi})} l(\pi_{\hat{\theta}_k}))} +E_{\sum p(\tau|\theta_k)} l(\pi_{\hat{\theta}_k})\\
+&\leq E_{p(\tau|\tilde{\pi})} l(\pi_{\hat{\theta}_k}) + \int l(\tau) d\tau \int p(\tau|\theta_k) - p(\tau|\tilde{\pi}) d\tau\\
+&\leq E_{p(\tau|\tilde{\pi})} l(\pi_{\hat{\theta}_k}) + 2||p(\tau|\theta_k) - p(\tau|\tilde{\pi})||_{TV}
+\end{align*}
+
+We then leverage the previous sample complexity bounds from Theorem \ref{thm:sup}. Thus, showing that in can require more data to achieve convergence to the true distribution. 
+
+
+\end{proof}
+
+ Thus, resulting in a potentially slower convergence. We demonstrate this effect experimentally in Sec. \ref{sec:gdw}. 
 
 \subsection{Realizable only on Supervisor's Support}
 Consider the situation, where the supervisor is only realizable on the places they are likely to visit, or within the support of $p(\tau|\tilde{\pi})$. 
 
 For instance if a supervisor trying to teach the task of driving down a highway, then they will stay within the lanes of the road and have a relatively smooth policy of going forward at a constant speed. However, if the supervisor is forced to veer off the road their resulting policy will become a much more complex maneuver to avoid crashing. 
+
+\begin{figure}
+\centering
+\includegraphics{f_figs/dif_support.eps}
+\caption{
+    \footnotesize
+An illustration of when the supervisor is realizable only on the support of its policy. In this situation, the trajectories from supervised learning stay within the region with a function class size of $\Theta$. However, because DAgger rolls out a policy that can make mistakes it could collect data in a region where the supervisor's policy has a function class of $\Theta +\Xi$, where $\Theta+\Xi \geq \Theta$. Thus, requiring a larger function class to converge. }
+\vspace*{-20pt}
+\label{fig:var}
+\end{figure}
+
 
 While supervised LfD never forces the supervisor to visit these states, active LfD  could learn a  policy that includes data from these more complex regions. Thus, potentially preventing active Lfd from ever converging to the true supervisor. Denote $\hat{\theta}_S$ as the policy found by supervisor LfD and $\hat{\theta}_a$ as that found by active LfD and $m$ the number of demonstrations. \\
 
