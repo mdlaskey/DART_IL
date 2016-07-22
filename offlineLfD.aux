@@ -26,12 +26,12 @@
 \citation{ross2010efficient}
 \citation{ross2010reduction}
 \citation{ross2013learning}
-\citation{anthony2009neural}
+\citation{vapnik2013nature}
 \citation{buhlmann2003boosting}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  An illustration of the of realizable. Denote a policy class $\Theta $ and a supervisor policy $\mathaccentV {tilde}07E{\pi }$, the supervisor's policy is realizable if it is contained in $\Theta $. We also illustrate Boosting, which can be thought of as attempting to grow the function class to achieve realizibility.\relax }}{1}{figure.caption.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  An illustration of the of realizable. Denote a policy class $\Theta $ and a supervisor policy $\mathaccentV {tilde}07E{\pi }$, the supervisor's policy is realizable if it is contained in $\Theta $. We also illustrate Boosting, which can be thought of as adding to the function class to achieve realizability.\relax }}{1}{figure.caption.1}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:teaserl}{{1}{1}{\footnotesize An illustration of the of realizable. Denote a policy class $\Theta $ and a supervisor policy $\tilde {\pi }$, the supervisor's policy is realizable if it is contained in $\Theta $. We also illustrate Boosting, which can be thought of as attempting to grow the function class to achieve realizibility.\relax }{figure.caption.1}{}}
+\newlabel{fig:teaserl}{{1}{1}{\footnotesize An illustration of the of realizable. Denote a policy class $\Theta $ and a supervisor policy $\tilde {\pi }$, the supervisor's policy is realizable if it is contained in $\Theta $. We also illustrate Boosting, which can be thought of as adding to the function class to achieve realizability.\relax }{figure.caption.1}{}}
 \citation{laskeyshiv}
 \citation{laskeyrobot}
 \citation{kim2013maximum}
@@ -55,44 +55,45 @@
 \newlabel{eq:main_obj}{{2}{3}{Problem Statement}{equation.3.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {IV}DAgger}{3}{section.4}}
 \newlabel{sec:DAgger}{{IV}{3}{DAgger}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Algorithm}{3}{subsection.4.1}}
 \citation{scholkopf2002learning}
 \citation{NIPS2014_5421}
 \citation{ross2010reduction}
 \citation{buhlmann2003boosting}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Algorithm}{4}{subsection.4.1}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {IV-A.1}Step 1}{4}{subsubsection.4.1.1}}
 \newlabel{eq:super_objj}{{3}{4}{Step 1}{equation.4.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {IV-A.2}Step 2}{4}{subsubsection.4.1.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Interpretation of DAgger}{4}{subsection.4.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  An illustration of the evolution in distributions when running DAgger. In iteration $K=0$, the dataset is just the supervisor's demonstrations. The through iteratively rolling out the policy the density over the data can converge to the distribution induced by the policy at $K=5$. The darker regions correspond to an area of higher density. [PLANNING ON UPDATING FIGURE]\relax }}{4}{figure.caption.3}}
 \newlabel{fig:graphModel}{{3}{4}{\footnotesize An illustration of the evolution in distributions when running DAgger. In iteration $K=0$, the dataset is just the supervisor's demonstrations. The through iteratively rolling out the policy the density over the data can converge to the distribution induced by the policy at $K=5$. The darker regions correspond to an area of higher density. [PLANNING ON UPDATING FIGURE]\relax }{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Supervised LfD}{4}{section.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {V-A}Supervised LfD}{4}{subsection.5.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Boosting for Machine Learning}{4}{subsection.5.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Passive LfD}{4}{section.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-A}Passive LfD}{4}{subsection.5.1}}
 \citation{mason1999boosting}
 \citation{anthony2009neural}
-\citation{anthony2009neural}
-\newlabel{alg:boosting}{{\caption@xref {alg:boosting}{ on input line 386}}{5}{Boosting for Machine Learning}{algocf.caption.4}{}}
+\citation{vapnik2013nature}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Boosting for Machine Learning}{5}{subsection.5.2}}
+\newlabel{alg:boosting}{{\caption@xref {alg:boosting}{ on input line 385}}{5}{Boosting for Machine Learning}{algocf.caption.4}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Boosting\relax }}{5}{algocf.1}}
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Theoretical Analysis}{5}{section.6}}
 \newlabel{Sec:theory}{{VI}{5}{Theoretical Analysis}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {VI-A}Realizable Everywhere}{5}{subsection.6.1}}
-\newlabel{thm:sup}{{6.1}{5}{Realizable Everywhere}{theorem.6.1}{}}
-\newlabel{thm:sup}{{6.2}{5}{Realizable Everywhere}{theorem.6.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {VI-B}Realizable only on Supervisor's Support}{5}{subsection.6.2}}
+\newlabel{thm:sup}{{6.1}{5}{Theoretical Analysis}{theorem.6.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  A binary decision tree, where a robot is being taught by a supervisor to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the supervisor would select, either left or right, $\delimiter "4266308 L, R \delimiter "5267309 $. The optimal policy, colored in green, is to select left, $L$, at each node.\relax }}{5}{figure.caption.5}}
+\newlabel{fig:c_ex}{{4}{5}{\footnotesize A binary decision tree, where a robot is being taught by a supervisor to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the supervisor would select, either left or right, $\lbrace L, R \rbrace $. The optimal policy, colored in green, is to select left, $L$, at each node.\relax }{figure.caption.5}{}}
+\newlabel{thm:n_c}{{6.2}{5}{Theoretical Analysis}{theorem.6.2}{}}
+\citation{settles2008analysis}
 \citation{scikit-learn}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  An illustration of when the supervisor is realizable only on the support of its policy. In this situation, the trajectories from supervised learning stay within the region with a function class size of $\Theta $. However, because DAgger rolls out a policy that can make mistakes it could collect data in a region where the supervisor's policy has a function class of $\Theta +\Xi $, where $\Theta +\Xi \geq \Theta $. Thus, requiring a larger function class to converge. \relax }}{6}{figure.caption.5}}
-\newlabel{fig:var}{{4}{6}{\footnotesize An illustration of when the supervisor is realizable only on the support of its policy. In this situation, the trajectories from supervised learning stay within the region with a function class size of $\Theta $. However, because DAgger rolls out a policy that can make mistakes it could collect data in a region where the supervisor's policy has a function class of $\Theta +\Xi $, where $\Theta +\Xi \geq \Theta $. Thus, requiring a larger function class to converge. \relax }{figure.caption.5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {VII}Experiments}{6}{section.7}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {VII-A}GridWorld}{6}{subsection.7.1}}
 \newlabel{sec:gdw}{{VII-A}{6}{GridWorld}{subsection.7.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Left: An example of the grid world domain, where the robot must reach the goal (green) state and avoid the red objects, for which it receives negative reward. The dynamics in this enviroment are stochastic, which requires a robot to learn a control policy that is robust to variance. Right: Is the optimal policy with respect to the expected discounted reward computed by our supervisor, Value Iteration. \relax }}{6}{figure.caption.7}}
 \newlabel{fig:grid_world}{{6}{6}{\footnotesize Left: An example of the grid world domain, where the robot must reach the goal (green) state and avoid the red objects, for which it receives negative reward. The dynamics in this enviroment are stochastic, which requires a robot to learn a control policy that is robust to variance. Right: Is the optimal policy with respect to the expected discounted reward computed by our supervisor, Value Iteration. \relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {VII-B}Planar Singulation}{6}{subsection.7.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Conclusion}{6}{section.8}}
 \bibstyle{IEEEtranS}
 \bibdata{references}
 \bibcite{abbeel2007application}{1}
 \bibcite{abbeel2008apprenticeship}{2}
-\bibcite{argall2009survey}{3}
+\bibcite{anthony2009neural}{3}
 \bibcite{chernova2009interactive}{4}
 \bibcite{duvallet2013imitation}{5}
 \bibcite{grollman2007dogged}{6}
@@ -104,17 +105,17 @@
 \bibcite{laskeyshiv}{12}
 \bibcite{levine2015end}{13}
 \bibcite{mason1999boosting}{14}
-\bibcite{ng2000algorithms}{15}
-\bibcite{scikit-learn}{16}
-\bibcite{pomerleau1989alvinn}{17}
-\bibcite{ross2010efficient}{18}
-\bibcite{ross2010reduction}{19}
+\bibcite{scikit-learn}{15}
+\bibcite{pomerleau1989alvinn}{16}
+\bibcite{ross2010efficient}{17}
+\bibcite{ross2010reduction}{18}
+\bibcite{ross2013learning}{19}
 \bibcite{scholkopf2002learning}{20}
-\bibcite{van2010superhuman}{21}
+\bibcite{settles2008analysis}{21}
+\bibcite{van2010superhuman}{22}
+\bibcite{vapnik2013nature}{23}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is the expected reward obtained for Value Iteration, which is the optimal supervisor, Supervise learning using Adaboost, DAgger and Supervise learning. All results are averaged over 1500 trials. In A) we demonstrate the four approaches for a given dynamics and initial state distributions, Adaboost converges fastest to the supervisor. In B), we double the noise in the dynamics, which causes the robot to cover a lot more states. Adaboost is still able to achieve faster convergence, which suggests DAgger does not help in producing a covering of states. Finally, in C) we increase the initial state variance by 5x, to try and see if over-fitting to a small sample size is possible. Results suggests that the effects of over-fitting persists in both DAgger and Adaboost.\relax }}{7}{figure.caption.6}}
 \newlabel{fig:var}{{5}{7}{\footnotesize Shown above is the expected reward obtained for Value Iteration, which is the optimal supervisor, Supervise learning using Adaboost, DAgger and Supervise learning. All results are averaged over 1500 trials. In A) we demonstrate the four approaches for a given dynamics and initial state distributions, Adaboost converges fastest to the supervisor. In B), we double the noise in the dynamics, which causes the robot to cover a lot more states. Adaboost is still able to achieve faster convergence, which suggests DAgger does not help in producing a covering of states. Finally, in C) we increase the initial state variance by 5x, to try and see if over-fitting to a small sample size is possible. Results suggests that the effects of over-fitting persists in both DAgger and Adaboost.\relax }{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown is Boosted Supervisor compared against Boosted DAgger in a 3D gridworld domain with each iteration corresponding to a demonstration given via the supervisor controlling the system or retro-actively, respectively. All results are averaged over 1000 trails. With low initial state variance the performance is similar, however as the initial state variance is increase DAgger queries the supervisor for less informative demonstrations. Thus, resulting in slower convergence. \relax }}{7}{figure.caption.8}}
-\newlabel{fig:r_eq}{{7}{7}{\footnotesize Shown is Boosted Supervisor compared against Boosted DAgger in a 3D gridworld domain with each iteration corresponding to a demonstration given via the supervisor controlling the system or retro-actively, respectively. All results are averaged over 1000 trails. With low initial state variance the performance is similar, however as the initial state variance is increase DAgger queries the supervisor for less informative demonstrations. Thus, resulting in slower convergence. \relax }{figure.caption.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {VII-B}Planar Singulation}{7}{subsection.7.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Conclusion}{7}{section.8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown is Boosted passive compared against Boosted DAgger in a 3D gridworld domain with each iteration corresponding to a demonstration given via the supervisor controlling the system or retro-actively, respectively. All results are averaged over 1000 trails. With low initial state variance the performance is similar, however as the initial state variance is increase DAgger queries the supervisor for less informative demonstrations. Thus, resulting in slower convergence. \relax }}{7}{figure.caption.8}}
+\newlabel{fig:r_eq}{{7}{7}{\footnotesize Shown is Boosted passive compared against Boosted DAgger in a 3D gridworld domain with each iteration corresponding to a demonstration given via the supervisor controlling the system or retro-actively, respectively. All results are averaged over 1000 trails. With low initial state variance the performance is similar, however as the initial state variance is increase DAgger queries the supervisor for less informative demonstrations. Thus, resulting in slower convergence. \relax }{figure.caption.8}{}}
 \@writefile{toc}{\contentsline {section}{References}{7}{section*.9}}

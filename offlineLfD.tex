@@ -123,7 +123,7 @@
 \usepackage{times}
 \usepackage{microtype}
 %\title{Iterative Imitation Learning with Reduced Human Supervision [v11]}
-%\title{SHIV:  Reducing Human Supervision for Robot Active Learning [v11]}
+%\title{SHIV:  Reducing Human Supervision for Robot adaptive Learning [v11]}
 
 \title{Reduction in Sample Complexity for Robotic\\
  Learning from Demonstrations}
@@ -149,45 +149,44 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{abstract}
-Learning from demonstration algorithms has historically been divided into two categories, supervised and active. Empirically it has been shown in robotics, active learning from demonstrations perform better than supervised, which has been attributed to training on the distribution induced by the robot's policy. We argue that this success is also because the supervisor's policy  is not in the same function class of the robot's policy, or not realizable. However with recent advances in boosting and deep learning, situations where realizibility is possible could be more prevalent.  We show theoretically, when the supervisor's policy is realizable, active learning from demonstration techniques can lead to slower convergence to the true supervisor's policy. We also show when the supervisor's policy is only realizable on states they are likely to visit. , active techniques can fail to converge, but supervised learning is guaranteed to.
+Learning from demonstration algorithms are either passive or adaptive. It has been shown in robotics, adaptive learning from demonstrations (e.g. DAgger) perform better than passive, which has been attributed to training on the distribution induced by the robot's policy. We argue that this success is also because the supervisor's policy  is not in the same function class of the robot's policy, or not realizable. However with recent advances in boosting and deep learning, situations where realizability is possible could be more prevalent.  We show theoretically, when the supervisor's policy is realizable on their distribution, adaptive learning from demonstration techniques can fail to converge to the true supervisor's policy, but passive is able to. We also demonstrate empirically in grid world simulation and via human trials on a robot, that adaptive techniques can require more data even when convergence is possible.
  \end{abstract}
 
 
 \section{Introduction} 
-In model-free robot Learning from Demonstration (LfD), a robot learns to perform a task, such as driving or grasping an object in a cluttered environment, from examples provided by a  supervisor, usually a human.  In such problems, the robot does not have access to either a smooth cost function that it can optimize, nor the dynamics model. The former occurs when it is difficult to specify the intermediate steps needed to complete a task and the latter occurs when either the system or the interaction with the world is difficult to characterize. Learning from demonstration has been used successfully in recent year for a large number of robotic tasks, including helicopter maneuvering~\cite{abbeel2007application}, car parking~\cite{abbeel2008apprenticeship} , robotic surgery~\cite{van2010superhuman,laskeyshiv} and robotic manipulation~\cite{laskeyrobot}.
+In model-free robot Learning from Demonstration (LfD), a robot learns to perform a task, such as driving or grasping an object in a cluttered environment, from examples provided by a  supervisor, usually a human.  In such problems, the robot does not have access to either a smooth cost function that it can optimize, nor the dynamics model. The former occurs when it is difficult to specify the intermediate steps needed to complete a task and the latter occurs when either the system or the interaction with the world is difficult to characterize. Learning from demonstration has been applied to a large number of robotic tasks, including helicopter maneuvering~\cite{abbeel2007application}, car parking~\cite{abbeel2008apprenticeship} , robotic surgery~\cite{van2010superhuman,laskeyshiv} and robotic manipulation~\cite{laskeyrobot}.
 
 
 
-LfD algorithms have historically evolved into two categories a supervised learning approach~\cite{pomerleau1989alvinn}, where the robot only observes demonstrations, or an active approach~\cite{ross2010reduction}, where the robot interacts with the world and receives feedback from the supervisor. In supervised LfD, the robot learns the policy based on a batch of examples, and then executes it to achieve the task.  In active LfD algorithm, algorithms such as DAgger, learns a series of policies. At each iteration, the robot trains a policy based on the existing examples, then rolls out (executes) that policy, and the supervisor provides demonstrations for all states the robot visits. The new state/control examples are aggregated with the old examples for the next iteration. 
+LfD algorithms have historically evolved into two categories a passive learning approach~\cite{pomerleau1989alvinn}, where the robot only observes demonstrations, or an adaptive approach~\cite{ross2010reduction}, where the robot executes its current policy and receives feedback from the supervisor. In passive LfD, the robot learns the policy based on a batch of examples, and then executes it to achieve the task.  In adaptive LfD algorithm, algorithms such as DAgger, learns a series of policies. At each iteration, the robot trains a policy based on the existing examples, then rolls out (executes) that policy, and the supervisor provides the correct control for all states the robot visits. The new state/control examples are aggregated with the old examples for the next iteration. Termination of the algorithm is determined when either the robot matches the supervisor, or is no longer improving. 
 
 
-Empirically it has been shown that active LfD algorithms have out performed the passive supervised learning algorithm in terms of better matching the supervisor~\cite{ross2010efficient,ross2010reduction,ross2013learning}. This has been attributed to active LfD algorithms sampling from state distributions the robot is more likely to visit and thus providing better training examples during learning.  We argue though  that the strength of active LfD algorithms arises not purely out of changing the training examples, but also because the supervisor's policy is not realizable by the  robot's current policy class. 
+Empirically it has been shown that adaptive LfD algorithms have out performed passive~\cite{ross2010efficient,ross2010reduction,ross2013learning}. This has been attributed to adaptive LfD algorithms sampling from state distributions the robot is more likely to visit and thus providing better training examples during learning.  We argue though  that the strength of adaptive LfD algorithms arises not purely out of changing the training examples, but also because the robot's current policy class is not capable of representing the supervisor's policy. 
 
-Realizibility is the notion that the function one is trying to learn is contained in the function class of a given learning algorithm. An example of when a learning algorithm does not have realizibility is training a linear regressor to predict a non-linear function. We illustrate this difference in Fig. \ref{fig:teaserl}.
+The notion that the function one is learning is contained in the function class of a given learning algorithm, is known as realizable. An example of when a learning algorithm does not have realizability is training a linear regressor to predict a non-linear function, see Fig. \ref{fig:teaserl}.
 
-When the robot's policy class is not able to realize the supervisor's policy, then the robot will never agree with the supervisor in some parts of the visited state space and deviate from the supervisors state distribution. Thus, DAgger tries to remedy this situation by providing examples in the new states the robot is likely to visit and tries to learn a policy to best mimic a supervisor in those new states. 
+When the robot's policy class is not able to realize the supervisor's policy, then the robot will never agree with the supervisor in some parts of the visited state space and deviate from the supervisors state distribution. DAgger tries to remedy this situation by providing examples in the new states the robot is likely to visit and tries to learn a policy to best mimic a supervisor in those new states. Thus, it will not be able to perfectly mimic the supervisor, but instead try to learn a policy that is similar. 
 
-\mlnote{want to discuss the limitations of this feedback, but will wait till after the human trials are done}
 
 \begin{figure}
 \includegraphics[width=0.5\textwidth]{f_figs/realizibility.eps}
 \caption{
     \footnotesize
-An illustration of the  of realizable. Denote a policy class $\Theta$ and a supervisor policy $\tilde{\pi}$, the supervisor's policy is realizable if it is contained in $\Theta$. We also illustrate Boosting, which can be thought of as attempting to grow the function class to achieve realizibility.}
+An illustration of the  of realizable. Denote a policy class $\Theta$ and a supervisor policy $\tilde{\pi}$, the supervisor's policy is realizable if it is contained in $\Theta$. We also illustrate Boosting, which can be thought of as adding to the function class to achieve realizability.}
 \vspace*{-20pt}
 \label{fig:teaserl}
 \end{figure}
 
-However, if the supervisor's policy is realizable on the states visited then performing  supervised learning is guaranteed to converge to the supervisor's policy as more training data is collected, which stems from a known property in statistics~\cite{anthony2009neural}. We show theoretically and empirically that active LfD methods can actually be harmful in this situation because they can train on states that the supervisor would never visit and thus lead to slower convergence. Furthermore, we theoretically show than when the supervisor is only realizable on states they are likely to visit, active LfD can actually not converge to the supervisor's policy.
+However, if the supervisor's policy is realizable on their distribution then performing  passive learning is guaranteed to converge to the supervisor's policy as more training data is collected, which we  demonstrate via the uniform law of large numbers~\cite{vapnik2013nature}.  In contrast, we theoretically show that adaptive LfD is not guaranteed to converge to the supervisor's policy. Thus, suggesting adaptivity can actually result in poor performance under the condition of realizability. 
 
-We acknowledge though that in practice realizibility can be hard to achieve. Thus, we propose using boosting on the current robot's policy class to incrementally inflate the class size. Boosting works by growing a learner to correct its current mis-predictions. An interesting property of Boosting is that by incrementally growing the class size the bias-variance trade-off can scale in a much tamer way as opposed to a standard non-parameteric regressor~\cite{buhlmann2003boosting}. Thus, we can avoid over-fitting to the observed example from the supervisor. 
+In practice realizability could be hard to achieve for a given task. Thus, we propose using boosting on the current robot's policy class to incrementally inflate the class size. Boosting works by training a sequence of each focused on examples that caused the previous policy to fail and then uses a weighted combination of all trained policies. A problem that exists when growing the function class size is that over-fitting is possible and this can poorly affect generalization. An interesting property of Boosting though is that by incrementally growing the function class size the bias-variance trade-off, or generalization ability, can  scale better as opposed to a standard non-parameteric regressor~\cite{buhlmann2003boosting}. \mlnote{will formalize previous statement with the exact rates} Thus, it can avoid over-fitting to the observed example from the supervisor. 
 
 \mlnote{Still working on how to summarize all results}
-Our contributions is showing, both theoretically and emprically that active LfD algorithms can achieve worse performance versus supervised LfD, if the function class is realizable. We also provide experiments on a physical robot setup with randomized human trials of teaching a robot how to singulate. 
+Our contributions is showing, both theoretically and empirically that adaptive LfD algorithms can achieve worse performance versus passive LfD, if the function class is realizable on the supervisor's distribution. We also provide experiments on a physical robot setup with randomized human trials of teaching a robot how to singulate objects, or manipulate one goal object away from an arbitrary cluster of objects. 
 
 
 \section{Related Work}
-Below we summarize related work in active approaches in applications of Online LfD to robotics, sample complexity results and then work on reducing samples. \mlnote{Will update related work}
+Below we summarize related work in adaptive approaches in applications of Online LfD to robotics, sample complexity results and then work on reducing samples. \mlnote{Will update related work}
 
 
 \noindent \textbf{Online LfD with an Expert Supervisor}
@@ -292,7 +291,7 @@ The distribution $p(\bu|\pi_\theta(\bx))$ can be thought of a as modeling choice
 \hat{\theta} = \underset{\theta}{\mbox{argmax}} \sum^N_{n=1}\sum^T_{t=1}-|| \bu_{n,t} - \pi_{\theta} (\bx_{n,t})||^2_2.
 \end{equation}
 
-One could also model the supervise as making multi-modal decisions, such as when the supervisor encounters "fork in the road" situations, where either choice is acceptable. Traditionally  Eq. \ref{eq:main_obj}, has been known as the surrogate loss to denote a difference between the true cost function. We will refer the to function $l : \mathcal{U} \times \mathcal{U} \rightarrow \mathbb{R}$ as the surrogate loss through out this paper. The surrogate loss can either be an indicator function as in classification or a continuous measure as indicated above.  This rewrites the objective as follows: 
+One could also model the supervisor as making multi-modal decisions, such as when the supervisor encounters "fork in the road" situations, where either choice is acceptable. Traditionally  Eq. \ref{eq:main_obj}, has been known as the surrogate loss to denote a difference between the true cost function. We will refer the to function $l : \mathcal{U} \times \mathcal{U} \rightarrow \mathbb{R}$ as the surrogate loss through out this paper. The surrogate loss can either be an indicator function as in classification or a continuous measure as indicated above.  This rewrites the objective as follows: 
 
 \begin{equation}\label{eq:main_obj}
 \hat{\theta} = \underset{\theta}{\mbox{argmin}} \sum^N_{n=1}\sum^T_{t=1} l(\bu_{n,t}, \pi_{\theta} (\bx_{n,t})).
@@ -364,17 +363,17 @@ In light of these limitations, we are interested in overcoming the model mismatc
 
 
 
-\section{Supervised LfD}
+\section{Passive LfD}
 While DAgger handles the problem of model mismatch via optimizing on the distribution induced by the robot, we will instead assume realizability is achievable and leverage supervise LfD.  
 
-\subsection{Supervised LfD}
-In supervised LfD, $M$ demonstrations are collected from the supervisor's distribution $p(\tau|\tilde{\pi})$ and the following objective is minimized: 
+\subsection{Passive LfD}
+In passive LfD, $M$ demonstrations are collected from the supervisor's distribution $p(\tau|\tilde{\pi})$ and the following objective is minimized: 
 
 $$\underset{\theta}{\mbox{min}} \: \frac{1}{M} \sum^M_{m=1} \sum^T_{t=1} l(\pi_{\theta}(\bx_{t,m}), \tilde{\pi}(\bx_{t,m}))$$
 
 This is known as empirical risk minimization and in Sec. \ref{Sec:theory}, we show that this converges to the supervisor's policy if it is realizable. 
 
-If the supervisor's policy is not realizable though than pure supervised learning could suffer in performance from not being active. Thus, we propose using Boosting to help inflate our model class to achieve realizability for observed demonstrations from the supervisor. 
+If the supervisor's policy is not realizable though than pure passive learning could suffer in performance from not being adaptive. Thus, we propose using Boosting to help inflate our model class to achieve realizability for observed demonstrations from the supervisor. 
 
 \subsection{Boosting for Machine Learning}
 The idea of boosting is to search for a robot's policy that lies not in the space of $\Theta$, but of $\mbox{lin}(\Theta)$ or linear combinations of the functional space. Boosting can be thought of searching for a function class that best matches the supervisor, but does not overly increase complexity~\cite{buhlmann2003boosting}.
@@ -401,19 +400,19 @@ $D_n = f(l(\pi_{\sum \theta}(\bx_n),\tilde{\pi}(\bx_n)))$
 
 
 \section{Theoretical Analysis} \label{Sec:theory}
-In this section, we are interesting in analyzing supervised LfD and active LfD when the supervisor $\tilde{\pi}$ is realizable, or $\tilde{\pi} \in \Theta$.  We first analyze the situation where the supervisor is realizable in all of the workspace and show convergence for supervised LfD and active LfD to $\tilde{\pi}$. Then we look at the case where the supervisor is only realizable in places they are likely to visit and show that only supervised LfD is guaranteed convergence.
+In this section, we are interesting in analyzing passive LfD and adaptive LfD when the supervisor $\tilde{\pi}$ is realizable, or $\tilde{\pi} \in \Theta$, for all states within the support of $p(\tau|\tilde{\pi})$.
 
 We assume throughout this section a bounded surrogate loss in the range of $[0,1]$ and that during minimization of the expected risk, the best function in the function class can be found. Examples of when these assumptions can be satisfied is if your robot has bounded controls and you are using a convex policy class, such as kernelized regression. 
 
-\subsection{Realizable Everywhere}
+
 Since we know that $\tilde{\pi} \in \Theta$ and that we can find the best fit for $\tilde{\pi}$ given the observed examples. Then the only reason that $\hat{\theta} \neq \tilde{\pi}$ is because not enough examples from the supervisor have been collected. 
 
-Understanding how much data is needed to learn a function, is a well studied problem known as sample complexity analysis~\cite{anthony2009neural}. In this literature they use different metrics to describe the complexity of a function class and show rates on which a given function class would converge to the real solution. We refer the reader to \cite{anthony2009neural}, for a review of such topics. 
+Understanding how much data is needed to learn a function, is a well studied problem known as sample complexity analysis~\cite{anthony2009neural}. In this literature they use different metrics to describe the complexity of a function class and show rates on which a given function class would converge to the real solution. We refer the reader to \cite{vapnik2013nature}, for a review of such topics. 
 
 A main result from this literature is that under the conditions we have described the following statement is true: \\
 
 \begin{theorem}\label{thm:sup}
-For a policy, $\hat{\theta}$ found via Supervised LfD, from $m$ trajectories collected from the supervisor the following is true with probability at least $1- 2\mbox{exp} (-m\delta^2/8)$
+For a policy, $\hat{\theta}$ found via passive LfD, from $m$ trajectories collected from the supervisor the following is true with probability at least $1- 2\mbox{exp} (-m\delta^2/8)$
 
 $$E_{p(\tau|\tilde{\pi})} l(\pi_{\hat{\theta}}, \tilde{\pi}) \leq 2R_{\Theta}(m) + \delta+ O(\frac{1}{\sqrt{m}})$$\\
 
@@ -423,67 +422,45 @@ In this result, $R_{\Theta}$ corresponds to the Rademacher complexity of the giv
 
 The key take away from from this theorem  is that at a non-asymptotic rate of demonstrations the surrogate loss will be zero on the distribution of the supervisor, thus corresponding to exact agreement between robot and supervisor. The exact rate itself will vary as a function of Rademacher Complexity of $\Theta$. 
 
-In active LfD, instead of collecting all $m$ demonstrations as samples from $p(\tau |\tilde{\pi})$, at each $k$ iteration  samples are taken from the current policy distribution $p(\tau|\hat{\theta}_k)$.  
 
-Since, we assume the supervisor's policy is realizable in all parts of the workspace, then we can still determine $\tilde{\pi}$ from this sampled data. However, because we previously showed that the $\hat{\theta}$ will converge to $\tilde{\pi}$, then sampling from a distribution that isn't $p(\tau|\tilde{\pi})$ could result in querying the supervisor for demonstrations that are not informative. 
-
-\begin{theorem}\label{thm:sup}
-For a policy, $\hat{\theta}$ found via DAgger, from $m$ trajectories collected from the supervisor the following is true with probability at least $1- 2\mbox{exp} (-m\delta^2/8)$
-
-$$E_{p(\tau|\tilde{\pi})} l(\pi_{\hat{\theta}}, \tilde{\pi}) \leq B(k)+ 2R_{\Theta}(m) + \delta+ O(\frac{1}{\sqrt{m}})$$\\
-
-\end{theorem}
-
-\begin{proof}
-We start out by trying to bound the surrogate loss on the distributions trained on and the best policy: 
-
-\begin{align*}
-&E_{\sum p(\tau|\theta_k)} l(\pi_{\hat{\theta}_k}) - E_{\sum p(\tau|\theta_k)} l(\theta^*)\\
-&=  E_{\sum p(\tau|\theta_k)} l(\pi_{\hat{\theta}_k}) - E_{\sum p(E_{\sum p(\tau|\tilde{\pi})} l(\pi_{\hat{\theta}_k}))} +E_{\sum p(\tau|\theta_k)} l(\pi_{\hat{\theta}_k})\\
-&\leq E_{p(\tau|\tilde{\pi})} l(\pi_{\hat{\theta}_k}) + \int l(\tau) d\tau \int p(\tau|\theta_k) - p(\tau|\tilde{\pi}) d\tau\\
-&\leq E_{p(\tau|\tilde{\pi})} l(\pi_{\hat{\theta}_k}) + 2||p(\tau|\theta_k) - p(\tau|\tilde{\pi})||_{TV}
-\end{align*}
-
-We then leverage the previous sample complexity bounds from Theorem \ref{thm:sup}. Thus, showing that in can require more data to achieve convergence to the true distribution. 
-
-
-\end{proof}
-
- Thus, resulting in a potentially slower convergence. We demonstrate this effect experimentally in Sec. \ref{sec:gdw}. 
-
-\subsection{Realizable only on Supervisor's Support}
-Consider the situation, where the supervisor is only realizable on the places they are likely to visit, or within the support of $p(\tau|\tilde{\pi})$. 
+We will next show how adaptive Lfd, actually fails to converge under these conditions. The intuition for this is that adaptivity can force the robot into states where the supervisor is no longer realizable (i.e. outside the support of $p(\tau|\tilde{\pi})$). 
 
 For instance if a supervisor trying to teach the task of driving down a highway, then they will stay within the lanes of the road and have a relatively smooth policy of going forward at a constant speed. However, if the supervisor is forced to veer off the road their resulting policy will become a much more complex maneuver to avoid crashing. 
 
-\begin{figure}
-\centering
-\includegraphics{f_figs/dif_support.eps}
-\caption{
-    \footnotesize
-An illustration of when the supervisor is realizable only on the support of its policy. In this situation, the trajectories from supervised learning stay within the region with a function class size of $\Theta$. However, because DAgger rolls out a policy that can make mistakes it could collect data in a region where the supervisor's policy has a function class of $\Theta +\Xi$, where $\Theta+\Xi \geq \Theta$. Thus, requiring a larger function class to converge. }
-\vspace*{-20pt}
-\label{fig:var}
-\end{figure}
+While passive LfD never forces the supervisor to visit these states, adaptive LfD  could learn a  policy that includes data from these more complex regions. Thus, potentially preventing adaptive Lfd from ever converging to the true supervisor. Denote $\hat{\theta}_S$ as the policy found by supervisor LfD and $\hat{\theta}_a$ as that found by adaptive LfD and $m$ the number of demonstrations. \\
 
-
-While supervised LfD never forces the supervisor to visit these states, active LfD  could learn a  policy that includes data from these more complex regions. Thus, potentially preventing active Lfd from ever converging to the true supervisor. Denote $\hat{\theta}_S$ as the policy found by supervisor LfD and $\hat{\theta}_a$ as that found by active LfD and $m$ the number of demonstrations. \\
-
-\begin{theorem}
+\begin{theorem}\label{thm:n_c}
 If $\tilde{\pi} \in \Theta$ only on the support of $p(\tau|\tilde{\pi})$ and $m\rightarrow \infty$, then $\hat{\theta}_S \rightarrow \tilde{\pi}$ but there exists situations where $\hat{\theta}_A$ does not converge to $\tilde{\pi}$.\\
 \end{theorem}
 
+\begin{figure}
+\centering
+\includegraphics{f_figs/counter_exmp.eps}
+\caption{
+    \footnotesize
+A binary decision tree, where a robot is being taught by a supervisor to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the supervisor would select, either left or right, $\lbrace L, R \rbrace$. The optimal policy, colored in green, is to select left, $L$, at each node.}
+\vspace*{-20pt}
+\label{fig:c_ex}
+\end{figure}
+
 \begin{proof}
-In order to prove the first part of the statement, that $\hat{\theta}_S \rightarrow \tilde{\pi}$ as  $m \rightarrow \infty$. We  use the result of Theorem 1 and note that all training data colected is in the region of realizibility.\\ 
+In order to prove the first part of the statement, that $\hat{\theta}_S \rightarrow \tilde{\pi}$ as  $m \rightarrow \infty$. We  use the result of Theorem 1 and note that all training data collected is in the region of realizability.\\ 
 
-In the second part of the theorem, convergence of active LfD techniques are not guaranteed because they could end up sampling part of the state space outside of the support of $p(\tau|\tilde{\pi})$.
+In the second part of the theorem, convergence of adaptive Lfd is not guaranteed as illustrated by the following situation, where a robot is learning to search down a tree to maximize cumulative reward, as illustrated in Fig. \ref{fig:c_ex}. Here the robot's policy class is the finite set of only being able to choose left or right, $\Theta = \lbrace L,R \rbrace$.
 
-This can happen if there exists an iteration $k \in 1:K$ where $p(\tau | \hat{\theta}_k)$ exhibits non-zero measure outside the support of $p(\tau |\tilde{\pi})$. Thus, collecting training data in parts of the state space where the policy is not realizable, which can result in the solution to the empirical risk minimization not finding the supervisor's policy because it has to cope with model error. 
+The learning algorithm, which chooses how to update the policy is to choose the policy, which agrees with the supervisor's controls the most, or: 
+
+$$\pi_{\theta} = \underset{\lbrace L,R \rbrace}{\mbox{argmin}} \sum^M_{m=0}\sum^T_{t=0} I(\pi_\theta(x_{m,t}),\tilde{\pi}(x_{m,t}))$$
+
+If passive LfD is applied to this situation, the supervisor will always chose left, $L$, and the robot will select this action resulting in perfect imitation. However, if DAgger is used and the robots initial policy is to go right, $\pi_{\theta_0} = R$. Then the robot will repeatedly always choose right and never converge. 
 
 \end{proof}
 
-While in practice this problem can be potentially overcome by increasing the complexity of $\Theta$, to make the supervisor realizable everywhere. It would result in a large Rademacher complexity and subsequently more training data. Thus, if the supervisor is less complex on their own distribution using supervised LfD can save data. 
+While in practice this problem can be potentially overcome by increasing the complexity of $\Theta$, to make the supervisor realizable outside of the support. It would result in a large Rademacher complexity and subsequently more training data. Thus, if the supervisor is less complex on their own distribution using passive LfD can save data and avoid over-fitting. 
 
+It also interesting to think about the case where the supervisor's policy is realizable over the whole workspace. Because we know the final distribution of states will be $p(\tau|\tilde{\pi})$, then not sampling from that could lead to querying the supervisor for uninformative demonstrations and slower convergence. We show this effect in Sec. \ref{sec:gdw}. 
+
+However, under some conditions adaptivity could lead to faster convergence.  This can happen if the robot is forced to sample states that are near decision boundaries of its current policy, which would be a form of uncertainty sampling~\cite{settles2008analysis}. Adaptive Lfd, by itself, is not designed to achieve this and it will be depend on the choice of policy representation and dynamics of the environment. 
 
 \section{Experiments}
 
@@ -506,7 +483,7 @@ We use Value Iteration to compute an optimal supervisor for our grid world domai
 
 \noindent \textbf{Realizable vs. Not Realizable} In Fig. \ref{fig:low_var}, we show supervise learning with the fixed decision tree, DAgger and supervise learning with boosting applied to the decision tree. Similar to prior work supervise learning with a fixed decision tree does worse than DAgger, which iteratively determines the distribution it policy induces and minimize the expected risk on it. However, DAgger is outperformed by the boosted learner, which is able to match the supervisor's controls during train and induce the same distribution. 
 
-To see how the results change when the variance is increased in the graphical model, we double the dynamics noise. Now, $p(\bx_{t+1}|\bx_t,\bu_t)$ causes the robot to go an adjacent state that does not correspond to the intended control with probability $0.4$. In Fig. \ref{fig:high_var}, we show that despite the large variance the relative results of DAgger, Boosted Supervised and Supervised remains the same. However, more data is still need to learn the policy, which corresponds to an increase in variance in the sampled distribution. We also note that Value Iteration optimal supervisor does much worse due to instability in control. 
+To see how the results change when the variance is increased in the graphical model, we double the dynamics noise. Now, $p(\bx_{t+1}|\bx_t,\bu_t)$ causes the robot to go an adjacent state that does not correspond to the intended control with probability $0.4$. In Fig. \ref{fig:high_var}, we show that despite the large variance the relative results of DAgger, Boosted passive and passive remains the same. However, more data is still need to learn the policy, which corresponds to an increase in variance in the sampled distribution. We also note that Value Iteration optimal supervisor does much worse due to instability in control. 
 
 \begin{figure}
 \centering
@@ -519,7 +496,7 @@ Left: An example of the grid world domain, where the robot must reach the goal (
 \end{figure}
 
 \noindent \textbf{Realizable Everywhere} 
-We are next interested in the situation when both DAgger and Supervised Learning are realizable. We use a 3D gridworld in this test domain that includes the additional action of UP and DOWN. We do this because to observe the effects of sub-optimally sampling data its important to create a larger workspace. 
+We are next interested in the situation when both DAgger and passive Learning are realizable. We use a 3D gridworld in this test domain that includes the additional action of UP and DOWN. We do this because to observe the effects of sub-optimally sampling data its important to create a larger workspace. 
 
 In Fig. \ref{fig:r_eq}, we show Boosted DAgger against Boosted Supervisor in two situation one with low initial state variance and one with higher initial state variance. The low initial state variance shows Boosted DAgger performing similar to Boosted Supervisor, however as the initial state variance is increased the robot's policy makes more mistakes and collects demonstrations in states the supervisor is unlikely to visit. 
 
@@ -529,7 +506,7 @@ In Fig. \ref{fig:r_eq}, we show Boosted DAgger against Boosted Supervisor in two
 \includegraphics{f_figs/r_ev.eps}
 \caption{
     \footnotesize
-Shown is Boosted Supervisor compared against Boosted DAgger in a 3D gridworld domain with each iteration corresponding to a demonstration given via the supervisor controlling the system or retro-actively, respectively. All results are averaged over 1000 trails. With low initial state variance the performance is similar, however as the initial state variance is increase DAgger queries the supervisor for less informative demonstrations. Thus, resulting in slower convergence.   }
+Shown is Boosted passive compared against Boosted DAgger in a 3D gridworld domain with each iteration corresponding to a demonstration given via the supervisor controlling the system or retro-actively, respectively. All results are averaged over 1000 trails. With low initial state variance the performance is similar, however as the initial state variance is increase DAgger queries the supervisor for less informative demonstrations. Thus, resulting in slower convergence.   }
 \vspace*{-20pt}
 \label{fig:r_eq}
 \end{figure}

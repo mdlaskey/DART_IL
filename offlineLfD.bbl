@@ -31,10 +31,10 @@ P.~Abbeel, D.~Dolgov, A.~Y. Ng, and S.~Thrun, ``Apprenticeship learning for
   motion planning with application to parking lot navigation,'' in \emph{IROS
   2008. IEEE/RS}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE.
 
-\bibitem{argall2009survey}
-B.~D. Argall, S.~Chernova, M.~Veloso, and B.~Browning, ``A survey of robot
-  learning from demonstration,'' \emph{Robotics and autonomous systems},
-  vol.~57, no.~5, pp. 469--483, 2009.
+\bibitem{anthony2009neural}
+M.~Anthony and P.~L. Bartlett, \emph{Neural network learning: Theoretical
+  foundations}.\hskip 1em plus 0.5em minus 0.4em\relax cambridge university
+  press, 2009.
 
 \bibitem{chernova2009interactive}
 S.~Chernova and M.~Veloso, ``Interactive policy learning through
@@ -87,10 +87,6 @@ S.~Levine, C.~Finn, T.~Darrell, and P.~Abbeel, ``End-to-end training of deep
 L.~Mason, J.~Baxter, P.~Bartlett, and M.~Frean, ``Boosting algorithms as
   gradient descent in function space,'' 1999.
 
-\bibitem{ng2000algorithms}
-A.~Y. Ng, S.~J. Russell \emph{et~al.}, ``Algorithms for inverse reinforcement
-  learning.'' in \emph{ICML}, 2000.
-
 \bibitem{scikit-learn}
 F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
   M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, J.~Vanderplas, A.~Passos,
@@ -112,15 +108,31 @@ S.~Ross, G.~J. Gordon, and J.~A. Bagnell, ``A reduction of imitation learning
   and structured prediction to no-regret online learning,'' \emph{arXiv
   preprint arXiv:1011.0686}, 2010.
 
+\bibitem{ross2013learning}
+S.~Ross, N.~Melik-Barkhudarov, K.~S. Shankar, A.~Wendel, D.~Dey, J.~A. Bagnell,
+  and M.~Hebert, ``Learning monocular reactive uav control in cluttered natural
+  environments,'' in \emph{ICRA, 2013 IEEE}.\hskip 1em plus 0.5em minus
+  0.4em\relax IEEE.
+
 \bibitem{scholkopf2002learning}
 B.~Sch{\"o}lkopf and A.~J. Smola, \emph{Learning with kernels: Support vector
   machines, regularization, optimization, and beyond}.\hskip 1em plus 0.5em
   minus 0.4em\relax MIT press, 2002.
+
+\bibitem{settles2008analysis}
+B.~Settles and M.~Craven, ``An analysis of active learning strategies for
+  sequence labeling tasks,'' in \emph{Proceedings of the conference on
+  empirical methods in natural language processing}.\hskip 1em plus 0.5em minus
+  0.4em\relax Association for Computational Linguistics, 2008, pp. 1070--1079.
 
 \bibitem{van2010superhuman}
 J.~Van Den~Berg, S.~Miller, D.~Duckworth, H.~Hu, A.~Wan, X.-Y. Fu, K.~Goldberg,
   and P.~Abbeel, ``Superhuman performance of surgical tasks by robots using
   iterative learning from human-guided demonstrations,'' in \emph{ICRA, 2010
   IEEE}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2010, pp. 2074--2081.
+
+\bibitem{vapnik2013nature}
+V.~Vapnik, \emph{The nature of statistical learning theory}.\hskip 1em plus
+  0.5em minus 0.4em\relax Springer Science \& Business Media, 2013.
 
 \end{thebibliography}
