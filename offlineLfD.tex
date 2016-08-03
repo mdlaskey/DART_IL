@@ -130,7 +130,7 @@
 
 
 
-\author{Michael Laskey, Jonathan Lee, Caleb Chuck, Jeff Mahler,\\ Sanjay Krishnan, Kevin Jamieson, Anca Dragan, Ken Goldberg}
+\author{Michael Laskey, Caleb Chuck,Jonathan Lee, Jeff Mahler,\\ Sanjay Krishnan, Kevin Jamieson, Anca Dragan, Ken Goldberg}
 \begin{document}
 
 
@@ -154,11 +154,7 @@ Learning from demonstration algorithms are either passive or adaptive. It has be
 
 
 \section{Introduction} 
-In model-free robot Learning from Demonstration (LfD), a robot learns to perform a task, such as driving or grasping an object in a cluttered environment, from examples provided by a  supervisor, usually a human.  In such problems, the robot does not have access to either a smooth cost function that it can optimize, nor the dynamics model. The former occurs when it is difficult to specify the intermediate steps needed to complete a task and the latter occurs when either the system or the interaction with the world is difficult to characterize. Learning from demonstration has been applied to a large number of robotic tasks, including helicopter maneuvering~\cite{abbeel2007application}, car parking~\cite{abbeel2008apprenticeship} , robotic surgery~\cite{van2010superhuman,laskeyshiv} and robotic manipulation~\cite{laskeyrobot}.
-
-
-
-LfD algorithms have historically evolved into two categories a passive learning approach~\cite{pomerleau1989alvinn}, where the robot only observes demonstrations, or an adaptive approach~\cite{ross2010reduction}, where the robot executes its current policy and receives feedback from the supervisor. In passive LfD, the robot learns the policy based on a batch of examples, and then executes it to achieve the task.  In adaptive LfD algorithm, algorithms such as DAgger, learns a series of policies. At each iteration, the robot trains a policy based on the existing examples, then rolls out (executes) that policy, and the supervisor provides the correct control for all states the robot visits. The new state/control examples are aggregated with the old examples for the next iteration. Termination of the algorithm is determined when either the robot matches the supervisor, or is no longer improving. 
+In model-free robot Learning from Demonstration (LfD), a robot learns to perform a task, such as driving or grasping an object in a cluttered environment, from examples provided by a  supervisor, usually a human. LfD algorithms have historically evolved into two categories a passive learning approach~\cite{pomerleau1989alvinn}, where the robot only observes demonstrations, or an adaptive approach~\cite{ross2010reduction}, where the robot executes its current policy and receives feedback from the supervisor. In passive LfD, the robot learns the policy based on a batch of examples, and then executes it to achieve the task.  In adaptive LfD algorithm, algorithms such as DAgger, learns a series of policies. At each iteration, the robot trains a policy based on the existing examples, then rolls out (executes) that policy, and the supervisor provides the correct control for all states the robot visits. The new state/control examples are aggregated with the old examples for the next iteration. Termination of the algorithm is determined when either the robot matches the supervisor, or is no longer improving. 
 
 
 Empirically it has been shown that adaptive LfD algorithms have out performed passive~\cite{ross2010efficient,ross2010reduction,ross2013learning}. This has been attributed to adaptive LfD algorithms sampling from state distributions the robot is more likely to visit and thus providing better training examples during learning.  We argue though  that the strength of adaptive LfD algorithms arises not purely out of changing the training examples, but also because the robot's current policy class is not capable of representing the supervisor's policy. 
@@ -218,15 +214,6 @@ simpler regularized binary classification~\cite{laskeyshiv}.
 \section{Problem Statement}\label{sec:PS}
 The goal of this work is to learn a policy that matches that of the supervisor's while asking the supervisor for as few examples as possible.
 
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{f_figs/graph_model.eps}
-\caption{
-    \footnotesize
-A graphical model of observed trajectory as a function of the hidden variable $\theta$.  We note that the dynamics and initial state distributions are dropped in this objective because they are conditionally independent of $\theta$, once the controls are observed. }
-\vspace*{-20pt}
-\label{fig:graphModel}
-\end{figure}
-
 \noindent\textbf{Modeling Choices and Assumptions}  We model the system dynamics as Markovian, stochastic, and stationary. Stationary dynamics occur when, given a state and a control, the probability of the next state does not change over time. 
 
 We model the initial state as sampled from a distribution over the state space.
@@ -256,8 +243,6 @@ induces a density on trajectories of length $T+1$: $$p(\tau | \theta)=
 p(\bx_0)\prod_{i=0}^{T-1}p(\bx_{t+1}|\bu_t,\bx_t)p(\bu_t|\pi_{\theta}(\bx_t))$$
 
 
-A graphical model that demonstrates this relationship can be shown in Fig. \ref{fig:graphModel}. We note here that once the controls are observed in the graphical model the policy parameters are conditionally independent of the dynamics and probability of initial state distributions: $p(\bx_{t+1}|\bu_t,\bx_t)$ and $p(\bx_0)$. 
-
 
 While we do not assume knowledge of the distributions corresponding to: $p(\bx_{t+1}|\bx_t,\bu_t)$, $p(\bx_0)$, $p(\bx_t|
 \theta)$ or $p(\bx|\theta)$, we assume that we have a stochastic real robot or a simulator such that for any state
@@ -281,27 +266,55 @@ $$\underset{\theta}{\mbox{max}} \prod^N_{n=1} p(\bx_0,n) \prod^T_{t=1} p(\bx_{t+
 
 In solving this optimization it is common to optimize the conditional log-likelihood, which maintains the same solution but breaks up the product terms into sums. 
 
-$$\underset{\theta}{\mbox{max}} \sum^N_{n=1}\sum^T_{t=1}\mbox{log }p(\bu_t|\bx_t,\theta)$$
+\begin{equation}\label{eq:m_likeli_obj}
+\underset{\theta}{\mbox{max}} \sum^N_{n=1}\sum^T_{t=1}\mbox{log }p(\bu_t|\bx_t,\theta)
+\end{equation}
+
 
 We note that the dynamics and initial state distributions are dropped in this objective because they are conditionally independent of $\theta$, once the controls are observed. 
 
-The distribution $p(\bu|\pi_\theta(\bx))$ can be thought of a as modeling choice for the supervisor. One can assume in the continuous controls case that the supervisor is making decisions drawn from a uni-modal Gaussian distribution, which would yield the following objective:
-
-\begin{equation}\label{eq:main_obj}
-\hat{\theta} = \underset{\theta}{\mbox{argmax}} \sum^N_{n=1}\sum^T_{t=1}-|| \bu_{n,t} - \pi_{\theta} (\bx_{n,t})||^2_2.
-\end{equation}
-
-One could also model the supervisor as making multi-modal decisions, such as when the supervisor encounters "fork in the road" situations, where either choice is acceptable. Traditionally  Eq. \ref{eq:main_obj}, has been known as the surrogate loss to denote a difference between the true cost function. We will refer the to function $l : \mathcal{U} \times \mathcal{U} \rightarrow \mathbb{R}$ as the surrogate loss through out this paper. The surrogate loss can either be an indicator function as in classification or a continuous measure as indicated above.  This rewrites the objective as follows: 
+ Traditionally  Eq. \ref{eq:main_obj}, has been known as the surrogate loss to denote a difference between the true cost function. We will refer the to function $l : \mathcal{U} \times \mathcal{U} \rightarrow \mathbb{R}$ as the surrogate loss through out this paper. The surrogate loss can either be an indicator function as in classification or a continuous measure as indicated above.  This rewrites the objective as follows: 
 
 \begin{equation}\label{eq:main_obj}
 \hat{\theta} = \underset{\theta}{\mbox{argmin}} \sum^N_{n=1}\sum^T_{t=1} l(\bu_{n,t}, \pi_{\theta} (\bx_{n,t})).
 \end{equation}
 
 
- The above objective can be challenge to solve because the supervisors policy, $\tilde{\pi}$ may not be realizable in the space $\Theta$, or functions that represent the robot's policy, or it may be contained but not able to be found do to local optimization methods, such a gradient descent for neural networks.  Thus leading to a mismeasure in the distribution trained on and tested on. 
+Due to model mismatch (e.g. not being realizable), or a limited amount of data, solving Eq. \ref{eq:main_obj} may not lead to $\tilde{\pi}$.  Thus leading to a mismeasure in the distribution trained on and tested on.  Prior work ~\cite{ross2010reduction}  proposed an iterative method that solves this problem by aggregating data to converge to a distribution induced by the robot's policy. We review this approach in Sec. \ref{sec:DAgger}.
  
- Prior work ~\cite{ross2010reduction}  proposed an iterative method that solves this problem by aggregating data to converge to a distribution induced by the robot's policy. We review this approach in Sec. \ref{sec:DAgger}.
- 
+\section{Passive LfD}
+While DAgger handles the problem of model mismatch via optimizing on the distribution induced by the robot, we will instead assume realizability is achievable and leverage supervise LfD.  
+
+\subsection{Passive LfD}
+In passive LfD, $M$ demonstrations are collected from the supervisor's distribution $p(\tau|\tilde{\pi})$ and the following objective is minimized: 
+
+$$\underset{\theta}{\mbox{min}} \: \frac{1}{M} \sum^M_{m=1} \sum^T_{t=1} l(\pi_{\theta}(\bx_{t,m}), \tilde{\pi}(\bx_{t,m}))$$
+
+This is known as empirical risk minimization and in Sec. \ref{Sec:theory}, we show that this converges to the supervisor's policy if it is realizable. 
+
+If the supervisor's policy is not realizable though than pure passive learning could suffer in performance from not being adaptive. Thus, leveraging a larger function class can be used to remedy this situation. 
+
+Increasing the function class size of a robot's policy can be done in several ways 1) is to use a large function class representation such a deep neural networks, which have seen a re-emergence in recent years~\cite{levine2015end} 2) is to alrogithimically inflate the function class using an approach known as boosting.
+
+Boosting operates by examining the error, or misclassifications, in the current training set at each iteration, $k$. Then weights the points higher that are misclassified using a specified function $f$ and learns a new $\pi_{\theta_k}$ parameter on this distribution.  Then the robot policy is updated as $\pi_{\sum \theta} = \sum^K_{k=1} w_k \pi_{\theta_k}$, where the policy is now an ensemble of weaker policy representations~\cite{mason1999boosting}.
+
+
+Since we know that $\tilde{\pi} \in \Theta$ and that we can find the best fit for $\tilde{\pi}$ given the observed examples. Then the only reason that $\hat{\theta} \neq \tilde{\pi}$ is because not enough examples from the supervisor have been collected. 
+
+Understanding how much data is needed to learn a function, is a well studied problem known as sample complexity analysis~\cite{anthony2009neural}. In this literature they use different metrics to describe the complexity of a function class and show rates on which a given function class would converge to the real solution. We refer the reader to \cite{vapnik2013nature}, for a review of such topics. 
+
+A main result from this literature is that under the conditions we have described the following statement is true: \\
+
+\begin{theorem}\label{thm:sup}
+For a policy, $\hat{\theta}$ found via passive LfD, from $m$ trajectories collected from the supervisor the following is true with probability at least $1- 2\mbox{exp} (-m\delta^2/8)$
+
+$$E_{p(\tau|\tilde{\pi})} l(\pi_{\hat{\theta}}, \tilde{\pi}) \leq 2R_{\Theta}(m) + \delta+ O(\frac{1}{\sqrt{m}})$$\\
+
+\end{theorem}
+
+In this result, $R_{\Theta}$ corresponds to the Rademacher complexity of the given function class $\Theta$. The Rademacher complexity is a measure of much a function can fit to random noise, more complex function classes can fit better and thus leading to slower rates of convergence. 
+
+The key take away from from this theorem  is that at a non-asymptotic rate of demonstrations the surrogate loss will be zero on the distribution of the supervisor, thus corresponding to exact agreement between robot and supervisor. The exact rate itself will vary as a function of Rademacher Complexity of $\Theta$. 
 
 
 
@@ -340,98 +353,12 @@ task\footnote{In the original DAgger the policy rollout was stochastically mixed
     policy was for theoretical analysis and in practice, it was recommended to set $\beta = 0$ to avoid biasing the
 sampling~\cite{NIPS2014_5421,ross2010reduction}}.
 
-\subsection{Interpretation of DAgger}
-As DAgger iterates between optimizing the policy and gathering data, it trains an estimator on the distribution defined as $\frac{1}{K} \sum^K_{k=1} p(\tau|\theta_k)$. Since the goal of DAgger is to train the robot's policy on the distribution induced by the current policy $p(\tau|\theta_k)$, it is interesting to think under what conditions is the following true: 
+\subsection{Analysis of DAgger}
+Ross et al. propose analyzing DAgger as an online optimization problem~\cite{ross2010reduction}.  In online optimization a learner plays a game where at each iteration, it chooses a policy and receives a loss from an adversary.  In the LfD setting, the learner is the robot's policy and the adversary would be the loss on the distribution of states induced by the policy $E_{p(\tau|\theta)} l(\pi_{\theta}(\bx),\tilde{\pi}(\bx))$~\cite{shalev2011online}.
 
-$$\frac{1}{K} \sum^K_{k=1} p(\tau|\theta_k) = p(\tau|\theta_K)$$
+DAgger in this context is known as a Follow the Leader (FTL) algorithm. In FTL, the best policy is chosen on all previous seen losses, or the aggregate dataset in the LfD context. Their analysis shows that under the condition when the surrogate loss, $l$, is strongly convex with respect to $\theta$, their policy has a regret that converges to the best the policy could have done on all previous seen losses $\underset{\theta}{\min} \sum_{k=1}^K p(\tau|\theta_k)$. 
 
-It can be shown that when $$||\theta_k - \theta_{k+1} ||_{\infty} \leq \epsilon$$ and $\epsilon \rightarrow 0$ as $K \rightarrow \infty$ the above statement would be true due to the properties of expectation. This property of convergence to the final distribution is illustrated in Fig. \ref{sec:DAgger}. 
-
-\begin{figure}
-\centering
-\includegraphics{f_figs/dagger.eps}
-\caption{
-    \footnotesize
-An illustration of the evolution in distributions when running DAgger. In iteration $K=0$, the dataset is just the supervisor's demonstrations. The through iteratively rolling out the policy the density over the data can converge to the distribution induced by the policy at $K=5$. The darker regions correspond to an area of higher density. [PLANNING ON UPDATING FIGURE]}
-\vspace*{-20pt}
-\label{fig:graphModel}
-\end{figure}
-
-Under these conditions DAgger is able to sample and train on the states the robot is likely to see. This can allow one to improve the performance of the robot's policy despite not being able to perfectly match the supervisor's policy. However this method can have several limitations 1) it can require more data than necessary because a large number of the states the supervisor labels will have low probability at the end of learning 2) it can be hard for a human to retro-actively provide feedback since they have to predict how the dynamics would behave under their proposed control. 
-
-In light of these limitations, we are interested in overcoming the model mismatch between the robot's policy and the supervisors. By iteratively weighting states that are hard to predict and growing the model to accommodate them. This technique is known as boosting, which we define in the next section. 
-
-
-
-\section{Passive LfD}
-While DAgger handles the problem of model mismatch via optimizing on the distribution induced by the robot, we will instead assume realizability is achievable and leverage supervise LfD.  
-
-\subsection{Passive LfD}
-In passive LfD, $M$ demonstrations are collected from the supervisor's distribution $p(\tau|\tilde{\pi})$ and the following objective is minimized: 
-
-$$\underset{\theta}{\mbox{min}} \: \frac{1}{M} \sum^M_{m=1} \sum^T_{t=1} l(\pi_{\theta}(\bx_{t,m}), \tilde{\pi}(\bx_{t,m}))$$
-
-This is known as empirical risk minimization and in Sec. \ref{Sec:theory}, we show that this converges to the supervisor's policy if it is realizable. 
-
-If the supervisor's policy is not realizable though than pure passive learning could suffer in performance from not being adaptive. Thus, we propose using Boosting to help inflate our model class to achieve realizability for observed demonstrations from the supervisor. 
-
-\subsection{Boosting for Machine Learning}
-The idea of boosting is to search for a robot's policy that lies not in the space of $\Theta$, but of $\mbox{lin}(\Theta)$ or linear combinations of the functional space. Boosting can be thought of searching for a function class that best matches the supervisor, but does not overly increase complexity~\cite{buhlmann2003boosting}.
-
-Boosting operates by examining the error, or misclassifications, in the current training set at each iteration, $k$. Then weights the points higher that are misclassified using a specified function $f$ and learns a new $\pi_{\theta_k}$ parameter on this distribution.  Then the robot policy is updated as $\pi_{\sum \theta} = \sum^K_{k=1} w_k \pi_{\theta_k}$, where the policy is now an ensemble of weaker policy representations. An outline of the algorithm can be shown in Algorithm 1.
-
-It has been shown that this process can be interpreted as performing gradient descent for a policy representation in the space of $\mbox{lin}(\Theta)$ and in the case of convex loss functions convergence to the best policy in this class is obtainable~\cite{mason1999boosting}.
-
-\begin{algorithm}\label{alg:boosting}
-$D_n = 0$ \;
- \For{k = 0,...,K}{
-  Learner chooses \; 
-   $\theta_k = \underset{\theta}{\mbox{argmax}}  \sum^N_{n=1} D_n  \times  l(\pi_{\theta}(\bx_n),\tilde{\pi}(\bx_n))$\;
-Choose $w_{k+1}$\; 
-Let $\pi_{\sum \theta} = \sum^k_{k=0} w_k \pi_{\theta_k}(\bx) + w_k \pi_{\theta_k}(\bx)$\;
-$D_n = f(l(\pi_{\sum \theta}(\bx_n),\tilde{\pi}(\bx_n)))$
- }
- \caption{Boosting}
-
- 
- 
-\end{algorithm}
-
-
-
-\section{Theoretical Analysis} \label{Sec:theory}
-In this section, we are interesting in analyzing passive LfD and adaptive LfD when the supervisor $\tilde{\pi}$ is realizable, or $\tilde{\pi} \in \Theta$, for all states within the support of $p(\tau|\tilde{\pi})$.
-
-We assume throughout this section a bounded surrogate loss in the range of $[0,1]$ and that during minimization of the expected risk, the best function in the function class can be found. Examples of when these assumptions can be satisfied is if your robot has bounded controls and you are using a convex policy class, such as kernelized regression. 
-
-
-Since we know that $\tilde{\pi} \in \Theta$ and that we can find the best fit for $\tilde{\pi}$ given the observed examples. Then the only reason that $\hat{\theta} \neq \tilde{\pi}$ is because not enough examples from the supervisor have been collected. 
-
-Understanding how much data is needed to learn a function, is a well studied problem known as sample complexity analysis~\cite{anthony2009neural}. In this literature they use different metrics to describe the complexity of a function class and show rates on which a given function class would converge to the real solution. We refer the reader to \cite{vapnik2013nature}, for a review of such topics. 
-
-A main result from this literature is that under the conditions we have described the following statement is true: \\
-
-\begin{theorem}\label{thm:sup}
-For a policy, $\hat{\theta}$ found via passive LfD, from $m$ trajectories collected from the supervisor the following is true with probability at least $1- 2\mbox{exp} (-m\delta^2/8)$
-
-$$E_{p(\tau|\tilde{\pi})} l(\pi_{\hat{\theta}}, \tilde{\pi}) \leq 2R_{\Theta}(m) + \delta+ O(\frac{1}{\sqrt{m}})$$\\
-
-\end{theorem}
-
-In this result, $R_{\Theta}$ corresponds to the Rademacher complexity of the given function class $\Theta$. The Rademacher complexity is a measure of much a function can fit to random noise, more complex function classes can fit better and thus leading to slower rates of convergence. 
-
-The key take away from from this theorem  is that at a non-asymptotic rate of demonstrations the surrogate loss will be zero on the distribution of the supervisor, thus corresponding to exact agreement between robot and supervisor. The exact rate itself will vary as a function of Rademacher Complexity of $\Theta$. 
-
-
-We will next show how adaptive Lfd, actually fails to converge under these conditions. The intuition for this is that adaptivity can force the robot into states where the supervisor is no longer realizable (i.e. outside the support of $p(\tau|\tilde{\pi})$). 
-
-For instance if a supervisor trying to teach the task of driving down a highway, then they will stay within the lanes of the road and have a relatively smooth policy of going forward at a constant speed. However, if the supervisor is forced to veer off the road their resulting policy will become a much more complex maneuver to avoid crashing. 
-
-While passive LfD never forces the supervisor to visit these states, adaptive LfD  could learn a  policy that includes data from these more complex regions. Thus, potentially preventing adaptive Lfd from ever converging to the true supervisor. Denote $\hat{\theta}_S$ as the policy found by supervisor LfD and $\hat{\theta}_a$ as that found by adaptive LfD and $m$ the number of demonstrations. \\
-
-\begin{theorem}\label{thm:n_c}
-If $\tilde{\pi} \in \Theta$ only on the support of $p(\tau|\tilde{\pi})$ and $m\rightarrow \infty$, then $\hat{\theta}_S \rightarrow \tilde{\pi}$ but there exists situations where $\hat{\theta}_A$ does not converge to $\tilde{\pi}$.\\
-\end{theorem}
+A bound in regret though though does not imply the robot will be able to generalize to the unseen data nor match the supervisor. For example consider, where a robot is learning to search down a tree to maximize cumulative reward, as illustrated in Fig. \ref{fig:c_ex}. Here the robot's policy class is the finite set of only being able to choose left or right, $\Theta = \lbrace L,R \rbrace$.
 
 \begin{figure}
 \centering
@@ -443,27 +370,17 @@ A binary decision tree, where a robot is being taught by a supervisor to descend
 \label{fig:c_ex}
 \end{figure}
 
-\begin{proof}
-In order to prove the first part of the statement, that $\hat{\theta}_S \rightarrow \tilde{\pi}$ as  $m \rightarrow \infty$. We  use the result of Theorem 1 and note that all training data collected is in the region of realizability.\\ 
-
-In the second part of the theorem, convergence of adaptive Lfd is not guaranteed as illustrated by the following situation, where a robot is learning to search down a tree to maximize cumulative reward, as illustrated in Fig. \ref{fig:c_ex}. Here the robot's policy class is the finite set of only being able to choose left or right, $\Theta = \lbrace L,R \rbrace$.
-
 The learning algorithm, which chooses how to update the policy is to choose the policy, which agrees with the supervisor's controls the most, or: 
 
 $$\pi_{\theta} = \underset{\lbrace L,R \rbrace}{\mbox{argmin}} \sum^M_{m=0}\sum^T_{t=0} I(\pi_\theta(x_{m,t}),\tilde{\pi}(x_{m,t}))$$
 
 If passive LfD is applied to this situation, the supervisor will always chose left, $L$, and the robot will select this action resulting in perfect imitation. However, if DAgger is used and the robots initial policy is to go right, $\pi_{\theta_0} = R$. Then the robot will repeatedly always choose right and never converge. 
 
-\end{proof}
+Thus, convergence in regret is achievable because the best the robot could have done is to still go right, but that does not result in a good policy. We will now show when the supervisor's policy is realizable the robot will always converge to the supervisor using passive LfD. 
 
-While in practice this problem can be potentially overcome by increasing the complexity of $\Theta$, to make the supervisor realizable outside of the support. It would result in a large Rademacher complexity and subsequently more training data. Thus, if the supervisor is less complex on their own distribution using passive LfD can save data and avoid over-fitting. 
 
-It also interesting to think about the case where the supervisor's policy is realizable over the whole workspace. Because we know the final distribution of states will be $p(\tau|\tilde{\pi})$, then not sampling from that could lead to querying the supervisor for uninformative demonstrations and slower convergence. We show this effect in Sec. \ref{sec:gdw}. 
-
-However, under some conditions adaptivity could lead to faster convergence.  This can happen if the robot is forced to sample states that are near decision boundaries of its current policy, which would be a form of uncertainty sampling~\cite{settles2008analysis}. Adaptive Lfd, by itself, is not designed to achieve this and it will be depend on the choice of policy representation and dynamics of the environment. 
 
 \section{Experiments}
-
 
 \begin{figure*}
 \includegraphics{f_figs/var_grid.eps}
@@ -476,47 +393,74 @@ Shown above is the expected reward obtained for Value Iteration, which is the op
 
 We provide experiments in a simulated GridWorld environment, which allows for us to vary noise in the dynamics and initial state distribution: $p(\bx_t|\bx_t,\bu_t)$ and $p(\bx_0)$, with a deterministic supervisor. Then we  train a Zymark robot to singulate objects from each other, which allows for us to look at high dimensional image environments and work with a human supervisor. 
 \subsection{GridWorld}\label{sec:gdw}
-In a simulated GridWorld, we have a point robot that is trying to reach a goal state, at which it receives $+10$ reward. The robot receives $-10$ reward if it touches a red state, as shown in Fig. \ref{fig:grid_world}. The robot has a state space of $(x,y)$ coordinates and a set of actions consisting of $\lbrace$LEFT,RIGHT,FORWARD,BACKWARD,NONE$\rbrace$, where NONE indicates staying at the current stop. For the transition dynamics $p(\bx_{t+1}|\bx_{t},\bu_t)$, the robot goes to an adjacent state that does not correspond to the intended control with probability $0.2$. 
+In a simulated GridWorld, we have a point robot that is trying to reach a goal state, at which it receives $+10$ reward. The robot receives $-10$ reward if it touches a red state, as shown in Fig. \ref{fig:grid_world}. The robot has a state space of $(x,y)$ coordinates and a set of actions consisting of $\lbrace$LEFT,RIGHT,FORWARD,BACKWARD,UP,DOWN NONE$\rbrace$, where NONE indicates staying at the current stop. For the transition dynamics $p(\bx_{t+1}|\bx_{t},\bu_t)$, the robot goes to an adjacent state that does not correspond to the intended control with probability $0.2$. 
 
 We use Value Iteration to compute an optimal supervisor for our grid world domain. The optimal policy must learn to be robust to the noise in the dynamics, reach the goal state and then stay there. The robot policy is represented as a decision tree with a maximum depth of $3$ and is trained using Sci-Kit Learn~\cite{scikit-learn}. We used a fix time horizon of $T=40$, which gives the robot enough time to get to the goal state. 
 
 
-\noindent \textbf{Realizable vs. Not Realizable} In Fig. \ref{fig:low_var}, we show supervise learning with the fixed decision tree, DAgger and supervise learning with boosting applied to the decision tree. Similar to prior work supervise learning with a fixed decision tree does worse than DAgger, which iteratively determines the distribution it policy induces and minimize the expected risk on it. However, DAgger is outperformed by the boosted learner, which is able to match the supervisor's controls during train and induce the same distribution. 
+\noindent \textbf{Un-Realizable} In Fig. \ref{fig:var}, we show the case when the robot's policy class does not contain the supervisors, with a fixed decision tree of depth 3.  Similar to prior work passive LfD  with a fixed decision tree does worse than DAgger, which iteratively determines the distribution it policy induces and minimize the expected risk on it.
 
-To see how the results change when the variance is increased in the graphical model, we double the dynamics noise. Now, $p(\bx_{t+1}|\bx_t,\bu_t)$ causes the robot to go an adjacent state that does not correspond to the intended control with probability $0.4$. In Fig. \ref{fig:high_var}, we show that despite the large variance the relative results of DAgger, Boosted passive and passive remains the same. However, more data is still need to learn the policy, which corresponds to an increase in variance in the sampled distribution. We also note that Value Iteration optimal supervisor does much worse due to instability in control. 
+\noindent \textbf{Realizable} 
+We then consider the situation where passive LfD and DAgger are able to to grow their function class via boosting, to place the supervisor's policy inside of it. To achieve this we applied AdaBoost to the decision trees from before and terminated the number of iterations once the training loss was zero. 
+
+As shown in Fig. \ref{fig:var}, DAgger and passive LfD both converge to the supervisor, but more data is needed for DAgger. This suggests that adaptivity forces the robot to ask for uninformative demonstrations.  
+
+
+\noindent \textbf{Over Realizable}
+We next consider the situation where passive LfD and DAgger have a very large function class To achieve this we  set the robot;s policy, $\pi_{\theta}$ to the decision trees with a depth of $100$.
+
+As shown in Fig. \ref{fig:var}, DAgger and passive LfD both converge to the supervisor, but in comparison to the Boosted decision trees more data is needed to converge to the supervisors. Thus, suggesting that using a larger than needed function class is prone to requiring more data. 
+
+\noindent \textbf{Noisy Supervisor}
+We finally observe the effects of noise on the supervisor. Here we consider the case where noise is applied to observe label, thus the robot recieve control labels that are $\bu = \pi_{\theta}(\bx) + \epsilon$, \mlnote{will fix that} where epsilon is an i.i.d distribution that selects a random control with probability $0.2$.
+
+We use the large decision tree which is most susceptible to the noisy supervisor and observe the effects of passive LfD versus adaptive. As shown, both passive and adaptive are able to surpass the noisy supervisor's performance because they can average out the noise in the labels with enough data. Though it takes both substantially more data, passive LfD is able to achieve gains over adaptive. 
+
+
+
+
+\subsection{Point Mass Control}
+We next consider the example where the robot needs to learn to get to a location in a 2D continuous world domain. The robot is represented as a point mass dynamics and the supervisor is computed using the infinite time horizon LQG, which results in a linear policy. 
+
+The domain, as shown in Fig. \ref{fig:p_mass}, consists of two areas A and B., which contain different dynamics and thus two different solutions to the LQG supervisor. In region B the controls are inverted between $x$ and $y$.  The goal state is located in area A. The robot's policy, $\pi_{\theta}$ is represented as a linear policy which is found via ridge regression. 
+
+We run passive Lfd and DAgger in this setting and plot the performance in Fig. \ref{fig:p_mass}. As shown, passive LfD is able to converge to the true supervisor's policy however the adaptivitiy of DAgger forces it to enter the region B of the workspace and subsequently try to learn the two different supervisors. Thus, preventing it from converging. 
 
 \begin{figure}
 \centering
-\includegraphics{f_figs/grid_world.eps}
-\caption{
-    \footnotesize
-Left: An example of the grid world domain, where the robot must reach the goal (green) state and avoid the red objects, for which it receives negative reward. The dynamics in this enviroment are stochastic, which requires a robot to learn a control policy that is robust to variance. Right: Is the optimal policy with respect to the expected discounted reward computed by our supervisor, Value Iteration.  }
-\vspace*{-10pt}
-\label{fig:grid_world}
-\end{figure}
-
-\noindent \textbf{Realizable Everywhere} 
-We are next interested in the situation when both DAgger and passive Learning are realizable. We use a 3D gridworld in this test domain that includes the additional action of UP and DOWN. We do this because to observe the effects of sub-optimally sampling data its important to create a larger workspace. 
-
-In Fig. \ref{fig:r_eq}, we show Boosted DAgger against Boosted Supervisor in two situation one with low initial state variance and one with higher initial state variance. The low initial state variance shows Boosted DAgger performing similar to Boosted Supervisor, however as the initial state variance is increased the robot's policy makes more mistakes and collects demonstrations in states the supervisor is unlikely to visit. 
-
-
-\begin{figure}
-\centering
-\includegraphics{f_figs/r_ev.eps}
+\includegraphics{f_figs/p_mass.eps}
 \caption{
     \footnotesize
 Shown is Boosted passive compared against Boosted DAgger in a 3D gridworld domain with each iteration corresponding to a demonstration given via the supervisor controlling the system or retro-actively, respectively. All results are averaged over 1000 trails. With low initial state variance the performance is similar, however as the initial state variance is increase DAgger queries the supervisor for less informative demonstrations. Thus, resulting in slower convergence.   }
 \vspace*{-20pt}
-\label{fig:r_eq}
+\label{fig:p_mass}
 \end{figure}
 
-
-
-\noindent \textbf{Realizable only on Supervisor's Support} 
-
-
 \subsection{Planar Singulation}
+We lastly perform a human study on a real robot, where people teach the robot to perform singulation task, or seperate a object from a pile. The objects used to form clutter are red extruded polygons.  For singulation task, we consider objects made of Medium Density Fiberboard with an average 4" diameter and 3" in height. 
+
+The robot has a 2 dimensional internal state of base rotation and arm extension. The state space of the environment, $\mathcal{X}$, is captured by  an overhead Logitech C270 camera, which is positioned to capture the workspace that contains all cluttered objects, the goal object and the robot arm. We use only the current image as state space, which captures positional information and a neural network architecture policy representation, the same as in~\cite{laskeyrobot}.
+
+The robot is commanded via position 
+control with a  PID controller. Similar to \cite{laskeyshiv}, the controls, $\mathcal{U}$, to the robot are bounded changes in the internal state, which allows for us to easily register control signals to the demonstrations provided by supervisors as opposed to torque control. The control signals for each degree of freedom are continuous values with the following ranges: base rotation, $[-15^\circ,15^\circ]$, arm extension $[-1,1]$. The units are degrees for base rotation and centimeters for arm extension. 
+
+During training and testing the initial state distribution $p(\bx_0)$ consists of sampling the relative pose of 4 objects from a distribution around their position in the pile and the pose of the pile as a whole. The pose of the pile is sampled from a Gaussian with variance \mlnote{get numbers}. Then using a virtual overlay a human is asked to place objects in their correct pose. 
+
+The robot can be trained in either 2 ways DAgger or passive learning. In passive learning, the subject is asked to provide 60 demonstrations to the robot using an Xbox Controller. In active learning the user is first asked to provide 20 demonstrations via the Xbox Controller and then provides retro-active feedback for $K=2$ iterations of 20 demonstrations each. 
+
+10 human subjects were selected who had a background in robotics research, but not in LfD. They were given a short demonstration of the learned robot policy and then asked to practice providing feedback through DAgger for 5 demonstrations and passive for 5 demonstrations. We then have each subject provide the first 20 demonstrations via passive feedback and then using counter-balancing to select whether they will perform passive or DAgger for the next 40 demonstrations.  
+
+In Fig. \ref{fig:izzy_rw} , we show the average performance of the policies trained with DAgger and passive LfD. Each policy is evaluated on a hold out set of 30 initial states sampled from the same distribution as training. As shown, the policies learned with DAgger exhibit statistically significant worse performance than those with passive LfD. Thus, sugggesting that DAgger could perform worse than passive Lfd on a task with actual human supervision. 
+
+\begin{figure}
+\centering
+\includegraphics{f_figs/izzy_reward.eps}
+\caption{
+    \footnotesize
+Shown is Boosted passive compared against Boosted DAgger in a 3D gridworld domain with each iteration corresponding to a demonstration given via the supervisor controlling the system or retro-actively, respectively. All results are averaged over 1000 trails. With low initial state variance the performance is similar, however as the initial state variance is increase DAgger queries the supervisor for less informative demonstrations. Thus, resulting in slower convergence.   }
+\vspace*{-20pt}
+\label{fig:izzy_rw}
+\end{figure}
 
 
 

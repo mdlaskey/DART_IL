@@ -1,17 +1,16 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Related Work}{}% 2
 \BOOKMARK [1][-]{section.3}{Problem Statement}{}% 3
-\BOOKMARK [1][-]{section.4}{DAgger}{}% 4
-\BOOKMARK [2][-]{subsection.4.1}{Algorithm}{section.4}% 5
-\BOOKMARK [3][-]{subsubsection.4.1.1}{Step 1}{subsection.4.1}% 6
-\BOOKMARK [3][-]{subsubsection.4.1.2}{Step 2}{subsection.4.1}% 7
-\BOOKMARK [2][-]{subsection.4.2}{Interpretation of DAgger}{section.4}% 8
-\BOOKMARK [1][-]{section.5}{Passive LfD}{}% 9
-\BOOKMARK [2][-]{subsection.5.1}{Passive LfD}{section.5}% 10
-\BOOKMARK [2][-]{subsection.5.2}{Boosting for Machine Learning}{section.5}% 11
-\BOOKMARK [1][-]{section.6}{Theoretical Analysis}{}% 12
-\BOOKMARK [1][-]{section.7}{Experiments}{}% 13
-\BOOKMARK [2][-]{subsection.7.1}{GridWorld}{section.7}% 14
-\BOOKMARK [2][-]{subsection.7.2}{Planar Singulation}{section.7}% 15
-\BOOKMARK [1][-]{section.8}{Conclusion}{}% 16
-\BOOKMARK [1][-]{section*.9}{References}{}% 17
+\BOOKMARK [1][-]{section.4}{Passive LfD}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{Passive LfD}{section.4}% 5
+\BOOKMARK [1][-]{section.5}{DAgger}{}% 6
+\BOOKMARK [2][-]{subsection.5.1}{Algorithm}{section.5}% 7
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Step 1}{subsection.5.1}% 8
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Step 2}{subsection.5.1}% 9
+\BOOKMARK [2][-]{subsection.5.2}{Analysis of DAgger}{section.5}% 10
+\BOOKMARK [1][-]{section.6}{Experiments}{}% 11
+\BOOKMARK [2][-]{subsection.6.1}{GridWorld}{section.6}% 12
+\BOOKMARK [2][-]{subsection.6.2}{Point Mass Control}{section.6}% 13
+\BOOKMARK [2][-]{subsection.6.3}{Planar Singulation}{section.6}% 14
+\BOOKMARK [1][-]{section.7}{Conclusion}{}% 15
+\BOOKMARK [1][-]{section*.6}{References}{}% 16
