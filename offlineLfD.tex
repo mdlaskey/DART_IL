@@ -125,12 +125,12 @@
 %\title{Iterative Imitation Learning with Reduced Human Supervision [v11]}
 %\title{SHIV:  Reducing Human Supervision for Robot adaptive Learning [v11]}
 
-\title{Reduction in Sample Complexity for Robotic\\
- Learning from Demonstrations}
+\title{On the Importance of Function Class \\
+Complexity in Robotic Learning from Demonstrations}
 
 
 
-\author{Michael Laskey, Caleb Chuck,Jonathan Lee, Jeff Mahler,\\ Sanjay Krishnan, Kevin Jamieson, Anca Dragan, Ken Goldberg}
+\author{Michael Laskey, Caleb Chuck, Jonathan Lee, Jeff Mahler,\\ Sanjay Krishnan, Kevin Jamieson, Anca Dragan, Ken Goldberg}
 \begin{document}
 
 
@@ -154,14 +154,15 @@ Learning from demonstration algorithms are either passive or adaptive. It has be
 
 
 \section{Introduction} 
-In model-free robot Learning from Demonstration (LfD), a robot learns to perform a task, such as driving or grasping an object in a cluttered environment, from examples provided by a  supervisor, usually a human. LfD algorithms have historically evolved into two categories a passive learning approach~\cite{pomerleau1989alvinn}, where the robot only observes demonstrations, or an adaptive approach~\cite{ross2010reduction}, where the robot executes its current policy and receives feedback from the supervisor. In passive LfD, the robot learns the policy based on a batch of examples, and then executes it to achieve the task.  In adaptive LfD algorithm, algorithms such as DAgger, learns a series of policies. At each iteration, the robot trains a policy based on the existing examples, then rolls out (executes) that policy, and the supervisor provides the correct control for all states the robot visits. The new state/control examples are aggregated with the old examples for the next iteration. Termination of the algorithm is determined when either the robot matches the supervisor, or is no longer improving. 
+In model-free robot Learning from Demonstration (LfD), a robot learns to perform a task, such as driving or grasping an object in a cluttered environment, from examples provided by a  supervisor, usually a human. In such problems, the robot does not have access to either a smooth cost function that it can optimize, nor the dynamics model. The former occurs when it is difficult to specify the intermediate steps needed to complete a task and the latter occurs when either the system or the interaction with the world is difficult to characterize. Learning from demonstration has been applied to a large number of robotic tasks, including helicopter maneuvering~\cite{abbeel2007application}, car parking~\cite{abbeel2008apprenticeship} , robotic surgery~\cite{van2010superhuman,laskeyshiv} and robotic manipulation~\cite{laskeyrobot}.
 
 
-Empirically it has been shown that adaptive LfD algorithms have out performed passive~\cite{ross2010efficient,ross2010reduction,ross2013learning}. This has been attributed to adaptive LfD algorithms sampling from state distributions the robot is more likely to visit and thus providing better training examples during learning.  We argue though  that the strength of adaptive LfD algorithms arises not purely out of changing the training examples, but also because the robot's current policy class is not capable of representing the supervisor's policy. 
 
-The notion that the function one is learning is contained in the function class of a given learning algorithm, is known as realizable. An example of when a learning algorithm does not have realizability is training a linear regressor to predict a non-linear function, see Fig. \ref{fig:teaserl}.
+LfD algorithms have historically evolved into two categories a passive learning approach~\cite{pomerleau1989alvinn}, where the robot only observes demonstrations and performs loss minimization, or an adaptive approach~\cite{ross2010reduction}, where the robot executes its current policy and receives feedback from the supervision. In their seminal papers~\cite{ross2010efficient,ross2010reduction,ross2013learning}., Ross et al. argued that this passive approach has a crucial limitation, namely,  if one sequentially executes a learned control policy $\hat{\pi}$ having an expected loss of $\epsilon$ over the supervisor's distribution, the worst-case error actually grows quadratically in time $O(T^2\epsilon)$. This is because during sequential execution the learned policy encounters a different state distribution than used during training.
 
-When the robot's policy class is not able to realize the supervisor's policy, then the robot will never agree with the supervisor in some parts of the visited state space and deviate from the supervisors state distribution. DAgger tries to remedy this situation by providing examples in the new states the robot is likely to visit and tries to learn a policy to best mimic a supervisor in those new states. Thus, it will not be able to perfectly mimic the supervisor, but instead try to learn a policy that is similar. 
+Ross et al. proposed an adaptive algorithm, DAgger, to address this problem.  At each iteration, DAgger executes the current best policy, and the supervisor provides corrections when the policy deviates from the desired behavior (e.g., moving outside of the expected state distribution). The new corrections are then aggregated for the next iteration where the policy is re-learned, and the result is an error-rate that grows only linearly with time. . Empirical results have shown that this tradeoff is actually worth making,  and DAgger has been shown to repeatedly out-perform the passive loss-minimization approach~\cite{ross2010efficient,ross2010reduction,ross2013learning}.
+
+However, as we demonstrate there is no free lunch to achieve this linear rate. In early iterations, the algorithm potentially collects demonstration data in states not likely to be visited and prevent it from ever  recovering the supervisor's policy $\tilde{\pi}$ even with infinite data. This is because the analysis is a regret bound, which is only able to say how well the robot could have best done in hindsight compared to what it did. Thus, if running DAgger forces the robot to collect data that is hard to learn the best it could have done is not necessarily a good policy. 
 
 
 \begin{figure}
@@ -173,12 +174,13 @@ An illustration of the  of realizable. Denote a policy class $\Theta$ and a supe
 \label{fig:teaserl}
 \end{figure}
 
-However, if the supervisor's policy is realizable on their distribution then performing  passive learning is guaranteed to converge to the supervisor's policy as more training data is collected, which we  demonstrate via the uniform law of large numbers~\cite{vapnik2013nature}.  In contrast, we theoretically show that adaptive LfD is not guaranteed to converge to the supervisor's policy. Thus, suggesting adaptivity can actually result in poor performance under the condition of realizability. 
 
-In practice realizability could be hard to achieve for a given task. Thus, we propose using boosting on the current robot's policy class to incrementally inflate the class size. Boosting works by training a sequence of each focused on examples that caused the previous policy to fail and then uses a weighted combination of all trained policies. A problem that exists when growing the function class size is that over-fitting is possible and this can poorly affect generalization. An interesting property of Boosting though is that by incrementally growing the function class size the bias-variance trade-off, or generalization ability, can  scale better as opposed to a standard non-parameteric regressor~\cite{buhlmann2003boosting}. \mlnote{will formalize previous statement with the exact rates} Thus, it can avoid over-fitting to the observed example from the supervisor. 
+This insight and recent results in Machine Learning~\cite{krizhevsky2012imagenet} encourage us to reconsider these results. The underlying concern with the loss minimization approach was that the error would grow quadratically in time $O(T^2\epsilon)$. This is only problematic if $\epsilon$ is large, but suppose we could choose a richer class of controllers to very nearly match the supervisor’s policymaking $\epsilon$ very small. This is increasingly possible with Deep Neural Networks~\cite{anthony2009neural} that can in principle approximate any function given enough data and the ability to minimize training loss. Similarly, techniques like Boosting can incrementally enlarge the class of functions by training a sequence of sub-policies each focused on examples that caused the previous policy to fail and then uses a weighted combination of all trained policies~\cite{mason1999boosting}.
 
-\mlnote{Still working on how to summarize all results}
-Our contributions is showing, both theoretically and empirically that adaptive LfD algorithms can achieve worse performance versus passive LfD, if the function class is realizable on the supervisor's distribution. We also provide experiments on a physical robot setup with randomized human trials of teaching a robot how to singulate objects, or manipulate one goal object away from an arbitrary cluster of objects. 
+Using these rich function classes we are able to include the expected supervisor's policy in the robot's policy class. In this situation, which we refer to as realizable, the passive LfD approach can be guaranteed to achieve the supervisor's policy if enough data is collected. Thus, our contribution is to instead of considering the problem of distribution mismatch, we look at how at how function complexity affects the performance of DAgger and passive LfD. 
+
+
+We  provide experiments in a gridworld domain demonstrating the effect of growing the robot's policy function class size and demonstrate that adaptivity may only be effective when the function class size is smaller than the supervisor's. We then illustrate a 2D point mass example, in which despite having the same function class as the supervisor adaptivity fails to converge to the supervisor's policy. Finally, we test both DAgger and passive Lfd in learning a policy for singulating objects from a pile on a Zymark Robot platform across 10 human subjects. We found the passive LfD is able to achieve a $21 \%$ increase in the probability of success with the same amount of data \mlnote{We will probably be able to increase that with boosting}
 
 
 \section{Related Work}
@@ -243,7 +245,6 @@ induces a density on trajectories of length $T+1$: $$p(\tau | \theta)=
 p(\bx_0)\prod_{i=0}^{T-1}p(\bx_{t+1}|\bu_t,\bx_t)p(\bu_t|\pi_{\theta}(\bx_t))$$
 
 
-
 While we do not assume knowledge of the distributions corresponding to: $p(\bx_{t+1}|\bx_t,\bu_t)$, $p(\bx_0)$, $p(\bx_t|
 \theta)$ or $p(\bx|\theta)$, we assume that we have a stochastic real robot or a simulator such that for any state
 $\bx_t$ and control $\bu_t$, we can sample the $\bx_{t+1}$ from the density $p(\bx_{t+1}|\bu_t,\bx_t)$. 
@@ -286,13 +287,11 @@ Due to model mismatch (e.g. not being realizable), or a limited amount of data, 
 While DAgger handles the problem of model mismatch via optimizing on the distribution induced by the robot, we will instead assume realizability is achievable and leverage supervise LfD.  
 
 \subsection{Passive LfD}
-In passive LfD, $M$ demonstrations are collected from the supervisor's distribution $p(\tau|\tilde{\pi})$ and the following objective is minimized: 
+In passive LfD, $N$ demonstrations are collected from the supervisor's distribution $p(\tau|\tilde{\pi})$ and the following objective is minimized: 
 
-$$\underset{\theta}{\mbox{min}} \: \frac{1}{M} \sum^M_{m=1} \sum^T_{t=1} l(\pi_{\theta}(\bx_{t,m}), \tilde{\pi}(\bx_{t,m}))$$
+$$\underset{\theta}{\mbox{min}} \: \frac{1}{M} \sum^N_{i=1} \sum^T_{t=1} l(\pi_{\theta}(\bx_{t,i}), \pi_{\theta^*}(\bx_{t,i}))$$
 
-This is known as empirical risk minimization and in Sec. \ref{Sec:theory}, we show that this converges to the supervisor's policy if it is realizable. 
-
-If the supervisor's policy is not realizable though than pure passive learning could suffer in performance from not being adaptive. Thus, leveraging a larger function class can be used to remedy this situation. 
+This objective is known as empirical risk minimization. If the supervisor's policy is not realizable though than pure passive learning could suffer in performance from not being adaptive. Thus, leveraging a larger function class can be used to remedy this situation. 
 
 Increasing the function class size of a robot's policy can be done in several ways 1) is to use a large function class representation such a deep neural networks, which have seen a re-emergence in recent years~\cite{levine2015end} 2) is to alrogithimically inflate the function class using an approach known as boosting.
 
@@ -303,20 +302,61 @@ Since we know that $\tilde{\pi} \in \Theta$ and that we can find the best fit fo
 
 Understanding how much data is needed to learn a function, is a well studied problem known as sample complexity analysis~\cite{anthony2009neural}. In this literature they use different metrics to describe the complexity of a function class and show rates on which a given function class would converge to the real solution. We refer the reader to \cite{vapnik2013nature}, for a review of such topics. 
 
-A main result from this literature is that under the conditions we have described the following statement is true: \\
+We are interested in the total cost along a trajectory with respect to a policy, $\pi_{\theta}$, which is defined as $J(\theta) = \sum^T_{t=1} l(\pi_{\theta}(\bx_{t}),\pi_{\theta^*}(\bx_{t}))$.  If we assume the surrogate loss $l$ is convex with respect to $\theta$ and bounded between $[0,1]$, then if $\theta \in \Theta$. \\
 
 \begin{theorem}\label{thm:sup}
-For a policy, $\hat{\theta}$ found via passive LfD, from $m$ trajectories collected from the supervisor the following is true with probability at least $1- 2\mbox{exp} (-m\delta^2/8)$
+For a policy, $\theta^n$ found via passive LfD, from $n$ trajectories collected from the supervisor the following is true with probability at least $1- 2\mbox{exp} (-m\delta^2/8)$
 
-$$E_{p(\tau|\tilde{\pi})} l(\pi_{\hat{\theta}}, \tilde{\pi}) \leq 2R_{\Theta}(m) + \delta+ O(\frac{1}{\sqrt{m}})$$\\
+$$E_{p(\tau|\theta^*)} J(\theta^n)\leq T( 2R_{\Theta}(Tn) + \delta+ \frac{1}{\sqrt{Tn}})$$\\
 
 \end{theorem}
 
-In this result, $R_{\Theta}$ corresponds to the Rademacher complexity of the given function class $\Theta$. The Rademacher complexity is a measure of much a function can fit to random noise, more complex function classes can fit better and thus leading to slower rates of convergence. 
+In this result, $R_{\Theta}$ corresponds to the Rademacher complexity of the given function class $\Theta$. The Rademacher complexity is a measure of much a function can fit to random noise, more complex function classes can fit better and thus leading to slower rates of convergence. It is interesting to not that in this bound $T$ controls how much data is added to each iteration, thus a longer time step trajectory can lead to faster convergence depending on the function class. 
 
-The key take away from from this theorem  is that at a non-asymptotic rate of demonstrations the surrogate loss will be zero on the distribution of the supervisor, thus corresponding to exact agreement between robot and supervisor. The exact rate itself will vary as a function of Rademacher Complexity of $\Theta$. 
+A main take away from from this theorem  is that at a non-asymptotic rate of demonstrations the surrogate loss will be zero on the distribution of the supervisor, thus corresponding to exact agreement between robot and supervisor. The exact rate itself will vary as a function of Rademacher Complexity of $\Theta$. 
+
+The above theorem though only shows that the policy converges in the limit of infinite samples, however we are interested in bounding the performance of a policy trained on only $n$ demonstrations. 
+
+ Define $\theta^n = \underset{\theta}{\mbox{argmin}} \sum^n_{i=1} J(\theta)$   $\:\:\tau \sim p(\tau|\theta^*)$, where $l(\pi_{\theta}(\bx),\pi_{\theta^*}(\bx)) = ||\pi_{\theta}(\bx_{i,t}) - \pi_{\theta^*}(\bx_{i,t})||_2$.We note that the controls can be bounded and normalized such that the $l \in [0,1]$.  We are interested in the situation where the supervisor and robot policy are stochastic with a Normal Distribution (i.e. $p(\bu|\pi_{\theta}(\bx)) = \mathcal{N}(\pi_\theta(\bx),\sigma I)$. The following statement can be said: \\
+
+\begin{theorem}
+Given a policy $\theta^n$, the following is true 
+$$E_{p(\tau|\theta^n)} J(\theta^n) \leq \big(\sqrt{T\frac{1}{4\sigma}}+1\big)E_{p(\tau|\theta^*)} J(\theta^n)$$\\
+\end{theorem}
+\begin{proof}
+For convenience we will write $E_{p(\tau|\theta)} = E_{\theta}$ and $l(\theta,\bx) = l(\theta)$. 
+
+\begin{align}
+&E_{\theta^n} J(\theta^n) - E_{\theta^*} J(\theta^n) \\
+&= T(\frac{1}{T}E_{\theta^n} J(\theta^n) -\frac{1}{T}E_{\theta^*} J(\theta^n)\\
+&\leq  T\mbox{sup}_{\theta} |\frac{1}{T}E_{\theta_n}J(\theta) - \frac{1}{T}E_{\theta^*} J(\theta)|\\
+&\leq  T| | p(\tau|\theta^n) - p(\tau|\theta^*)||_{TV}\\
+&\leq T\sqrt{\frac{1}{2} D_{KL}(p(\tau|\theta^*),p(\tau|\theta^n))}
+\end{align}
+
+Line 5 bounds the expected loss over $\theta^n$ by taking the worst case value. Line 6 leverages the fact that the worst case loss is bounded by $1$ and the definition of Total Variational distance. Line 7 uses Pinsker's inequality. 
 
 
+\begin{align}
+&= T\sqrt{\frac{1}{2} E_{p(\theta^*)} \mbox{log} \frac{p(\tau|\theta^*)}{p(\tau|\theta^n)}}\\
+&= T\sqrt{\frac{1}{2} E_{p(\theta^*)} \sum^T_{t=1}\mbox{log} \frac{p(\bu_t|\bx_t,\theta^*)}{p(\bu_t|\bx_t,\theta^n)}}\\
+&= T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} \sum^T_{t=1} ||\bu_t- \pi_{\theta^*}(\bx_t)||_2^2 - ||\bu_t- \pi_{\theta^n}(\bx_t)||_2^2}\\
+&\leq T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} \sum^T_{t=1}  ||\pi_{\theta^*}(\bx_t) - \pi_{\theta^n}(\bx_t)||_2^2}
+\end{align}
+
+Line 12,13,14 come from the definition of KL divergence our Markov assumption and the fact that the policies are stochastic with a normal distribution, respectively. Line 15 leverages triangle inequality. 
+
+\begin{align}
+&= T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} \sum^T_{t=1}  l(\pi_{\theta^n}(\bx_t),\pi_{\theta^*}(\bx_t))^2}\\
+&= T\sqrt{T\frac{1}{4\sigma}E_{p(x|\theta^*)} \sum^T_{t=1}  l(\pi_{\theta^n}(\bx_t),\pi_{\theta^*}(\bx_t))^2}\\
+&=\sqrt{T\frac{1}{4\sigma}}E_{p(\theta^*)} \sum^T_{t=1}  J(\theta^n)
+\end{align}
+
+Line 12 uses the definition of our surrogate loss, $l$. Line 13 applies the definition of the expected state distribution used in Ross et al. \cite{ross2010reduction}. Line 14 simplifies the expression and return to the surrogate loss over the distribution on trajectories. 
+
+\end{proof}
+ 
+ The above theorem suggest that passive LfD can in fact achieve a rate that is $T\sqrt{T}$ and not $T^2$ as suggested by Ross et al. \cite{ross2010reduction,ross2010efficient} when using the expected state distribution.  Theorem 4.1 and 4.2 can combined to show convergence of the robot's policy as a function of samples. 
 
 
 \section{DAgger}\label{sec:DAgger}
@@ -376,7 +416,13 @@ $$\pi_{\theta} = \underset{\lbrace L,R \rbrace}{\mbox{argmin}} \sum^M_{m=0}\sum^
 
 If passive LfD is applied to this situation, the supervisor will always chose left, $L$, and the robot will select this action resulting in perfect imitation. However, if DAgger is used and the robots initial policy is to go right, $\pi_{\theta_0} = R$. Then the robot will repeatedly always choose right and never converge. 
 
-Thus, convergence in regret is achievable because the best the robot could have done is to still go right, but that does not result in a good policy. We will now show when the supervisor's policy is realizable the robot will always converge to the supervisor using passive LfD. 
+Thus, convergence in regret is achievable because the best the robot could have done in hindsight would be to always choose $R$, but that does not result in a good policy. We note that if passive LfD was applied the robot would have chosen $L$ from the a single initial demonstration. 
+
+ While this problem can be overcomed by increasing the robot policy's function class, a larger function class could result in more data needed to learn the policy\cite{kakade2009generalization}.
+ 
+Another potential downside of DAgger is that when the supervisor's policy is in the robot's policy class over the entire workspace. DAgger could potentially converge at a slower rate because it is requesting labels in uninformative states, as we show in Sec. \ref{sec:gdw}. We note though that it is possible for DAgger to act as an active learning algorithm and query states near a policies decision boundary. This depends on the environment's dynamics and the robot's policy representation. 
+
+
 
 
 
@@ -386,12 +432,13 @@ Thus, convergence in regret is achievable because the best the robot could have 
 \includegraphics{f_figs/var_grid.eps}
 \caption{
     \footnotesize
-Shown above is the expected reward obtained for Value Iteration, which is the optimal supervisor, Supervise learning using Adaboost, DAgger and Supervise learning. All results are averaged over 1500 trials. In A) we demonstrate the four approaches for a given dynamics and initial state distributions, Adaboost converges fastest to the supervisor. In B), we double the noise in the dynamics, which causes the robot to cover a lot more states. Adaboost is still able to achieve faster convergence, which suggests DAgger does not help in producing a covering of states. Finally, in C) we increase the initial state variance by 5x, to try and see if over-fitting to a small sample size is possible. Results suggests that the effects of over-fitting persists in both DAgger and Adaboost.}
+Shown above is the expected reward obtained for four different conditions in a 3D gridworld environment, where the robot is taught to avoid negative reward states and reach a goal state. Condition A examines when the robot's policy class is not able to learn the supervisors, which results in adaptivity leading to better performance. Condition B examines Boosting being used to incrementally increase the robot's policy class such that it contains the supervisor policy. Thus resulting in passive leading to faster convergence. Condition C examines a large robot policy class that is also able to represent the supervisor. This leads to similar performance as Condition B, but requires more data. Finally, Condition D examines when the supervisor has noise added to the controls labels, this leads to more data being needed to converge but the passive approach is still able to outperform adaptive.  }
 \vspace*{-20pt}
 \label{fig:var}
 \end{figure*}
 
 We provide experiments in a simulated GridWorld environment, which allows for us to vary noise in the dynamics and initial state distribution: $p(\bx_t|\bx_t,\bu_t)$ and $p(\bx_0)$, with a deterministic supervisor. Then we  train a Zymark robot to singulate objects from each other, which allows for us to look at high dimensional image environments and work with a human supervisor. 
+
 \subsection{GridWorld}\label{sec:gdw}
 In a simulated GridWorld, we have a point robot that is trying to reach a goal state, at which it receives $+10$ reward. The robot receives $-10$ reward if it touches a red state, as shown in Fig. \ref{fig:grid_world}. The robot has a state space of $(x,y)$ coordinates and a set of actions consisting of $\lbrace$LEFT,RIGHT,FORWARD,BACKWARD,UP,DOWN NONE$\rbrace$, where NONE indicates staying at the current stop. For the transition dynamics $p(\bx_{t+1}|\bx_{t},\bu_t)$, the robot goes to an adjacent state that does not correspond to the intended control with probability $0.2$. 
 
@@ -431,7 +478,7 @@ We run passive Lfd and DAgger in this setting and plot the performance in Fig. \
 \includegraphics{f_figs/p_mass.eps}
 \caption{
     \footnotesize
-Shown is Boosted passive compared against Boosted DAgger in a 3D gridworld domain with each iteration corresponding to a demonstration given via the supervisor controlling the system or retro-actively, respectively. All results are averaged over 1000 trails. With low initial state variance the performance is similar, however as the initial state variance is increase DAgger queries the supervisor for less informative demonstrations. Thus, resulting in slower convergence.   }
+Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants A and B, in B the controls are inverted in the dynamics thus resulting in $x=y$ and $y=x$. The supervisor is the infinite horizion LQG computed policy, which results in two different linear matrices in region A and B. Right: Illustrates how having a linear robot policy class can cause DAgger to fail  to converge due to it collecting data from region B.  }
 \vspace*{-20pt}
 \label{fig:p_mass}
 \end{figure}
@@ -457,7 +504,7 @@ In Fig. \ref{fig:izzy_rw} , we show the average performance of the policies trai
 \includegraphics{f_figs/izzy_reward.eps}
 \caption{
     \footnotesize
-Shown is Boosted passive compared against Boosted DAgger in a 3D gridworld domain with each iteration corresponding to a demonstration given via the supervisor controlling the system or retro-actively, respectively. All results are averaged over 1000 trails. With low initial state variance the performance is similar, however as the initial state variance is increase DAgger queries the supervisor for less informative demonstrations. Thus, resulting in slower convergence.   }
+Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the supervisor rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. }
 \vspace*{-20pt}
 \label{fig:izzy_rw}
 \end{figure}
