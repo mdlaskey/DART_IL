@@ -166,10 +166,11 @@ However, as we demonstrate there is no free lunch to achieve this linear rate. I
 
 
 \begin{figure}
-\includegraphics[width=0.5\textwidth]{f_figs/realizibility.eps}
+\center
+\includegraphics[width=0.4\textwidth]{f_figs/realizibility.eps}
 \caption{
     \footnotesize
-An illustration of the  of realizable. Denote a policy class $\Theta$ and a supervisor policy $\tilde{\pi}$, the supervisor's policy is realizable if it is contained in $\Theta$. We also illustrate Boosting, which can be thought of as adding to the function class to achieve realizability.}
+An illustration of idea that the supervisor's policy is within the function class of the function class of the robot's. Denote a policy class $\Theta$ and a supervisor policy $\pi_{\theta^*}$, the expected supervisor's policy is in the set if it is contained in $\Theta$. .}
 \vspace*{-20pt}
 \label{fig:teaserl}
 \end{figure}
@@ -182,7 +183,7 @@ Using these rich function classes we are able to include the expected supervisor
 We further contribute a new analysis of passive LfD approaches that for squared euclidean losses shows a rate of $O(T\sqrt{T\epsilon})$, which can apply to non-convex losses such as neural networks and suggest $T$ scales at a tamer rate. Furthermore, drawing from sample complexity analysis we use Radmacher Complexity to illustrate how much data is needed as a function of the supervisor's function class complexity. 
 
 
-We  provide experiments in a gridworld domain demonstrating the effect of growing the robot's policy function class size and demonstrate that adaptivity may only be effective when the function class size is smaller than the supervisor's. We then illustrate a 2D point mass example, in which despite having the same function class as the supervisor adaptivity fails to converge to the supervisor's policy. Finally, we test both DAgger and passive Lfd in learning a policy for singulating objects from a pile on a Zymark Robot platform across 10 human subjects. We found the passive LfD is able to achieve a $21 \%$ increase in the probability of success with the same amount of data.
+We  provide experiments in a gridworld domain demonstrating the effect of growing the robot's policy function class size and demonstrate that adaptivity may only be effective when the function class size is smaller than the supervisor's. We then illustrate a 2D point mass example, in which despite having the same function class as the supervisor adaptivity fails to converge to the supervisor's policy. Finally, we test both DAgger and passive Lfd for learning a visuo-motor neural network policy for singulating objects from a pile on a Zymark Robot platform across 10 human subjects. We found the passive LfD is able to achieve a $21 \%$ increase in the probability of success with the same amount of data.
 
 \section{Related Work}
 Below we summarize related work in adaptive approaches in applications of Online LfD to robotics, sample complexity results and then work on reducing samples. \mlnote{Will update related work}
@@ -243,7 +244,7 @@ ${\tau} = (\bx_0,....,\bx_T)$.
 A policy is a function $\pi: \mathcal{X} \to \mathcal{U}$ from states to control inputs. 
 We consider a space of policies $\pi_{\theta}:\mathcal{X}\to \mathcal{U}$ parameterized by some $\theta\in \Theta$. Any such policy $\pi_{\theta}$ in an environment with probabilistic initial state density and Markovian dynamics
 induces a density on trajectories of length $T+1$: $$p(\tau | \theta)=
-p(\bx_0)\prod_{i=0}^{T-1}p(\bx_{t+1}|\bu_t,\bx_t)p(\bu_t|\pi_{\theta}(\bx_t))$$
+p(\bx_0)\prod_{i=0}^{T-1}p(\bx_{t+1}|\bu_t,\bx_t)p(\bu_t|\bx_t,\theta)$$
 
 
 While we do not assume knowledge of the distributions corresponding to: $p(\bx_{t+1}|\bx_t,\bu_t)$, $p(\bx_0)$, $p(\bx_t|
@@ -258,7 +259,7 @@ estimating $p(\bx|\theta)$ itself.
 For example, in the task of inserting a peg into a hole, a function on distance between the peg's current and desired final state is used \cite{levine2015end}.  
 
 In our problem, we do not have access to the cost function itself. Instead, we only have access to 
-a supervisor that can achieve a desired level of performance on the task. The supervisor provides the robot an initial set
+a supervisor, $\pi_{\theta^*}$, where $\theta^*$ may not be contained in $\Theta$. A supervisor is chosen that can achieve a desired level of performance on the task. The supervisor provides the robot an initial set
 an initial set of $N$ stochastic demonstration trajectories $\lbrace \tilde{\tau}^1,...,\tilde{\tau}^N \rbrace$. 
 which are the result of the supervisor applying this policy. This induces a training data set $\mathcal{D}$ of all state-control input pairs from the demonstrated trajectories.
 
@@ -318,10 +319,11 @@ A main take away from from this theorem  is that at a non-asymptotic rate of dem
 
 The above theorem though only shows that the policy converges in the limit of infinite samples, however we are interested in bounding the performance of a policy trained on only $N$ demonstrations. 
 
- Define the surrogate loss as the squared euclidean norm, or $l(\pi_{\theta}(\bx),\pi_{\theta^*}(\bx)) = ||\pi_{\theta}(\bx_{i,t}) - \pi_{\theta^*}(\bx_{i,t})||_2$.We assume that the controls are be bounded and thus can be normalized such that the $l \in [0,1]$.  We are interested in the situation where the supervisor and robot policy are stochastic with a Normal Distribution (i.e. $p(\bu|\pi_{\theta}(\bx)) = \mathcal{N}(\pi_\theta(\bx),\sigma I)$. The following statement can be said: \\
+ Define the surrogate loss as the squared euclidean norm, or $l(\pi_{\theta}(\bx),\pi_{\theta^*}(\bx)) = ||\pi_{\theta}(\bx_{i,t}) - \pi_{\theta^*}(\bx_{i,t})||_2$.We assume that the controls are be bounded and thus can be normalized such that the $l \in [0,1]$.  We are interested in the situation where the supervisor and robot policy are stochastic with a Normal Distribution (i.e. $p(\bu|\pi_{\theta}(\bx)) = \mathcal{N}(\pi_\theta(\bx),\sigma I)$. A stochastic policy with a normal distribution is a common assumption for learned robotic policy ~\cite{levine2015end}. 
+ 
 
 \begin{theorem}
-Given a policy $\theta^N$, the following is true 
+Given a policy $\pi_{theta^N}$, the following is true 
 $$E_{p(\tau|\theta^n)} J(\theta^N) \leq \sqrt{T\frac{1}{4\sigma}E_{p(\tau|\theta^*)} J(\theta^N)}+E_{p(\tau|\theta^*)} J(\theta^N)$$\\
 \end{theorem}
 \begin{proof}
@@ -346,12 +348,16 @@ Line 5 bounds the expected loss over $\theta^N$ by taking the worst case value. 
 &= T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} J(\theta^N)}
 \end{align}
 
-Line 8,9 and 10 apply the defintion of the KL-divergence, the markov chain and the normal distribution over $p(\bu_t|\bx_t,\theta)$. Line 11 applies the trianlge inequality to upperbound by the defined surrogate loss. Line 12 applies the assumed definition of $J(\theta)$. 
+Line 8,9 and 10 apply the definition of the KL-divergence, the markov chain and the normal distribution over $p(\bu_t|\bx_t,\theta)$. Line 11 applies the triangle inequality to upperbound by the defined surrogate loss. Line 12 applies the assumed definition of $J(\theta)$. 
+
+The intuition behind these steps is that difference between  the two distribution can be controlled via the surrogate loss on the expected supervisor. Thus, illustrating the closer the robot's policy matches the supervisor's policy on the supervisor's distribution, the smaller the total variational difference between the resulting two distributions will be. 
 
 
 \end{proof}
  
  The above theorem suggest that passive LfD can in fact achieve a rate that is $O(T\sqrt{T})$ and not $O(T^2)$ as suggested by Ross et al. \cite{ross2010reduction,ross2010efficient} when using the expected state distribution. Theorem 4.1 and 4.2 can combined to show convergence of the robot's policy as a function of samples. 
+ 
+ 
 
 One interesting result of Thereom 4.1 is that you can obtain a rate of $O(T\sqrt{T})$ without the assumption of convexity on the surrogate loss. In contrast DAgger's linear rate of $O(T)$ only applies to strongly convex surrogate loss function, which prohibits the analysis of decision trees and neural networks. 
 
