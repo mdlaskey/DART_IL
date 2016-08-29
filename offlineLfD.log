@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  28 AUG 2016 20:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  28 AUG 2016 22:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -887,7 +887,11 @@ Package microtype Info: Loading configuration file microtype.cfg.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/microtype.cfg
 File: microtype.cfg 2013/05/23 v2.5a microtype main configuration file (RS)
 ))
-(./offlineLfD.aux)
+(./offlineLfD.aux
+
+LaTeX Warning: Label `fig:izzy_rw' multiply defined.
+
+)
 \openout1 = `offlineLfD.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 134.
@@ -1042,14 +1046,14 @@ LaTeX Warning: Citation `he2012imitation' on page 2 undefined on input line 203
 LaTeX Warning: Citation `shalev2011online' on page 2 undefined on input line 20
 5.
 
-[2]
-Underfull \hbox (badness 3646) in paragraph at lines 299--300
+[2] [3]
+Underfull \hbox (badness 3646) in paragraph at lines 300--301
 \OT1/ptm/m/n/10 (+20) with re-spect to a pol-icy, $\OML/cmm/m/it/10 ^^Y[]$\OT1/
 ptm/m/n/10 (+20) , which is de-fined as
  []
 
 
-Underfull \hbox (badness 2717) in paragraph at lines 299--300
+Underfull \hbox (badness 2717) in paragraph at lines 300--301
 \OML/cmm/m/it/10 J\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^R\OT1/cmr/m/n/10 ) = [][]
  \OML/cmm/m/it/10 l\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^Y[]\OT1/cmr/m/n/10 (\OT1
 /cmr/bx/n/10 x[]\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; ^^Y[]\OT1/cmr/m/n/10 (\OT1/
@@ -1057,24 +1061,24 @@ cmr/bx/n/10 x[]\OT1/cmr/m/n/10 ))$\OT1/ptm/m/n/10 (+20) . If we as-sume the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 299--300
-
- []
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 304--305
+Underfull \hbox (badness 10000) in paragraph at lines 300--301
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 319--320
+Underfull \hbox (badness 10000) in paragraph at lines 305--306
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 320--321
 
  []
 
 [4]
 
 LaTeX Warning: Citation `shalev2011online' on page 5 undefined on input line 39
-1.
+2.
 
 Package epstopdf Info: Source file: <f_figs/counter_exmp.eps>
 (epstopdf)                    date: 2016-07-17 18:27:51
@@ -1084,19 +1088,19 @@ Package epstopdf Info: Source file: <f_figs/counter_exmp.eps>
 (epstopdf)                    size: 13754 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/counter_exmp-eps-co
 nverted-to.pdf f_figs/counter_exmp.eps>
-(epstopdf)             \includegraphics on input line 399.
+(epstopdf)             \includegraphics on input line 400.
 Package epstopdf Info: Output file is already uptodate.
-<f_figs/counter_exmp-eps-converted-to.pdf, id=137, 143.53625pt x 103.38625pt>
+<f_figs/counter_exmp-eps-converted-to.pdf, id=136, 143.53625pt x 103.38625pt>
 File: f_figs/counter_exmp-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/counter_exmp-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/counter_exmp-eps-converted-to.pdf used on input
- line 399.
+ line 400.
 (pdftex.def)             Requested size: 143.53589pt x 103.38599pt.
 
 
 LaTeX Warning: Citation `kakade2009generalization' on page 5 undefined on input
- line 415.
+ line 416.
 
 Package epstopdf Info: Source file: <f_figs/var_grid.eps>
 (epstopdf)                    date: 2016-08-21 16:47:04
@@ -1106,22 +1110,22 @@ Package epstopdf Info: Source file: <f_figs/var_grid.eps>
 (epstopdf)                    size: 80781 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/var_grid-eps-conver
 ted-to.pdf f_figs/var_grid.eps>
-(epstopdf)             \includegraphics on input line 426.
+(epstopdf)             \includegraphics on input line 427.
 Package epstopdf Info: Output file is already uptodate.
-<f_figs/var_grid-eps-converted-to.pdf, id=139, 529.98pt x 148.555pt>
+<f_figs/var_grid-eps-converted-to.pdf, id=138, 529.98pt x 148.555pt>
 File: f_figs/var_grid-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/var_grid-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/var_grid-eps-converted-to.pdf used on input lin
-e 426.
+e 427.
 (pdftex.def)             Requested size: 529.97868pt x 148.55463pt.
 
-Overfull \hbox (24.08868pt too wide) in paragraph at lines 426--429
+Overfull \hbox (24.08868pt too wide) in paragraph at lines 427--430
 [][] 
  []
 
 
-LaTeX Warning: Reference `fig:grid_world' on page 5 undefined on input line 437
+LaTeX Warning: Reference `fig:grid_world' on page 5 undefined on input line 438
 .
 
 [5 <./f_figs/counter_exmp-eps-converted-to.pdf>]
@@ -1133,17 +1137,35 @@ Package epstopdf Info: Source file: <f_figs/p_mass.eps>
 (epstopdf)                    size: 25149 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/p_mass-eps-converte
 d-to.pdf f_figs/p_mass.eps>
-(epstopdf)             \includegraphics on input line 481.
+(epstopdf)             \includegraphics on input line 482.
 Package epstopdf Info: Output file is already uptodate.
 
-<f_figs/p_mass-eps-converted-to.pdf, id=157, 226.8475pt x 90.3375pt>
+<f_figs/p_mass-eps-converted-to.pdf, id=156, 226.8475pt x 90.3375pt>
 File: f_figs/p_mass-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/p_mass-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/p_mass-eps-converted-to.pdf used on input line 
-481.
+482.
 (pdftex.def)             Requested size: 226.84694pt x 90.33727pt.
  [6 <./f_figs/var_grid-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <f_figs/singulation.eps>
+(epstopdf)                    date: 2016-08-28 21:25:20
+(epstopdf)                    size: 314094 bytes
+(epstopdf)             Output file: <f_figs/singulation-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-08-28 21:26:15
+(epstopdf)                    size: 19359 bytes
+(epstopdf)             Command: <repstopdf --outfile=f_figs/singulation-eps-con
+verted-to.pdf f_figs/singulation.eps>
+(epstopdf)             \includegraphics on input line 497.
+Package epstopdf Info: Output file is already uptodate.
+
+<f_figs/singulation-eps-converted-to.pdf, id=169, 186.6975pt x 83.31125pt>
+File: f_figs/singulation-eps-converted-to.pdf Graphic file (type pdf)
+
+<use f_figs/singulation-eps-converted-to.pdf>
+Package pdftex.def Info: f_figs/singulation-eps-converted-to.pdf used on input 
+line 497.
+(pdftex.def)             Requested size: 186.69704pt x 83.31104pt.
 Package epstopdf Info: Source file: <f_figs/izzy_reward.eps>
 (epstopdf)                    date: 2016-08-02 21:02:11
 (epstopdf)                    size: 428006 bytes
@@ -1152,7 +1174,7 @@ Package epstopdf Info: Source file: <f_figs/izzy_reward.eps>
 (epstopdf)                    size: 35793 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/izzy_reward-eps-con
 verted-to.pdf f_figs/izzy_reward.eps>
-(epstopdf)             \includegraphics on input line 517.
+(epstopdf)             \includegraphics on input line 528.
 Package epstopdf Info: Output file is already uptodate.
 
 <f_figs/izzy_reward-eps-converted-to.pdf, id=171, 237.88875pt x 131.49126pt>
@@ -1160,9 +1182,9 @@ File: f_figs/izzy_reward-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/izzy_reward-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/izzy_reward-eps-converted-to.pdf used on input 
-line 517.
+line 528.
 (pdftex.def)             Requested size: 237.88815pt x 131.49092pt.
- [7 <./f_figs/p_mass-eps-converted-to.pdf> <./f_figs/izzy_reward-eps-converted-
+ [7 <./f_figs/p_mass-eps-converted-to.pdf> <./f_figs/singulation-eps-converted-
 to.pdf>] (./offlineLfD.bbl)
 
 ** Conference Paper **
@@ -1175,55 +1197,67 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 544.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 544.
+[8 <./f_figs/izzy_reward-eps-converted-to.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 555.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 555.
  (./offlineLfD.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 544.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 544.
-Package rerunfilecheck Info: File `offlineLfD.out' has not changed.
-(rerunfilecheck)             Checksum: BC3548AD3AB8BDB98DAEBC33B3F37FE7;884.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 555.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 555.
 
+
+Package rerunfilecheck Warning: File `offlineLfD.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `offlineLfD.out':
+(rerunfilecheck)             Before: AC367EB6765BC619F63D2B4CE9840BB6;884
+(rerunfilecheck)             After:  5715C0B99F46B1DDBDF615E6142A83B0;823.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 544.
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 555.
  ) 
 Here is how much of TeX's memory you used:
- 22160 strings out of 493117
- 396665 string characters out of 6135433
- 535559 words of memory out of 5000000
- 24892 multiletter control sequences out of 15000+600000
- 54900 words of font info for 252 fonts, out of 8000000 for 9000
+ 22169 strings out of 493117
+ 396898 string characters out of 6135433
+ 536884 words of memory out of 5000000
+ 24896 multiletter control sequences out of 15000+600000
+ 55019 words of font info for 254 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,54p,1127b,395s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
-xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texl
-ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texli
-ve/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/te
-xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
-live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texli
-ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive
-/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2
-014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/201
-4/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2014/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2014/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2014/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2014/texmf-dist/fonts
-/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2014/texmf-dist/f
-onts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1
-/urw/times/utmbi8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/time
-s/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmri8a.
-pfb>
-Output written on offlineLfD.pdf (8 pages, 383219 bytes).
+pdfTeX warning (dest): name{subsection.4.1} has been referenced but does not 
+exist, replaced by a fixed one
+
+{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texl
+ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texliv
+e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive
+/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texl
+ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texli
+ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive
+/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2
+014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/201
+4/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2014/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2014/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2014/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2014/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2014/texmf-dist/fonts/t
+ype1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2014/texmf-dist/fon
+ts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/u
+rw/times/utmbi8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/
+utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmri8a.pf
+b>
+Output written on offlineLfD.pdf (8 pages, 390875 bytes).
 PDF statistics:
- 305 PDF objects out of 1000 (max. 8388607)
- 260 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
- 29350 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 312 PDF objects out of 1000 (max. 8388607)
+ 265 compressed objects within 3 object streams
+ 70 named destinations out of 1000 (max. 500000)
+ 29355 words of extra memory for PDF output out of 29859 (max. 10000000)
 

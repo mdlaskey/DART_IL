@@ -208,7 +208,7 @@ In the online optimization algorithm a bound for the error on the robot's policy
 
 
 \section{Problem Statement}\label{sec:PS}
-The goal of this work is to learn a policy that matches that of the supervisor's while asking the supervisor for as few examples as possible.
+The goal of this work is to learn a policy that matches that of the supervisor's on a specified task that demonstrations are collected on. 
 
 \noindent\textbf{Modeling Choices and Assumptions}  We model the system dynamics as Markovian, stochastic, and stationary. Stationary dynamics occur when, given a state and a control, the probability of the next state does not change over time. 
 
@@ -239,8 +239,8 @@ induces a density on trajectories of length $T+1$: $$p(\tau | \theta)=
 p(\bx_0)\prod_{i=0}^{T-1}p(\bx_{t+1}|\bu_t,\bx_t)p(\bu_t|\bx_t,\theta)$$
 
 
-While we do not assume knowledge of the distributions corresponding to: $p(\bx_{t+1}|\bx_t,\bu_t)$, $p(\bx_0)$, $p(\bx_t|
-\theta)$ or $p(\bx|\theta)$, we assume that we have a stochastic real robot or a simulator such that for any state
+While we do not assume knowledge of the distributions corresponding to: $p(\bx_{t+1}|\bx_t,\bu_t)$, $p(\bx_0)$ or $p(\bx_t|
+\theta)$, we assume that we have a stochastic real robot or a simulator such that for any state
 $\bx_t$ and control $\bu_t$, we can sample the $\bx_{t+1}$ from the density $p(\bx_{t+1}|\bu_t,\bx_t)$. 
 Therefore, when 'rolling out' trajectories under a policy
 $\pi_{\theta}$, we utilize the robot or a simulator to sample the resulting stochastic trajectories rather than
@@ -252,7 +252,7 @@ For example, in the task of inserting a peg into a hole, a function on distance 
 
 In our problem, we do not have access to the cost function itself. Instead, we only have access to 
 a supervisor, $\pi_{\theta^*}$, where $\theta^*$ may not be contained in $\Theta$. A supervisor is chosen that can achieve a desired level of performance on the task. The supervisor provides the robot an initial set
-an initial set of $N$ stochastic demonstration trajectories $\lbrace \tilde{\tau}^1,...,\tilde{\tau}^N \rbrace$. 
+of $N$ stochastic demonstration trajectories $\lbrace \tilde{\tau}^1,...,\tilde{\tau}^N \rbrace$. 
 which are the result of the supervisor applying this policy. This induces a training data set $\mathcal{D}$ of all state-control input pairs from the demonstrated trajectories.
 
 We are interesting in determining what parameter $\theta$ generates the sample demonstrations from the supervisors policy. The question can be framed as maximizing the conditional likelihood of the sample demonstrations conditioned on a given parameter $\theta$. 
@@ -268,19 +268,20 @@ In solving this optimization it is common to optimize the conditional log-likeli
 
 We note that the dynamics and initial state distributions are dropped in this objective because they are conditionally independent of $\theta$, once the controls are observed. 
 
- Traditionally  Eq. \ref{eq:main_obj}, has been known as the surrogate loss to denote a difference between the true cost function. We will refer the to function $l : \mathcal{U} \times \mathcal{U} \rightarrow \mathbb{R}$ as the surrogate loss through out this paper. The surrogate loss can either be an indicator function as in classification or a continuous measure as indicated above.  This rewrites the objective as follows: 
+ Traditionally maximizing the probability of a given control observed from the supervisor, has been viewed as minimization of a surrogate loss to denote a difference between the true cost function~\cite{ross2010reduction,ross2010efficient}. We will refer the to function $l : \mathcal{U} \times \mathcal{U} \rightarrow \mathbb{R}$ as the surrogate loss through out this paper. The surrogate loss can either be an indicator function as in classification or a continuous measure on the sufficient statistics of $p(\bu|\bx,\theta)$.  This rewrites the objective as follows: 
 
 \begin{equation}\label{eq:main_obj}
-\hat{\theta} = \underset{\theta}{\mbox{argmin}} \sum^N_{n=1}\sum^T_{t=1} l(\bu_{n,t}, \pi_{\theta} (\bx_{n,t})).
+\theta^N = \underset{\theta}{\mbox{argmin}} \sum^N_{n=1}\sum^T_{t=1} l(\bu_{n,t}, \pi_{\theta} (\bx_{n,t})).
 \end{equation}
 
 
-Due to model mismatch (e.g. not being realizable), or a limited amount of data, solving Eq. \ref{eq:main_obj} may not lead to $\tilde{\pi}$.  Thus leading to a mismeasure in the distribution trained on and tested on.  Prior work ~\cite{ross2010reduction}  proposed an iterative method that solves this problem by aggregating data to converge to a distribution induced by the robot's policy. We review this approach in Sec. \ref{sec:DAgger}.
- 
-\section{Passive LfD}
-While DAgger handles the problem of model mismatch via optimizing on the distribution induced by the robot, we will instead assume realizability is achievable and leverage supervise LfD.  
+Due to model mismatch (e.g. not being realizable), or a limited amount of data, solving Eq. \ref{eq:main_obj} may not lead to $\tilde{\pi}$.  Thus leading to a mismeasure in the distribution trained on and tested on, since the robot must sample from its own distribution $p(\tau|\hat{\theta})$ and not the supervisors, $p(\tau|\theta^*)$.  Prior work has proposed an adaptive solution ~\cite{ross2010reduction} that attempts to solves this problem by aggregating data to gather data on the distribution induced by the robot's policy. We review this approach in Sec. \ref{sec:DAgger}. 
 
-\subsection{Passive LfD}
+However, we argue that when the robot's policy class contains the expected supervisor's, or  $\theta^* \in  \Theta$, and a sufficient amount of data is gathered the effects of adaptvity can be negligible at best and potentially harmful at worst. 
+
+ 
+
+\section{Passive LfD}
 In passive LfD, $N$ demonstrations are collected from the supervisor's distribution $p(\tau|\tilde{\pi})$ and the following objective is minimized: 
 
 $$\theta^N = \underset{\theta}{\mbox{argmin}} \: \frac{1}{N} \sum^N_{i=1} \sum^T_{t=1} l(\pi_{\theta}(\bx_{t,i}), \pi_{\theta^*}(\bx_{t,i}))$$
@@ -482,7 +483,7 @@ We run passive Lfd and DAgger in this setting and plot the performance in Fig. \
 \caption{
     \footnotesize
 Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants A and B, in B the controls are inverted in the dynamics thus resulting in $x=y$ and $y=x$. The supervisor is the infinite horizion LQG computed policy, which results in two different linear matrices in region A and B. Right: Illustrates how having a linear robot policy class can cause DAgger to fail  to converge due to it collecting data from region B.  }
-\vspace*{-20pt}
+\vspace*{-1pt}
 \label{fig:p_mass}
 \end{figure}
 
@@ -490,6 +491,16 @@ Left: A 2D workspace where a point mass robot is taught to go to the green circl
 We lastly perform a human study on a real robot, where people teach the robot to perform singulation task, or seperate a object from a pile. The objects used to form clutter are red extruded polygons.  For singulation task, we consider objects made of Medium Density Fiberboard with an average 4" diameter and 3" in height. 
 
 The robot has a 2 dimensional internal state of base rotation and arm extension. The state space of the environment, $\mathcal{X}$, is captured by  an overhead Logitech C270 camera, which is positioned to capture the workspace that contains all cluttered objects and the robot arm. We use only the current image as state space, which captures positional information and a neural network architecture policy representation, the same as in~\cite{laskeyrobot}.
+
+\begin{figure}
+\centering
+\includegraphics{f_figs/singulation.eps}
+\caption{
+    \footnotesize
+Shown above is an example of an initial state (left) that the robot is presented with. It can vary in placement of the object in the pile, translation and rotation. A human is asked to singulate the object, which is to have the robot learn to push one object from the pile (right).  }
+
+\label{fig:izzy_rw}
+\end{figure}
 
 The robot is commanded via position 
 control with a  PID controller. Similar to \cite{laskeyshiv}, the controls, $\mathcal{U}$, to the robot are bounded changes in the internal state, which allows for us to easily register control signals to the demonstrations provided by supervisors as opposed to torque control. The control signals for each degree of freedom are continuous values with the following ranges: base rotation, $[-15^\circ,15^\circ]$, arm extension $[-1,1]$. The units are degrees for base rotation and centimeters for arm extension. 
