@@ -186,33 +186,25 @@ We further contribute a new analysis of passive LfD approaches that for squared 
 We  provide experiments in a gridworld domain demonstrating the effect of growing the robot's policy function class size and demonstrate that adaptivity may only be effective when the function class size is smaller than the supervisor's. We then illustrate a 2D point mass example, in which despite having the same function class as the supervisor adaptivity fails to converge to the supervisor's policy. Finally, we test both DAgger and passive Lfd for learning a visuo-motor neural network policy for singulating objects from a pile on a Zymark Robot platform across 10 human subjects. We found the passive LfD is able to achieve a $21 \%$ increase in the probability of success with the same amount of data.
 
 \section{Related Work}
-Below we summarize related work in adaptive approaches in applications of Online LfD to robotics, sample complexity results and then work on reducing samples. \mlnote{Will update related work}
+Below we summarize related work in passive and adaptive LfD and there theoretical insights. 
 
+\noindent \textbf {Passive LfD}
+Pormeleau et al. used passive Lfd to train a neural network to drive a car on the highway via demonstrations provided by the expert. To reduce the number of demonstrations needed to perform a task, they synthetically generated  images of the road and subsequent labels~\cite{pomerleau1989alvinn}. A similar idea, was recently proposed by ~\cite{NVIDEA}, but used a convolutional neural architecture. 
 
-\noindent \textbf{Online LfD with an Expert Supervisor}
-Online Learning from Demonstration in robotics has achieved numerous examples of completely model-free learning from high dimensional state representations, such as images. Successful robotic examples of Online Learning From Demonstration with an expert supervisor include applications to flying a quad-copter through a forest where the input is only image data taken from an on board sensor. 
+Ross et al. examined the passive Lfd in a theoretical setting and derived that in the worst case the error from this approach can go quadratic in the time  horizon, $T$~\cite{ross2010efficient}. The intuition behind this analysis is that if the distribution induced by the robot's policy is different than the supervisor's, the robot could incur maximum error. 
 
-Recently, Laskey et al. applied Online Learning from Demonstration to manipulation tasks such as surgical needle insertion \cite{laskeyshiv}, where a surgical robot correctly learns to insert a needle into tissue to prepare for suturing. Furthermore, Laskey et al. applied Online LfD to robotic de-cluttering, where a robot is given image data of a table with a variety of objects on it and must learn to push the obstacle objects aside to grasp a goal \cite{laskeyrobot}. 
+In our analysis, we show that a rate of $T\sqrt{T}$ is achievable. However in contrast to Ross et al,  we also show how function class complexity and the number of demonstrations effect this bound. Data dependent results can help provide better insight into the error incurred in the finite sample domains. 
 
-Other succesful examples have been teaching a robotic wheel chair navigate to goal positions in the presence of obstacles and teaching a robot to follow verbal instructions to navigate across an office building \cite{kim2013maximum, duvallet2013imitation}. 
+\noindent \textbf{Adaptive LfD}
+Adaptive LfD has recently been used in numerous examples of model-free learning from high dimensional state representations, such as images. Successful robotic examples of adaptive LfD with an expert supervisor include applications to flying a quad-copter through a forest where the input is only image data taken from an on board sensor~\cite{ross2013learning}.
 
-\noindent \textbf{Sample Complexity in Online LfD}
-Sample complexity analysis in Online LfD is normally summarized as to results.  Ross et al. showed that a supervise learning approach (i.e. where no iterative online feedback is used) achieves an error rate that is quadratic in the time horizon, but is only an asymptotic bound \cite{ross2010efficient}. 
+ Recently, Laskey et al. applied adaptive LfD to manipulation tasks such as surgical needle insertion \cite{laskeyshiv} and robotic de-cluttering, where a robot is given image data of a table with a variety of objects on it and must learn to push the obstacle objects aside to grasp a goal \cite{laskeyrobot}. Other succesful examples have been teaching a robotic wheel chair navigate to goal positions in the presence of obstacles and teaching a robot to follow verbal instructions to navigate across an office building \cite{kim2013maximum, duvallet2013imitation}. 
 
-Ross et al. then models an iterative Online LfD algorithm known as DAgger as a Follow-The-Leader algorithms and gives regret bounds for strongly convex loss functions, however it also have linear dependence on $T$. We argue that both of these approaches can instead by thought of as traditional supervise learning, where the sample distribution is simply different than the distribution optimized over and model the problem as supervise learning with importance sampling weights. 
+Algorithmic extensions to adaptive LfD have also been recently made, such as  forcing the supervisor to provide controls more similar to the robot's policy which allows for easier to learn policies~\cite{he2012imitation}. Furthermore, Kim et al. proposed only query the supervisor in states that the robot is uncertain~\cite{kim2013maximum} about and Laskey et al. extended this to high dimensional states~\cite{laskeyshiv}. Finally, Laskey et al. looked at using a hierarchy (in terms of quality) of supervisors to reduce burden on the expert supervisor~\cite{laskeyrobot}.
 
-Finally of interest to us is the comparison to Reinforcement Learning methods. A common approach in RL for robotics is policy gradients, where a gradient is computed on the loss function based on sample estimates. Kakade et al. demonstrated that  a single gradient estimate can require on the order of cubic in the time horizon samples~\cite{kakade2003sample}. For perspective a robotic task has hundreds of time steps and can sometimes take minutes to sample a trajectory.
+All these approaches build theoretically upon the online optimization analysis that Ross et al. proposed~\cite{ross2010reduction}. In online optimization an adversary presents a learner's policy with some cost function and the learner then chooses an action and receives a loss. In the LfD context, the learner chooses a policy and the adversary always select the expected disagreement with respect to the supervisor on the distribution induced by the policy~\cite{shalev2011online}. DAgger specifically can be modeled as a Follow-The-Leader algorithm, because it picks the best policy over all previous seen demonstrations~\cite{ross2010reduction}.
 
-\noindent\textbf{Reducing Supervisor Burden in Online LfD} 
-An interesting line of work in this field is applying active learning to the task of Online LfD, which has the promise to help reduce sample complexity. Active learning approaches to reducing supervisor burden only ask for supervision when the robot is uncertain about the
-correct control to apply. Traditional active learning techniques like query-by-committee and uncertainty sampling have
-been utilized for this purpose \cite{chernova2009interactive,judah2011active,grollman2007dogged}
-Kim et al. demonstrated that due to the non-stationarity of the distribution of states encountered during
-learning, the traditional active learning techniques may not be suitable.
-Thus the use of novelty detection was proposed~\cite{kim2013maximum}. Laskey et al. introduced SHIV, using an active
-learning approach tailored to high dimensional and non-stationarity state distributions and a modified version of the
-One Class SVM classifier. This reduced the density estimation problem to a 
-simpler regularized binary classification~\cite{laskeyshiv}. 
+In the online optimization algorithm a bound for the error on the robot's policy can be obtained that is linear in $T$ for stongly convex losses (i.e. heavly regularized linear or kernelized regression). However as we show the regret bound does not imply convergance to the supervisor is possible, even when the robot's function class contains the expected supervisor's policy. 
 
 
 \section{Problem Statement}\label{sec:PS}
@@ -532,18 +524,18 @@ Shown is averaged success at the singulation task over the 10 human subjects. Ea
 
 
 
-
-  
-
-
-
 \section{Conclusion}
-\mlnote{This is specific to the theoretical analysis section}
-In conclusion, we have shown that by knowing what distribution the robot is likely to encounter we can achieve more representative bounds on the performance of our policy. 
+We thus conclude our analysis on the trade-offs between passive and adaptive Lfd approaches. We demonstrated that if a robot's function class contains the expected supervisor's policy, then the  performance difference between adaptive algorithms, such as DAgger,  and passive Lfd techniques can become negligible.  Furthermore, we also provided examples where adaptivity fails to converge despite being able to represent the supervisor. Thus illustrating a short-coming in the regret style analysis for DAgger. 
 
-By achieving the familiar bound of Rademacher Complexity, we can now apply techniques such as Metric Entropy, Fat Shattering and VC Dimension to achieve sample complexity terms for both convex class and non-convex, which can be more enlightening than the previous FTL analysis. 
+Our final experiment in having humans teach a robot to singulate objects suggest that adaptivity can lead to worse performance. Our post analysis seems to suggest that humans had a harder time providing retro-active feedback via a labeling interface. While, this may be overcome through a better labeling interface, an inherent problem persists in the inability of a human to observe how well their controls would have performed. 
 
-However, the bounds show a strong dependence on how large the importance sampling weights can become. This implies that if our policy starts to deviate from the training set during its empirical risk minimization. It is likely that the effective sample size could be quite low and thus require more samples. We present several ways to control for this factor and will begin experimentally seeing the effects.  
+Finally, we offered a new theoretical  way to analysis passive Lfd and demonstrate that the depedence on the time horizon constant, $T$, can be $T\sqrt{T}$ and not $T^2$, a result that does not need the assumption of strongly convexity.  For convex loses, we are able to offer data-dependent sample complexity bounds that illustrate how the function class of the learning algorithm and number of demonstrations effect this bound on error. 
+
+The data-dependent results demonstrate that in the worst-case a heavy tail could exits in terms of the number of demonstrations needed (i.e. a large number of demonstrations could be need). Thus, presenting a challenge in obtaining an industrial level of reliability in unstructured domains. However, in future work we are interested in examining ways around this limitation. Below are two possible ways:
+
+\noindent \textbf{Active Learning} Uniform sampling from the initial state distribution $p(\bx_0)$, may not be an optimal approach to learning the supervisor's policy. In active learning, an algorithm would try to select more informative initial states for the robot to learn from. An example of this is the field of optimal design, where measurments are collected in a way to reduce variance in the label and lead to more robust data analysis. Extending this to LfD would be an interesting oppurtunity. 
+
+\noindent \textbf{Synthetic Data Generetion} Another approach to reduce data-dependence is to synthetically grow your dataset. For example, consider a robot learning how to grasp an isolated object  with image data as the state space. One could take the given image state and translate both the object and grasp label to create more demonstrations. A similar approach has been used recently in self-driving cars. However, a formal approach to checking when synthetic data generation is possible would be an exciting new direction. 
 
 \bibliographystyle{IEEEtranS}
 \bibliography{references}
