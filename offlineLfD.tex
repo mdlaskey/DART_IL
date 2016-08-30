@@ -110,16 +110,16 @@
 
 \newboolean{include-notes}
 \setboolean{include-notes}{true}
-\newcommand{\adnote}[1]{\ifthenelse{ \boolean{include-notes}}%
+\newcommand{\adnote}[1]{%
  {\textcolor{blue}{\textbf{AD: #1}}}{}}
  
- \newcommand{\sknote}[1]{\ifthenelse{ \boolean{include-notes}}%
+ \newcommand{\sknote}[1]{%
  {\textcolor{blue}{\textbf{SK: #1}}}{}}
  
-  \newcommand{\mlnote}[1]{\ifthenelse{ \boolean{include-notes}}%
+  \newcommand{\mlnote}[1]{%
  {\textcolor{purple}{\textbf{ML: #1}}}{}}
  
- \newcommand{\jmnote}[1]{\ifthenelse{ \boolean{include-notes}}%
+ \newcommand{\jmnote}[1]{%
  {\textcolor{orange}{\textbf{JM: #1}}}{}}
 
 \renewcommand{\baselinestretch}{.95}
@@ -194,17 +194,19 @@ We further contribute a new analysis of passive LfD approaches that for squared 
 
 We  provide experiments in a gridworld domain demonstrating the effect of growing the robot's policy function class size and demonstrate that adaptivity may only be effective when the function class size is smaller than the supervisor's. We then illustrate a 2D point mass example, in which despite having the same function class as the supervisor adaptivity fails to converge to the supervisor's policy. Finally, we test both DAgger and passive Lfd for learning a visuo-motor neural network policy for singulating objects from a pile on a Zymark Robot platform across 10 human subjects. We found the passive LfD is able to achieve a $21 \%$ increase in the probability of success with the same amount of data.
 
-\jmnote{In general intro is pretty good but I think the exact assumptions of this analysis should be cleared up earlier e.g. what is realizable (seems to imply exact mins and maxes as well)? Like right now the neural net statment doesn't actually make sense as far as I understand bc you wouldn't necessarily get zero training error}
+\jmnote{In general intro is pretty good but I think the exact assumptions of this analysis should be cleared up earlier e.g. what is realizable (seems to imply exact mins and maxes as well)? Like right now the neural net statment doesn't actually make sense as far as I understand bc you wouldn't necessarily get zero training error. Furthermore I think the top two motivators should come up front: (a) retroactive feedback induces a suboptimal policy from the supervisor and (b) Dagger can fail when it collects states not in the supervisor's support.}
 
 \section{Related Work}
 Below we summarize related work in passive and adaptive LfD and there theoretical insights. 
 
 \noindent \textbf {Passive LfD}
 Pormeleau et al. used passive Lfd to train a neural network to drive a car on the highway via demonstrations provided by the expert. To reduce the number of demonstrations needed to perform a task, they synthetically generated  images of the road and subsequent labels~\cite{pomerleau1989alvinn}. A similar idea, was recently proposed by ~\cite{NVIDEA}, but used a convolutional neural architecture. 
+\jmnote{Key insight, plus how are we different?}
 
 Ross et al. examined the passive Lfd in a theoretical setting and derived that in the worst case the error from this approach can go quadratic in the time  horizon, $T$~\cite{ross2010efficient}. The intuition behind this analysis is that if the distribution induced by the robot's policy is different than the supervisor's, the robot could incur maximum error. 
 
-In our analysis, we show that a rate of $T\sqrt{T}$ is achievable. However in contrast to Ross et al,  we also show how function class complexity and the number of demonstrations effect this bound. Data dependent results can help provide better insight into the error incurred in the finite sample domains. 
+In our analysis, we show that a rate of $T\sqrt{T}$ is achievable. \jmnote{When?}
+However in contrast to Ross et al,  we also show how function class complexity and the number of demonstrations effect this bound. Data dependent results can help provide better insight into the error incurred in the finite sample domains. 
 
 \noindent \textbf{Adaptive LfD}
 Adaptive LfD has recently been used in numerous examples of model-free learning from high dimensional state representations, such as images. Successful robotic examples of adaptive LfD with an expert supervisor include applications to flying a quad-copter through a forest where the input is only image data taken from an on board sensor~\cite{ross2013learning}.
@@ -284,13 +286,13 @@ In solving this optimization it is common to optimize the conditional log-likeli
 
 We note that the dynamics and initial state distributions are dropped in this objective because they are conditionally independent of $\theta$, once the controls are observed. 
 
- Traditionally maximizing the probability of a given control observed from the supervisor, has been viewed as minimization of a surrogate loss to denote a difference between the true cost function~\cite{ross2010reduction,ross2010efficient}. We will refer the to function $l : \mathcal{U} \times \mathcal{U} \rightarrow \mathbb{R}$ as the surrogate loss through out this paper. The surrogate loss can either be an indicator function as in classification or a continuous measure on the sufficient statistics of $p(\bu|\bx,\theta)$.  This rewrites the objective as follows: 
+ Traditionally maximizing the probability of a given control observed from the supervisor, has been viewed as minimization of a surrogate loss to denote a difference between the true cost function~\cite{ross2010reduction,ross2010efficient}. We will refer the to function $l : \mathcal{U} \times \mathcal{U} \rightarrow \mathbb{R}$ as the surrogate loss through out this paper. The surrogate loss can either be an indicator function as in classification or a continuous measure on the sufficient statistics of $p(\bu|\bx,\theta)$ \jmnote{How about we just define the distribution to include the loss? Then this falls out naturally}.  This rewrites the objective as follows: 
 
 \begin{equation}\label{eq:main_obj}
 \theta^N = \underset{\theta}{\mbox{argmin}} \sum^N_{n=1}\sum^T_{t=1} l(\bu_{n,t}, \pi_{\theta} (\bx_{n,t})).
 \end{equation}
 
-
+\jmnote{Might be nice to talk about the bigger picture of minimizing expectations here, then the reader isn't surprised later on}
 Due to model mismatch (e.g. not being realizable), or a limited amount of data, solving Eq. \ref{eq:main_obj} may not lead to $\tilde{\pi}$.  Thus leading to a mismeasure \sknote{???} in the distribution trained on and tested on, since the robot must sample from its own distribution $p(\tau|\hat{\theta})$ and not the supervisors, $p(\tau|\theta^*)$.  Prior work has proposed an adaptive solution ~\cite{ross2010reduction} that attempts to solves this problem by aggregating data to gather data on the distribution induced by the robot's policy. We review this approach in Sec. \ref{sec:DAgger}. 
 
 However, we argue that when the robot's policy class contains the expected supervisor's, or  $\theta^* \in  \Theta$, and a sufficient amount of data is gathered the effects of adaptvity can be negligible at best and potentially harmful at worst \sknote{??? I don't understand this statement}. 
@@ -315,7 +317,8 @@ Since we know that $\tilde{\pi} \in \Theta$ and that we can find the best fit fo
 
 Understanding how much data is needed to learn a function, is a well studied problem known as sample complexity analysis~\cite{anthony2009neural}. In this literature they use different metrics to describe the complexity of a function class and show rates on which a given function class would converge to the real solution. We refer the reader to \cite{vapnik2013nature}, for a review of such topics. 
 
-We are interested in the total cost along a trajectory with respect to a policy, $\pi_{\theta}$, which is defined as $J(\theta) = \sum^T_{t=1} l(\pi_{\theta}(\bx_{t}),\pi_{\theta^*}(\bx_{t}))$.  If we assume the surrogate loss $l$ is convex with respect to $\theta$ and bounded between $[0,1]$, then if $\theta \in \Theta$. \\
+We are interested in the total cost along a trajectory with respect to a policy, $\pi_{\theta}$, which is defined as $J(\theta) = \sum^T_{t=1} l(\pi_{\theta}(\bx_{t}),\pi_{\theta^*}(\bx_{t}))$.  If we assume the surrogate loss $l$ is convex with respect to $\theta$ and bounded between $[0,1]$, then if $\theta \in \Theta$. \jmnote{??? This is a fragment and really unclear. If these are assumptions of the theorem then let's put them in there}
+\\
 
 \begin{theorem}\label{thm:sup}
 For a policy, $\theta^N$ found via passive LfD, from $N$ trajectories collected from the supervisor the following is true with probability at least $1- 2\mbox{exp} (-m\delta^2/8)$
@@ -361,12 +364,13 @@ Line 5 bounds the expected loss over $\theta^N$ by taking the worst case value. 
 
 Line 8,9 and 10 apply the definition of the KL-divergence, the markov chain and the normal distribution over $p(\bu_t|\bx_t,\theta)$. Line 11 applies the triangle inequality to upperbound by the defined surrogate loss. Line 12 applies the assumed definition of $J(\theta)$. 
 
-The intuition behind these steps is that difference between  the two distribution can be controlled via the surrogate loss on the expected supervisor. Thus, illustrating the closer the robot's policy matches the supervisor's policy on the supervisor's distribution, the smaller the total variational difference between the resulting two distributions will be. 
+The intuition behind these steps is that difference between  the two distribution can be controlled via the surrogate loss on the expected supervisor. Thus, illustrating the closer the robot's policy matches the supervisor's policy on the supervisor's distribution, the smaller the total variational difference between the resulting two distributions will be.
 
 
 \end{proof}
  
  The above theorem suggest that passive LfD can in fact achieve a rate that is $O(T\sqrt{T})$ and not $O(T^2)$ as suggested by Ross et al. \cite{ross2010reduction,ross2010efficient} when using the expected state distribution. Theorem 4.1 and 4.2 can combined to show convergence of the robot's policy as a function of samples. 
+ \jmnote{Need to be careful here... We could say that in this particular case you get a better rate. Also it could be useful to explicitly write the relation between trajectory and average state distribution.}
  
  
 
@@ -460,7 +464,8 @@ We use Value Iteration to compute an optimal supervisor for our grid world domai
 Each plot shows the normalized performance where $1.0$ represents the expected performance of the value iteration supervisor. We run all trials over 100 randomly generated environments, which contain $X$ randomly selected penalty state and $1$ goal state. 
 
 
-\noindent \textbf{Not in the Set} In Fig. \ref{fig:var} A, we show the case when the robot's policy class does not contain the supervisors, we used a Linear SVM for the policy class representation, which is commonly used in ~\cite{ross2010efficient,ross2010reduction,ross2013learning} . As illustrated the Adaptive DAgger approach does better than the Passive approach, which is a common result in the literature~\cite{ross2010efficient,ross2010reduction}.
+\noindent \textbf{Not in the Set} \jmnote{Can we prove it's not in the set? Otherwise this seems a little ad-hoc, which is fine but we should be clear about that.}
+In Fig. \ref{fig:var} A, we show the case when the robot's policy class does not contain the supervisors, we used a Linear SVM for the policy class representation, which is commonly used in ~\cite{ross2010efficient,ross2010reduction,ross2013learning} . As illustrated the Adaptive DAgger approach does better than the Passive approach, which is a common result in the literature~\cite{ross2010efficient,ross2010reduction}.
 
 
 Similar to prior work passive LfD  with a Linear SVM does worse than DAgger, which iteratively determines the distribution it policy induces and minimize the expected risk on it. However, because the robot's policy class did not contain the supervisor's it was not able to perform as well as the value iteration supervisor. 
@@ -493,7 +498,7 @@ where $w\sim \mathcal{N}(0,\sigma I)$. The dynamics for region B correspond to t
 
 The supervisor is a switching linear system, where each linear model is computed via the infinite horizon LQG for the specified dynamics. The robot's policy, $\pi_{\theta}$ is represented as a linear policy which is found via ridge regression.
 
-We run passive Lfd and DAgger in this setting and plot the performance in Fig. \ref{fig:p_mass}. As shown, passive LfD is able to converge to the true supervisor's policy however the adaptivitiy of DAgger forces it to enter the region B of the work space and subsequently try to learn the two different supervisors. Thus, preventing it from converging. 
+We run passive Lfd and DAgger in this setting and plot the performance in Fig. \ref{fig:p_mass}. As shown, passive LfD is able to converge to the true supervisor's policy however the adaptivitiy of DAgger forces it to enter the region B of the work space and subsequently try to learn the two different supervisors. Thus, preventing it from converging. \jmnote{Fragment. There are a lot of these!!!!!!!}
 
 \begin{figure}
 \centering
@@ -506,7 +511,7 @@ Left: A 2D workspace where a point mass robot is taught to go to the green circl
 \end{figure}
 
 \subsection{Planar Singulation}
-We lastly perform a human study on a real robot, where people teach the robot to perform singulation task, or seperate a object from a pile. The objects used to form clutter are red extruded polygons.  For singulation task, we consider objects made of Medium Density Fiberboard with an average 4" diameter and 3" in height. 
+We lastly perform a human study on a real robot, where people teach the robot to perform singulation task, or seperate a object from a pile. The objects used to form clutter are red extruded polygons.  For singulation task, we consider objects made of Medium Density Fiberboard with an average 4" diameter and 3" in height. \jmnote{Robot hardware model?}
 
 The robot has a 2 dimensional internal state of base rotation and arm extension. The state space of the environment, $\mathcal{X}$, is captured by  an overhead Logitech C270 camera, which is positioned to capture the workspace that contains all cluttered objects and the robot arm. We use only the current image as state space, which captures positional information and a neural network architecture policy representation, the same as in~\cite{laskeyrobot}.
 
@@ -539,7 +544,7 @@ This measurement gives a rough percentage difference between the human's teleope
 
 \mlnote{Need to better explain this} We performed this experiment with five subjects, and observed an average normalized distance of $0.44$, or $44\%$ deviation. By comparison, the normalized distance on the test set during training of the policy gave a normalized error of about $22\%$. The average euclidian distance of the states was $0.8$ cm. These results indicate a  difference between the controls applied by retroactive feedback and those applied by the human performing teleoperation.
 
-Thus suggesting that the intention of humans providing feedback may be lost in the labeling interface. We acknowledge that this might be remedy by providing a more intuitive labeling interface, however a trade-off exists between time spent designing an interface for a given task and collecting more data via passive LfD. 
+Thus suggesting that the intention of humans providing feedback may be lost in the labeling interface. \jmnote{MORE FRAGMENTS!} We acknowledge that this might be remedy by providing a more intuitive labeling interface, however a trade-off exists between time spent designing an interface for a given task and collecting more data via passive LfD. 
 
 \begin{figure}
 \centering

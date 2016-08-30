@@ -1,0 +1,147 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+%\documentclass[journal,transmag]{IEEEtran}% Comment this line out if you need a4paper
+
+\documentclass[10pt, conference]{ieeeconf}      % Use this line for a4 paper
+
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+
+%\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+% The following packages can be found on http:\\www.ctan.org
+%\usepackage{graphics} % for pdf, bitmapped graphics files
+%\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+%\usepackage{amsmath} % assumes amsmath package installed
+%\usepackage{amssymb}  % assumes amsmath package installed
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{url}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+
+\def\lc{\left\lfloor}   
+\def\rc{\right\rfloor}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{tabularx}
+\usepackage{tikz,hyperref,graphicx,units}
+\usepackage{subfigure}
+\usepackage{benktools}
+\usepackage{bbm}
+\renewcommand{\baselinestretch}{.5}
+
+\usepackage{caption}
+\usepackage{epstopdf}
+\renewcommand{\captionfont}{\footnotesize}
+\usepackage{sidecap,wrapfig}
+\usepackage[ruled,vlined]{algorithm2e}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\abs}[1]{\lvert#1\rvert} 
+\newcommand{\norm}[1]{\lVert#1\rVert}
+%\newcommand{\suchthat}{\mid}
+\newcommand{\suchthat}{\ \big|\ }
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bc}{\mathbf{c}}
+\newcommand{\bd}{\mathbf{d}}
+\newcommand{\bg}{\mathbf{g}}
+\newcommand{\bj}{\mathbf{j}}
+\newcommand{\bn}{\mathbf{n}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bt}{\mathbf{t}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bbf}{\mathbf{f}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\mX}{\mathcal{X}}
+\newcommand{\mD}{\mathcal{D}}
+\newcommand{\mG}{\mathcal{G}}
+\newcommand{\mN}{\mathcal{N}}
+\newcommand{\mW}{\mathcal{W}}
+\newcommand{\mF}{\mathcal{F}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\mR}{\mathcal{R}}
+
+\newcommand{\bfc}{W}
+\newcommand{\Qinf}{Q_{\infty}}
+\newcommand{\st}[1]{_\text{#1}}
+\newcommand{\rres}{r\st{res}}
+\newcommand{\pos}[1]{(#1)^+}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\convhull}{\operatorname{ConvexHull}}
+\newcommand{\minksum}{\operatorname{MinkowskiSum}}
+
+\newcommand{\specialcell}[2][c]{ \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\newcommand{\acro}{SHIV}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\newcolumntype{L}[1]{>{\RaggedRight\hspace{0pt}}p{#1}}
+\newcolumntype{R}[1]{>{\RaggedLeft\hspace{0pt}}p{#1}}
+
+
+\newboolean{include-notes}
+\setboolean{include-notes}{true}
+\newcommand{\adnote}[1]{%
+ {\textcolor{blue}{\textbf{AD: #1}}}{}}
+ 
+ \newcommand{\sknote}[1]{%
+ {\textcolor{blue}{\textbf{SK: #1}}}{}}
+ 
+  \newcommand{\mlnote}[1]{%
+ {\textcolor{purple}{\textbf{ML: #1}}}{}}
+ 
+ \newcommand{\jmnote}[1]{%
+ {\textcolor{orange}{\textbf{JM: #1}}}{}}
+
+\renewcommand{\baselinestretch}{.95}
+\usepackage{times}
+\usepackage{microtype}
+%\title{Iterative Imitation Learning with Reduced Human Supervision [v11]}
+%\title{SHIV:  Reducing Human Supervision for Robot adaptive Learning [v11]}
+
+\title{Supplementary File for: An Analysis of Adaptivity
+ \\in  Robotic Learning from Demonstrations}
+
+
+
+\author{Michael Laskey, Caleb Chuck, Jonathan Lee, Jeff Mahler,\\ Sanjay Krishnan, Kevin Jamieson, Anca Dragan, Ken Goldberg}
+\begin{document}
+
+
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+\end{document}
