@@ -136,12 +136,68 @@
 \author{Michael Laskey, Caleb Chuck, Jonathan Lee, Jeff Mahler,\\ Sanjay Krishnan, Kevin Jamieson, Anca Dragan, Ken Goldberg}
 \begin{document}
 
-
-
-
 \maketitle
 \thispagestyle{empty}
 \pagestyle{empty}
+
+\section{Proofs}
+\begin{theorem}\label{thm:sup}
+Let $l: \mathcal{U} \times \mathcal{U} \rightarrow [0,1]$ be a bounded convex loss function and assume $\theta^* \in \Theta$.
+Furthermore, define 
+\begin{align*}
+	p(\tau | \theta) &= p(\bx_0)\prod_{i=0}^{T-1}p(\bx_{t+1}|\bu_t,\bx_t)p(\bu_t|\bx_t,\theta) \\
+	J(\theta) &= \sum^T_{t=1} l(\pi_{\theta}(\bx_{t}),\pi_{\theta^*}(\bx_{t})) \\
+	\theta^N &= \underset{\theta \in \Theta}{\mbox{argmin}} \: \frac{1}{N} \sum^N_{i=1} \sum^T_{t=1} l(\pi_{\theta}(\bx_{t,i}), \pi_{\theta^*}(\bx_{t,i}))
+\end{align*}
+
+For a policy $\theta^N$ found via passive LfD from $N$ trajectories collected from the supervisor the following is true with probability at least $1- 2\mbox{exp} (-N\delta^2/(8 T^2))$
+
+$$E_{p(\tau|\theta^*)} J(\theta^N) \leq 2R_{\Theta}(N) + \delta+ \frac{1}{\sqrt{N}}$$\\
+
+\end{theorem}
+
+\begin{proof}
+By Theorem 4.2 of M. Wainwright with probability at least $1- 2\mbox{exp} (-N\delta^2/(8 T^2))$
+\begin{align*}
+	\big| \frac{1}{N} \sum^N_{i=1} \sum^T_{t=1} l(\pi_{\theta}(\bx_{t,i}), \pi_{\theta^*}(\bx_{t,i})) - E_{p(\tau|\theta^*)} J(\theta^N) \big| \leq \\ 2R_{\Theta}(N) + \delta \\
+	\Rightarrow E_{p(\tau|\theta^*)} J(\theta^N) \leq 2R_{\Theta}(N) + \delta  + \\ \frac{1}{N} \sum^N_{i=1} \sum^T_{t=1} l(\pi_{\theta}(\bx_{t,i}), \pi_{\theta^*}(\bx_{t,i}))
+\end{align*}
+
+\end{proof}
+
+\begin{theorem}
+Given a policy $\pi_{\theta^N}$, the following is true 
+$$E_{p(\tau|\theta^n)} J(\theta^N) \leq \sqrt{T\frac{1}{4\sigma}E_{p(\tau|\theta^*)} J(\theta^N)}+E_{p(\tau|\theta^*)} J(\theta^N)$$\\
+\end{theorem}
+\begin{proof}
+For convenience we will write $E_{p(\tau|\theta)} = E_{\theta}$ and $l(\theta,\bx) = l(\theta)$. 
+
+\begin{align}
+&E_{\theta^N} J(\theta^N) - E_{\theta^*} J(\theta^N) \\
+&= T(\frac{1}{T}E_{\theta^N} J(\theta^N) -\frac{1}{T}E_{\theta^*} J(\theta^N)\\
+&\leq  T\mbox{sup}_{\theta} |\frac{1}{T}E_{\theta_n}J(\theta) - \frac{1}{T}E_{\theta^*} J(\theta)|\\
+&\leq  T| | p(\tau|\theta^N) - p(\tau|\theta^*)||_{TV}\\
+&\leq T\sqrt{\frac{1}{2} D_{KL}(p(\tau|\theta^*),p(\tau|\theta^N))}
+\end{align}
+
+Line 5 bounds the expected loss over $\theta^N$ by taking the worst case value. Line 6 leverages the fact that the worst case loss is bounded by $1$ and the definition of Total Variational distance. Line 7 uses Pinsker's inequality. 
+
+
+\begin{align}
+&= T\sqrt{\frac{1}{2} E_{p(\theta^*)} \mbox{log} \frac{p(\tau|\theta^*)}{p(\tau|\theta^N)}}\\
+&= T\sqrt{\frac{1}{2} E_{p(\theta^*)} \sum^T_{t=1}\mbox{log} \frac{p(\bu_t|\bx_t,\theta^*)}{p(\bu_t|\bx_t,\theta^N)}}\\
+&= T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} \sum^T_{t=1} ||\bu_t- \pi_{\theta^N}(\bx_t)||_2^2 - ||\bu_t- \pi_{\theta^*}(\bx_t)||_2^2}\\
+&\leq T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} \sum^T_{t=1}  ||\pi_{\theta^*}(\bx_t) - \pi_{\theta^N}(\bx_t)||_2^2}\\
+&= T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} J(\theta^N)}
+\end{align}
+
+Line 8,9 and 10 apply the definition of the KL-divergence, the markov chain and the normal distribution over $p(\bu_t|\bx_t,\theta)$. Line 11 applies the triangle inequality to upperbound by the defined surrogate loss. Line 12 applies the assumed definition of $J(\theta)$. 
+
+The intuition behind these steps is that difference between  the two distribution can be controlled via the surrogate loss on the expected supervisor. Thus, illustrating the closer the robot's policy matches the supervisor's policy on the supervisor's distribution, the smaller the total variational difference between the resulting two distributions will be.
+
+
+\end{proof}
+ 
 
 
 \end{document}
