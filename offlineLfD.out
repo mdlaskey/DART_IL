@@ -1,15 +1,19 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Related Work}{}% 2
-\BOOKMARK [1][-]{section.3}{Problem Statement}{}% 3
-\BOOKMARK [1][-]{section.4}{Passive LfD}{}% 4
-\BOOKMARK [1][-]{section.5}{DAgger}{}% 5
-\BOOKMARK [2][-]{subsection.5.1}{Algorithm}{section.5}% 6
-\BOOKMARK [3][-]{subsubsection.5.1.1}{Step 1}{subsection.5.1}% 7
-\BOOKMARK [3][-]{subsubsection.5.1.2}{Step 2}{subsection.5.1}% 8
-\BOOKMARK [2][-]{subsection.5.2}{Analysis of DAgger}{section.5}% 9
-\BOOKMARK [1][-]{section.6}{Experiments}{}% 10
-\BOOKMARK [2][-]{subsection.6.1}{GridWorld}{section.6}% 11
-\BOOKMARK [2][-]{subsection.6.2}{Point Mass Control}{section.6}% 12
-\BOOKMARK [2][-]{subsection.6.3}{Planar Singulation}{section.6}% 13
-\BOOKMARK [1][-]{section.7}{Conclusion}{}% 14
+\BOOKMARK [1][-]{section.3}{Problem Statement and Background}{}% 3
+\BOOKMARK [2][-]{subsubsection.3.0.1}{Step 1}{section.3}% 4
+\BOOKMARK [3][-]{subsubsection.3.0.2}{Step 2}{subsubsection.3.0.1}% 5
+\BOOKMARK [1][-]{section.4}{Theoretical Analysis}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Algorithm Convergence}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Bound on Error for Passive Lfd}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{Finite Sample Analysis}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{Experiments}{}% 10
+\BOOKMARK [2][-]{subsection.5.1}{Varying Function Class}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.2}{Algorithmic Convergence }{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.3}{Human Study for Planar Singulation}{section.5}% 13
+\BOOKMARK [1][-]{section.6}{Conclusion and Future Work}{}% 14
 \BOOKMARK [1][-]{section*.7}{References}{}% 15
+\BOOKMARK [1][-]{section*.8}{Appendix}{}% 16
+\BOOKMARK [2][-]{subsection.Appendix.A.1}{Notation and Problem Statement}{section*.8}% 17
+\BOOKMARK [2][-]{subsection.Appendix.A.2}{Empirical Risk Minimizer \(Passive LfD\)}{section*.8}% 18
+\BOOKMARK [2][-]{subsection.Appendix.A.3}{Follow-The-Leader \(DAgger\)}{section*.8}% 19
