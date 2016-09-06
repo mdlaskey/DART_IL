@@ -70,10 +70,6 @@ M.~Laskey, S.~Staszak, W.~Y.-S. Hsieh, J.~Mahler, F.~T. Pokorny, A.~D. Dragan,
 S.~Levine, C.~Finn, T.~Darrell, and P.~Abbeel, ``End-to-end training of deep
   visuomotor policies,'' \emph{arXiv preprint arXiv:1504.00702}, 2015.
 
-\bibitem{mason1999boosting}
-L.~Mason, J.~Baxter, P.~Bartlett, and M.~Frean, ``Boosting algorithms as
-  gradient descent in function space,'' 1999.
-
 \bibitem{pomerleau1989alvinn}
 D.~A. Pomerleau, ``Alvinn: An autonomous land vehicle in a neural network,''
   Carnegie-Mellon University, Tech. Rep., 1989.
@@ -108,8 +104,12 @@ J.~Van Den~Berg, S.~Miller, D.~Duckworth, H.~Hu, A.~Wan, X.-Y. Fu, K.~Goldberg,
   iterative learning from human-guided demonstrations,'' in \emph{ICRA, 2010
   IEEE}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2010, pp. 2074--2081.
 
+\bibitem{vapnik1992principles}
+V.~Vapnik, ``Principles of risk minimization for learning theory,'' in
+  \emph{Advances in Neural Information Processing Systems}, 1992, pp. 831--838.
+
 \bibitem{vapnik2013nature}
-V.~Vapnik, \emph{The nature of statistical learning theory}.\hskip 1em plus
-  0.5em minus 0.4em\relax Springer Science \& Business Media, 2013.
+------, \emph{The nature of statistical learning theory}.\hskip 1em plus 0.5em
+  minus 0.4em\relax Springer Science \& Business Media, 2013.
 
 \end{thebibliography}
