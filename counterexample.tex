@@ -1,0 +1,87 @@
+\subsection{Notation and Problem Statement}
+Given a discrete-time stochastic dynamical system over the state-space $\mathcal{X}$ and control-space $\mathcal{U}$
+\begin{equation}
+x_{t+1} = f(x_t,u_t) + \epsilon_t~~x_0\sim p(x_0)~~\epsilon_t \sim \text{i.i.d}, \label{sde}
+\end{equation}
+both passive and adaptive LfD model the supervisor as a stochastic state-feedback control policy $\pi^*: \mathcal{X} \mapsto \mathcal{U}$:
+\[
+u_{t} \sim \pi^*(x_t).
+\]
+We assume that this distribution is parametric, parametrized by $\theta^* \in \Theta$, and where $\Theta$ denotes the parameter set over all possible policies--we will use $\pi_{\theta}$ to denote a given policy.  
+Every policy parametrized by has a state distribution at time $t$:
+\[x_t \sim \theta =  p(x_0) \prod^t_{i=1} p(x_{i+1}|x_{i},u_{i})p(u_i|x_i,\theta).\]
+\sknote{how do you do retroactive feedback stochastically?}
+
+Given independent and identically distributed episodic observations (each of a fixed-length $T$) of Equation \ref{sde}:
+\[
+D = \{d_1,...,d_N\}~~~~d_i = [(x_1,u_1),...,(x_T,u_T)],
+\]
+the LfD problem is to find a parametrized policy $\pi_{\theta}$ that minimizes the expected disagreement $\pi_{\theta^*}$ over $T$ time-steps of the system:
+\begin{equation}
+\min_{\theta \in \Theta} \sum_{t=0}^T \mathbf{E}_{x_t \sim \theta} [ \ell(\pi_{\theta}(x_t), \pi_{\theta^*}(x_t))]. \label{obj}
+\end{equation}
+
+\subsection{Empirical Risk Minimizer (Passive LfD)}
+One approach to this problem is to find the $\hat{\theta}$ that minimizes the loss over each state seen in the demonstrations:
+\[
+\min_{\theta \in \Theta} \sum_{d=0}^N \sum_{t=0}^T \ell(\pi_{\theta}(x_{d,t}), u_{d,t}),
+\]
+and one can re-write this minimization problem as:
+\begin{equation}
+\hat{\theta} = \arg\min_{\theta \in \Theta} \sum_{d=0}^N  J(\theta),\label{erm}
+\end{equation}
+where $J(\theta) = \sum_{t=0}^T \ell(\pi_{\theta}(x_{d,t}), u_{d,t})$.
+Equation \ref{erm} is called the empirical risk minimizer (ERM) as it estimates the true risk--the disagreement with the expected supervisor over the sample-space of demonstrations:
+\[
+\min_{\theta \in \Theta} \mathbf{E}_{d \sim D^\infty}  J(\theta).
+\]
+An important notion in ERM is consistency, i.e., $\hat{\theta} \rightarrow \theta^* \text{ a.s}$. This can be achieved for certain classes of functions via a uniform convergence argument \sknote{Someone who knows this advise--and replace consistency with whatever term you want}.
+Our analysis assumes consistency and relaxing this assumption is a natural next step in future work.
+
+\vspace{0.5em}\noindent \textbf{Remark: } Even with the fairly strong assumption of consistency, the LfD problem remains to be complex. The empirical risk minimization problem is measuring the expected risk over the distribution of states seen by the supervisor's policy. This is not quite the same as measuring the expected error over T time-steps of execution in Equation \ref{obj}. For any finite sample, the empirical risk minimizer will in general be $\hat{\theta} \ne \theta^*$, and the distribution of states visited by applying $\pi_{\hat{\theta}}$ might be different than the distribution of states visited by applying $\pi_{\theta^*}$.
+
+\subsection{Follow-The-Leader (DAgger)}
+To address the mismatch between supervisor and execution distributions, Ross et al. proposed an algorithm (DAgger) derived from online optimization rather than supervised learning. In online optimization, one usually considers a scenario where a sequence of data arrives in an unknown (and possible adversarial) stochastic process.
+DAgger collects an initial set of $N'$ demonstrations, and computes the empirical risk minimizer $\hat{\theta}$.
+Then, it executes this policy and collects samples of states visited by $\pi_{\hat{\theta}}$.
+It appends these samples to the initial set of demonstrations and re-optimizes.
+This approach is a form of online optimization called Follow-The-Leader, i.e., apply most successful, or ``leading'', parameter over the previous observations. 
+
+\vspace{0.5em}\noindent \textbf{Remark: } Ross et al. proved a error bound with DAgger that showed error with DAgger is $\mathcal{O}(T\epsilon_n)$ where $\epsilon_n = \mathbf{E}_{d \sim D^\infty}  J(\hat{\theta})$. It is important to differentiate this bound from the hypothetical ``best policy in the class'', which would have $\epsilon = \mathbf{E}_{d \sim D^\infty}  J(\theta^*)$ and $\epsilon \le \epsilon_n$. In this sense, DAgger ensures that the error rate grows linearly with the best policy seen in the current dataset, but does not guarantee it will visit the same states (in distribution) as the supervisor as $N \rightarrow \infty$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -36,34 +36,21 @@ M.~Anthony and P.~L. Bartlett, \emph{Neural network learning: Theoretical
   foundations}.\hskip 1em plus 0.5em minus 0.4em\relax cambridge university
   press, 2009.
 
-\bibitem{chernova2009interactive}
-S.~Chernova and M.~Veloso, ``Interactive policy learning through
-  confidence-based autonomy,'' \emph{Journal of Artificial Intelligence
-  Research}, vol.~34, no.~1, p.~1, 2009.
-
 \bibitem{duvallet2013imitation}
 F.~Duvallet, T.~Kollar, and A.~Stentz, ``Imitation learning for natural
   language direction following through unknown environments,'' in
   \emph{ICRA}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2013, pp.
   1047--1053.
 
-\bibitem{grollman2007dogged}
-D.~H. Grollman and O.~C. Jenkins, ``Dogged learning for robots,'' in
-  \emph{ICRA, 2007 IEEE}.
-
 \bibitem{NIPS2014_5421}
 X.~Guo, S.~Singh, H.~Lee, R.~L. Lewis, and X.~Wang, ``Deep learning for
   real-time atari game play using offline monte-carlo tree search planning,''
   in \emph{NIPS}, 2014, pp. 3338--3346.
 
-\bibitem{judah2011active}
-K.~Judah, A.~Fern, and T.~Dietterich, ``Active imitation learning via state
-  queries,'' in \emph{Proceedings of the ICML Workshop on Combining Learning
-  Strategies to Reduce Label Cost}, 2011.
-
-\bibitem{kakade2003sample}
-S.~M. Kakade \emph{et~al.}, \emph{On the sample complexity of reinforcement
-  learning}, 2003.
+\bibitem{kakade2009generalization}
+S.~M. Kakade and A.~Tewari, ``On the generalization ability of online strongly
+  convex programming algorithms,'' in \emph{Advances in Neural Information
+  Processing Systems}, 2009, pp. 801--808.
 
 \bibitem{kim2013maximum}
 B.~Kim and J.~Pineau, ``Maximum mean discrepancy imitation learning.'' in
@@ -82,17 +69,6 @@ M.~Laskey, S.~Staszak, W.~Y.-S. Hsieh, J.~Mahler, F.~T. Pokorny, A.~D. Dragan,
 \bibitem{levine2015end}
 S.~Levine, C.~Finn, T.~Darrell, and P.~Abbeel, ``End-to-end training of deep
   visuomotor policies,'' \emph{arXiv preprint arXiv:1504.00702}, 2015.
-
-\bibitem{mason1999boosting}
-L.~Mason, J.~Baxter, P.~Bartlett, and M.~Frean, ``Boosting algorithms as
-  gradient descent in function space,'' 1999.
-
-\bibitem{scikit-learn}
-F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
-  M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, J.~Vanderplas, A.~Passos,
-  D.~Cournapeau, M.~Brucher, M.~Perrot, and E.~Duchesnay, ``Scikit-learn:
-  Machine learning in {P}ython,'' \emph{Journal of Machine Learning Research},
-  vol.~12, pp. 2825--2830, 2011.
 
 \bibitem{pomerleau1989alvinn}
 D.~A. Pomerleau, ``Alvinn: An autonomous land vehicle in a neural network,''
@@ -119,11 +95,8 @@ B.~Sch{\"o}lkopf and A.~J. Smola, \emph{Learning with kernels: Support vector
   machines, regularization, optimization, and beyond}.\hskip 1em plus 0.5em
   minus 0.4em\relax MIT press, 2002.
 
-\bibitem{settles2008analysis}
-B.~Settles and M.~Craven, ``An analysis of active learning strategies for
-  sequence labeling tasks,'' in \emph{Proceedings of the conference on
-  empirical methods in natural language processing}.\hskip 1em plus 0.5em minus
-  0.4em\relax Association for Computational Linguistics, 2008, pp. 1070--1079.
+\bibitem{shalev2011online}
+S.~Shalev-Shwartz, ``Online learning and online convex optimization,'' 2011.
 
 \bibitem{van2010superhuman}
 J.~Van Den~Berg, S.~Miller, D.~Duckworth, H.~Hu, A.~Wan, X.-Y. Fu, K.~Goldberg,
@@ -131,8 +104,12 @@ J.~Van Den~Berg, S.~Miller, D.~Duckworth, H.~Hu, A.~Wan, X.-Y. Fu, K.~Goldberg,
   iterative learning from human-guided demonstrations,'' in \emph{ICRA, 2010
   IEEE}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2010, pp. 2074--2081.
 
+\bibitem{vapnik1992principles}
+V.~Vapnik, ``Principles of risk minimization for learning theory,'' in
+  \emph{Advances in Neural Information Processing Systems}, 1992, pp. 831--838.
+
 \bibitem{vapnik2013nature}
-V.~Vapnik, \emph{The nature of statistical learning theory}.\hskip 1em plus
-  0.5em minus 0.4em\relax Springer Science \& Business Media, 2013.
+------, \emph{The nature of statistical learning theory}.\hskip 1em plus 0.5em
+  minus 0.4em\relax Springer Science \& Business Media, 2013.
 
 \end{thebibliography}

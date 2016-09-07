@@ -33,9 +33,9 @@
 \citation{anthony2009neural}
 \citation{mason1999boosting}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  An illustration of idea that the supervisor's policy is within the function class of the function class of the robot's. Denote a policy class $\Theta $ and a supervisor policy $\pi _{\theta ^*}$, the expected supervisor's policy is in the set if it is contained in $\Theta $. .\relax }}{1}{figure.caption.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  {\leavevmode {\color  {blue}\textbf  {SK: Hmm...not quite right? Don't you require:}}}{} $\mathaccentV {hat}05E{\theta } \rightarrow \theta a.s$ {\leavevmode {\color  {blue}\textbf  {SK: --}}}{} An illustration of idea that the supervisor's policy is within the function class of the function class of the robot's. Denote a policy class $\Theta $ and a supervisor policy $\pi _{\theta ^*}$, the expected supervisor's policy is in the set if it is contained in $\Theta $. \relax }}{1}{figure.caption.1}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:teaserl}{{1}{1}{\footnotesize An illustration of idea that the supervisor's policy is within the function class of the function class of the robot's. Denote a policy class $\Theta $ and a supervisor policy $\pi _{\theta ^*}$, the expected supervisor's policy is in the set if it is contained in $\Theta $. .\relax }{figure.caption.1}{}}
+\newlabel{fig:teaserl}{{1}{1}{\footnotesize \sknote {Hmm...not quite right? Don't you require:} $\hat {\theta } \rightarrow \theta a.s$ \sknote {--} An illustration of idea that the supervisor's policy is within the function class of the function class of the robot's. Denote a policy class $\Theta $ and a supervisor policy $\pi _{\theta ^*}$, the expected supervisor's policy is in the set if it is contained in $\Theta $. \relax }{figure.caption.1}{}}
 \citation{pomerleau1989alvinn}
 \citation{NVIDEA}
 \citation{ross2010efficient}
@@ -58,78 +58,74 @@
 \citation{ross2010reduction}
 \citation{ross2010efficient}
 \citation{ross2010reduction}
-\citation{levine2015end}
-\citation{mason1999boosting}
-\citation{anthony2009neural}
-\citation{vapnik2013nature}
 \newlabel{eq:m_likeli_obj}{{1}{3}{Problem Statement}{equation.3.1}{}}
 \newlabel{eq:main_obj}{{2}{3}{Problem Statement}{equation.3.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Passive LfD}{3}{section.4}}
 \citation{levine2015end}
+\citation{mason1999boosting}
+\citation{anthony2009neural}
+\citation{vapnik2013nature}
+\citation{levine2015end}
+\newlabel{thm:sup}{{4.1}{4}{Passive LfD}{theorem.4.1}{}}
 \citation{ross2010reduction}
 \citation{ross2010efficient}
 \citation{ross2010reduction}
-\newlabel{thm:sup}{{4.1}{4}{Passive LfD}{theorem.4.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}DAgger}{4}{section.5}}
-\newlabel{sec:DAgger}{{V}{4}{DAgger}{section.5}{}}
 \citation{scholkopf2002learning}
 \citation{NIPS2014_5421}
 \citation{ross2010reduction}
 \citation{ross2010reduction}
 \citation{shalev2011online}
-\citation{kakade2009generalization}
+\@writefile{toc}{\contentsline {section}{\numberline {V}DAgger}{5}{section.5}}
+\newlabel{sec:DAgger}{{V}{5}{DAgger}{section.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {V-A}Algorithm}{5}{subsection.5.1}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {V-A.1}Step 1}{5}{subsubsection.5.1.1}}
 \newlabel{eq:super_objj}{{13}{5}{Step 1}{equation.5.13}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {V-A.2}Step 2}{5}{subsubsection.5.1.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Analysis of DAgger}{5}{subsection.5.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  A binary decision tree, where a robot is being taught by a supervisor to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the supervisor would select, either left or right, $\delimiter "4266308 L, R \delimiter "5267309 $. The optimal policy, colored in green, is to select left, $L$, at each node.\relax }}{5}{figure.caption.2}}
 \newlabel{fig:c_ex}{{2}{5}{\footnotesize A binary decision tree, where a robot is being taught by a supervisor to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the supervisor would select, either left or right, $\lbrace L, R \rbrace $. The optimal policy, colored in green, is to select left, $L$, at each node.\relax }{figure.caption.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Experiments}{5}{section.6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {VI-A}GridWorld}{5}{subsection.6.1}}
-\newlabel{sec:gdw}{{VI-A}{5}{GridWorld}{subsection.6.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {V-A.2}Step 2}{5}{subsubsection.5.1.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Analysis of DAgger}{5}{subsection.5.2}}
+\citation{kakade2009generalization}
 \citation{ross2010efficient}
 \citation{ross2010reduction}
 \citation{ross2013learning}
 \citation{ross2010efficient}
 \citation{ross2010reduction}
-\citation{laskeyrobot}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is the normalized performance with respect to the expected supervisor, where $1.0$ indicates matching the expected supervisor's reward. The plots are averaged over 100 randomly generated 2D gridworld environments, where the robot is taught to avoid penalty states and reach a goal state. Condition A examines when the robot's policy class is not able to learn the supervisors, which results in adaptivity leading to better performance. Condition D examines a larger robot policy class that contains the expected supervisor,and demonstrates negligible difference between adaptive and passive LfD. to represent the supervisor. This leads to similar performance as Condition B, but requires more data. Finally, Condition C examines when the supervisor has noise added to the controls labels, this leads to more data being needed to converge to the expected supervisor, but the difference between passive and adaptive is still negligible. \relax }}{6}{figure.caption.3}}
-\newlabel{fig:var}{{3}{6}{\footnotesize Shown above is the normalized performance with respect to the expected supervisor, where $1.0$ indicates matching the expected supervisor's reward. The plots are averaged over 100 randomly generated 2D gridworld environments, where the robot is taught to avoid penalty states and reach a goal state. Condition A examines when the robot's policy class is not able to learn the supervisors, which results in adaptivity leading to better performance. Condition D examines a larger robot policy class that contains the expected supervisor,and demonstrates negligible difference between adaptive and passive LfD. to represent the supervisor. This leads to similar performance as Condition B, but requires more data. Finally, Condition C examines when the supervisor has noise added to the controls labels, this leads to more data being needed to converge to the expected supervisor, but the difference between passive and adaptive is still negligible. \relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Experiments}{6}{section.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {VI-A}GridWorld}{6}{subsection.6.1}}
+\newlabel{sec:gdw}{{VI-A}{6}{GridWorld}{subsection.6.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {VI-B}Point Mass Control}{6}{subsection.6.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {VI-C}Planar Singulation}{6}{subsection.6.3}}
+\citation{laskeyrobot}
 \citation{laskeyshiv}
 \citation{laskeyrobot}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is the normalized performance with respect to the expected supervisor, where $1.0$ indicates matching the expected supervisor's reward. The plots are averaged over 100 randomly generated 2D gridworld environments, where the robot is taught to avoid penalty states and reach a goal state. Condition A examines when the robot's policy class is not able to learn the supervisors, which results in adaptivity leading to better performance. Condition D examines a larger robot policy class that contains the expected supervisor,and demonstrates negligible difference between adaptive and passive LfD. to represent the supervisor. This leads to similar performance as Condition B, but requires more data. Finally, Condition C examines when the supervisor has noise added to the controls labels, this leads to more data being needed to converge to the expected supervisor, but the difference between passive and adaptive is still negligible. \relax }}{7}{figure.caption.3}}
+\newlabel{fig:var}{{3}{7}{\footnotesize Shown above is the normalized performance with respect to the expected supervisor, where $1.0$ indicates matching the expected supervisor's reward. The plots are averaged over 100 randomly generated 2D gridworld environments, where the robot is taught to avoid penalty states and reach a goal state. Condition A examines when the robot's policy class is not able to learn the supervisors, which results in adaptivity leading to better performance. Condition D examines a larger robot policy class that contains the expected supervisor,and demonstrates negligible difference between adaptive and passive LfD. to represent the supervisor. This leads to similar performance as Condition B, but requires more data. Finally, Condition C examines when the supervisor has noise added to the controls labels, this leads to more data being needed to converge to the expected supervisor, but the difference between passive and adaptive is still negligible. \relax }{figure.caption.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants A and B, in B the controls are inverted in the dynamics thus resulting in $x=y$ and $y=x$. The supervisor is the infinite horizion LQG computed policy, which results in two different linear matrices in region A and B. Right: Illustrates how having a linear robot policy class can cause DAgger to fail to converge due to it collecting data from region B. \relax }}{7}{figure.caption.4}}
 \newlabel{fig:p_mass}{{4}{7}{\footnotesize Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants A and B, in B the controls are inverted in the dynamics thus resulting in $x=y$ and $y=x$. The supervisor is the infinite horizion LQG computed policy, which results in two different linear matrices in region A and B. Right: Illustrates how having a linear robot policy class can cause DAgger to fail to converge due to it collecting data from region B. \relax }{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {VI-C}Planar Singulation}{7}{subsection.6.3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is an example of an initial state (left) that the robot is presented with. It can vary in placement of the object in the pile, translation and rotation. A human is asked to singulate the object, which is to have the robot learn to push one object from the pile (right). \relax }}{7}{figure.caption.5}}
 \newlabel{fig:izzy_rw}{{5}{7}{\footnotesize Shown above is an example of an initial state (left) that the robot is presented with. It can vary in placement of the object in the pile, translation and rotation. A human is asked to singulate the object, which is to have the robot learn to push one object from the pile (right). \relax }{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Conclusion}{7}{section.7}}
 \bibstyle{IEEEtranS}
 \bibdata{references}
 \bibcite{abbeel2007application}{1}
 \bibcite{abbeel2008apprenticeship}{2}
 \bibcite{anthony2009neural}{3}
-\bibcite{chernova2009interactive}{4}
-\bibcite{duvallet2013imitation}{5}
-\bibcite{grollman2007dogged}{6}
-\bibcite{NIPS2014_5421}{7}
-\bibcite{judah2011active}{8}
-\bibcite{kakade2003sample}{9}
-\bibcite{kim2013maximum}{10}
-\bibcite{laskeyrobot}{11}
-\bibcite{laskeyshiv}{12}
-\bibcite{levine2015end}{13}
-\bibcite{mason1999boosting}{14}
-\bibcite{scikit-learn}{15}
-\bibcite{pomerleau1989alvinn}{16}
-\bibcite{ross2010efficient}{17}
-\bibcite{ross2010reduction}{18}
-\bibcite{ross2013learning}{19}
-\bibcite{scholkopf2002learning}{20}
-\bibcite{settles2008analysis}{21}
-\bibcite{van2010superhuman}{22}
-\bibcite{vapnik2013nature}{23}
+\bibcite{duvallet2013imitation}{4}
+\bibcite{NIPS2014_5421}{5}
+\bibcite{kakade2009generalization}{6}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the supervisor rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. \relax }}{8}{figure.caption.6}}
 \newlabel{fig:izzy_rw}{{6}{8}{\footnotesize Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the supervisor rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. \relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Conclusion}{8}{section.7}}
 \@writefile{toc}{\contentsline {section}{References}{8}{section*.7}}
+\bibcite{kim2013maximum}{7}
+\bibcite{laskeyrobot}{8}
+\bibcite{laskeyshiv}{9}
+\bibcite{levine2015end}{10}
+\bibcite{pomerleau1989alvinn}{11}
+\bibcite{ross2010efficient}{12}
+\bibcite{ross2010reduction}{13}
+\bibcite{ross2013learning}{14}
+\bibcite{scholkopf2002learning}{15}
+\bibcite{shalev2011online}{16}
+\bibcite{van2010superhuman}{17}
+\bibcite{vapnik1992principles}{18}
+\bibcite{vapnik2013nature}{19}

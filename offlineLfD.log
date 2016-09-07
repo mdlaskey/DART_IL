@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  28 AUG 2016 22:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  7 SEP 2016 02:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -894,20 +894,20 @@ LaTeX Warning: Label `fig:izzy_rw' multiply defined.
 )
 \openout1 = `offlineLfD.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 134.
-LaTeX Font Info:    ... okay on input line 134.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
  ABD: EveryShipout initializing macros
 (/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -924,7 +924,7 @@ LaTeX Font Info:    ... okay on input line 134.
 \everyMPtoPDFconversion=\toks40
 )
 \AtBeginShipoutBox=\box51
-Package hyperref Info: Link coloring OFF on input line 134.
+Package hyperref Info: Link coloring OFF on input line 137.
  (/usr/local/texlive/2014/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -933,9 +933,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count181
 )
-LaTeX Info: Redefining \ref on input line 134.
-LaTeX Info: Redefining \pageref on input line 134.
-LaTeX Info: Redefining \nameref on input line 134.
+LaTeX Info: Redefining \ref on input line 137.
+LaTeX Info: Redefining \pageref on input line 137.
+LaTeX Info: Redefining \nameref on input line 137.
 
 (./offlineLfD.out) (./offlineLfD.out)
 \@outlinefile=\write4
@@ -970,7 +970,7 @@ LaTeX Info: Redefining \selectfont on input line 126.
 \RaggedRightParindent=\skip91
 \JustifyingParindent=\skip92
 )
-LaTeX Info: Redefining \microtypecontext on input line 134.
+LaTeX Info: Redefining \microtypecontext on input line 137.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -988,7 +988,7 @@ File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 161.
+LaTeX Font Info:    Try loading font information for U+msa on input line 167.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -996,7 +996,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 161.
+LaTeX Font Info:    Try loading font information for U+msb on input line 167.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1005,55 +1005,64 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 Package epstopdf Info: Source file: <f_figs/realizibility.eps>
-(epstopdf)                    date: 2016-08-27 16:25:07
+(epstopdf)                    date: 2016-08-29 23:01:33
 (epstopdf)                    size: 286626 bytes
 (epstopdf)             Output file: <f_figs/realizibility-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2016-08-27 16:25:27
+(epstopdf)                    date: 2016-08-29 23:01:33
 (epstopdf)                    size: 16897 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/realizibility-eps-c
 onverted-to.pdf f_figs/realizibility.eps>
-(epstopdf)             \includegraphics on input line 170.
+(epstopdf)             \includegraphics on input line 176.
 Package epstopdf Info: Output file is already uptodate.
 
-<f_figs/realizibility-eps-converted-to.pdf, id=71, 137.51375pt x 92.345pt>
+<f_figs/realizibility-eps-converted-to.pdf, id=83, 137.51375pt x 92.345pt>
 File: f_figs/realizibility-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/realizibility-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/realizibility-eps-converted-to.pdf used on inpu
-t line 170.
+t line 176.
 (pdftex.def)             Requested size: 202.3529pt x 135.89908pt.
 
 
 LaTeX Warning: Citation `krizhevsky2012imagenet' on page 1 undefined on input l
-ine 179.
+ine 187.
 
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
+
+LaTeX Warning: Citation `mason1999boosting' on page 1 undefined on input line 1
+87.
+
 [1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
  <./f_figs/realizibility-eps-converted-to.pdf>]
 
-LaTeX Warning: Citation `NVIDEA' on page 2 undefined on input line 192.
+LaTeX Warning: Citation `NVIDEA' on page 2 undefined on input line 203.
 
 
-LaTeX Warning: Citation `he2012imitation' on page 2 undefined on input line 203
+LaTeX Warning: Citation `he2012imitation' on page 2 undefined on input line 216
 .
 
+[2]
 
-LaTeX Warning: Citation `shalev2011online' on page 2 undefined on input line 20
-5.
+LaTeX Warning: Reference `sec:DAgger' on page 3 undefined on input line 296.
 
-[2] [3]
-Underfull \hbox (badness 3646) in paragraph at lines 300--301
+[3]
+
+LaTeX Warning: Citation `mason1999boosting' on page 4 undefined on input line 3
+13.
+
+
+Underfull \hbox (badness 3646) in paragraph at lines 320--322
 \OT1/ptm/m/n/10 (+20) with re-spect to a pol-icy, $\OML/cmm/m/it/10 ^^Y[]$\OT1/
 ptm/m/n/10 (+20) , which is de-fined as
  []
 
 
-Underfull \hbox (badness 2717) in paragraph at lines 300--301
+Underfull \hbox (badness 2717) in paragraph at lines 320--322
 \OML/cmm/m/it/10 J\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^R\OT1/cmr/m/n/10 ) = [][]
  \OML/cmm/m/it/10 l\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^Y[]\OT1/cmr/m/n/10 (\OT1
 /cmr/bx/n/10 x[]\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; ^^Y[]\OT1/cmr/m/n/10 (\OT1/
@@ -1061,131 +1070,134 @@ cmr/bx/n/10 x[]\OT1/cmr/m/n/10 ))$\OT1/ptm/m/n/10 (+20) . If we as-sume the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 300--301
+Underfull \hbox (badness 10000) in paragraph at lines 320--322
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 305--306
+Underfull \hbox (badness 10000) in paragraph at lines 326--327
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 320--321
+Underfull \hbox (badness 10000) in paragraph at lines 341--342
 
  []
 
 [4]
-
-LaTeX Warning: Citation `shalev2011online' on page 5 undefined on input line 39
-2.
-
 Package epstopdf Info: Source file: <f_figs/counter_exmp.eps>
-(epstopdf)                    date: 2016-07-17 18:27:51
+(epstopdf)                    date: 2016-08-29 23:01:33
 (epstopdf)                    size: 281926 bytes
 (epstopdf)             Output file: <f_figs/counter_exmp-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-07-17 18:28:02
+(epstopdf)                    date: 2016-08-29 23:10:15
 (epstopdf)                    size: 13754 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/counter_exmp-eps-co
 nverted-to.pdf f_figs/counter_exmp.eps>
-(epstopdf)             \includegraphics on input line 400.
+(epstopdf)             \includegraphics on input line 422.
 Package epstopdf Info: Output file is already uptodate.
-<f_figs/counter_exmp-eps-converted-to.pdf, id=136, 143.53625pt x 103.38625pt>
+
+<f_figs/counter_exmp-eps-converted-to.pdf, id=148, 143.53625pt x 103.38625pt>
 File: f_figs/counter_exmp-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/counter_exmp-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/counter_exmp-eps-converted-to.pdf used on input
- line 400.
+ line 422.
 (pdftex.def)             Requested size: 143.53589pt x 103.38599pt.
-
-
-LaTeX Warning: Citation `kakade2009generalization' on page 5 undefined on input
- line 416.
-
+ [5 <./f_figs/counter_exmp-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <f_figs/var_grid.eps>
-(epstopdf)                    date: 2016-08-21 16:47:04
+(epstopdf)                    date: 2016-08-25 12:11:22
 (epstopdf)                    size: 762834 bytes
 (epstopdf)             Output file: <f_figs/var_grid-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-08-21 16:47:11
+(epstopdf)                    date: 2016-08-25 12:11:22
 (epstopdf)                    size: 80781 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/var_grid-eps-conver
 ted-to.pdf f_figs/var_grid.eps>
-(epstopdf)             \includegraphics on input line 427.
+(epstopdf)             \includegraphics on input line 449.
 Package epstopdf Info: Output file is already uptodate.
-<f_figs/var_grid-eps-converted-to.pdf, id=138, 529.98pt x 148.555pt>
+
+<f_figs/var_grid-eps-converted-to.pdf, id=164, 529.98pt x 148.555pt>
 File: f_figs/var_grid-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/var_grid-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/var_grid-eps-converted-to.pdf used on input lin
-e 427.
+e 449.
 (pdftex.def)             Requested size: 529.97868pt x 148.55463pt.
 
-Overfull \hbox (24.08868pt too wide) in paragraph at lines 427--430
+Overfull \hbox (24.08868pt too wide) in paragraph at lines 449--452
 [][] 
  []
 
 
-LaTeX Warning: Reference `fig:grid_world' on page 5 undefined on input line 438
+LaTeX Warning: Reference `fig:grid_world' on page 6 undefined on input line 460
 .
 
-[5 <./f_figs/counter_exmp-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <f_figs/p_mass.eps>
-(epstopdf)                    date: 2016-08-02 20:09:38
-(epstopdf)                    size: 367594 bytes
+(epstopdf)                    date: 2016-09-07 02:47:47
+(epstopdf)                    size: 364846 bytes
 (epstopdf)             Output file: <f_figs/p_mass-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-08-02 21:06:41
-(epstopdf)                    size: 25149 bytes
+(epstopdf)                    date: 2016-08-29 23:10:16
+(epstopdf)                    size: 25147 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/p_mass-eps-converte
 d-to.pdf f_figs/p_mass.eps>
-(epstopdf)             \includegraphics on input line 482.
-Package epstopdf Info: Output file is already uptodate.
+(epstopdf)             \includegraphics on input line 505.
+runsystem(repstopdf --outfile=f_figs/p_mass-eps-converted-to.pdf f_figs/p_mass.
+eps)...executed safely (allowed).
 
-<f_figs/p_mass-eps-converted-to.pdf, id=156, 226.8475pt x 90.3375pt>
+Package epstopdf Info: Result file: <f_figs/p_mass-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-09-07 02:50:59
+(epstopdf)                    size: 24937 bytes.
+<f_figs/p_mass-eps-converted-to.pdf, id=168, 217.81375pt x 90.3375pt>
 File: f_figs/p_mass-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/p_mass-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/p_mass-eps-converted-to.pdf used on input line 
-482.
-(pdftex.def)             Requested size: 226.84694pt x 90.33727pt.
- [6 <./f_figs/var_grid-eps-converted-to.pdf>]
+505.
+(pdftex.def)             Requested size: 217.8132pt x 90.33727pt.
+ [6]
 Package epstopdf Info: Source file: <f_figs/singulation.eps>
-(epstopdf)                    date: 2016-08-28 21:25:20
+(epstopdf)                    date: 2016-08-29 23:01:33
 (epstopdf)                    size: 314094 bytes
 (epstopdf)             Output file: <f_figs/singulation-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-08-28 21:26:15
+(epstopdf)                    date: 2016-08-29 23:10:17
 (epstopdf)                    size: 19359 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/singulation-eps-con
 verted-to.pdf f_figs/singulation.eps>
-(epstopdf)             \includegraphics on input line 497.
+(epstopdf)             \includegraphics on input line 520.
 Package epstopdf Info: Output file is already uptodate.
 
-<f_figs/singulation-eps-converted-to.pdf, id=169, 186.6975pt x 83.31125pt>
+<f_figs/singulation-eps-converted-to.pdf, id=179, 186.6975pt x 83.31125pt>
 File: f_figs/singulation-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/singulation-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/singulation-eps-converted-to.pdf used on input 
-line 497.
+line 520.
 (pdftex.def)             Requested size: 186.69704pt x 83.31104pt.
+ [7 <./f_figs/var_grid-eps-converted-to.pdf> <./f_figs/p_mass-eps-converted-to.
+pdf> <./f_figs/singulation-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <f_figs/izzy_reward.eps>
-(epstopdf)                    date: 2016-08-02 21:02:11
-(epstopdf)                    size: 428006 bytes
+(epstopdf)                    date: 2016-09-07 02:47:47
+(epstopdf)                    size: 428506 bytes
 (epstopdf)             Output file: <f_figs/izzy_reward-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-08-02 21:06:42
+(epstopdf)                    date: 2016-08-29 23:10:19
 (epstopdf)                    size: 35793 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/izzy_reward-eps-con
 verted-to.pdf f_figs/izzy_reward.eps>
-(epstopdf)             \includegraphics on input line 528.
-Package epstopdf Info: Output file is already uptodate.
+(epstopdf)             \includegraphics on input line 551.
+runsystem(repstopdf --outfile=f_figs/izzy_reward-eps-converted-to.pdf f_figs/iz
+zy_reward.eps)...executed safely (allowed).
 
-<f_figs/izzy_reward-eps-converted-to.pdf, id=171, 237.88875pt x 131.49126pt>
+Package epstopdf Info: Result file: <f_figs/izzy_reward-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-09-07 02:51:01
+(epstopdf)                    size: 35816 bytes.
+
+<f_figs/izzy_reward-eps-converted-to.pdf, id=205, 237.88875pt x 131.49126pt>
 File: f_figs/izzy_reward-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/izzy_reward-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/izzy_reward-eps-converted-to.pdf used on input 
-line 528.
+line 551.
 (pdftex.def)             Requested size: 237.88815pt x 131.49092pt.
- [7 <./f_figs/p_mass-eps-converted-to.pdf> <./f_figs/singulation-eps-converted-
-to.pdf>] (./offlineLfD.bbl)
+ (./offlineLfD.bbl [8 <./f_figs/izzy_reward-eps-converted-to.pdf>])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1197,12 +1209,14 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[8 <./f_figs/izzy_reward-eps-converted-to.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 555.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 555.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 578.
+[9
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 578.
  (./offlineLfD.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 555.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 555.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 578.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 578.
 
 
 Package rerunfilecheck Warning: File `offlineLfD.out' has changed.
@@ -1210,7 +1224,7 @@ Package rerunfilecheck Warning: File `offlineLfD.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `offlineLfD.out':
-(rerunfilecheck)             Before: AC367EB6765BC619F63D2B4CE9840BB6;884
+(rerunfilecheck)             Before: 9A6E1AB75014353FD59DC036923DF713;1275
 (rerunfilecheck)             After:  5715C0B99F46B1DDBDF615E6142A83B0;823.
 
 LaTeX Warning: There were undefined references.
@@ -1218,18 +1232,51 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 555.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 578.
  ) 
 Here is how much of TeX's memory you used:
- 22169 strings out of 493117
- 396898 string characters out of 6135433
- 536884 words of memory out of 5000000
- 24896 multiletter control sequences out of 15000+600000
- 55019 words of font info for 254 fonts, out of 8000000 for 9000
+ 22176 strings out of 493117
+ 397062 string characters out of 6135433
+ 534147 words of memory out of 5000000
+ 24900 multiletter control sequences out of 15000+600000
+ 55806 words of font info for 251 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,11n,54p,1127b,395s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{subsection.4.1} has been referenced but does not 
-exist, replaced by a fixed one
+ 55i,11n,54p,1225b,468s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{figure.caption.7} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.Appendix.A.3} has been referenced but do
+es not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.Appendix.A.2} has been referenced but do
+es not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.Appendix.A.1} has been referenced but do
+es not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{section*.9} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{section*.8} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.5.3} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.4.3} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.4.2} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.4.1} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.3.0.2} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.3.0.1} has been referenced but does n
+ot exist, replaced by a fixed one
 
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
 live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texl
@@ -1254,10 +1301,10 @@ ts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/u
 rw/times/utmbi8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmri8a.pf
 b>
-Output written on offlineLfD.pdf (8 pages, 390875 bytes).
+Output written on offlineLfD.pdf (9 pages, 396306 bytes).
 PDF statistics:
- 312 PDF objects out of 1000 (max. 8388607)
- 265 compressed objects within 3 object streams
- 70 named destinations out of 1000 (max. 500000)
- 29355 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 332 PDF objects out of 1000 (max. 8388607)
+ 284 compressed objects within 3 object streams
+ 78 named destinations out of 1000 (max. 500000)
+ 29891 words of extra memory for PDF output out of 35830 (max. 10000000)
 
