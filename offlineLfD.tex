@@ -530,15 +530,37 @@ The robot can be trained in either 2 ways DAgger or passive learning. In passive
 In Fig. \ref{fig:izzy_rw} , we show the average performance of the policies trained with DAgger and passive LfD. Each policy is evaluated on a hold out set of 30 initial states sampled from the same distribution as training. As shown, the policies learned with DAgger exhibit statistically significant worse performance than those with passive LfD. Thus, sugggesting that DAgger could perform worse than passive Lfd on a task with actual human supervision. 
 
 \noindent \textbf{Post Analysis}
-\mlnote{updating this with numbers from post analysis soon}
-In order to gain some insight into the human study, we compared the equivalence of human retroactive feedback and tele-operation. We designed a  experiment: the human was to tele-operate the robot five times and asked to provide retro-active feedback via the DAgger interface to try and match the controls given by tele-operation.    
-The controls of the human tele-operation with those given by retroactive feedback. We compared the controls via first normalizing them between $[-1,1]$ based on their bounds an then used squared euclidean distance of the rotation and translation control. The same loss used in training of the policy. 
+To better understand why DAgger performed worst than Passive LfD, we examined the surrogate loss on a test set of 10 randomly selected trajectories.  As shown in Table 1, we observed the average test error over the policies trained with 60 demonstrations in both degrees of freedom (i.e. forward and rotation) is statistically significant higher. While, this does not imply the policy was necessarily more complex, it does indicate that the DAgger policies on average had a harder time generalize to unseen labels in the dataset. 
 
-This measurement gives a rough percentage difference between the human's teleoperation actions, and their retroactive feedback. A more intuitive physical measurement of the differences was also performed. To do this, we computed the resulting robot state given that it moved the full distance of the applied delta, then finding the Euclidian distance between the subsequent state of robot, and the state predicted from the delta applied from the retroactive feedback. This gives units of centimeters to the error per delta.
 
-\mlnote{Need to better explain this} We performed this experiment with five subjects, and observed an average normalized distance of $0.44$, or $44\%$ deviation. By comparison, the normalized distance on the test set during training of the policy gave a normalized error of about $22\%$. The average euclidian distance of the states was $0.8$ cm. These results indicate a  difference between the controls applied by retroactive feedback and those applied by the human performing teleoperation.
 
-Thus suggesting that the intention of humans providing feedback may be lost in the labeling interface. We acknowledge that this might be remedy by providing a more intuitive labeling interface, however a trade-off exists between time spent designing an interface for a given task and collecting more data via passive LfD. 
+
+\begin{table}[t]
+\centering
+\begin{tabular}{ R{1.75cm}||R{2.5cm}| R{2.5cm}}
+ %\hline
+ %\multicolumn{4}{|c|}{Sensitivity Analysis for Convergence to Best Grasp for Thompson sampling} \\
+ %\hline 
+ & \multicolumn{2}{c}{Surrogate Loss on Test Set} \\
+ \hline
+\specialcell{\bf Algorithm\\ \bf Type} & \specialcell{\bf Forward\\ \bf (mm)} & \specialcell{\bf Rotation \\ \bf (rad)} \\
+ \hline
+Passive LfD & $2.1\pm 0.2$ & $0.009 \pm 0.001$ \\
+Adaptive LfD & $3.4 \pm 1.0$    & $0.014 \pm 0.003$ \\
+ %\hline
+\end{tabular}
+   \caption { \footnotesize  Shown above is the average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 demonstrators. The confidence intervals are standard error on the mean, which indicate Adaptive LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. 
+   }
+		\tablabel{opt-p-comparison}
+\vspace*{-20pt}
+\end{table}
+
+
+We further tried to gain some insight into how well people provide retro-active feedback. We asked participants to tele-operate the robot five times and then provide retro-active feedback via the DAgger interface to try and match the controls given by tele-operation. The controls of the human tele-operation with those given by retroactive feedback. We compared the controls via first normalizing them between $[-1,1]$ based on their bounds an then used squared euclidean distance of the rotation and translation control. The same loss used in training of the policy. This measurement gives a  percentage difference between the human's tele-operation actions, and their retroactive feedback.
+
+ We performed this experiment with five subjects, and observed an average normalized distance of $0.44$, or $44\%$ deviation. These results indicate a large  difference between the controls applied by retroactive feedback and those applied by the human performing tele-operation.
+ 
+ Under the assumption that tele-operation was the correct action the expert wanted, this would suggest our retro-active feedback interface caused the intention to be loss. We acknowledge that this might be remedy by providing a more intuitive labeling interface, however an inherent problem may exists of the expert never observing how the world is affected by their control. 
 
 \begin{figure}
 \centering
@@ -557,7 +579,7 @@ We thus conclude our analysis on the trade-offs between passive and adaptive Lfd
 
 Our final experiment in having humans teach a robot to singulate objects suggest that adaptivity can lead to worse performance. Our post analysis seems to suggest that humans had a harder time providing retro-active feedback via a labeling interface. While, this may be overcome through a better labeling interface, an inherent problem persists in the inability of a human to observe how well their controls would have performed. 
 
-Finally, we offered a new theoretical  way to analysis passive Lfd and demonstrate that the depedence on the time horizon constant, $T$, can be $T\sqrt{T}$ and not $T^2$, a result that does not need the assumption of strongly convexity.  For convex loses, we are able to offer data-dependent sample complexity bounds that illustrate how the function class of the learning algorithm and number of demonstrations effect this bound on error. 
+Finally, we offered a new theoretical  way to analysis passive Lfd and demonstrate that the depedence on the time horizon constant, $T$, can be $O(T\sqrt{T})$ and not $O(T^2)$, a result that does not need the assumption of strongly convexity.  For convex loses, we are able to offer data-dependent sample complexity bounds that illustrate how the function class of the learning algorithm and number of demonstrations effect this bound on error. 
 
 The data-dependent results demonstrate that in the worst-case a heavy tail could exits in terms of the number of demonstrations needed (i.e. a large number of demonstrations could be need). Thus, presenting a challenge in obtaining an industrial level of reliability in unstructured domains. However, in future work we are interested in examining ways around this limitation. Below are two possible ways:
 
