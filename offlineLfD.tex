@@ -157,18 +157,18 @@ Learning from demonstration algorithms are either passive or adaptive . It has b
 
 
 \section{Introduction} 
-In model-free robot Learning from Demonstration (LfD), a robot learns to perform a task, such as driving or grasping an object in a cluttered environment, from examples provided by an expert, usually a human. Learning from demonstration has been applied to a large number of robotic tasks, including helicopter maneuvering~\cite{abbeel2007application}, car parking~\cite{abbeel2008apprenticeship} , robotic surgery~\cite{van2010superhuman,laskeyshiv} and robotic manipulation~\cite{laskeyrobot}. 
+In model-free robot Learning from Demonstration (LfD), a robot learns to perform a task, such as driving or grasping an object in a cluttered environment, from examples provided by an expert, usually a human. Learning from demonstration has been applied to a large number of robotic tasks, including helicopter maneuvering~\cite{abbeel2007application}, car parking~\cite{abbeel2008apprenticeship}, robotic surgery~\cite{van2010superhuman,laskeyshiv} and robotic manipulation~\cite{laskeyrobot}. 
 
-In the supervised learning approach to LfD, a robot's policy , or a mapping from the state space to controls, is learned via regression or classification. The passive approach to LfD is to collect expert demonstrations on the states the expert is likely to visit. However, due to error in learning the robot's policy will not match the expert and cause it to visit different states when performing the task. A common trend in LfD, is adaptivity, which is to have the expert retro-actively provide feedback (or the correct control signal) to the robot on the states that it visits~\cite{ross2010efficient,ross2010reduction,laskeyrobot,laskeyshiv,he2012imitation}.
+In the supervised learning approach to LfD, a robot's policy , or a mapping from the state space to controls, is learned via regression or classification. The passive approach to LfD is to collect expert demonstrations on the states the expert is likely to visit. However, due to error in learning the robot's policy will not match the expert and will visit different states when performing the task. A common trend in LfD, is adaptivity, which is to have the expert retro-actively provide feedback (or the correct control signal) to the robot on the states that it visits~\cite{ross2010efficient,ross2010reduction,laskeyrobot,laskeyshiv,he2012imitation}.
 Thus, providing examples in the states the robot is more likely to visit with its current policy. 
 
 
-Two common ways error in learning can occur is model and approximation error: 1) is the model, or robot's policy, is not capable of representing a the expert's expected policy or 2) there is currently not enough demonstrations to approximate the expected expert's policy. If the first reason occurs than the robot will never recover the expected expert's policy even in the limit of infinite data. Adaptivity may be useful because the robot will always visit different states than the expert. 
+Two common ways error in learning can occur is model and approximation error: 1) the model, or robot's policy, is not capable of representing a the expert's expected policy or 2) there is currently not enough demonstrations to approximate the  expert's expected policy. If the first reason occurs then the robot will never recover the expected expert's policy even in the limit of infinite data. Adaptivity may be useful because the robot will always visit different states than the expert. 
 
-However, in second case where not enough data has been collected. A question exists should it be better to collect data from the distribution of the current robot's policy or that of the expert's. Our insight, it that  when the robot's policy is capable of learning the expected expert's policy the robot will want to collect data from solely the expert's distribution. 
+However in the second case, where not enough data has been collected, a question exists: is it better to collect data from the distribution of the current robot's policy, or that of the expert's? Our insight, is that  when the robot's policy is capable of learning the expected expert's policy, the robot will want to collect data from solely the expert's distribution. 
 
 
-This insights stems from two possible problems: 1) is that adaptive techniques force the robot into areas of the state space that the expert would never visit and can require learning more complex demonstrations 2) is that humans can have trouble retroactively providing feedback without knowledge of the outcome of the control. 
+This insight stems from two possible problems: 1) adaptive techniques force the robot into areas of the state space that the expert would never visit and can require learning more complex demonstrations and 2) humans can have trouble retroactively providing feedback without knowledge of the outcome of the control. 
 
 \begin{figure}
 \center
@@ -181,33 +181,33 @@ A) An illustration of  the expert's policy, $\pi_{\theta^*}$ being contained in 
 \end{figure}
 
 
- We tested the occurrence of the these problem via a pilot study with 10 roboticists at UC Berkeley, who are asked to use both DAgger and Passive Lfd to train a Zymark robot to singulate (or seperate an object) from a pile. We observed a statistically significant gap in the average performance of the policies trained by the two approaches. In our  post analysis we examined how well people could match their controls in retro-active feedback compared to tele-operated. Furthermore, we examined a held out test set's surrogate loss to illustrate how well the policy learned is able to match the unseen data, which is related to how hard the demonstration can be to learn from. 
+ We tested the occurrence of  these problems via a pilot study with 10 roboticists at UC Berkeley, who were asked to use both DAgger and Passive Lfd to train a Zymark robot to singulate an object (or separate it from a pile). We observed a statistically significant gap in the average performance of the policies trained by the two approaches. In our  post analysis we examined how well people could match their controls in retro-active feedback compared to tele-operated. Furthermore, we examined a held out test set's surrogate loss to illustrate how well the policy learned is able to match the unseen data, which is related to how hard the demonstration can be to learn from. 
 
-Additionally, we contribute three theoretical contributions. First, is that we show adaptive algorithms despite having the same function class as the expert, on the expert's distribution, can with non-zero probability not recover the expert policy with infinite demonstrations. Thus, illustrating a key problem that could occur while using adaptive techniques.  
+Additionally, we present three theoretical contributions. First, we show adaptive algorithms, despite having the same function class as the expert, on the expert's distribution, can with non-zero probability not recover the expert policy with infinite demonstration.However, passive LfD is able to do so. 
 
-We furthermore contribute a new analysis for the error accumulation in passive Lfd, that demonstrates for squared euclidean losses a rate of $O(T\sqrt{T})$, where $T$ is the time horizon, is achievable in contrast to the $O(T^2)$ rate suggested by Ross et al.~\cite{ross2010efficient}. We finally provide a data-dependent analysis of this rate for convex policy classes (i.e. linear svm, kernelized regression) using Rademacher Complexity, which shows that $T$ is not the only important variable in analyzing policy error, but also function class size and number of demonstrations.
+We furthermore contribute a new analysis for the error accumulation in passive LfD, that demonstrates for squared euclidean losses a lower bound (in the time horizon of the task) than the rate suggested by Ross et al.~\cite{ross2010efficient}. We finally provide a data-dependent analysis of this rate for convex policy classes (i.e. linear SM, kernelized regression) using Rademacher Complexity, which shows that $T$ is not the only important parameter in analyzing policy error, but also size of policy class and number of demonstrations.
 
-We  provide experiments in a gridworld domain over 100 randomly generated environments demonstrating the effect of growing the robot's policy function class size. Result suggests that the performance difference between adaptive and passive is only seen when expert's policy is not contained in the set. We then illustrate a 2D point mass example, in which despite having the same function class as the expert, adaptivity fails to converge to the expert's policy. Finally, we test both DAgger and passive Lfd for learning a visuo-motor neural network policy for singulating objects from a pile on a Zymark Robot platform across 10 human subjects. We found the passive LfD is able to achieve a $21 \%$ increase in the probability of success with the same amount of data.
+We  provide experiments in a gridworld domain with over 100 randomly generated environments demonstrating the effect of growing the robot's policy function class size. Result suggests that the performance difference between adaptive and passive is only seen when expert's policy is not contained in the set. We then illustrate a 2D point mass example, in which despite having the same function class as the expert, adaptivity fails to converge to the expert's policy. Finally, we test both DAgger and passive Lfd for learning a visuo-motor neural network policy for singulating objects from a pile on a Zymark Robot platform across 10 human subjects. We found the passive LfD is able to achieve a $21 \%$ increase in the probability of success with the same amount of data.
 
 
 
 
 \section{Related Work}
-Below we summarize related work in passive and adaptive LfD and there theoretical insights. 
+Below we summarize related work in passive and adaptive LfD and their theoretical insights. 
 
 \noindent \textbf {Passive LfD}
-Pormeleau et al. used passive Lfd to train a neural network to drive a car on the highway via demonstrations provided by the expert. To reduce the number of demonstrations needed to perform a task, they synthetically generated  images of the road and subsequent labels~\cite{pomerleau1989alvinn}. A similar idea, was recently proposed by ~\cite{NVIDEA}, but used a convolutional neural architecture. 
+Pormeleau et al. used passive Lfd to train a neural network to drive a car on the highway via demonstrations provided by an expert. To reduce the number of demonstrations needed to perform a task, they synthetically generated  images of the road and subsequent labels~\cite{pomerleau1989alvinn}. A similar idea, was recently proposed by ~\cite{NVIDEA}, but used a convolutional neural architecture. 
 
 Ross et al. examined the passive Lfd in a theoretical setting and derived that in the worst case the error from this approach can go quadratic in the time  horizon, $T$~\cite{ross2010efficient}. The intuition behind this analysis is that if the distribution induced by the robot's policy is different than the expert's, the robot could incur maximum error. 
 
 In our analysis, we show that a rate of $T\sqrt{T}$ is achievable. However in contrast to Ross et al,  we also show how function class complexity and the number of demonstrations effect this bound. Data dependent results can help provide better insight into the error incurred in the finite sample domains. 
 
 \noindent \textbf{Adaptive LfD}
-Adaptive LfD has recently been used in numerous examples of model-free learning from high dimensional state representations, such as images. Successful robotic examples of adaptive LfD with an expert expert include applications to flying a quad-copter through a forest where the input is only image data taken from an on board sensor~\cite{ross2013learning}.
+Adaptive LfD has recently been used in numerous examples of model-free learning from high dimensional state representations, such as images. Successful robotic examples of adaptive LfD with an expert  include flying a quad-copter through a forest where the input is only image data taken from an on board sensor~\cite{ross2013learning}.
 
- Recently, Laskey et al. applied adaptive LfD to manipulation tasks such as surgical needle insertion \cite{laskeyshiv} and robotic de-cluttering, where a robot is given image data of a table with a variety of objects on it and must learn to push the obstacle objects aside to grasp a goal \cite{laskeyrobot}. Other succesful examples have been teaching a robotic wheel chair navigate to goal positions in the presence of obstacles and teaching a robot to follow verbal instructions to navigate across an office building \cite{kim2013maximum, duvallet2013imitation}. 
+ Recently, Laskey et al. applied adaptive LfD to manipulation tasks such as surgical needle insertion \cite{laskeyshiv} and robotic de-cluttering, where a robot is given image data of a table with a variety of objects on it and must learn to push the obstacle objects aside to grasp a goal \cite{laskeyrobot}. Other successful examples have been teaching a robotic wheelchair to navigate to goal positions in the presence of obstacles and teaching a robot to follow verbal instructions to navigate across an office building \cite{kim2013maximum, duvallet2013imitation}. 
 
-Algorithmic extensions to adaptive LfD have also been recently made, such as  forcing the expert to provide controls more similar to the robot's policy which allows for easier to learn policies~\cite{he2012imitation}. Furthermore, Kim et al. proposed only query the expert in states that the robot is uncertain~\cite{kim2013maximum} about and Laskey et al. extended this to high dimensional states~\cite{laskeyshiv}. Finally, Laskey et al. looked at using a hierarchy (in terms of quality) of expert's to reduce burden on the expert supervisor~\cite{laskeyrobot}.
+Algorithmic extensions to adaptive LfD have also been recently made, such as  forcing the expert to provide controls more similar to the robot's policy which allows for easier to learn policies~\cite{he2012imitation}. Furthermore, Kim et al. proposed to only query the expert in states that the robot is uncertain~\cite{kim2013maximum} and Laskey et al. extended this to high dimensional states~\cite{laskeyshiv}. Finally, Laskey et al. looked at using a hierarchy (in terms of quality) of experts to reduce burden on the expert supervisor~\cite{laskeyrobot}.
 
 All these approaches build theoretically upon the online optimization analysis that Ross et al. proposed~\cite{ross2010reduction}. In online optimization an adversary presents a learner's policy with some cost function and the learner then chooses an action and receives a loss. In the LfD context, the learner chooses a policy and the adversary always select the expected disagreement with respect to the expert on the distribution induced by the policy~\cite{shalev2011online}. DAgger specifically can be modeled as a Follow-The-Leader algorithm, because it picks the best policy over all previous seen demonstrations~\cite{ross2010reduction}.
 
@@ -215,7 +215,7 @@ In the online optimization algorithm a bound for the error on the robot's policy
 
 
 \section{Problem Statement and Background}\label{sec:PS}
-The goal of this work is to learn a policy that matches that of the expert's on a specified task that demonstrations are collected on. 
+The goal of this work is to learn a policy that matches that of the expert on a specified task that demonstrations are collected on. 
 
 \noindent\textbf{Modeling Choices and Assumptions}  We model the system dynamics as Markovian, stochastic, and stationary. Stationary dynamics occur when, given a state and a control, the probability of the next state does not change over time. 
 
@@ -232,7 +232,7 @@ continuous. We model dynamics as Markovian, such that the probability of state $
 \mathcal{X}$ can be determined from the previous state $\mathbf{x}_t\in\mathcal{X}$ and control input $\mathbf{u}_t\in
 \mathcal{U}$: 
 $$p(\bx_{t+1}|\bu_{t},\bx_{t}, \ldots, \bu_{0}, \bx_{0})=p(\bx_{t+1}|\bu_{t}, \bx_t)$$
-We assume a probability density over initial states $p(\bx_0)$.
+We assume a probability density over initial states $p(\bx_0)$. The environment of a task is thus defined as the tuple, $\lbrace \mathcal{X}, \mathcal{U}, p(\bx_0),p(\bx_{t+1}|\bu_{t}, \bx_t)\rbrace$.
 
 
 %We denote the probability density over the initial state also by $p:\mathcal{X}\to \mathbb{R}$. 
@@ -290,9 +290,9 @@ We note that the dynamics and initial state distributions are dropped in this ob
 
 
 \noindent \textbf{Adaptive LfD}
-Due to model mismatch (e.g. not being realizable), or a limited amount of data, solving Eq. \ref{eq:main_obj} may not lead to $\hat{\theta} \neq \theta^*$.  Thus leading to a mismeasure in the distribution trained on and tested on, since the robot visits states from the distribution $p(\tau|\hat{\theta})$ and not the expert's, $p(\tau|\theta^*)$.  Prior work has proposed an adaptive solution ~\cite{ross2010reduction} that attempts to solves this problem by aggregating data to gather data on the distribution induced by the robot's policy.
+Due to model mismatch (e.g. not being realizable), or a limited amount of data, solving Eq. \ref{eq:main_obj} may not lead to $\hat{\theta} \neq \theta^*$.  Thus, leading to a mismeasure in the distribution trained on and tested on, since the robot visits states from the distribution $p(\tau|\hat{\theta})$ and not the expert's, $p(\tau|\theta^*)$.  Prior work has proposed an adaptive solution ~\cite{ross2010reduction} that attempts to solve this problem by aggregating data on the distribution induced by the current robot's policy.
 
-Instead of  minimizing the surrogate loss, in Eq. \ref{eq:main_obj},  DAgger attempts to find the distribution the final policy will converge to. Thus reducing surrogate loss in places the robot is likely to visit.
+Instead of  minimizing the surrogate loss, in Eq. \ref{eq:main_obj},  DAgger attempts to find the distribution the final policy will converge to, reducing surrogate loss in places the robot is likely to visit.
 DAgger~\cite{ross2010reduction} attempts this by iterating two steps: 1)
 computing the policy parameter $\theta$ using the training data $\mathcal{D}$ thus far, and 2) by executing the policy
 induced by the current $\theta$, and asking for labels for the encountered states. 
@@ -305,7 +305,7 @@ The first step of any iteration $k$ is to compute a $\hat{\theta}_k$ that minimi
 \theta_{k} = \underset{\theta}{\argmin} \: \sum_{i=1}^{N} \sum_{t=1}^T  l(\pi_{\theta}(\bx_{i,t}),\bu_{i,t}).
 \end{align}
 
-This can be observed as minimizing the empirical risk on the aggregate dataset of all examples seen so far, note that equal weight is giving to each example regardless of high likely they under the current policy~\cite{scholkopf2002learning}. 
+This can be observed as minimizing the empirical risk on the aggregate dataset of all examples seen so far~\cite{scholkopf2002learning}.  Note that equal weight is given to each example regardless of how likely they are under the current policy.
  
 
  \subsubsection{Step 2}
@@ -335,7 +335,7 @@ Thus, we define convergence as given an infinite amount of data the following mu
 
 $$E_{p(\tau|\theta^*)}J(\theta^*) = E_{p(\tau|\theta^*)}J(\hat{\theta}) $$
 
-This statement implies that the policy achieves the same surrogate loss of the expert's policy on the distribution of states the expert visits. Thus, agrees with the expert in all states the expert would visit.  The function class $\Theta$ and choice of learning algorithm that achieves this condition will be defined as consistent~\cite{vapnik1992principles}.. 
+This statement implies that the policy achieves the same surrogate loss of the expert's policy on the distribution of states the expert visits. Thus, agrees with the expert in all states the expert would visit.  The function class $\Theta$ and choice of learning algorithm that achieves this condition will be defined as consistent~\cite{vapnik1992principles}.
 
 We will now show that it is possible for a given policy class, $\Theta$, to achieve have this condition when using passive LfD, but fail to when using an adaptive LfD. \\
 
@@ -352,7 +352,7 @@ A binary decision tree, where a robot is being taught by a expert to descend dow
 
 
 \begin{theorem}
-Given a policy class, $\Theta$, that is consistent under passive LfD. There exists environments such that under adaptive LfD with non-zero probability become not expected realizable. \\
+Given a policy class, $\Theta$, that is consistent under passive LfD. There exists environments such that under adaptive LfD with non-zero probability become not consistent. \\
 \end{theorem}
 
 \begin{proof}
@@ -379,7 +379,7 @@ A bound in regret though though does not necessarily imply the robot will be abl
 We do acknowledged though that these  problem can be overcome by increasing the robot policy's function class. However, a larger function class could result in more data needed to learn the policy than the passive LfD and be more susceptible to noise~\cite{kakade2009generalization}.
 
 \subsection{Bound on Error for Passive Lfd}
-In the passive LfD setting a robot is trained on the states visited by the expert. However, at run time it can encounter a different distribution of states due to not perfectly matching the expert's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadritically (i.e. $O(T^2)$) when executing the robot's policy~\cite{ross2010efficient}. We present a new analysis for a specific class of policies defined below that shows a rate of $O(T\sqrt{T})$, which suggests a tamer rate in the time time horizon. 
+In the passive LfD setting a robot is trained on the states visited by the expert. However, at run time it can encounter a different distribution of states due to not perfectly matching the expert's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadritically (i.e. $O(T^2E_{p(\bx|\theta^*)} l(\hat{\theta})$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\hat{\theta}) = E_{p(\tau|\theta)} J(\theta)$. We present a new analysis for a specific class of policies defined below that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\hat{\theta})})$, which suggests a tamer rate in the time time horizon. 
 
  Define the surrogate loss as the squared euclidean norm, or $l(\pi_{\theta}(\bx),\pi_{\theta^*}(\bx)) = ||\pi_{\theta}(\bx_{i,t}) - \pi_{\theta^*}(\bx_{i,t})||_2$.We assume that the controls are be bounded and thus can be normalized such that the $l \in [0,1]$.  We are interested in the situation where the expert and robot policy are stochastic with a Normal Distribution (i.e. $p(\bu|\pi_{\theta}(\bx)) = \mathcal{N}(\pi_\theta(\bx),\sigma I)$. A stochastic policy with a normal distribution is a common assumption for learned robotic policy ~\cite{levine2015end}. 
  
@@ -394,12 +394,11 @@ For convenience we will write $E_{p(\tau|\theta)} = E_{\theta}$ and $l(\theta,\b
 \begin{align}
 &E_{\theta^N} J(\theta^N) - E_{\theta^*} J(\theta^N) \\
 &= T(\frac{1}{T}E_{\theta^N} J(\theta^N) -\frac{1}{T}E_{\theta^*} J(\theta^N)\\
-&\leq  T\mbox{sup}_{\theta} |\frac{1}{T}E_{\theta_n}J(\theta) - \frac{1}{T}E_{\theta^*} J(\theta)|\\
 &\leq  T| | p(\tau|\theta^N) - p(\tau|\theta^*)||_{TV}\\
 &\leq T\sqrt{\frac{1}{2} D_{KL}(p(\tau|\theta^*),p(\tau|\theta^N))}
 \end{align}
 
-Line 5 bounds the expected loss over $\theta^N$ by taking the worst case value. Line 6 leverages the fact that the worst case loss is bounded by $1$ and the definition of Total Variational distance. Line 7 uses Pinsker's inequality. 
+ Line 6 leverages the fact that the worst case loss is bounded by $1$ and the definition of Total Variational distance. Line 7 uses Pinsker's inequality. 
 
 
 \begin{align}
@@ -407,15 +406,16 @@ Line 5 bounds the expected loss over $\theta^N$ by taking the worst case value. 
 &= T\sqrt{\frac{1}{2} E_{p(\theta^*)} \sum^T_{t=1}\mbox{log} \frac{p(\bu_t|\bx_t,\theta^*)}{p(\bu_t|\bx_t,\theta^N)}}\\
 &= T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} \sum^T_{t=1} ||\bu_t- \pi_{\theta^N}(\bx_t)||_2^2 - ||\bu_t- \pi_{\theta^*}(\bx_t)||_2^2}\\
 &\leq T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} \sum^T_{t=1}  ||\pi_{\theta^*}(\bx_t) - \pi_{\theta^N}(\bx_t)||_2^2}\\
-&= T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} J(\theta^N)}
+&= T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} J(\theta^N)}\\
+&= T\sqrt{T \frac{1}{4\sigma} E_{p(\bx|\theta^*)} l(\hat{\theta})}
 \end{align}
 
-Line 8,9 and 10 apply the definition of the KL-divergence, the markov chain and the normal distribution over $p(\bu_t|\bx_t,\theta)$. Line 11 applies the triangle inequality to upperbound by the defined surrogate loss. Line 12 applies the assumed definition of $J(\theta)$. 
+Line 8,9 and 10 apply the definition of the KL-divergence, the markov chain and the normal distribution over $p(\bu_t|\bx_t,\theta)$. Line 11 applies the triangle inequality to upperbound by the defined surrogate loss. Line 12 applies the assumed definition of $J(\theta)$. Line 13 uses Ross et al. notation. 
 
 The intuition behind these steps is that difference between  the two distribution can be controlled via the surrogate loss on the expected expert. Thus, illustrating the closer the robot's policy matches the expert's policy on the expert's distribution, the smaller the total variational difference between the resulting two distributions will be. 
 \end{proof}
   
-One interesting result of Thereom 4.2 is that you can obtain a rate of $O(T\sqrt{T})$ without the assumption of convexity on the surrogate loss. In contrast DAgger's linear rate of $O(T)$ only applies to strongly convex surrogate loss function, which prohibits the analysis of decision trees and neural networks. 
+It is important to note that our bound can be larger than the original analysis provided by Ross et al. when  $E_{p(\bx|\theta^*)} l(\hat{\theta})$ is very low. However, when not enough demonstrations have been collected or model error exists $E_{p(\bx|\theta^*)} l(\hat{\theta})$ could be quite large. Thus, suggesting that passive Lfd has more robustness than originally thought. 
 
 \subsection{Finite Sample Analysis}
 The above analysis demonstrates how the constant $T$ affects the bound in error. However, it is important to note that this is not the only variable that plays a role in performance. The size of the function class and number of demonstrations needed are are also important. 
@@ -427,11 +427,11 @@ An example of such results though is the following.  If we are interested in the
 \begin{theorem}\label{thm:sup}
 For a policy, $\theta^N$ found via passive LfD, from $N$ trajectories collected from the expert the following is true with probability at least $1- 2\mbox{exp} (-m\delta^2/8)$
 
-$$E_{p(\tau|\theta^*)} J(\theta^N)\leq T( 2R_{\Theta}(n) + \delta+ \frac{1}{\sqrt{n}})$$\\
+$$E_{p(\tau|\theta^*)} J(\theta^N)\leq T( 2R_{\Theta}(n) + \delta+ O(\frac{1}{\sqrt{n}})) + E_{p(\tau|\theta^*)} J(\theta^*)$$\\
 
 \end{theorem}
 
-In this result, $R_{\Theta}$ corresponds to the Rademacher complexity of the given function class $\Theta$. The Rademacher complexity is a measure of much a function can fit to random noise (i.e. no relation exists between $\bx_i$ and the label), more complex function classes can fit better and thus leading to slower rates of convergence.
+The proof for this analysis can be found in Sec. 3 in Tewari et al.~\cite{tewari13learning}. In this result, $R_{\Theta}$ corresponds to the Rademacher complexity of the given function class $\Theta$. The Rademacher complexity is a measure of much a function can fit to random noise (i.e. no relation exists between $\bx_i$ and the label), more complex function classes can fit better and thus leading to slower rates of convergence.
 
 Thus if your expert's policy is only a linear function, you may find the Rademacher term is small enough that $T$ is the dominant factor. However, if you are trying to learn a highly non-linear function, the Rademacher complexity could be much larger than $T$~\cite{vapnik2013nature} Thus, suggesting that only examining $T$ in the analysis can be misleading. 
 
@@ -583,9 +583,9 @@ Finally, we offered a new theoretical  way to analysis passive Lfd and demonstra
 
 The data-dependent results demonstrate that in the worst-case a heavy tail could exits in terms of the number of demonstrations needed (i.e. a large number of demonstrations could be need). Thus, presenting a challenge in obtaining an industrial level of reliability in unstructured domains. However, in future work we are interested in examining ways around this limitation. Below are two possible ways:
 
-\noindent \textbf{Active Learning} Uniform sampling from the initial state distribution $p(\bx_0)$, may not be an optimal approach to learning the expert's policy. In active learning, an algorithm would try to select more informative initial states for the robot to learn from. An example of this is the field of optimal design, where measurments are collected in a way to reduce variance in the label and lead to more robust data analysis. Extending this to LfD would be an interesting oppurtunity. 
+\noindent \textbf{Active Learning} Uniform sampling from the initial state distribution $p(\bx_0)$, may not be an optimal approach to learning the expert's policy. In active learning, an algorithm would try to select more informative initial states for the robot to learn from. An example of this is the field of optimal design, where measurements are collected in a way to reduce variance in the label and lead to more robust data analysis. Extending this to LfD would be an interesting opportunity. 
 
-\noindent \textbf{Synthetic Data Generetion} Another approach to reduce data-dependence is to synthetically grow your dataset. For example, consider a robot learning how to grasp an isolated object  with image data as the state space. One could take the given image state and translate both the object and grasp label to create more demonstrations. A similar approach has been used recently in self-driving cars. However, a formal approach to checking when synthetic data generation is possible would be an exciting new direction. 
+\noindent \textbf{Synthetic Data Generation} Another approach to reduce data-dependence is to synthetically grow your dataset. For example, consider a robot learning how to grasp an isolated object  with image data as the state space. One could take the given image state and translate both the object and grasp label to create more demonstrations. A similar approach has been used recently in self-driving cars. However, a formal approach to checking when synthetic data generation is possible would be an exciting new direction. 
 
 \bibliographystyle{IEEEtranS}
 \bibliography{references}
