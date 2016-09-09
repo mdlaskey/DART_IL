@@ -26,6 +26,9 @@
 \citation{laskeyrobot}
 \citation{laskeyshiv}
 \citation{he2012imitation}
+\citation{scholkopf2002learning}
+\citation{ross2010efficient}
+\citation{ross2010reduction}
 \citation{ross2010efficient}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  A) An illustration of the expert's policy, $\pi _{\theta ^*}$ being contained in the robot's policy class $\Theta $. We argue that in the case on the right, passive LfD can be advantageous compare to adaptive. B) Samples taken from a robot trying to reach the green goal state. The adaptive approach(Teal) causes the robot to visit states the passive (Orange) does not need to. C) A person from our pilot study using an Xbox Controller to provide a demonstration to the robot on how to singulate an object from the pile. D) In the pilot study, passive (left) always had visit the states the expert did, but adaptive (right) lead to states where the expert had to provide more complex commands such as teaching the robot to go backwards.\relax }}{1}{figure.caption.1}}
@@ -91,7 +94,6 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is the normalized performance with respect to the expected expert, where $1.0$ indicates matching the expected expert's reward. The plots are averaged over 100 randomly generated 2D gridworld environments, where the robot is taught to avoid penalty states and reach a goal state. Condition A examines when the robot's policy class is not able to learn the expert's, which results in adaptivity leading to better performance. Condition D examines a larger robot policy class that contains the expected expert,and demonstrates negligible difference between adaptive and passive LfD. to represent the expert. This leads to similar performance as Condition B, but requires more data. Finally, Condition C examines when the expert has noise added to the controls labels, this leads to more data being needed to converge to the expected expert, but the difference between passive and adaptive is still negligible. \relax }}{6}{figure.caption.3}}
 \newlabel{fig:var}{{3}{6}{\footnotesize Shown above is the normalized performance with respect to the expected expert, where $1.0$ indicates matching the expected expert's reward. The plots are averaged over 100 randomly generated 2D gridworld environments, where the robot is taught to avoid penalty states and reach a goal state. Condition A examines when the robot's policy class is not able to learn the expert's, which results in adaptivity leading to better performance. Condition D examines a larger robot policy class that contains the expected expert,and demonstrates negligible difference between adaptive and passive LfD. to represent the expert. This leads to similar performance as Condition B, but requires more data. Finally, Condition C examines when the expert has noise added to the controls labels, this leads to more data being needed to converge to the expected expert, but the difference between passive and adaptive is still negligible. \relax }{figure.caption.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Algorithmic Convergence }{6}{subsection.5.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {V-C}Human Study for Planar Singulation}{6}{subsection.5.3}}
 \citation{laskeyrobot}
 \citation{laskeyshiv}
 \citation{laskeyrobot}
@@ -99,6 +101,7 @@
 \newlabel{fig:p_mass}{{4}{7}{\footnotesize Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants A and B, in B the controls are inverted in the dynamics thus resulting in $x=y$ and $y=x$. The expert is the infinite horizion LQG computed policy, which results in two different linear matrices in region A and B. Right: Illustrates how having a linear robot policy class can cause DAgger to fail to converge due to it collecting data from region B. \relax }{figure.caption.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is an example of an initial state (left) that the robot is presented with. It can vary in placement of the object in the pile, translation and rotation. A human is asked to singulate the object, which is to have the robot learn to push one object from the pile (right). \relax }}{7}{figure.caption.5}}
 \newlabel{fig:izzy_rw}{{5}{7}{\footnotesize Shown above is an example of an initial state (left) that the robot is presented with. It can vary in placement of the object in the pile, translation and rotation. A human is asked to singulate the object, which is to have the robot learn to push one object from the pile (right). \relax }{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-C}Human Study for Planar Singulation}{7}{subsection.5.3}}
 \@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is the average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 demonstrators. The confidence intervals are standard error on the mean, which indicate Adaptive LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }}{7}{table.caption.6}}
 \newlabel{tab:opt-p-comparison}{{I}{7}{\footnotesize Shown above is the average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 demonstrators. The confidence intervals are standard error on the mean, which indicate Adaptive LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }{table.caption.6}{}}
 \bibstyle{IEEEtranS}
@@ -119,16 +122,17 @@
 \bibcite{ross2013learning}{14}
 \bibcite{scholkopf2002learning}{15}
 \bibcite{shalev2011online}{16}
-\bibcite{van2010superhuman}{17}
-\bibcite{vapnik1992principles}{18}
-\bibcite{vapnik2013nature}{19}
+\bibcite{tewari13learning}{17}
+\bibcite{van2010superhuman}{18}
+\bibcite{vapnik1992principles}{19}
+\bibcite{vapnik2013nature}{20}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the expert rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. \relax }}{8}{figure.caption.7}}
 \newlabel{fig:izzy_rw}{{6}{8}{\footnotesize Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the expert rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. \relax }{figure.caption.7}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion and Future Work}{8}{section.6}}
 \@writefile{toc}{\contentsline {section}{References}{8}{section*.8}}
-\@writefile{toc}{\contentsline {section}{Appendix}{8}{section*.9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Notation and Problem Statement}{8}{subsection.Appendix.A.1}}
-\newlabel{sde}{{14}{8}{Notation and Problem Statement}{equation.Appendix.A.14}{}}
+\@writefile{toc}{\contentsline {section}{Appendix}{9}{section*.9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Notation and Problem Statement}{9}{subsection.Appendix.A.1}}
+\newlabel{sde}{{14}{9}{Notation and Problem Statement}{equation.Appendix.A.14}{}}
 \newlabel{obj}{{15}{9}{Notation and Problem Statement}{equation.Appendix.A.15}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {B}Empirical Risk Minimizer (Passive LfD)}{9}{subsection.Appendix.A.2}}
 \newlabel{erm}{{16}{9}{Empirical Risk Minimizer (Passive LfD)}{equation.Appendix.A.16}{}}

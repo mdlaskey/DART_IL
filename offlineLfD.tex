@@ -164,12 +164,12 @@ In the supervised learning approach to LfD, a robot's policy , or a mapping from
 Thus, providing examples in the states the robot is more likely to visit with its current policy. 
 
 
-Two common ways error in learning can occur is model and approximation error: 1) the model, or robot's policy, is not capable of representing a the expert's expected policy or 2) there is currently not enough demonstrations to approximate the  expert's expected policy. If the first reason occurs then the robot will never recover the expected expert's policy even in the limit of infinite data. Adaptivity may be useful because the robot will always visit different states than the expert. 
+Two common ways error in learning can occur is model and approximation error: 1) the model, or robot's policy, is not capable of representing a the expert's expected policy or 2) there is currently not enough demonstrations to approximate the  expert's expected policy~\cite{scholkopf2002learning}. If the first reason occurs then the robot will never recover the expected expert's policy even in the limit of infinite data. Adaptivity could then be useful because the robot will always visit different states than the expert. 
 
-However in the second case, where not enough data has been collected, a question exists: is it better to collect data from the distribution of the current robot's policy, or that of the expert's? Our insight, is that  when the robot's policy is capable of learning the expected expert's policy, the robot will want to collect data from solely the expert's distribution. 
+However in the second case, where not enough data has been collected, a question exists: is it better to collect data from the distribution of the current robot's policy, or that of the expert's? Our insight, is that passive LfD can actually outperform adaptive LfD in this setting, which is contrary to prior work~\cite{ross2010efficient,ross2010reduction}.
 
 
-This insight stems from two possible problems: 1) adaptive techniques force the robot into areas of the state space that the expert would never visit and can require learning more complex demonstrations and 2) humans can have trouble retroactively providing feedback without knowledge of the outcome of the control. 
+This insight stems from two possible problems: 1) adaptive techniques force the robot into areas of the state space that the expert would never visit and can require learning more complex demonstrations and 2) human demonstrators can have trouble retroactively providing feedback without knowledge of the outcome of the control. 
 
 \begin{figure}
 \center
@@ -181,22 +181,22 @@ A) An illustration of  the expert's policy, $\pi_{\theta^*}$ being contained in 
 \label{fig:teaserl}
 \end{figure}
 
-
+\mlnote{waiting on Anca for help on this paragraph}
  We tested the occurrence of  these problems via a pilot study with 10 roboticists at UC Berkeley, who were asked to use both DAgger and Passive Lfd to train a Zymark robot to singulate an object (or separate it from a pile). We observed a statistically significant gap in the average performance of the policies trained by the two approaches. In our  post analysis we examined how well people could match their controls in retro-active feedback compared to tele-operated. Furthermore, we examined a held out test set's surrogate loss to illustrate how well the policy learned is able to match the unseen data, which is related to how hard the demonstration can be to learn from. 
 
 
 Additionally, we present three theoretical contributions. First, we show adaptive algorithms, despite having the same function class as the expert, on the expert's distribution, can with non-zero probability not recover the expert policy with infinite demonstration.However, passive LfD is able to do so. 
 
 
-We furthermore contribute a new analysis for the error accumulation in passive LfD, that demonstrates for squared euclidean losses a lower bound (in the time horizon of the task) than the rate suggested by Ross et al.~\cite{ross2010efficient}. We finally provide a data-dependent analysis of this rate for convex policy classes (i.e. linear SM, kernelized regression) using Rademacher Complexity, which shows that $T$ is not the only important parameter in analyzing policy error, but also size of policy class and number of demonstrations.
+We furthermore contribute a new analysis for the error accumulation in passive LfD, that demonstrates for squared euclidean losses a tighter bound (in the time horizon of the task) than the rate suggested by Ross et al.~\cite{ross2010efficient}. We finally provide a data-dependent analysis of this rate for convex policy classes (i.e. linear SM, kernelized regression) using Rademacher Complexity, which shows that $T$ is not the only important parameter in analyzing policy error, but also size of policy class and number of demonstrations.
 
-We  provide experiments in a gridworld domain with over 100 randomly generated environments demonstrating the effect of growing the robot's policy function class size. Result suggests that the performance difference between adaptive and passive is only seen when expert's policy is not contained in the set. We then illustrate a 2D point mass example, in which despite having the same function class as the expert, adaptivity fails to converge to the expert's policy. Finally, we test both DAgger and passive Lfd for learning a visuo-motor neural network policy for singulating objects from a pile on a Zymark Robot platform across 10 human subjects. We found the passive LfD is able to achieve a $21 \%$ increase in the probability of success with the same amount of data.
+We  provide experiments in a gridworld domain with over 100 randomly generated environments demonstrating the effect of growing the robot's policy function class size. Result suggests that the performance difference, in terms of cumulative reward, between adaptive and passive is only seen when expert's policy is not contained in the set. We then illustrate a 2D point mass example, in which despite having the same function class as the expert, adaptivity fails to converge to the expert's policy. Finally, we test both DAgger and passive Lfd for learning a visuo-motor neural network policy for singulating objects from a pile on a Zymark Robot platform across 10 human subjects. We found the passive LfD is able to achieve a $21 \%$ increase in the probability of success with the same amount of data.
 
 
 
 
 \section{Related Work}
-Below we summarize related work in passive and adaptive LfD and their theoretical insights. 
+Below we summarize related work in passive and adaptive LfD and their theoretical insights. \mlnote{Still working on this section}
 
 \noindent \textbf {Passive LfD}
 Pormeleau et al. used passive Lfd to train a neural network to drive a car on the highway via demonstrations provided by an expert. To reduce the number of demonstrations needed to perform a task, they synthetically generated  images of the road and subsequent labels~\cite{pomerleau1989alvinn}. A similar idea, was recently proposed by ~\cite{NVIDEA}, but used a convolutional neural architecture. 
@@ -212,7 +212,7 @@ Adaptive LfD has recently been used in numerous examples of model-free learning 
 
 Algorithmic extensions to adaptive LfD have also been recently made, such as  forcing the expert to provide controls more similar to the robot's policy which allows for easier to learn policies~\cite{he2012imitation}. Furthermore, Kim et al. proposed to only query the expert in states that the robot is uncertain~\cite{kim2013maximum} and Laskey et al. extended this to high dimensional states~\cite{laskeyshiv}. Finally, Laskey et al. looked at using a hierarchy (in terms of quality) of experts to reduce burden on the expert supervisor~\cite{laskeyrobot}.
 
-All these approaches build theoretically upon the online optimization analysis that Ross et al. proposed~\cite{ross2010reduction}. In online optimization an adversary presents a learner's policy with some cost function and the learner then chooses an action and receives a loss. In the LfD context, the learner chooses a policy and the adversary always select the expected disagreement with respect to the expert on the distribution induced by the policy~\cite{shalev2011online}. DAgger specifically can be modeled as a Follow-The-Leader algorithm, because it picks the best policy over all previous seen demonstrations~\cite{ross2010reduction}.
+All these approaches build theoretically upon the online optimization analysis that Ross et al. proposed~\cite{ross2010reduction}. In online optimization an adversary presents a learner's policy with some cost function and the learner then chooses an action and receives a loss. In the LfD context, the learner chooses a policy and the adversary always select the expected disagreement with respect to the expert on the distribution induced by the policy~\cite{shalev2011online}. DAgger specifically can be modeled as a Follow The Leader algorithm, because it picks the best policy over all previous seen demonstrations~\cite{ross2010reduction}.
 
 In the online optimization algorithm a bound for the error on the robot's policy can be obtained that is linear in $T$ for stongly convex losses (i.e. heavily regularized linear or kernelized regression). However as we show the regret bound does not imply convergence to the expert is possible, even when the robot's function class contains the expected expert's policy. 
 
@@ -223,7 +223,7 @@ The goal of this work is to learn a policy that matches that of the expert on a 
 \noindent\textbf{Modeling Choices and Assumptions}  We model the system dynamics as Markovian, stochastic, and stationary. Stationary dynamics occur when, given a state and a control, the probability of the next state does not change over time. 
 
 We model the initial state as sampled from a distribution over the state space.
-We assume a known state space and set of controls. We also assume access to a robot or simulator, such that we  can sample from the state sequences induced by a sequence of controls.   Lastly, we assume access to a expert who can, given a state, provide a control signal label. We additionally assume the expert can be noisy and imperfect, noting that the robot cannot surpass the level of performance of the expert. 
+We assume a known state space and set of controls. We also assume access to a robot or simulator, such that we  can sample from the state sequences induced by a sequence of controls.   Lastly, we assume access to a expert who can, given a state, provide a control signal label. We additionally assume the expert can be noisy and imperfect, noting that the robot cannot surpass the performance level of the expert. 
 
 
 
@@ -235,7 +235,7 @@ continuous. We model dynamics as Markovian, such that the probability of state $
 \mathcal{X}$ can be determined from the previous state $\mathbf{x}_t\in\mathcal{X}$ and control input $\mathbf{u}_t\in
 \mathcal{U}$: 
 $$p(\bx_{t+1}|\bu_{t},\bx_{t}, \ldots, \bu_{0}, \bx_{0})=p(\bx_{t+1}|\bu_{t}, \bx_t)$$
-We assume a probability density over initial states $p(\bx_0)$. The environment of a task is thus defined as the tuple, $\lbrace \mathcal{X}, \mathcal{U}, p(\bx_0),p(\bx_{t+1}|\bu_{t}, \bx_t)\rbrace$.
+We assume a probability density over initial states $p(\bx_0)$. The environment of a task is thus defined as a specific instance of a control and stat space, initial state distribution and dynamics. 
 
 
 %We denote the probability density over the initial state also by $p:\mathcal{X}\to \mathbb{R}$. 
@@ -292,9 +292,7 @@ We note that the dynamics and initial state distributions are dropped in this ob
 \end{equation}
 
 
-\noindent \textbf{Adaptive LfD}
-
-Due to model mismatch (e.g. not being realizable), or a limited amount of data, solving Eq. \ref{eq:main_obj} may not lead to $\hat{\theta} \neq \theta^*$.  Thus, leading to a mismeasure in the distribution trained on and tested on, since the robot visits states from the distribution $p(\tau|\hat{\theta})$ and not the expert's, $p(\tau|\theta^*)$.  Prior work has proposed an adaptive solution ~\cite{ross2010reduction} that attempts to solve this problem by aggregating data on the distribution induced by the current robot's policy.
+\noindent \textbf{Adaptive LfD} Due to model mismatch (e.g. not being realizable), or a limited amount of data, solving Eq. \ref{eq:main_obj} may not lead to $\theta^N \neq \theta^*$.  Thus, leading to a mismeasure in the distribution trained on and tested on, since the robot visits states from the distribution $p(\tau|\theta^N)$ and not the expert's, $p(\tau|\theta^*)$.  Prior work has proposed an adaptive solution ~\cite{ross2010reduction} that attempts to solve this problem by aggregating data on the distribution induced by the current robot's policy.
 
 Instead of  minimizing the surrogate loss, in Eq. \ref{eq:main_obj},  DAgger attempts to find the distribution the final policy will converge to, reducing surrogate loss in places the robot is likely to visit.
 DAgger~\cite{ross2010reduction} attempts this by iterating two steps: 1)
@@ -327,7 +325,7 @@ sampling~\cite{NIPS2014_5421,ross2010reduction}}.
  
 
 \section{Theoretical Analysis}
-In this section we will first show how adaptive algorithms can cause the robot's policy to not converge. Then we present a new analysis for passive LfD, which shows a better scaling rate for the time horizon than suggested in prior literature.  Finally, we use Rademacher Complexity to illustrate how function class and number of demonstrations affect the worst case error. 
+In this section we will first show how adaptive algorithms can cause the robot's policy to not converge. Then we present a new analysis for the accumulation in error for  passive LfD.  Finally, we use Rademacher Complexity to illustrate how function class and number of demonstrations affect the worst case error. 
 
 For this section are interested in the total cost along a trajectory with respect to a policy, $\pi_{\theta}$, which is defined as $J(\theta) = \sum^T_{t=1} l(\pi_{\theta}(\bx_{t}),\pi_{\theta^*}(\bx_{t}))$. 
 
@@ -367,7 +365,7 @@ Given a policy class, $\Theta$, that is consistent under passive LfD. There exis
 \begin{proof}
 Since, we are looking at situations where passive LfD has the condition of consistency, we must only demonstrate the existence of one environment where adaptive LfD fails to converge with non-zero probability. 
 
-Consider a robot learning to search down a tree to maximize cumulative reward, as illustrated in Fig. \ref{fig:c_ex}. Here the robot's policy class is the finite set of only being able to choose left or right, $\Theta = \lbrace L,R \rbrace$.
+Consider a robot learning to search down a tree to maximize cumulative reward, as illustrated in Fig. \ref{fig:c_ex}. Here the robot's policy class is the finite set of only being able to choose left or right, $\Theta = \lbrace L,R \rbrace$. The time horizon of the task is $T=3$, the dynamics are deterministic (i.e. given a control 
 
 The learning algorithm, which chooses how to update the policy is to choose the policy which agrees with the expert's controls the most, or: 
 
@@ -388,7 +386,7 @@ A bound in regret though though does not necessarily imply the robot will be abl
 We acknowledge that these  problem can be overcome by increasing the robot policy's function class. However, a larger function class could result in more data needed to learn the policy than the passive LfD and be more susceptible to noise~\cite{kakade2009generalization}.
 
 \subsection{Bound on Error for Passive Lfd}
-In the passive LfD setting a robot is trained on the states visited by the expert. However, at run time it can encounter a different distribution of states due to not perfectly matching the expert's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadritically (i.e. $O(T^2E_{p(\bx|\theta^*)} l(\hat{\theta})$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\hat{\theta}) = E_{p(\tau|\theta)} J(\theta)$. We present a new analysis for a specific class of policies defined below that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\hat{\theta})})$, which suggests a tamer rate in the time time horizon. 
+In the passive LfD setting a robot is trained on the states visited by the expert. However, at run time it can encounter a different distribution of states due to not perfectly matching the expert's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadritically (i.e. $O(T^2E_{p(\bx|\theta^*)} l(\hat{\theta})$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\theta^N) = E_{p(\tau|\theta)} J(\theta)$. We present a new analysis for a specific class of policies defined below that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\theta^N)}$, which suggests a tamer rate in the time time horizon. 
 
  Define the surrogate loss as the squared euclidean norm, or $l(\pi_{\theta}(\bx),\pi_{\theta^*}(\bx)) = ||\pi_{\theta}(\bx_{i,t}) - \pi_{\theta^*}(\bx_{i,t})||_2$.We assume that the controls are be bounded and thus can be normalized such that the $l \in [0,1]$.  We are interested in the situation where the expert and robot policy are stochastic with a Normal Distribution (i.e. $p(\bu|\pi_{\theta}(\bx)) = \mathcal{N}(\pi_\theta(\bx),\sigma I)$. A stochastic policy with a normal distribution is a common assumption for learned robotic policy ~\cite{levine2015end}. 
  
@@ -416,7 +414,7 @@ For convenience we will write $E_{p(\tau|\theta)} = E_{\theta}$ and $l(\theta,\b
 &= T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} \sum^T_{t=1} ||\bu_t- \pi_{\theta^N}(\bx_t)||_2^2 - ||\bu_t- \pi_{\theta^*}(\bx_t)||_2^2}\\
 &\leq T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} \sum^T_{t=1}  ||\pi_{\theta^*}(\bx_t) - \pi_{\theta^N}(\bx_t)||_2^2}\\
 &= T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} J(\theta^N)}\\
-&= T\sqrt{T \frac{1}{4\sigma} E_{p(\bx|\theta^*)} l(\hat{\theta})}
+&= T\sqrt{T \frac{1}{4\sigma} E_{p(\bx|\theta^*)} l(\theta^N)}
 \end{align}
 
 Line 8,9 and 10 apply the definition of the KL-divergence, the markov chain and the normal distribution over $p(\bu_t|\bx_t,\theta)$. Line 11 applies the triangle inequality to upperbound by the defined surrogate loss. Line 12 applies the assumed definition of $J(\theta)$. Line 13 uses Ross et al. notation. 
@@ -424,7 +422,7 @@ Line 8,9 and 10 apply the definition of the KL-divergence, the markov chain and 
 The intuition behind these steps is that difference between  the two distribution can be controlled via the surrogate loss on the expected expert. Thus, illustrating the closer the robot's policy matches the expert's policy on the expert's distribution, the smaller the total variational difference between the resulting two distributions will be. 
 \end{proof}
   
-It is important to note that our bound can be larger than the original analysis provided by Ross et al. when  $E_{p(\bx|\theta^*)} l(\hat{\theta})$ is very low. However, when not enough demonstrations have been collected or model error exists $E_{p(\bx|\theta^*)} l(\hat{\theta})$ could be quite large. Thus, suggesting that passive Lfd has more robustness than originally thought. 
+It is important to note that our bound can be larger than the original analysis provided by Ross et al. when  $E_{p(\bx|\theta^*)} l(\theta^N)$ is very small. However, when not enough demonstrations have been collected or model error exists $E_{p(\bx|\theta^*)} l(\theta^N)$ could be quite large. Thus, suggesting that passive Lfd has more robustness than originally thought. 
 
 \subsection{Finite Sample Analysis}
 The above analysis demonstrates how the constant $T$ affects the bound in error. However, it is important to note that this is not the only variable that plays a role in performance. The size of the function class and number of demonstrations needed are are also important. 
@@ -459,7 +457,7 @@ Shown above is the normalized performance with respect to the expected expert, w
 We provide experiments in a simulated GridWorld environment, which allows for us to vary the robot's policy class over a large number of randomly generated enviroments. Then we examine a linear dynamical system, which is used to show a limitation the ability of adaptive algorithms to converge. Finally, we perform human trials on 10 participants, who try to teach a robot how to singulate, or separate an object from a pile. 
 
 \subsection{Varying Function Class}\label{sec:gdw}
-In this experiment, we hypothesize that the performance gap of adaptive LfD diminishes as the the robot's policy class is increased. In a simulated GridWorld, we have a point robot that is trying to reach a goal state, at which it receives $+10$ reward. The robot receives $-10$ reward if it touches a penalty state, as shown in Fig. \ref{fig:grid_world}. The robot has a state space of $(x,y)$ coordinates and a set of actions consisting of $\lbrace$LEFT,RIGHT,FORWARD,BACKWARD NONE$\rbrace$, where NONE indicates staying at the current stop. For the transition dynamics $p(\bx_{t+1}|\bx_{t},\bu_t)$, the robot goes to an adjacent state that does not correspond to the intended control with probability $0.2$. 
+In this experiment, we hypothesize that the performance gap of adaptive LfD diminishes as the the robot's policy class is increased. In a simulated GridWorld, we have a point robot that is trying to reach a goal state, at which it receives $+10$ reward. The robot receives $-10$ reward if it touches a penalty state, as shown in Fig. \ref{fig:grid_world}. The robot also receives a $-0.02$ penalty for every blank state. The robot has a state space of $(x,y)$ coordinates and a set of actions consisting of $\lbrace$LEFT,RIGHT,FORWARD,BACKWARD NONE$\rbrace$, where NONE indicates staying at the current stop. The grid size for the gridworld environment was $30 \times 30$ $20\%$ of randomly drawn states are marked as a penalty, while only one is a goal state. For the transition dynamics $p(\bx_{t+1}|\bx_{t},\bu_t)$, the robot goes to an adjacent state that does not necessarily correspond to the intended control with probability $0.2$.  The time horizon for the policy was $T=30$. 
 
 We use Value Iteration to compute an optimal expert for our grid world domain. The optimal policy must learn to be robust to the noise in the dynamics, reach the goal state and then stay there. In all settings we provided the adaptive approach with one demonstration from the expert and then roll out its policy. 
 
@@ -480,7 +478,7 @@ As shown in Fig. \ref{fig:var}, DAgger and passive LfD both converge to the expe
 
 
 \noindent \textbf{Noisy Expert}
-We finally observe the effects of noise on the expert. Here we consider the case where noise is applied to observe label, thus the robot receive control labels that are $\bu = \pi_{\theta}(\bx) + \epsilon$,  where epsilon is an i.i.d distribution that selects a random control with probability $0.2$.
+We finally observe the effects of noise on the expert. Here we consider the case where noise is applied to observe label, thus the robot receive control labels that are $\bu = \pi_{\theta}(\bx) + \epsilon$,  where epsilon is an i.i.d distribution that selects a random control with probability $0.3$.
 
 We use the  decision tree  of depth $100$ which due to its large function class is more susceptible to the noisy expert. We then compare the performance of passive versus adaptive LfD. As shown, both passive and adaptive are able to converge to the expected expert's normalized performance because they can average out the noise in the labels with enough data. Though it does take more data because passive LfD  and DAgger converge at a similar rate to the true expected expert. 
 
