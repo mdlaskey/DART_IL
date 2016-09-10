@@ -72,20 +72,17 @@
 \citation{shalev2011online}
 \citation{kakade2009generalization}
 \citation{ross2010efficient}
-\citation{levine2015end}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  A binary decision tree, where a robot is being taught by a expert to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the expert would select, either left or right, $\delimiter "4266308 L, R \delimiter "5267309 $. The optimal policy, colored in green, is to select left, $L$, at each node.\relax }}{4}{figure.caption.2}}
 \newlabel{fig:c_ex}{{2}{4}{\footnotesize A binary decision tree, where a robot is being taught by a expert to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the expert would select, either left or right, $\lbrace L, R \rbrace $. The optimal policy, colored in green, is to select left, $L$, at each node.\relax }{figure.caption.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Algorithm Convergence}{4}{subsection.4.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Bound on Error for Passive Lfd}{4}{subsection.4.2}}
+\citation{levine2015end}
 \citation{anthony2009neural}
 \citation{vapnik2013nature}
 \citation{tewari13learning}
 \citation{vapnik2013nature}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Bound on Error for Passive Lfd}{5}{subsection.4.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-C}Finite Sample Analysis}{5}{subsection.4.3}}
 \newlabel{thm:sup}{{4.3}{5}{Finite Sample Analysis}{theorem.4.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Experiments}{5}{section.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {V-A}Varying Function Class}{5}{subsection.5.1}}
-\newlabel{sec:gdw}{{V-A}{5}{Varying Function Class}{subsection.5.1}{}}
 \citation{ross2010efficient}
 \citation{ross2010reduction}
 \citation{ross2013learning}
@@ -93,17 +90,18 @@
 \citation{ross2010reduction}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is the normalized performance with respect to the expected expert, where $1.0$ indicates matching the expected expert's reward. The plots are averaged over 100 randomly generated 2D gridworld environments, where the robot is taught to avoid penalty states and reach a goal state. A) Examines when the robot's policy class (i.e. Linear SVM) is not able to learn the expert's, which results in adaptivity leading to better performance. Condition B examines a larger robot policy class (i.e. Decision Trees) that contains the expected expert,and demonstrates negligible difference between adaptive and passive LfD. to represent the expert. Finally, Condition C examines when the expert has noise added to the controls labels, this leads to more data being needed to converge to the expected expert, but the difference between passive and adaptive is still negligible. \relax }}{6}{figure.caption.3}}
 \newlabel{fig:var}{{3}{6}{\footnotesize Shown above is the normalized performance with respect to the expected expert, where $1.0$ indicates matching the expected expert's reward. The plots are averaged over 100 randomly generated 2D gridworld environments, where the robot is taught to avoid penalty states and reach a goal state. A) Examines when the robot's policy class (i.e. Linear SVM) is not able to learn the expert's, which results in adaptivity leading to better performance. Condition B examines a larger robot policy class (i.e. Decision Trees) that contains the expected expert,and demonstrates negligible difference between adaptive and passive LfD. to represent the expert. Finally, Condition C examines when the expert has noise added to the controls labels, this leads to more data being needed to converge to the expected expert, but the difference between passive and adaptive is still negligible. \relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Experiments}{6}{section.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-A}Varying Function Class}{6}{subsection.5.1}}
+\newlabel{sec:gdw}{{V-A}{6}{Varying Function Class}{subsection.5.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Algorithmic Convergence }{6}{subsection.5.2}}
 \citation{laskeyrobot}
 \citation{laskeyshiv}
 \citation{laskeyrobot}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants A and B, in B the controls are inverted in the dynamics thus resulting in $x=y$ and $y=x$. The expert is the infinite horizion LQG computed policy, which results in two different linear matrices in region A and B. Right: Illustrates how having a linear robot policy class can cause DAgger to fail to converge due to it collecting data from region B. \relax }}{7}{figure.caption.4}}
 \newlabel{fig:p_mass}{{4}{7}{\footnotesize Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants A and B, in B the controls are inverted in the dynamics thus resulting in $x=y$ and $y=x$. The expert is the infinite horizion LQG computed policy, which results in two different linear matrices in region A and B. Right: Illustrates how having a linear robot policy class can cause DAgger to fail to converge due to it collecting data from region B. \relax }{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-C}Human Study for Planar Singulation}{7}{subsection.5.3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is an example of an initial state (left) that the robot is presented with. It can vary in placement of the object in the pile, translation and rotation. A human is asked to singulate the object, which is to have the robot learn to push one object from the pile (right). \relax }}{7}{figure.caption.5}}
 \newlabel{fig:izzy_rw}{{5}{7}{\footnotesize Shown above is an example of an initial state (left) that the robot is presented with. It can vary in placement of the object in the pile, translation and rotation. A human is asked to singulate the object, which is to have the robot learn to push one object from the pile (right). \relax }{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {V-C}Human Study for Planar Singulation}{7}{subsection.5.3}}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is the average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 demonstrators. The confidence intervals are standard error on the mean, which indicate Adaptive LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }}{7}{table.caption.6}}
-\newlabel{tab:opt-p-comparison}{{I}{7}{\footnotesize Shown above is the average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 demonstrators. The confidence intervals are standard error on the mean, which indicate Adaptive LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }{table.caption.6}{}}
 \bibstyle{IEEEtranS}
 \bibdata{references}
 \bibcite{abbeel2007application}{1}
@@ -118,6 +116,12 @@
 \bibcite{levine2015end}{10}
 \bibcite{pomerleau1989alvinn}{11}
 \bibcite{ross2010efficient}{12}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is the average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 demonstrators. The confidence intervals are standard error on the mean, which indicate Adaptive LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }}{8}{table.caption.6}}
+\newlabel{tab:opt-p-comparison}{{I}{8}{\footnotesize Shown above is the average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 demonstrators. The confidence intervals are standard error on the mean, which indicate Adaptive LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }{table.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the expert rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. \relax }}{8}{figure.caption.7}}
+\newlabel{fig:izzy_rw}{{6}{8}{\footnotesize Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the expert rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. \relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion and Future Work}{8}{section.6}}
+\@writefile{toc}{\contentsline {section}{References}{8}{section*.8}}
 \bibcite{ross2010reduction}{13}
 \bibcite{ross2013learning}{14}
 \bibcite{scholkopf2002learning}{15}
@@ -126,10 +130,6 @@
 \bibcite{van2010superhuman}{18}
 \bibcite{vapnik1992principles}{19}
 \bibcite{vapnik2013nature}{20}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the expert rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. \relax }}{8}{figure.caption.7}}
-\newlabel{fig:izzy_rw}{{6}{8}{\footnotesize Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the expert rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. \relax }{figure.caption.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion and Future Work}{8}{section.6}}
-\@writefile{toc}{\contentsline {section}{References}{8}{section*.8}}
 \@writefile{toc}{\contentsline {section}{Appendix}{9}{section*.9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}Notation and Problem Statement}{9}{subsection.Appendix.A.1}}
 \newlabel{sde}{{14}{9}{Notation and Problem Statement}{equation.Appendix.A.14}{}}

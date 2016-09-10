@@ -137,7 +137,7 @@
 
 
 
-\author{Michael Laskey, Caleb Chuck, Jonathan Lee, Jeffrey Mahler,\\ Sanjay Krishnan, Kevin Jamieson, Anca Dragan, Ken Goldberg}
+\author{Michael Laskey, Caleb Chuck, Jonathan Lee, Jeffrey Mahler,\\ Sanjay Krishnan, Anca Dragan, Ken Goldberg}
 \begin{document}
 
 
@@ -335,13 +335,10 @@ For this section are interested in the total cost along a trajectory with respec
 Convergence of an LfD algorithm can be defined in a number of ways, for example one way could be the element-wise condition $\theta^* = \hat{\theta}$. However, this is potentially a stronger condition than required for the performance of a robot to match that of an expert.  This is because the robot only needs to match the expert on the distribution induced by the expert (i.e. if the expert never visits a state the robot should not be forced to match the expert there). 
 
 An algorithm converges if
-$$\underset{n \rightarrow \infty}{\text{limit }} E_{p(\tau|\theta^*)}J(\hat{\theta}_n)  = E_{p(\tau|\theta^*)}J(\theta^*) $$
-\noindent where $\hat{\theta}_n$ is the result of running an algorithm on $n$ datapoints.
-
-$$E_{p(\tau|\theta^*)}J(\theta^*) = E_{p(\tau|\theta^*)}J(\hat{\theta}) $$
+$$\underset{n \rightarrow \infty}{\text{limit }} E_{p(\tau|\theta^*)}J(\theta^N)  = E_{p(\tau|\theta^*)}J(\theta^*) $$
+\noindent where $\theta^N$ is the result of running an algorithm on $N$ datapoints.
 
 This statement implies that the policy achieves the same surrogate loss of the expert's policy on the distribution of states the expert visits. Thus, agrees with the expert in all states the expert would visit.  The function class $\Theta$ and choice of learning algorithm that achieves this condition will be defined as consistent~\cite{vapnik1992principles}.
-
 
 We will now show that it is possible for a given policy class, $\Theta$, to achieve have this condition when using passive LfD, but fail to when using an adaptive LfD. \\
 Let $\theta_{p}^M$ be the result of running passive LfD on $M$ trajectory samples from the supervisor.
@@ -402,7 +399,7 @@ A bound in regret though though does not necessarily imply the robot will be abl
 We acknowledge that these  problem can be overcome by increasing the robot policy's function class. However, a larger function class could result in more data needed to learn the policy than the passive LfD and be more susceptible to noise~\cite{kakade2009generalization}.
 
 \subsection{Bound on Error for Passive Lfd}
-In the passive LfD setting a robot is trained on the states visited by the expert. However, at run time it can encounter a different distribution of states due to not perfectly matching the expert's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadritically (i.e. $O(T^2E_{p(\bx|\theta^*)} l(\theta^N)$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\theta^N) = E_{p(\tau|\theta^*)} J(\theta^N)$. We present a new analysis for a specific class of policies defined below that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\theta^N)}$, which suggests a tamer rate in the time time horizon. 
+In the passive LfD setting a robot is trained on the states visited by the expert. However, at run time it can encounter a different distribution of states due to not perfectly matching the expert's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadritically (i.e. $O(T^2E_{p(\bx|\theta^*)} l(\theta^N)$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\theta^N) = E_{p(\tau|\theta^*)} J(\theta^N)$. We present a new analysis for a specific class of policies defined below that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\theta^N)}$, which suggests a tamer rate in the time horizon. 
 
  Define the surrogate loss as the squared euclidean norm, or $l(\pi_{\theta}(\bx),\pi_{\theta^*}(\bx)) = ||\pi_{\theta}(\bx_{i,t}) - \pi_{\theta^*}(\bx_{i,t})||_2$.We assume that the controls are be bounded and thus can be normalized such that the $l \in [0,1]$.  We are interested in the situation where the expert and robot policy are stochastic with a Normal Distribution (i.e. $p(\bu|\pi_{\theta}(\bx)) = \mathcal{N}(\pi_\theta(\bx),\sigma I)$. A stochastic policy with a normal distribution is a common assumption for learned robotic policy ~\cite{levine2015end}. 
  
