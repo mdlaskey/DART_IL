@@ -159,6 +159,32 @@ Learning from demonstration algorithms are either passive or adaptive . It has b
 
 
 \section{Introduction} 
+
+
+\adnote{I think the story here should be: We focuse on supervised learning from demonstration. We characterize two approaches to acquiring samples in supervised learning of robot control policies from demonstration. }
+
+\adnote{The first is the standard supervised learning approach, where a human supervisor demonstrates the task by providing policy roll-outs consisting of state-action samples. We refer to this as “Human Centric” (HC) sampling. }
+
+\adnote{We contrast it to "Robot-Centric" (RC) sampling, where a human supervisor iteratively observes the robot’s current learned policy and provides new action labels to correct errors.  RC sampling is motivated by the fact that when the robot can not match the supervisor’s policy well, errors will cause it to veer off to states where it has no data and in which it will perform poorly. RC sampling collects data on such states and has been used in algorithms like DAgger to improve performance.} 
+
+\adnote{Our insight is that while RC sampling has great advantages, it does come at a cost in practice. First, it is tedious for human supervisors because it requires providing corrective actions without observing their outcome on the robot (more detail). Second, it requires learning a more complex policy than the standard supervisor policy, involving corrections from failure states (more detail, esp to help people understand that you don't get to see the robot execute the action). This can, in some cases, actually increase sample complexity.  }
+
+\adnote{Motivated by this insight, we explore the value of the extra overhead of RC for emerging classes of highly-expressive learning models such as deep decision trees and neural networks, which can more accurately learn the supervisor policy compared to standard learners. (slightly more detail)}
+
+
+\adnote{theoretical and practical analysis: }
+
+\adnote{We prove a tighter bound on HC sampling performance for the case of expressive learners (more detail), other theoretical results}
+
+\adnote{We compare the performance of HC and RC sampling on a set of robot tasks, manipulating the expressivity of the learner. simulated tasks: RC better when not expressive, but same when expressive even under noise; }
+
+\adnote{real tasks with real humans (describe): surprisingly, HC is better; follow up analysis suggests that humans suck at giving corrections, and that the RC policy is more complex.}
+
+\adnote{Overall, our results suggests that in the era of highly expressive learners, it might in some cases be more advantageous to get demonstrations in the standard supervised learning regime than to ask the human supervisor for corrective action labels along the current policy.}
+
+
+
+
 In model-free robot Learning from Demonstration (LfD), a robot learns to perform a task, such as driving or grasping an object in a cluttered environment, from examples provided by an expert, usually a human. Learning from demonstration has been applied to a large number of robotic tasks, including helicopter maneuvering~\cite{abbeel2007application}, car parking~\cite{abbeel2008apprenticeship}, robotic surgery~\cite{van2010superhuman,laskeyshiv} and robotic manipulation~\cite{laskeyrobot}. 
 
 In the supervised learning approach to LfD, a robot's policy , or a mapping from the state space to controls, is learned via regression or classification. The passive approach to LfD is to collect expert demonstrations on the states the expert is likely to visit. However, due to error in learning the robot's policy will not match the expert and will visit different states when performing the task. A common trend in LfD, is adaptivity, which is to have the expert retro-actively provide feedback (or the correct control signal) to the robot on the states that it visits~\cite{ross2010efficient,ross2010reduction,laskeyrobot,laskeyshiv,he2012imitation}.
@@ -356,13 +382,14 @@ A binary decision tree, where a robot is being taught by a expert to descend dow
 
 \jmnote{Need to get the notation consistent}
 \jmnote{Should change rewards to costs in examples to be consistent with definitions}
+\jmnote{Might want to make a, explicit statement in the theorem about the policy being realizable to make things stronger although it's already in there technically}
 \begin{theorem}
 There exists an environment and policy class $\Theta$ such that:
 \begin{align*}
-	E_{p(\tau \mid \theta_{d}^N) } J(\theta_{d}^N) > E_{p(\tau \mid \theta_{p}^N)) } J(\theta_{p}^N) = E_{p(\tau \mid \theta^*)} J(\theta^*)
+	\underset{N \rightarrow \infty}{\text{lim }} E_{p(\tau \mid \theta_{d}^N) } J(\theta_{d}^N) &> E_{p(\tau \mid \theta^*)} J(\theta^*) \\
+	\underset{M \rightarrow \infty}{\text{lim }} E_{p(\tau \mid \theta_{p}^M) } J(\theta_{p}^M) &= E_{p(\tau \mid \theta^*)} J(\theta^*)
 \end{align*} 
-\noindent for all $N > N_0$ and $M > M_0$ and some $M_0, N_0 \in \mathbb{Z}$.
-In other words, DAgger may fail to converge in cases where passive LfD matches the expert exactly.
+\noindent In other words, DAgger may fail to converge in cases where passive LfD matches the expert exactly.
 \end{theorem}
 
 \begin{proof}
@@ -386,8 +413,8 @@ Therefore for any $M > 0$ supervised learning chooses $\theta_{p}^M = L$ which h
 Let DAgger be initialized with $\theta_d^0 = R$, and without loss of generality assume DAgger collects one trajectory per demonstration.
 Then on iteration $N=1$, DAgger goes to the right three times and collects expert labels $\{L, R, R\}$, leading to policy $\theta_{d}^1 = R$.
 Furthermore, if $\theta_{d}^K = R$ then the next iteration collects $\{L, R, R\}$ and the dataset $\mD_{K+1}$ maintains two-thirds right labels, so $\theta_{d}^{K+1} = R$.
-Therefore by induction $\theta_{d}^{N} = R$ for all $N > 0$ for this environment and policy class, which incurs surrogate loss $E_{p(\tau \mid \theta_{p}^N)} J(\theta_{p}^N) = (2 / 3) N T > E_{p(\tau \mid \theta_{p}^M)} J(\theta_{p}^M)$.
-Furthermore, the cost is also suboptimal: $E_{p(\tau \mid \theta_{p}^N)} C(\tau) = 21$.
+Therefore by induction $\theta_{d}^{N} = R$ for all $N > 0$, which incurs surrogate loss $E_{p(\tau \mid \theta_{p}^N)} J(\theta_{p}^N) = (2 / 3) N T > E_{p(\tau \mid \theta_{p}^M)} J(\theta_{p}^M)$.
+We also note that the cost is also suboptimal: $E_{p(\tau \mid \theta_{p}^N)} C(\tau) = 21$.
 \end{proof}
 
 It is interesting to note that this theorem does not contradict the original theoretical anlysis of Ross et al. ~\cite{ross2010reduction}. In their analysis, DAgger is modeled as a  an online optimization problem~\cite{ross2010reduction}.  In online optimization a learner plays a game where at each iteration, it chooses a policy and receives a loss from an adversary.  In the LfD setting, the learner is the robot's policy and the adversary would be the loss on the distribution of states induced by the policy $E_{p(\tau|\theta)} J(\theta)$~\cite{shalev2011online}.
