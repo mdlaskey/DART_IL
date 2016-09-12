@@ -478,8 +478,13 @@ $$E_{p(\tau|\theta^*)} J(\theta^N)\leq T( 2R_{\Theta}(N) + \delta+ O(\frac{1}{\s
 
 \end{theorem}
 
-The proof for this analysis can be found in Sec. 3 in Tewari et al.~\cite{tewari13learning}. In this result, $R_{\Theta}$ corresponds to the Rademacher complexity of the given function class $\Theta$. The Rademacher complexity is a measure of much a function can fit to random noise (i.e. no relation exists between $\bx_i$ and the label), more complex function classes can fit better and thus leading to slower rates of convergence.
+The proof for this analysis can be found in Sec. 3 in Tewari et al.~\cite{tewari13learning}. In this result, $R_{\Theta}(N)$ corresponds to the Rademacher complexity of the given function class $\Theta$ for $N$ samples.
+The Rademacher complexity is a measure of much a function can fit to random noise.
+Intuitively, more complex function classes may fit noise better, leading to slower rates of convergence.
+The Rademacher Complexity for bounded linear functions and kernel regressors over bounded domains is $O (\frac{1}{\sqrt{N}})$ ~\cite{bartlett2002rademacher, kakade2009complexity}.
+For decision trees with linear decision functions, the Rademacher Complexity is $O (\frac{1}{\sqrt{N}} + \frac{\log(N)}{N}$ ~\cite{bartlett2002rademacher}.
 
+\jmnote{I'd vote to remove the below, it's hard to relate the terms to T dues to unknown constant factors}
 Thus if your expert's policy is only a linear function, you may find the Rademacher term is small enough that $T$ is the dominant factor. However, if you are trying to learn a highly non-linear function, the Rademacher complexity could be much larger than $T$~\cite{vapnik2013nature} Thus, suggesting that only examining $T$ in the analysis can be misleading. 
 
 
