@@ -26,14 +26,11 @@
 \citation{laskeyrobot}
 \citation{laskeyshiv}
 \citation{he2012imitation}
-\citation{scholkopf2002learning}
-\citation{ross2010efficient}
-\citation{ross2010reduction}
-\citation{ross2010efficient}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  A) An illustration of the expert's policy, $\pi _{\theta ^*}$ being contained in the robot's policy class $\Theta $. We argue that in the case on the right, passive LfD can be advantageous compare to adaptive. B) Samples taken from a robot trying to reach the green goal state. The adaptive approach(Teal) causes the robot to visit states the passive (Orange) does not need to. C) A person from our pilot study using an Xbox Controller to provide a demonstration to the robot on how to singulate an object from the pile. D) In the pilot study, passive (left) always had visit the states the expert did, but adaptive (right) lead to states where the expert had to provide more complex commands such as teaching the robot to go backwards.\relax }}{1}{figure.caption.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  A) A person from our pilot study using an Xbox Controller to provide a demonstration to the robot on how to singulate (i.e. seperate) an object from the pile. B) Samples taken from a robot trying to reach the green goal state. The RC approach (Teal) has the robot visit states the HC (Orange) does not. C) Two states that a human had to provide retro-active feedback on from the pilot study. Left: a state that the robot would have seen under HC sampling. Right: a state the robot would not have seen under HC sampling. Correct feedback in this state would be to tell the robot to recover by going backwards and to the side. [STILL WORKING ON FIGURE PLAYING WITH LIGHTING DISPLAY]\relax }}{1}{figure.caption.1}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:teaserl}{{1}{1}{\footnotesize A) An illustration of the expert's policy, $\pi _{\theta ^*}$ being contained in the robot's policy class $\Theta $. We argue that in the case on the right, passive LfD can be advantageous compare to adaptive. B) Samples taken from a robot trying to reach the green goal state. The adaptive approach(Teal) causes the robot to visit states the passive (Orange) does not need to. C) A person from our pilot study using an Xbox Controller to provide a demonstration to the robot on how to singulate an object from the pile. D) In the pilot study, passive (left) always had visit the states the expert did, but adaptive (right) lead to states where the expert had to provide more complex commands such as teaching the robot to go backwards.\relax }{figure.caption.1}{}}
+\newlabel{fig:teaserl}{{1}{1}{\footnotesize A) A person from our pilot study using an Xbox Controller to provide a demonstration to the robot on how to singulate (i.e. seperate) an object from the pile. B) Samples taken from a robot trying to reach the green goal state. The RC approach (Teal) has the robot visit states the HC (Orange) does not. C) Two states that a human had to provide retro-active feedback on from the pilot study. Left: a state that the robot would have seen under HC sampling. Right: a state the robot would not have seen under HC sampling. Correct feedback in this state would be to tell the robot to recover by going backwards and to the side. [STILL WORKING ON FIGURE PLAYING WITH LIGHTING DISPLAY]\relax }{figure.caption.1}{}}
+\citation{ross2010efficient}
 \citation{pomerleau1989alvinn}
 \citation{NVIDEA}
 \citation{ross2010efficient}
@@ -58,38 +55,37 @@
 \citation{ross2010reduction}
 \citation{ross2010reduction}
 \citation{scholkopf2002learning}
-\citation{NIPS2014_5421}
-\citation{ross2010reduction}
 \newlabel{eq:m_likeli_obj}{{1}{3}{Problem Statement and Background}{equation.3.1}{}}
 \newlabel{eq:main_obj}{{2}{3}{Problem Statement and Background}{equation.3.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {III-.1}Step 1}{3}{subsubsection.3.0.1}}
 \newlabel{eq:super_objj}{{3}{3}{Step 1}{equation.3.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {III-.2}Step 2}{3}{subsubsection.3.0.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Theoretical Analysis}{3}{section.4}}
+\citation{NIPS2014_5421}
+\citation{ross2010reduction}
 \citation{vapnik1992principles}
 \citation{ross2010reduction}
 \citation{ross2010reduction}
 \citation{shalev2011online}
-\citation{kakade2009generalization}
-\citation{ross2010efficient}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  A binary decision tree, where a robot is being taught by a expert to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the expert would select, either left or right, $\delimiter "4266308 L, R \delimiter "5267309 $. The optimal policy, colored in green, is to select left, $L$, at each node.\relax }}{4}{figure.caption.2}}
-\newlabel{fig:c_ex}{{2}{4}{\footnotesize A binary decision tree, where a robot is being taught by a expert to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the expert would select, either left or right, $\lbrace L, R \rbrace $. The optimal policy, colored in green, is to select left, $L$, at each node.\relax }{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Theoretical Analysis}{4}{section.4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Algorithm Convergence}{4}{subsection.4.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  A binary decision tree, where a robot is being taught by a supervisor to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the supervisor would select, either left or right, $\delimiter "4266308 L, R \delimiter "5267309 $. The optimal policy, colored in green, is to select left, $L$, at each node.\relax }}{4}{figure.caption.2}}
+\newlabel{fig:c_ex}{{2}{4}{\footnotesize A binary decision tree, where a robot is being taught by a supervisor to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the supervisor would select, either left or right, $\lbrace L, R \rbrace $. The optimal policy, colored in green, is to select left, $L$, at each node.\relax }{figure.caption.2}{}}
+\citation{ross2010efficient}
 \citation{levine2015end}
+\citation{ross2010reduction}
 \citation{anthony2009neural}
 \citation{vapnik2013nature}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Bound on Error for HC Lfd}{5}{subsection.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-C}Finite Sample Analysis}{5}{subsection.4.3}}
 \citation{tewari13learning}
 \citation{vapnik2013nature}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Bound on Error for Passive Lfd}{5}{subsection.4.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-C}Finite Sample Analysis}{5}{subsection.4.3}}
-\newlabel{thm:sup}{{4.3}{5}{Finite Sample Analysis}{theorem.4.3}{}}
+\citation{rossreduction2010}
 \citation{ross2010efficient}
 \citation{ross2010reduction}
 \citation{ross2013learning}
 \citation{ross2010efficient}
 \citation{ross2010reduction}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is the normalized performance with respect to the expected expert, where $1.0$ indicates matching the expected expert's reward. The plots are averaged over 100 randomly generated 2D gridworld environments, where the robot is taught to avoid penalty states and reach a goal state. A) Examines when the robot's policy class (i.e. Linear SVM) is not able to learn the expert's, which results in adaptivity leading to better performance. Condition B examines a larger robot policy class (i.e. Decision Trees) that contains the expected expert,and demonstrates negligible difference between adaptive and passive LfD. to represent the expert. Finally, Condition C examines when the expert has noise added to the controls labels, this leads to more data being needed to converge to the expected expert, but the difference between passive and adaptive is still negligible. \relax }}{6}{figure.caption.3}}
-\newlabel{fig:var}{{3}{6}{\footnotesize Shown above is the normalized performance with respect to the expected expert, where $1.0$ indicates matching the expected expert's reward. The plots are averaged over 100 randomly generated 2D gridworld environments, where the robot is taught to avoid penalty states and reach a goal state. A) Examines when the robot's policy class (i.e. Linear SVM) is not able to learn the expert's, which results in adaptivity leading to better performance. Condition B examines a larger robot policy class (i.e. Decision Trees) that contains the expected expert,and demonstrates negligible difference between adaptive and passive LfD. to represent the expert. Finally, Condition C examines when the expert has noise added to the controls labels, this leads to more data being needed to converge to the expected expert, but the difference between passive and adaptive is still negligible. \relax }{figure.caption.3}{}}
+\newlabel{thm:sup}{{4.3}{6}{Finite Sample Analysis}{theorem.4.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {V}Experiments}{6}{section.5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {V-A}Varying Function Class}{6}{subsection.5.1}}
 \newlabel{sec:gdw}{{V-A}{6}{Varying Function Class}{subsection.5.1}{}}
@@ -97,11 +93,20 @@
 \citation{laskeyrobot}
 \citation{laskeyshiv}
 \citation{laskeyrobot}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants A and B, in B the controls are inverted in the dynamics thus resulting in $x=y$ and $y=x$. The expert is the infinite horizion LQG computed policy, which results in two different linear matrices in region A and B. Right: Illustrates how having a linear robot policy class can cause DAgger to fail to converge due to it collecting data from region B. \relax }}{7}{figure.caption.4}}
-\newlabel{fig:p_mass}{{4}{7}{\footnotesize Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants A and B, in B the controls are inverted in the dynamics thus resulting in $x=y$ and $y=x$. The expert is the infinite horizion LQG computed policy, which results in two different linear matrices in region A and B. Right: Illustrates how having a linear robot policy class can cause DAgger to fail to converge due to it collecting data from region B. \relax }{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is the normalized performance with respect to the expected supervisor, where $1.0$ indicates matching the optimal supervisor's performance. The plots are averaged over 100 randomly generated 2D gridworld environments, where the robot is taught to avoid penalty states and reach a goal state. Both RC and HC are given the same number of samples. A) Examines when the robot's policy class has low expressiveness (i.e. Linear SVM), which results in RC leading to better performance. Condition B examines a more expressive robot policy class (i.e. Decision Trees) that contains the expected supervisor,and demonstrates negligible difference between HC and RC. to represent the supervisor. Finally, Condition C examines when the supervisor has noise added to the controls labels, this leads to more data being needed to converge to the expected supervisor. HC and RC perform the same in this situation. \relax }}{7}{figure.caption.3}}
+\newlabel{fig:var}{{3}{7}{\footnotesize Shown above is the normalized performance with respect to the expected supervisor, where $1.0$ indicates matching the optimal supervisor's performance. The plots are averaged over 100 randomly generated 2D gridworld environments, where the robot is taught to avoid penalty states and reach a goal state. Both RC and HC are given the same number of samples. A) Examines when the robot's policy class has low expressiveness (i.e. Linear SVM), which results in RC leading to better performance. Condition B examines a more expressive robot policy class (i.e. Decision Trees) that contains the expected supervisor,and demonstrates negligible difference between HC and RC. to represent the supervisor. Finally, Condition C examines when the supervisor has noise added to the controls labels, this leads to more data being needed to converge to the expected supervisor. HC and RC perform the same in this situation. \relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants A and B, in B the controls are inverted in the dynamics thus resulting in $x=y$ and $y=x$. The supervisor is the infinite horizion LQG computed policy, which results in two different linear matrices in region A and B. Right: Illustrates how having a linear robot policy class can cause RC LfD to fail to converge due to it collecting data from region B, however HC still converges to the true distribution. \relax }}{7}{figure.caption.4}}
+\newlabel{fig:p_mass}{{4}{7}{\footnotesize Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants A and B, in B the controls are inverted in the dynamics thus resulting in $x=y$ and $y=x$. The supervisor is the infinite horizion LQG computed policy, which results in two different linear matrices in region A and B. Right: Illustrates how having a linear robot policy class can cause RC LfD to fail to converge due to it collecting data from region B, however HC still converges to the true distribution. \relax }{figure.caption.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {V-C}Human Study for Planar Singulation}{7}{subsection.5.3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is an example of an initial state (left) that the robot is presented with. It can vary in placement of the object in the pile, translation and rotation. A human is asked to singulate the object, which is to have the robot learn to push one object from the pile (right). \relax }}{7}{figure.caption.5}}
 \newlabel{fig:izzy_rw}{{5}{7}{\footnotesize Shown above is an example of an initial state (left) that the robot is presented with. It can vary in placement of the object in the pile, translation and rotation. A human is asked to singulate the object, which is to have the robot learn to push one object from the pile (right). \relax }{figure.caption.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is the average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 demonstrators. The confidence intervals are standard error on the mean, which indicate Adaptive LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }}{8}{table.caption.6}}
+\newlabel{tab:opt-p-comparison}{{I}{8}{\footnotesize Shown above is the average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 demonstrators. The confidence intervals are standard error on the mean, which indicate Adaptive LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }{table.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion and Future Work}{8}{section.6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the supervisor rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. \relax }}{8}{figure.caption.7}}
+\newlabel{fig:izzy_rw}{{6}{8}{\footnotesize Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the supervisor rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. \relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Two trajectories that a participant tried to retro-actively match after they tele-operated. The trajectories are plotted over the initial state given to the robot. The teal lines represente the direction of the control label provided from retroactive feedback, while the orange line is the path the participant took during HC sampling. When the two match the robot heads the teal line would point in the direction of the orange line. \relax }}{8}{figure.caption.8}}
+\newlabel{fig:izzy_rw}{{7}{8}{\footnotesize Two trajectories that a participant tried to retro-actively match after they tele-operated. The trajectories are plotted over the initial state given to the robot. The teal lines represente the direction of the control label provided from retroactive feedback, while the orange line is the path the participant took during HC sampling. When the two match the robot heads the teal line would point in the direction of the orange line. \relax }{figure.caption.8}{}}
 \bibstyle{IEEEtranS}
 \bibdata{references}
 \bibcite{abbeel2007application}{1}
@@ -116,12 +121,6 @@
 \bibcite{levine2015end}{10}
 \bibcite{pomerleau1989alvinn}{11}
 \bibcite{ross2010efficient}{12}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown above is the average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 demonstrators. The confidence intervals are standard error on the mean, which indicate Adaptive LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }}{8}{table.caption.6}}
-\newlabel{tab:opt-p-comparison}{{I}{8}{\footnotesize Shown above is the average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 demonstrators. The confidence intervals are standard error on the mean, which indicate Adaptive LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }{table.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the expert rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. \relax }}{8}{figure.caption.7}}
-\newlabel{fig:izzy_rw}{{6}{8}{\footnotesize Shown is averaged success at the singulation task over the 10 human subjects. Each policy is evaulated 30 times on the a held out set of test configurations. The first 20 rollouts are from the expert rolling out there policy and the next 40 are collected via retro-active feedback for adaptive and tele-operated demonstrations for passive. Passive LfD shows a 20$\%$ improvement in success at the end. \relax }{figure.caption.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion and Future Work}{8}{section.6}}
-\@writefile{toc}{\contentsline {section}{References}{8}{section*.8}}
 \bibcite{ross2010reduction}{13}
 \bibcite{ross2013learning}{14}
 \bibcite{scholkopf2002learning}{15}
@@ -130,11 +129,12 @@
 \bibcite{van2010superhuman}{18}
 \bibcite{vapnik1992principles}{19}
 \bibcite{vapnik2013nature}{20}
-\@writefile{toc}{\contentsline {section}{Appendix}{9}{section*.9}}
+\@writefile{toc}{\contentsline {section}{References}{9}{section*.9}}
+\@writefile{toc}{\contentsline {section}{Appendix}{9}{section*.10}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}Notation and Problem Statement}{9}{subsection.Appendix.A.1}}
 \newlabel{sde}{{14}{9}{Notation and Problem Statement}{equation.Appendix.A.14}{}}
 \newlabel{obj}{{15}{9}{Notation and Problem Statement}{equation.Appendix.A.15}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {B}Empirical Risk Minimizer (Passive LfD)}{9}{subsection.Appendix.A.2}}
 \newlabel{erm}{{16}{9}{Empirical Risk Minimizer (Passive LfD)}{equation.Appendix.A.16}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {C}Follow-The-Leader (DAgger)}{9}{subsection.Appendix.A.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {D}Counterexample Proof Sketch}{9}{subsection.Appendix.A.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C}Follow-The-Leader (DAgger)}{10}{subsection.Appendix.A.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Counterexample Proof Sketch}{10}{subsection.Appendix.A.4}}
