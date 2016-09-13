@@ -71,10 +71,6 @@ M.~Laskey, S.~Staszak, W.~Y.-S. Hsieh, J.~Mahler, F.~T. Pokorny, A.~D. Dragan,
   and K.~Goldberg, ``Shiv: Reducing supervisor burden using support vectors for
   efficient learning from demonstrations in high dimensional state spaces.''
 
-\bibitem{levine2015end}
-S.~Levine, C.~Finn, T.~Darrell, and P.~Abbeel, ``End-to-end training of deep
-  visuomotor policies,'' \emph{arXiv preprint arXiv:1504.00702}, 2015.
-
 \bibitem{pomerleau1989alvinn}
 D.~A. Pomerleau, ``Alvinn: An autonomous land vehicle in a neural network,''
   Carnegie-Mellon University, Tech. Rep., 1989.
@@ -102,16 +98,6 @@ B.~Sch{\"o}lkopf and A.~J. Smola, \emph{Learning with kernels: Support vector
 
 \bibitem{shalev2011online}
 S.~Shalev-Shwartz, ``Online learning and online convex optimization,'' 2011.
-
-\bibitem{tewari13learning}
-\BIBentryALTinterwordspacing
-A.~Tewari and P.~L. Bartlett, ``Learning theory,'' in \emph{Academic Press
-  Library in Signal Processing: Volume 1 Signal Processing Theory and Machine
-  Learning}, ser. Academic Press Library in Signal Processing, P.~S. Diniz,
-  J.~A. Suykens, R.~Chellappa, and S.~Theodoridis, Eds.\hskip 1em plus 0.5em
-  minus 0.4em\relax Elsevier, 2014, vol.~1, ch.~14, pp. 775--816. [Online].
-  Available: \url{http://dx.doi.org/10.1016/B978-0-12-396502-8.00014-0}
-\BIBentrySTDinterwordspacing
 
 \bibitem{van2010superhuman}
 J.~Van Den~Berg, S.~Miller, D.~Duckworth, H.~Hu, A.~Wan, X.-Y. Fu, K.~Goldberg,

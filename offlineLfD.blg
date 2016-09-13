@@ -14,6 +14,7 @@ You're missing a field part---line 765 of file references.bib
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "he2012imitation"
 Warning--I didn't find a database entry for "NVIDEA"
+Warning--I didn't find a database entry for "mahler2014learning"
 Warning--I didn't find a database entry for "rossreduction2010"
 -- IEEEtranS.bst version 1.13 (2008/09/30) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
@@ -30,45 +31,45 @@ Warning--empty booktitle in verdu2014total
 Warning--empty year in verdu2014total
 
 Done.
-You've used 22 entries,
+You've used 20 entries,
             4498 wiz_defined-function locations,
-            1019 strings with 12436 characters,
-and the built_in function-call counts, 17268 in all, are:
-= -- 1464
-> -- 564
-< -- 84
-+ -- 283
-- -- 150
-* -- 882
-:= -- 2614
-add.period$ -- 50
-call.type$ -- 22
-change.case$ -- 138
-chr.to.int$ -- 210
-cite$ -- 31
-duplicate$ -- 1106
-empty$ -- 1371
-format.name$ -- 168
-if$ -- 3832
+            1005 strings with 11929 characters,
+and the built_in function-call counts, 15319 in all, are:
+= -- 1288
+> -- 499
+< -- 73
++ -- 252
+- -- 134
+* -- 773
+:= -- 2307
+add.period$ -- 45
+call.type$ -- 20
+change.case$ -- 124
+chr.to.int$ -- 186
+cite$ -- 29
+duplicate$ -- 984
+empty$ -- 1232
+format.name$ -- 149
+if$ -- 3401
 int.to.chr$ -- 0
-int.to.str$ -- 22
-missing$ -- 200
-newline$ -- 91
-num.names$ -- 46
-pop$ -- 627
+int.to.str$ -- 20
+missing$ -- 177
+newline$ -- 83
+num.names$ -- 40
+pop$ -- 567
 preamble$ -- 1
-purify$ -- 117
+purify$ -- 107
 quote$ -- 2
-skip$ -- 1248
+skip$ -- 1105
 stack$ -- 0
-substring$ -- 624
-swap$ -- 757
-text.length$ -- 14
+substring$ -- 556
+swap$ -- 661
+text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 224
+type$ -- 202
 warning$ -- 9
-while$ -- 78
-width$ -- 24
-write$ -- 209
+while$ -- 69
+width$ -- 22
+write$ -- 185
 (There was 1 error message)

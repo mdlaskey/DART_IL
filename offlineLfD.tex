@@ -135,8 +135,8 @@
 %\title{Iterative Imitation Learning with Reduced Human Supervision [v11]}
 %\title{SHIV:  Reducing Human Supervision for Robot adaptive Learning [v11]}
 
-\title{An Analysis with Highly Expressive  \\
-Deep Models in  Robotic Learning from Demonstrations}
+\title{Comparing Human-Centric and Robot-Centric \\
+Sample Efficiency for Robot Deep Learning from Demonstrations}
 
 
 
@@ -242,11 +242,10 @@ We assume a probability density over initial states $p(\bx_0)$. The environment 
 
 %We denote the probability density over the initial state also by $p:\mathcal{X}\to \mathbb{R}$. 
 
-A trajectory $\hat{\tau}$ is a finite sequence of $T+1$ pairs of states visited and corresponding
-control inputs at these states, $\hat{\tau} = (\mathbf{x}_0,\mathbf{u}_0, ...., \mathbf{x}_T,\mathbf{u}_T)$, where $\bx_t\in \mathcal{X}$
+A trajectory $\tau$ is a finite sequence of $T+1$ pairs of states visited and corresponding
+control inputs at these states, $\bar{\tau} = ((\mathbf{x}_0,\mathbf{u}_0), ...., (\mathbf{x}_T,\mathbf{u}_T))$, where $\bx_t\in \mathcal{X}$
 and $\bu_t\in \mathcal{U}$ for $t\in \{0, \ldots, T\}$ and some $T\in \mathbb{N}$.  
-For a given trajectory $\hat{\tau}$ as above, we denote by ${\tau}$ the corresponding trajectory in state space,
-${\tau} = (\bx_0,....,\bx_T)$. 
+
 
 
 A policy is a measurable function $\pi: \mathcal{X} \to \mathcal{U}$ from states to control inputs. 
@@ -257,7 +256,7 @@ p(\bx_0)\prod_{i=0}^{T-1}p(\bx_{t+1}|\bu_t,\bx_t)p(\bu_t|\bx_t,\theta)$$
 
 The term $p(\bu_t|\bx_t,\theta)$ indicates a non-deterministic policy, which can occur due noise in robot execution~\cite{mahler2014learning}. While we do not assume knowledge of the distributions corresponding to: $p(\bx_{t+1}|\bx_t,\bu_t)$, $p(\bx_0)$ or $p(\bx_t|
 \theta)$, we assume that we have a stochastic real robot or a simulator such that for any state
-$\bx_t$ and control $\bu_t$, we can sample the $\bx_{t+1}$ from the density $p(\bx_{t+1}|\bu_t,\bx_t)$. 
+$\bx_t$ and control $\bu_t$, we can observe a sample $\bx_{t+1}$ from the density $p(\bx_{t+1}|\bu_t,\bx_t)$. 
 Therefore, when 'rolling out' trajectories under a policy
 $\pi_{\theta}$, we utilize the robot or a simulator to sample the resulting stochastic trajectories rather than
 estimating $p(\bx|\theta)$ itself.
@@ -268,7 +267,7 @@ For example in the task of grasping, the reward can be a binary measure of succe
 
 In our problem, we do not have access to the reward function itself. Instead, we only have access to 
 a supervisor, $\pi_{\theta^*}$, where $\theta^*$ may not be contained in $\Theta$. A supervisor is chosen that can achieve a desired level of performance on the task. The supervisor provides the robot an initial set
-of $N$   demonstration trajectories $\lbrace \tilde{\tau}^1,...,\tilde{\tau}^N \rbrace$. 
+of $N$   demonstration trajectories $\lbrace \tau^1,...,\tau^N \rbrace$. 
 which are the result of the supervisor applying this policy. This induces a training data set $\mathcal{D}$ of all state-control input pairs from the demonstrated trajectories.
 
 We are interested in determining what parameter $\theta$ generates the sample demonstrations from the supervisor's policy. 
@@ -293,7 +292,8 @@ We note that the dynamics and initial state distributions are dropped in this ob
 \end{equation}
 
 
-\noindent \textbf{\nc} Due to learning error, solving Eq. \ref{eq:main_obj} may not lead to $\theta^N \neq \theta^*$.  Thus, leading to a mismeasure in the distribution trained on and tested on (i.e. the robot visits states from the distribution $p(\tau|\theta^N)$ and not the supervisor's, $p(\tau|\theta^*)$).  Prior work has proposed an iterative solution ~\cite{ross2010reduction} that attempts to solve this problem by aggregating data on the distribution induced by the current robot's policy.
+\noindent \textbf{\nc} If $\theta* \in \Theta$, then as N grows, $
+\theta^N$ will approach an objective value (i.e. loss) of equation (2) equal to that evaluated under $\theta^*$ (note, this does not necessarily imply $\theta^N \rightarrow \theta^*$ unless  Eq . \ref{eq.main_obj} is strongly convex with respect to theta). However, the states that are being used to train $\theta^N$ are provided by $\theta^*$. Thus, when the policy is rolled out under $\theta^N$ (and $\theta^N \neq \theta^*$ exactly) then it is possible that new states will be visited that would never have been visited by $\theta^*$. To account for this, prior work has proposed an iterative solution ~\cite{ross2010reduction} that attempts to solve this problem by aggregating data on the distribution induced by the current robot's policy.
 
 Instead of  minimizing the surrogate loss in Eq. \ref{eq:main_obj},  RC LfD, or DAgger and its variants~\cite{ross2010reduction,laskeyshiv,he2012imitation}, attempts to find the distribution the final policy will converge to. Thus, reducing surrogate loss in places the robot is likely to visit.
 We will specifically describe DAgger~\cite{ross2010reduction}, which attempts this by iterating two steps: 1)
@@ -396,19 +396,16 @@ RC LfD in this context is known as a Follow the Leader (FTL) algorithm. In FTL, 
 A bound in regret though though does not necessarily imply the robot will be able to generalize to the unseen data nor match the supervisor. It instead says the robot's error is bounded by the best it could have done in hindsight, which may be arbitrarily bad as our tree example suggests. 
 
 \subsection{Bound on Error for HC Lfd}
-In the HC LfD setting a robot is trained on the states visited by the supervisor. However, at run time the robot may encounter a different distribution of states due to not perfectly matching the supervisor's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadritically (i.e. $O(T^2E_{p(\bx|\theta^*)} l(\theta^N)$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\theta^N) = E_{p(\tau|\theta^*)} J(\theta^N)$. We present a new analysis for a class of stochastic policies and  defined below that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\theta^N)})$.
+In the HC LfD setting a robot is trained on the states visited by the supervisor. However, at run time the robot may encounter a different distribution of states due to not perfectly matching the supervisor's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadritically (i.e. $O(T^2E_{p(\bx|\theta^*)} l(\theta^N)$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\theta^N) = E_{p(\tau|\theta^*)} J(\theta^N)$. We present a new analysis for a class of stochastic policies defined below that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\theta^N)})$.
 
- Define the surrogate loss as the squared euclidean norm, or $l(\pi_{\theta}(\bx),\pi_{\theta^*}(\bx)) = ||\pi_{\theta}(\bx_{i,t}) - \pi_{\theta^*}(\bx_{i,t})||_2$.We assume that the controls are be bounded and thus can be normalized such that the $l \in [0,1]$.  We are interested in the situation where the supervisor and robot policy are stochastic with a Normal Distribution (i.e. $p(\bu|\pi_{\theta}(\bx)) = \mathcal{N}(\pi_\theta(\bx),\sigma I)$. The interest in stochastic policies instead of deterministic is two-fold: 1) human supervisor can be noisy in nature and 2) due to noise in robot execution, such as cable coupling, the intended and actual control may differ~\cite{mahler2014learning}. \mlnote{need to clarify what the generalization is} We show a generalization of this bound to any distribution in the exponential family in the supplement material.  Note Ross et al.~\cite{ross2010reduction} used a deterministic policy in their analysis, which may prohibit a direct comparison of rates.
- 
+ Define the surrogate loss as the squared euclidean norm, or $l(\pi_{\theta}(\bx),\pi_{\theta^*}(\bx)) = ||\pi_{\theta}(\bx_{i,t}) - \pi_{\theta^*}(\bx_{i,t})||_2$.We assume that the controls are be bounded and thus can be normalized such that the $l \in [0,1]$.  We are interested in the situation where the supervisor and robot policy are stochastic with a Normal Distribution (i.e. $p(\bu|\pi_{\theta}(\bx)) = \mathcal{N}(\pi_\theta(\bx),\sigma I)$. The interest in stochastic policies instead of deterministic is two-fold: 1) human supervisor can be noisy in nature and 2) due to noise in robot execution, such as cable coupling, the intended and actual control may differ in a stochastic way~\cite{mahler2014learning}. \mlnote{need to clarify what the generalization is} We show a generalization of this bound to any distribution in the exponential family in the supplement material.  Note Ross et al.~\cite{ross2010reduction} used a deterministic policy in their analysis, which may prohibit a direct comparison of rates.
 
 \begin{theorem}
 Given a policy $\pi_{\theta^N}$, the following is true 
-$$E_{p(\tau|\theta^n)} J(\theta^N) \leq T\sqrt{\frac{1}{4\sigma}E_{p(\tau|\theta^*)} J(\theta^N)}+E_{p(\tau|\theta^*)} J(\theta^N)$$\\
+$$E_{p(\tau|\theta^n)} J(\theta^N) \leq T\sqrt{\frac{1}{4\sigma}E_{p(\tau|\theta^*)} J(\theta^N)}+E_{p(\tau|\theta^*)} J(\theta^N)$$
 \end{theorem}
 \begin{proof}
 For convenience we will write $E_{p(\tau|\theta)} = E_{\theta}$ and $l(\theta,\bx) = l(\theta)$. The proof follows by first deriving an upper bound on the worst case difference between the two quantities $E_{\theta^N} J(\theta^N) - E_{\theta^*} J(\theta^N) $. Then we leverage the intuition that if one is minimizing $E_{\theta^*} J(\theta^N) $, they are also decreasing the distance between the robot and supervisor's distributions. 
-
-
 
 \begin{align}
 &E_{\theta^N} J(\theta^N) - E_{\theta^*} J(\theta^N) \\
@@ -429,14 +426,11 @@ For convenience we will write $E_{p(\tau|\theta)} = E_{\theta}$ and $l(\theta,\b
 &= T\sqrt{T \frac{1}{4\sigma} E_{p(\bx|\theta^*)} l(\theta^N)}
 \end{align}
 
-Line 8,9 and 10 apply the definition of the KL-divergence, the markov chain and the normal distribution over $p(\bu_t|\bx_t,\theta)$. Line 11 applies the triangle inequality to upperbound by the defined surrogate loss. Line 12 applies the assumed definition of $J(\theta)$. Line 13 uses Ross et al. notation. 
+Line 8,9 and 10 apply the definition of the KL-divergence, the markov chain and the normal distribution over $p(\bu_t|\bx_t,\theta)$. Line 11 applies the triangle inequality to upperbound by the defined surrogate loss. Line 12 applies the assumed definition of $J(\theta)$. Line 13 uses the notation of Ross et al.. 
 
 The intuition behind these steps is that difference between  the two distribution can be controlled via the surrogate loss on the expected supervisor. Thus, illustrating the closer the robot's policy matches the supervisor's policy on the supervisor's distribution, the smaller the total variational difference between the resulting two distributions will be. 
 \end{proof}
   
- \mlnote{this is weird to compare because of deterministic to stochastic}
-We acknowledge our bound can be larger than the original analysis provided by Ross et al. when  $E_{p(\bx|\theta^*)} l(\theta^N)$ is very small. However, when not enough demonstrations have been collected or model error exists $E_{p(\bx|\theta^*)} l(\theta^N)$ could be quite large. Thus, suggesting that HC Lfd has more robustness than suggested in prior work~\cite{ross2010reduction}. 
-
 The above analysis demonstrates how the constant $T$ affects the bound in error. However, it is important to note that this is not the only variable that plays a role in performance. The size of the function class and number of demonstrations needed are are also important in determining how large $E_{p(\bx|\theta^*)} l(\theta^N)$ is. 
 
 Understanding how much data is needed to learn a function, is a well studied problem known as sample complexity analysis~\cite{anthony2009neural,bartlett2002rademacher,kakade2009complexity}. In this literature they use different metrics to describe the complexity of a function class and show rates on which a given function class would converge to the best in the set. We refer the reader to \cite{vapnik2013nature}, for a review of such topics. 
@@ -455,9 +449,9 @@ Shown above is the normalized performance with respect to the expected superviso
 We provide experiments in a  Grid World environment, which allows for us to vary the robot's policy class over a large number of randomly generated environments. Then we examine a linear dynamical system, which is used to show a limitation the ability of RC LfD to converge. Finally, we perform human trials on 10 participants, who try to teach a robot how to singulate, or separate an object from a pile. We used DAgger as the example of an RC algorithm in these experiments. 
 
 \subsection{Varying Function Class}\label{sec:gdw}
-In this experiment, we hypothesize that the performance gap of RC LfD diminishes as the robot's policy class is increased. In a simulated Grid World, we have a robot that is trying to reach a goal state, at which it receives $+10$ reward. The robot receives $-10$ reward if it touches a penalty state. The robot also receives a $-0.02$ penalty for every blank state. The robot has a state space of $(x,y)$ coordinates and a set of actions consisting of $\lbrace$LEFT, RIGHT, FORWARD, BACKWARD, NONE$\rbrace$, where NONE indicates staying at the current stop. The grid size for the environment was $30 \times 30$. $20\%$ of randomly drawn states are marked as a penalty, while only one is a goal state. For the transition dynamics, $p(\bx_{t+1}|\bx_{t},\bu_t)$, the robot goes to an adjacent state that does not correspond to the intended control with probability $0.2$.  The time horizon for the policy is $T=30$. 
+In this experiment, we hypothesize that the performance gap of RC LfD diminishes as the robot's policy becomes more expressive. In a simulated Grid World, we have a robot that is trying to reach a goal state, at which it receives $+10$ reward. The robot receives $-10$ reward if it touches a penalty state. The robot also receives a $-0.02$ penalty for every blank state. The robot has a state space of $(x,y)$ coordinates and a set of actions consisting of $\lbrace$LEFT, RIGHT, FORWARD, BACKWARD, NONE$\rbrace$, where NONE indicates staying at the current stop. The grid size for the environment was $30 \times 30$. $20\%$ of randomly drawn states are marked as a penalty, while only one is a goal state. For the transition dynamics, $p(\bx_{t+1}|\bx_{t},\bu_t)$, the robot goes to an adjacent state that does not correspond to the intended control with probability $0.2$.  The time horizon for the policy is $T=30$. 
 
-We use Value Iteration to compute an optimal supervisor. The optimal policy must learn to be robust to the noise in the dynamics, reach the goal state and then stay there. In all settings we provided the RC LfD with one demonstration from HC sampling and then roll out its policy. This initial demonstration set from HC sampling is common in methods like DAgger~\cite{rossreduction2010}.
+We use Value Iteration to compute an optimal supervisor. The supervisor must learn to be robust to the noise in the dynamics, reach the goal state and then stay there. In all settings we provided the RC LfD with one demonstration from HC sampling and then roll out its policy. This initial demonstration set from HC sampling is common in methods like DAgger~\cite{rossreduction2010}.
 
 Each plot shows the normalized performance where $1.0$ represents the expected performance of the optimal supervisor. We run all trials over 100 randomly generated environments, which contain $270$ randomly selected penalty states and $1$ goal state. 
 
