@@ -189,14 +189,11 @@ We explore the value of the extra overhead of RC for emerging classes of highly-
 
 We  conjecture that their added expressiveness can help alleviate, model error, which means the robot may now recover the expected supervisor's policy with with enough data. In this case, the robot will converge to the  supervisor's distribution. Thus,  it could be beneficial to collect data from the distribution it is converging towards. 
 
-We present three theoretical contributions that consider these ideas. First, assuming that you have consistent a robot policy, (i.e., given infinite data the estimated policy converges to the best in the set) HC is guaranteed to converge. However,  under this assumption RC is still not guaranteed to converge. 
+We present three theoretical contributions that consider these ideas. First, assuming that you have consistent a robot policy, (i.e., given infinite data the estimated policy converges to the best in the set) HC is guaranteed to converge. However,  under this assumption RC is still not guaranteed to converge. We furthermore contribute a new analysis for the error accumulation in HC LfD, that demonstrates for squared euclidean losses and normally distributed stochastic policies a tighter bound (in the time horizon of the task) than the rate shown by Ross et al.~\cite{ross2010efficient} for HC LfD.
 
-We furthermore contribute a new analysis for the error accumulation in HC LfD, that demonstrates for squared euclidean losses and stochastic policies a tighter bound (in the time horizon of the task) than the rate suggested by Ross et al.~\cite{ross2010efficient}. We finally provide a data-dependent analysis of this rate for policy classes with convex losses (i.e. kernelized SVM, kernelized regression) using Rademacher Complexity, which shows that the time horizon is not the only important parameter in analyzing policy error, but also size of policy class and number of demonstrations.
+We then compare the performance of HC and RC LfD on a series of simulated robotic tasks. By varying the expressiveness of a the robot's policy, we show on 100 randomly generated gridworld environments that performance gap between the two methods diminishes as the expressiveness is increased. We further demonstrate in a point mass control example how RC LfD can prevent convergence by visiting harder to learn areas. 
 
-We then compare the performance of HC and RC LfD on a series of simulated robotic tasks. By varying the expressiveness of a the robot's policy, we show on 100 randomly generated gridworld enviroments that performance gap between the two methods diminishes as the expressiveness is increased. We further demonstrate in a point mass control example how RC LfD can prevent convergence by visiting harder to learn areas. 
-
-We finally performed a pilot study with 10 students at UC Berkeley, who were asked to use both RC and HC Lfd to train a Zymark robot to singulate an object (or separate it from a pile). We observed a statistically significant gap in the average performance of the policies trained by the two approaches. We found that RC was $40\%$ succesful and HC was $60\%$.  LfD is able to achieve a $21 \%$ increase in the probability of success with the same amount of $60$ trials. We examined how well people could match their controls in retro-active feedback compared to tele-operated. Furthermore, we examined a held out test set's surrogate loss to illustrate how well the policy learned is able to generalize.
-
+We finally performed a pilot study with 10 students at UC Berkeley, who were asked to use both RC and HC Lfd to train a Zymark robot to singulate an object (or separate it from a pile). We observed a statistically significant gap in the average performance of the policies trained by the two approaches. We found that RC was $40\%$ successful and HC was $60\%$ with the same amount of $60$ trials provided. In our post analysis, we examined how well people could match their controls in retro-active feedback compared to tele-operated. Furthermore, we examined a held out test set's surrogate loss to illustrate how well the policy learned is able to generalize.
 
 Overall, our results suggests that for highly expressive learners, it might in some cases be more advantageous to get demonstrations using HC LfD than to ask the human supervisor for retro-active feedback  along the current robot's policy.
 
@@ -335,7 +332,6 @@ In this section we will first show how when HC is guranteed to converge, RC is n
 For this section are interested in the total loss along a trajectory with respect to a policy, $\pi_{\theta^*}$, which is defined as $J(\theta) = \sum^T_{t=1} l(\pi_{\theta}(\bx_{t}),\pi_{\theta^*}(\bx_{t}))$. 
 
 \subsection{Algorithm Convergence}
-\mlnote{We are working on formalizing this section more}
 Convergence of an LfD algorithm can be defined in a number of ways, for example one way could be the element-wise condition $\theta^* = \hat{\theta}$. However, this is potentially a stronger condition than required for the performance of a robot to match that of an supervisor.  This is because the robot only needs to match the supervisor on the distribution induced by the supervisor (i.e. if the supervisor never visits a state the robot should not be forced to match the supervisor there). 
 
 An algorithm converges if
@@ -510,7 +506,7 @@ We run HC and RC LfD in this setting and plot the performance in Fig. \ref{fig:p
 \includegraphics{f_figs/p_mass.eps}
 \caption{
     \footnotesize
-Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants A and B, in B the controls are inverted in the dynamics thus resulting in $x=y$ and $y=x$. The supervisor is the infinite horizion LQG computed policy, which results in two different linear matrices in region A and B. Right: Illustrates how having a linear robot policy class can cause RC LfD to fail  to converge due to it collecting data from region B, however HC still converges to the true distribution. }
+Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two quadrants 1 and 2, in 2 the point mass has four times as much mass. The supervisor is computed via infinite horizon LQG for each region, which results in two different linear matrices in region 1 and 2. Right: Illustrates how having a linear robot policy class can cause RC LfD to fail  to converge due to it collecting data from region 2, however HC converges to the true supervisor performance. }
 \vspace*{-1pt}
 \label{fig:p_mass}
 \end{figure}
@@ -563,11 +559,24 @@ RC LfD & $3.4 \pm 1.0$    & $0.014 \pm 0.003$ \\
    \caption { \footnotesize  Shown above is the average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 demonstrators. The confidence intervals are standard error on the mean, which indicate RC LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. 
    }
 		\tablabel{opt-p-comparison}
-\vspace*{-20pt}
+\vspace*{-10pt}
 \end{table}
 
 
 We further tried to gain some insight into how well people provide retro-active feedback. We asked participants to tele-operate the robot five times and then provide retro-active feedback via the RC interface to try and match the controls given by tele-operation. \mlnote{controls should all be measured via correlation}
+
+
+
+\begin{figure}
+\centering
+\includegraphics{f_figs/traj_data.eps}
+\caption{
+    \footnotesize
+Shown above are samples collected during the human study on the same initial state, each point on the line represents where the tip of the gripper is. Left: Is the the 10 demonstrations given from human tele-operation. Note they all move to the object pile and try to push the "banana" shape to move the small shape. Right: the trajectories  from RC sampling under the current policy trained. The RC samples visit a much larger area of the workspace, where the robot must be taught more complex recovery behavior. }
+
+\label{fig:izzy_sing}
+\end{figure}
+
 
 
 The controls of the human tele-operation with those given by retroactive feedback. We compared the controls via first normalizing them between $[-1,1]$ based on their bounds an then used squared euclidean distance of the rotation and translation control. The same loss used in training of the policy. This measurement gives a  percentage difference between the human's tele-operation actions, and their retroactive feedback.
@@ -603,28 +612,6 @@ The data-dependent results demonstrate that in the worst-case a heavy tail could
 
 \bibliographystyle{IEEEtranS}
 \bibliography{references}
-
-\appendix
-\input{counterexample.tex}
-
-\begin{defn}
-
-\end{defn}
-
-\subsection{Counterexample Proof Sketch}
-Consider a robot learning to search down a tree with time horizon $T > 2$ to maximize cumulative reward as illustrated in Fig. \ref{fig:c_ex} with a policy that can choose to either always go left or always go right, $\Theta = \lbrace L,R \rbrace$.
-
-The learning algorithm, which chooses how to update the policy is to choose the policy that satifies: 
-
-$$\pi_{\theta} = \underset{\lbrace L,R \rbrace}{\mbox{argmin}} \sum^M_{m=0}\sum^T_{t=0} I(\pi_\theta(x_{m,t}),\tilde{\pi}(x_{m,t}))$$
-
-It is straightforward to show that $\pi_{\theta}$ will always choose the majority of actions taken by the supervisor.
-
-If passive LfD is applied to this situation, the supervisor will always chose left, $L$, and the robot will select this action resulting in perfect imitation. However, if DAgger is used and the robots initial policy is to go right, $\pi_{\theta_0} = R$.
-Then for the first rollout the learner collects labels $\{L, R, ..., R\}$, and again chooses the policy $\pi_{\theta} = R$.
-Furthermore, if on iteration $n$ $\pi_{\hat{\theta}_n} = R$ then the learner will again collect labels $\{L, R, ..., R\}$ and the aggregate dataset will still have a majority of $R$s.
-
-Thus, convergence in regret is achievable because the best the robot could have done in hindsight would be to always choose $R$, but that does not result in a good policy. We note that if passive LfD was applied the robot would have chosen $L$ from the a single initial demonstration. 
 
 
 \end{document}
