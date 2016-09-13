@@ -326,22 +326,17 @@ sampling~\cite{NIPS2014_5421,ross2010reduction}}.
  
 
 \section{Theoretical Analysis}
-In this section we will first show how when HC is guaranteed to converge, RC is not.  Then we present a new analysis for the accumulation in error for  \ns. 
+In this section we will first show how when HC is guaranteed to converge, RC is not.  Then we present a new analysis for the accumulation in error for  \ns. In this section are interested in the total loss along a trajectory with respect to the supervisor's policy $\pi_{\theta^*}$, which is defined as $J(\theta) = \sum^T_{t=1} l(\pi_{\theta}(\bx_{t}),\pi_{\theta^*}(\bx_{t}))$. 
 
-For this section are interested in the total loss along a trajectory with respect to a policy, $\pi_{\theta^*}$, which is defined as $J(\theta) = \sum^T_{t=1} l(\pi_{\theta}(\bx_{t}),\pi_{\theta^*}(\bx_{t}))$. 
+\subsection{Algorithm Consistency}
+A policy produced by an LfD algorithm is {\it consistent} if it can match the loss of the supervisor on the supervisor's own distribution given infinite samples:
+$$\underset{N \rightarrow \infty}{\text{lim }} E_{p(\tau|\theta^N)}J(\theta^N)  = E_{p(\tau|\theta^*)}J(\theta^*) $$
+\noindent where $\theta^N$ is the policy produced by running the LfD algorithm on $N$ datapoints.
+We note that this condition does not imply {\it convergence} to the supervisor's policy: $\underset{N \rightarrow \infty}{\text{lim }} \theta^N = \theta^*$.
 
-\subsection{Algorithm Convergence}
-Convergence of an LfD algorithm can be defined in a number of ways, for example one way could be the element-wise condition $\theta^* = \hat{\theta}$. However, this is potentially a stronger condition than required for the performance of a robot to match that of an supervisor.  This is because the robot only needs to match the supervisor on the distribution induced by the supervisor (i.e. if the supervisor never visits a state the robot should not be forced to match the supervisor there). 
-
-An algorithm converges if
-$$\underset{N \rightarrow \infty}{\text{limit }} E_{p(\tau|\theta^*)}J(\theta^N)  = E_{p(\tau|\theta^*)}J(\theta^*) $$
-\noindent where $\theta^N$ is the result of running an algorithm on $N$ datapoints.
-
-Thus, the final policy achieves the same surrogate loss as the supervisor's policy on the distribution of states the supervisor visits.  A policy that is expressive enough to achieve this condition will be defined as consistent~\cite{vapnik1992principles}.
-
-We will now show that it is possible for a given policy class, $\Theta$, to achieve have this condition when using \ns , but fail to when using an \nc. \\
-Let $\theta^M$ be the result of running \ns on $M$ trajectory samples from the supervisor.
-Let $\theta_{d}^N$ be the result of running RC for $N$ iterations.
+We show that there exist environments such that \ns is consistent but \nc is not.
+Let $\theta_{h}^M$ be the result of running \ns on $M$ trajectory samples from the supervisor.
+Let $\theta_{r}^N$ be the result of running \nc for $N$ iterations.
 
 \begin{figure}
 \centering
@@ -354,18 +349,18 @@ A binary decision tree, where a robot is being taught by a supervisor to descend
 \end{figure}
 
 \begin{theorem}
-There exists an environment and policy class $\Theta$ such that:
+There exist an environment and policy class $\Theta$ such that:
+\vspace{-2ex}
 \begin{align*}
-	\underset{N \rightarrow \infty}{\text{lim }} E_{p(\tau \mid \theta_{d}^N) } J(\theta_{d}^N) &> E_{p(\tau \mid \theta^*)} J(\theta^*) \\
-	\underset{M \rightarrow \infty}{\text{lim }} E_{p(\tau \mid \theta^M) } J(\theta^M) &= E_{p(\tau \mid \theta^*)} J(\theta^*)
+	\underset{N \rightarrow \infty}{\text{lim }} E_{p(\tau \mid \theta_{r}^N) } J(\theta_{r}^N) &> E_{p(\tau \mid \theta^*)} J(\theta^*) \\
+	\underset{M \rightarrow \infty}{\text{lim }} E_{p(\tau \mid \theta_{h}^M) } J(\theta_{h}^M) &= E_{p(\tau \mid \theta^*)} J(\theta^*)
 \end{align*} 
-\noindent In other words, RC may fail to converge in cases where HC LfD matches the expected surrogate loss of the supervisor. 
 \end{theorem}
 
 \begin{proof}
-Consider an environment with a deterministic initial state at the root of a binary tree of depth 3 with deterministic dynamics and rewards illustrated in Fig. \ref{fig:c_ex}.
-Let $T = 3$ and consider the 0-1 surrogate loss $\ell$.
-The optimal policy is to choose to go left at the initial state at every branch on the left of the tree and right at every branch on the right of the tree.
+Consider an environment with a deterministic initial state $\bx_0$ at the root of a binary tree of depth 3 with deterministic dynamics and rewards illustrated in Fig. \ref{fig:c_ex}.
+Let $T = 3$ and let $\ell$ be the 0-1 surrogate loss.
+The optimal policy is to choose to go left at $\bx_0$ and every branch to the left of the tree, and to right at every branch on the right of the tree.
 This incurs reward $E_{p(\tau \mid \theta^*)} R(\tau) = 30$ and expected surrogate loss $E_{p(\tau \mid \theta^*)} J(\theta^*) = 0$.
 
 Let the policy class for RC and HC LfD be the set of policies $\Theta = \{L, R\}$.
@@ -373,27 +368,31 @@ Let $\mD_K$ be a set of $K * T$ states generated by the algorithm, and let $a = 
 Then the policy produced by either algorithm is $\pi_{\hat{\theta}}$ for all states $x$, where
 \vspace{-2ex}
 \begin{align*}
-	\hat{\theta} = \underset{\theta \in \Theta}{\text{argmin }} \sum_{k=0}^K \sum_{t=0}^T \ell(\pi_{\theta}(x_{k,t}), \pi_{\theta^*}(x_{k,t})) = \left\{ \begin{array}{cc} R & a \geq b \\ L & a < b \end{array} \right.
+	\theta^K = \underset{\theta \in \Theta}{\text{argmin }} \sum_{k=0}^K \sum_{t=0}^T \ell(\pi_{\theta}(x_{k,t}), \pi_{\theta^*}(x_{k,t})) = \left\{ \begin{array}{cc} R & a \geq b \\ L & a < b \end{array} \right.
 \end{align*}
 \noindent In other words, the optimal policy is to choose the action that the supervisor chooses most frequently in the dataset.
 
-For HC LfD, the dataset $\mD_K$ consists of $K * T$ left labels because the dynamics and initial state are deterministic.
-Therefore for any $M > 0$  HC LfD chooses $\theta^M = L$ which has surrogate loss $E_{p(\tau \mid \theta^M)} J(\theta^M) = 0$.
+For \ns, the dataset $\mD_K$ consists of $K * T$ left labels because the dynamics and initial state are deterministic.
+Therefore for any $M > 0$  HC LfD chooses $\theta_{h}^M = L$ which has surrogate loss $E_{p(\tau \mid \theta^M)} J(\theta_{h}^M) = 0$.
 
-Let RC be initialized with $\theta_d^0 = R$, run with $\beta=0$~\cite{ross2010reduction}, and without loss of generality assume RC collects one trajectory per demonstration.
-Then on iteration $N=1$, RC goes to the right three times and collects supervisor labels $\{L, R, R\}$, leading to policy $\theta_{d}^1 = R$.
+Let \nc be initialized with $\theta_{r}^0 = R$ and without loss of generality assume RC collects one trajectory per demonstration and is run with $\beta=0$~\cite{ross2010reduction}.
+Then on iteration $N=1$, \nc goes to the right three times and collects supervisor labels $\{L, R, R\}$, leading to policy $\theta_{d}^1 = R$.
 Furthermore, if $\theta_{d}^N = R$ then the next iteration collects $\{L, R, R\}$ and the dataset $\mD_{K+1}$ maintains two-thirds right labels, so $\theta_{d}^{N+1} = R$.
 
-Therefore by induction $\theta_{d}^{N} = R$ for all $N > 0$, which incurs surrogate loss $E_{p(\tau \mid \theta_{p}^N)} J(\theta_{p}^N) = (1 / 3) N T > E_{p(\tau \mid \theta^M)} J(\theta^M)$.
+Therefore by induction $\theta_{d}^{N} = R$ for all $N > 0$, which incurs surrogate loss $E_{p(\tau \mid \theta_{p}^N)} J(\theta_{p}^N) = (1 / 3) T > E_{p(\tau \mid \theta^M)} J(\theta^M)$.
 We also note that the reward is also suboptimal: $E_{p(\tau \mid \theta^N)} R(\tau) = 20$.
 
 \end{proof}
 
-\mlnote{TODO: need to shorten the next three paragraphs}This theorem does not contradict the original theoretical analysis of Ross et al. ~\cite{ross2010reduction}. In their analysis, RC LfD is modeled as an online optimization problem~\cite{ross2010reduction}.  In online optimization a learner plays a game where at each iteration, it chooses a policy and receives a loss from an adversary.  In the LfD setting, the learner is the robot's policy and the adversary would be the loss on the distribution of states induced by the policy $E_{p(\tau|\theta)} J(\theta)$~\cite{shalev2011online}.
+This suggests that \ns may be preferable to \nc in cases where the policy class $\Theta$ is sufficient to achieve consistency but not convergence because \nc may collect samples in parts of of the state space where the supervisor's policy is more complex.
+We note that this theorem does not contradict the original theoretical analysis of Ross et al. ~\cite{ross2010reduction}, which shows that the learner may achieve a surrogate loss that is $O(T)$ but not necessarily converging to zero.
+This may be because the analysis bounds the error by the best the algorithm could have done in hindsight, which may be arbitrarily bad as our tree example suggests. 
 
-RC LfD in this context is known as a Follow the Leader (FTL) algorithm. In FTL, the best policy is chosen on all previous seen losses, or the aggregate dataset in the LfD context. Their analysis shows that under the condition when the surrogate loss, $l$, is strongly convex with respect to $\theta$, their policy has a regret that converges to the best the policy could have done on all previous seen losses $\underset{\theta}{\min} \sum_{k=1}^K E_{p(\tau|\hat{\theta}_k)}J(\hat{\theta}_k)$. 
-
-A bound in regret though though does not necessarily imply the robot will be able to generalize to the unseen data nor match the supervisor. It instead says the robot's error is bounded by the best it could have done in hindsight, which may be arbitrarily bad as our tree example suggests. 
+%In online optimization a learner plays a game where at each iteration, it chooses a policy and receives a loss from an adversary.  In the LfD setting, the learner is the robot's policy and the adversary would be the loss on the distribution of states induced by the policy $E_{p(\tau|\theta)} J(\theta)$~\cite{shalev2011online}.
+%
+%RC LfD in this context is known as a Follow the Leader (FTL) algorithm. In FTL, the best policy is chosen on all previous seen losses, or the aggregate dataset in the LfD context. Their analysis shows that under the condition when the surrogate loss, $l$, is strongly convex with respect to $\theta$, their policy has a regret that converges to the best the policy could have done on all previous seen losses $\underset{\theta}{\min} \sum_{k=1}^K E_{p(\tau|\hat{\theta}_k)}J(\hat{\theta}_k)$. 
+%
+%A bound in regret though though does not necessarily imply the robot will be able to generalize to the unseen data nor match the supervisor. It instead says the robot's error is bounded by the best it could have done in hindsight, which may be arbitrarily bad as our tree example suggests. 
 
 \subsection{Bound on Error for HC Lfd}
 In the HC LfD setting a robot is trained on the states visited by the supervisor. However, at run time the robot may encounter a different distribution of states due to not perfectly matching the supervisor's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadratically (i.e. $O(T^2E_{p(\bx|\theta^*)} l(\theta^N)$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\theta^N) = E_{p(\tau|\theta^*)} J(\theta^N)$. We present a new analysis for a class of stochastic policies and  defined below that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\theta^N)})$.
@@ -434,8 +433,8 @@ Line 8,9 and 10 apply the definition of the KL-divergence, the markov chain and 
 The intuition behind these steps is that difference between  the two distribution can be controlled via the surrogate loss on the expected supervisor. Thus, illustrating the closer the robot's policy matches the supervisor's policy on the supervisor's distribution, the smaller the total variational difference between the resulting two distributions will be. 
 \end{proof}
   
- \mlnote{this is weird to compare because of deterministic to stochastic}
-We acknowledge our bound can be larger than the original analysis provided by Ross et al. when  $E_{p(\bx|\theta^*)} l(\theta^N)$ is very small. However, when not enough demonstrations have been collected or model error exists $E_{p(\bx|\theta^*)} l(\theta^N)$ could be quite large. Thus, suggesting that HC Lfd has more robustness than suggested in prior work~\cite{ross2010reduction}. 
+% \mlnote{this is weird to compare because of deterministic to stochastic}
+%We acknowledge our bound can be larger than the original analysis provided by Ross et al. when  $E_{p(\bx|\theta^*)} l(\theta^N)$ is very small. However, when not enough demonstrations have been collected or model error exists $E_{p(\bx|\theta^*)} l(\theta^N)$ could be quite large. Thus, suggesting that HC Lfd has more robustness than suggested in prior work~\cite{ross2010reduction}. 
 
 The above analysis demonstrates how the constant $T$ affects the bound in error. However, it is important to note that this is not the only variable that plays a role in performance. The size of the function class and number of demonstrations needed are are also important in determining how large $E_{p(\bx|\theta^*)} l(\theta^N)$ is. 
 
