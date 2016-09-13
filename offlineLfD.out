@@ -6,15 +6,14 @@
 \BOOKMARK [1][-]{section.4}{Theoretical Analysis}{}% 6
 \BOOKMARK [2][-]{subsection.4.1}{Algorithm Convergence}{section.4}% 7
 \BOOKMARK [2][-]{subsection.4.2}{Bound on Error for HC Lfd}{section.4}% 8
-\BOOKMARK [2][-]{subsection.4.3}{Finite Sample Analysis}{section.4}% 9
-\BOOKMARK [1][-]{section.5}{Experiments}{}% 10
-\BOOKMARK [2][-]{subsection.5.1}{Varying Function Class}{section.5}% 11
-\BOOKMARK [2][-]{subsection.5.2}{Algorithmic Convergence }{section.5}% 12
-\BOOKMARK [2][-]{subsection.5.3}{Human Study for Planar Singulation}{section.5}% 13
-\BOOKMARK [1][-]{section.6}{Conclusion and Future Work}{}% 14
-\BOOKMARK [1][-]{section*.9}{References}{}% 15
-\BOOKMARK [1][-]{section*.10}{Appendix}{}% 16
-\BOOKMARK [2][-]{subsection.Appendix.A.1}{Notation and Problem Statement}{section*.10}% 17
-\BOOKMARK [2][-]{subsection.Appendix.A.2}{Empirical Risk Minimizer \(Passive LfD\)}{section*.10}% 18
-\BOOKMARK [2][-]{subsection.Appendix.A.3}{Follow-The-Leader \(DAgger\)}{section*.10}% 19
-\BOOKMARK [2][-]{subsection.Appendix.A.4}{Counterexample Proof Sketch}{section*.10}% 20
+\BOOKMARK [1][-]{section.5}{Experiments}{}% 9
+\BOOKMARK [2][-]{subsection.5.1}{Varying Function Class}{section.5}% 10
+\BOOKMARK [2][-]{subsection.5.2}{Algorithmic Convergence }{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.3}{Human Study for Planar Singulation}{section.5}% 12
+\BOOKMARK [1][-]{section.6}{Conclusion and Future Work}{}% 13
+\BOOKMARK [1][-]{section*.8}{References}{}% 14
+\BOOKMARK [1][-]{section*.9}{Appendix}{}% 15
+\BOOKMARK [2][-]{subsection.Appendix.A.1}{Notation and Problem Statement}{section*.9}% 16
+\BOOKMARK [2][-]{subsection.Appendix.A.2}{Empirical Risk Minimizer \(Passive LfD\)}{section*.9}% 17
+\BOOKMARK [2][-]{subsection.Appendix.A.3}{Follow-The-Leader \(DAgger\)}{section*.9}% 18
+\BOOKMARK [2][-]{subsection.Appendix.A.4}{Counterexample Proof Sketch}{section*.9}% 19

@@ -36,6 +36,11 @@ M.~Anthony and P.~L. Bartlett, \emph{Neural network learning: Theoretical
   foundations}.\hskip 1em plus 0.5em minus 0.4em\relax cambridge university
   press, 2009.
 
+\bibitem{bartlett2002rademacher}
+P.~L. Bartlett and S.~Mendelson, ``Rademacher and gaussian complexities: Risk
+  bounds and structural results,'' \emph{Journal of Machine Learning Research},
+  vol.~3, no. Nov, pp. 463--482, 2002.
+
 \bibitem{duvallet2013imitation}
 F.~Duvallet, T.~Kollar, and A.~Stentz, ``Imitation learning for natural
   language direction following through unknown environments,'' in
@@ -47,10 +52,10 @@ X.~Guo, S.~Singh, H.~Lee, R.~L. Lewis, and X.~Wang, ``Deep learning for
   real-time atari game play using offline monte-carlo tree search planning,''
   in \emph{NIPS}, 2014, pp. 3338--3346.
 
-\bibitem{kakade2009generalization}
-S.~M. Kakade and A.~Tewari, ``On the generalization ability of online strongly
-  convex programming algorithms,'' in \emph{Advances in Neural Information
-  Processing Systems}, 2009, pp. 801--808.
+\bibitem{kakade2009complexity}
+S.~M. Kakade, K.~Sridharan, and A.~Tewari, ``On the complexity of linear
+  prediction: Risk bounds, margin bounds, and regularization,'' in
+  \emph{Advances in neural information processing systems}, 2009, pp. 793--800.
 
 \bibitem{kim2013maximum}
 B.~Kim and J.~Pineau, ``Maximum mean discrepancy imitation learning.'' in
@@ -121,5 +126,9 @@ V.~Vapnik, ``Principles of risk minimization for learning theory,'' in
 \bibitem{vapnik2013nature}
 ------, \emph{The nature of statistical learning theory}.\hskip 1em plus 0.5em
   minus 0.4em\relax Springer Science \& Business Media, 2013.
+
+\bibitem{verdu2014total}
+S.~Verd{\'u}, ``Total variation distance and the distribution of relative
+  information.''\hskip 1em plus 0.5em minus 0.4em\relax Citeseer.
 
 \end{thebibliography}

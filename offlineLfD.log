@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  11 SEP 2016 21:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  12 SEP 2016 20:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -889,14 +889,7 @@ Package microtype Info: Loading configuration file microtype.cfg.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/microtype.cfg
 File: microtype.cfg 2013/05/23 v2.5a microtype main configuration file (RS)
 ))
-(./offlineLfD.aux
-
-LaTeX Warning: Label `fig:izzy_rw' multiply defined.
-
-
-LaTeX Warning: Label `fig:izzy_rw' multiply defined.
-
-)
+(./offlineLfD.aux)
 \openout1 = `offlineLfD.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 144.
@@ -1002,30 +995,30 @@ Missing character: There is no â in font ptmb7t!
 Missing character: There is no € in font ptmb7t!
 Missing character: There is no ™ in font ptmb7t!
 Package epstopdf Info: Source file: <f_figs/teaser.eps>
-(epstopdf)                    date: 2016-09-11 20:56:47
-(epstopdf)                    size: 86616726 bytes
+(epstopdf)                    date: 2016-09-12 19:59:04
+(epstopdf)                    size: 21497050 bytes
 (epstopdf)             Output file: <f_figs/teaser-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-09-11 20:56:56
-(epstopdf)                    size: 507390 bytes
+(epstopdf)                    date: 2016-09-12 19:59:12
+(epstopdf)                    size: 406896 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/teaser-eps-converte
 d-to.pdf f_figs/teaser.eps>
-(epstopdf)             \includegraphics on input line 170.
+(epstopdf)             \includegraphics on input line 171.
 Package epstopdf Info: Output file is already uptodate.
 
-<f_figs/teaser-eps-converted-to.pdf, id=87, 294.09875pt x 154.5775pt>
+<f_figs/teaser-eps-converted-to.pdf, id=83, 286.06876pt x 154.5775pt>
 File: f_figs/teaser-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/teaser-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/teaser-eps-converted-to.pdf used on input line 
-170.
-(pdftex.def)             Requested size: 252.94499pt x 132.94818pt.
+171.
+(pdftex.def)             Requested size: 252.94499pt x 136.67958pt.
 
-Overfull \hbox (7.22688pt too wide) in paragraph at lines 170--173
+Overfull \hbox (7.22688pt too wide) in paragraph at lines 171--174
  [] 
  []
 
 
-LaTeX Warning: Citation `he2012imitation' on page 1 undefined on input line 179
+LaTeX Warning: Citation `he2012imitation' on page 1 undefined on input line 180
 .
 
 [1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
@@ -1036,7 +1029,7 @@ LaTeX Warning: Citation `he2012imitation' on page 1 undefined on input line 179
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 200.
+LaTeX Font Info:    Try loading font information for U+msa on input line 198.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -1044,7 +1037,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 200.
+LaTeX Font Info:    Try loading font information for U+msb on input line 198.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1053,16 +1046,16 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 
-LaTeX Warning: Citation `NVIDEA' on page 2 undefined on input line 209.
+LaTeX Warning: Citation `NVIDEA' on page 2 undefined on input line 207.
 
 
-LaTeX Warning: Citation `he2012imitation' on page 2 undefined on input line 220
+LaTeX Warning: Citation `he2012imitation' on page 2 undefined on input line 218
 .
 
 [2]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 310.
+(hyperref)                than one, level fixed on input line 308.
 
 [3]
 Package epstopdf Info: Source file: <f_figs/counter_exmp.eps>
@@ -1073,159 +1066,113 @@ Package epstopdf Info: Source file: <f_figs/counter_exmp.eps>
 (epstopdf)                    size: 13754 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/counter_exmp-eps-co
 nverted-to.pdf f_figs/counter_exmp.eps>
-(epstopdf)             \includegraphics on input line 355.
+(epstopdf)             \includegraphics on input line 353.
 Package epstopdf Info: Output file is already uptodate.
 
-<f_figs/counter_exmp-eps-converted-to.pdf, id=135, 143.53625pt x 103.38625pt>
+<f_figs/counter_exmp-eps-converted-to.pdf, id=143, 143.53625pt x 103.38625pt>
 File: f_figs/counter_exmp-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/counter_exmp-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/counter_exmp-eps-converted-to.pdf used on input
- line 355.
+ line 353.
 (pdftex.def)             Requested size: 143.53589pt x 103.38599pt.
  [4 <./f_figs/counter_exmp-eps-converted-to.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 413--414
-
- []
-
-
-Underfull \hbox (badness 3646) in paragraph at lines 449--450
-\OT1/ptm/m/n/10 (+20) with re-spect to a pol-icy, $\OML/cmm/m/it/10 ^^Y[]$\OT1/
-ptm/m/n/10 (+20) , which is de-fined as
- []
-
-
-Underfull \hbox (badness 2717) in paragraph at lines 449--450
-\OML/cmm/m/it/10 J\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^R\OT1/cmr/m/n/10 ) = [][]
- \OML/cmm/m/it/10 l\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^Y[]\OT1/cmr/m/n/10 (\OT1
-/cmr/bx/n/10 x[]\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; ^^Y[]\OT1/cmr/m/n/10 (\OT1/
-cmr/bx/n/10 x[]\OT1/cmr/m/n/10 ))$\OT1/ptm/m/n/10 (+20) . If we as-sume the
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 449--450
+Underfull \hbox (badness 10000) in paragraph at lines 414--415
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 454--455
-
- []
-
 Package epstopdf Info: Source file: <f_figs/var_grid.eps>
-(epstopdf)                    date: 2016-09-11 18:50:12
-(epstopdf)                    size: 602810 bytes
+(epstopdf)                    date: 2016-09-12 17:31:48
+(epstopdf)                    size: 599598 bytes
 (epstopdf)             Output file: <f_figs/var_grid-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-09-11 18:50:25
-(epstopdf)                    size: 53656 bytes
+(epstopdf)                    date: 2016-09-12 17:32:01
+(epstopdf)                    size: 52299 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/var_grid-eps-conver
 ted-to.pdf f_figs/var_grid.eps>
-(epstopdf)             \includegraphics on input line 466.
+(epstopdf)             \includegraphics on input line 455.
 Package epstopdf Info: Output file is already uptodate.
-<f_figs/var_grid-eps-converted-to.pdf, id=167, 507.8975pt x 149.55875pt>
+ <f_figs/var_grid-eps-converted-to.pdf, id=176, 507.8975pt x 149.55875pt>
 File: f_figs/var_grid-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/var_grid-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/var_grid-eps-converted-to.pdf used on input lin
-e 466.
+e 455.
 (pdftex.def)             Requested size: 507.89627pt x 149.55838pt.
 
-Overfull \hbox (2.00627pt too wide) in paragraph at lines 466--469
+Overfull \hbox (2.00627pt too wide) in paragraph at lines 455--458
 [][] 
  []
 
 
-LaTeX Warning: Reference `fig:grid_world' on page 6 undefined on input line 477
-.
-
-
 LaTeX Warning: Citation `rossreduction2010' on page 6 undefined on input line 4
-79.
+68.
 
 [6]
 Package epstopdf Info: Source file: <f_figs/p_mass.eps>
-(epstopdf)                    date: 2016-09-10 23:56:08
-(epstopdf)                    size: 361690 bytes
+(epstopdf)                    date: 2016-09-12 16:45:30
+(epstopdf)                    size: 491266 bytes
 (epstopdf)             Output file: <f_figs/p_mass-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-09-10 23:58:20
-(epstopdf)                    size: 23781 bytes
+(epstopdf)                    date: 2016-09-12 16:53:26
+(epstopdf)                    size: 47087 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/p_mass-eps-converte
 d-to.pdf f_figs/p_mass.eps>
-(epstopdf)             \includegraphics on input line 521.
+(epstopdf)             \includegraphics on input line 510.
 Package epstopdf Info: Output file is already uptodate.
- <f_figs/p_mass-eps-converted-to.pdf, id=178, 217.81375pt x 90.3375pt>
+ <f_figs/p_mass-eps-converted-to.pdf, id=188, 249.93375pt x 105.39375pt>
 File: f_figs/p_mass-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/p_mass-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/p_mass-eps-converted-to.pdf used on input line 
-521.
-(pdftex.def)             Requested size: 217.8132pt x 90.33727pt.
+510.
+(pdftex.def)             Requested size: 249.93314pt x 105.39348pt.
+
+Overfull \hbox (4.21503pt too wide) in paragraph at lines 510--513
+ [][] 
+ []
+
 Package epstopdf Info: Source file: <f_figs/singulation.eps>
-(epstopdf)                    date: 2016-08-28 21:25:20
-(epstopdf)                    size: 314094 bytes
+(epstopdf)                    date: 2016-09-12 11:47:10
+(epstopdf)                    size: 93680734 bytes
 (epstopdf)             Output file: <f_figs/singulation-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-08-28 21:26:15
-(epstopdf)                    size: 19359 bytes
+(epstopdf)                    date: 2016-09-12 11:47:15
+(epstopdf)                    size: 476891 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/singulation-eps-con
 verted-to.pdf f_figs/singulation.eps>
-(epstopdf)             \includegraphics on input line 536.
+(epstopdf)             \includegraphics on input line 525.
 Package epstopdf Info: Output file is already uptodate.
-
-<f_figs/singulation-eps-converted-to.pdf, id=179, 186.6975pt x 83.31125pt>
+<f_figs/singulation-eps-converted-to.pdf, id=190, 237.88875pt x 113.42375pt>
 File: f_figs/singulation-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/singulation-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/singulation-eps-converted-to.pdf used on input 
-line 536.
-(pdftex.def)             Requested size: 186.69704pt x 83.31104pt.
+line 525.
+(pdftex.def)             Requested size: 237.88815pt x 113.42346pt.
  [7 <./f_figs/var_grid-eps-converted-to.pdf> <./f_figs/p_mass-eps-converted-to.
 pdf> <./f_figs/singulation-eps-converted-to.pdf>]
-Underfull \hbox (badness 1540) in paragraph at lines 567--567
+Underfull \hbox (badness 1540) in paragraph at lines 555--555
  []||
  []
 
 Package epstopdf Info: Source file: <f_figs/izzy_reward.eps>
-(epstopdf)                    date: 2016-09-11 19:33:40
-(epstopdf)                    size: 349642 bytes
+(epstopdf)                    date: 2016-09-12 17:35:50
+(epstopdf)                    size: 349286 bytes
 (epstopdf)             Output file: <f_figs/izzy_reward-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-09-11 19:33:58
-(epstopdf)                    size: 21597 bytes
+(epstopdf)                    date: 2016-09-12 19:59:14
+(epstopdf)                    size: 21237 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/izzy_reward-eps-con
 verted-to.pdf f_figs/izzy_reward.eps>
-(epstopdf)             \includegraphics on input line 590.
+(epstopdf)             \includegraphics on input line 581.
 Package epstopdf Info: Output file is already uptodate.
-<f_figs/izzy_reward-eps-converted-to.pdf, id=207, 210.7875pt x 131.49126pt>
+<f_figs/izzy_reward-eps-converted-to.pdf, id=224, 210.7875pt x 131.49126pt>
 File: f_figs/izzy_reward-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/izzy_reward-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/izzy_reward-eps-converted-to.pdf used on input 
-line 590.
+line 581.
 (pdftex.def)             Requested size: 210.78699pt x 131.49092pt.
-Package epstopdf Info: Source file: <f_figs/cor_dif.eps>
-(epstopdf)                    date: 2016-09-10 20:56:26
-(epstopdf)                    size: 2228978 bytes
-(epstopdf)             Output file: <f_figs/cor_dif-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-09-10 20:57:13
-(epstopdf)                    size: 132279 bytes
-(epstopdf)             Command: <repstopdf --outfile=f_figs/cor_dif-eps-convert
-ed-to.pdf f_figs/cor_dif.eps>
-(epstopdf)             \includegraphics on input line 601.
-Package epstopdf Info: Output file is already uptodate.
-
-<f_figs/cor_dif-eps-converted-to.pdf, id=208, 250.9375pt x 126.4725pt>
-File: f_figs/cor_dif-eps-converted-to.pdf Graphic file (type pdf)
-
-<use f_figs/cor_dif-eps-converted-to.pdf>
-Package pdftex.def Info: f_figs/cor_dif-eps-converted-to.pdf used on input line
- 601.
-(pdftex.def)             Requested size: 250.93687pt x 126.47218pt.
-
-Overfull \hbox (5.21877pt too wide) in paragraph at lines 601--604
- [][] 
- []
-
-[8 <./f_figs/izzy_reward-eps-converted-to.pdf> <./f_figs/cor_dif-eps-converted-
-to.pdf>] (./offlineLfD.bbl) (./counterexample.tex [9])
+ [8 <./f_figs/izzy_reward-eps-converted-to.pdf>] (./offlineLfD.bbl) (./countere
+xample.tex [9])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1238,30 +1185,27 @@ Before submitting the final camera ready copy, remember to:
  process uses the US letter (8.5in X 11in) paper size.
 
 [10]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 649.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 649.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 630.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 630.
  (./offlineLfD.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 649.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 649.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 630.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 630.
 Package rerunfilecheck Info: File `offlineLfD.out' has not changed.
-(rerunfilecheck)             Checksum: 07EFD39EFC332A613FA5BD0D3CB592B5;1362.
+(rerunfilecheck)             Checksum: CA99C814EA6DE4C5CE8BE8FCD995B3AF;1285.
 
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 649.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 630.
  ) 
 Here is how much of TeX's memory you used:
- 22209 strings out of 493117
- 397496 string characters out of 6135433
- 532069 words of memory out of 5000000
- 24917 multiletter control sequences out of 15000+600000
+ 22204 strings out of 493117
+ 397312 string characters out of 6135433
+ 532643 words of memory out of 5000000
+ 24914 multiletter control sequences out of 15000+600000
  56245 words of font info for 257 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,16n,54p,2000b,382s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,16n,54p,2000b,343s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
 xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texl
@@ -1283,10 +1227,10 @@ nts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/
 urw/times/utmbi8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times
 /utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmri8a.p
 fb>
-Output written on offlineLfD.pdf (10 pages, 937901 bytes).
+Output written on offlineLfD.pdf (10 pages, 1209626 bytes).
 PDF statistics:
- 355 PDF objects out of 1000 (max. 8388607)
- 297 compressed objects within 3 object streams
- 81 named destinations out of 1000 (max. 500000)
- 30416 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 366 PDF objects out of 1000 (max. 8388607)
+ 295 compressed objects within 3 object streams
+ 80 named destinations out of 1000 (max. 500000)
+ 30403 words of extra memory for PDF output out of 35830 (max. 10000000)
 
