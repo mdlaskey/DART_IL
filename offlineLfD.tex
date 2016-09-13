@@ -292,7 +292,7 @@ We note that the dynamics and initial state distributions are dropped in this ob
 \end{equation}
 
 
-\noindent \textbf{\nc} If $\theta* \in \Theta$, then as N grows, $
+\noindent \textbf{\nc} \mlnote{need to shorten this} If $\theta* \in \Theta$, then as N grows, $
 \theta^N$ will approach an objective value (i.e. loss) of equation (2) equal to that evaluated under $\theta^*$ (note, this does not necessarily imply $\theta^N \rightarrow \theta^*$ unless  Eq . \ref{eq.main_obj} is strongly convex with respect to theta). However, the states that are being used to train $\theta^N$ are provided by $\theta^*$. Thus, when the policy is rolled out under $\theta^N$ (and $\theta^N \neq \theta^*$ exactly) then it is possible that new states will be visited that would never have been visited by $\theta^*$. To account for this, prior work has proposed an iterative solution ~\cite{ross2010reduction} that attempts to solve this problem by aggregating data on the distribution induced by the current robot's policy.
 
 Instead of  minimizing the surrogate loss in Eq. \ref{eq:main_obj},  RC LfD, or DAgger and its variants~\cite{ross2010reduction,laskeyshiv,he2012imitation}, attempts to find the distribution the final policy will converge to. Thus, reducing surrogate loss in places the robot is likely to visit.
