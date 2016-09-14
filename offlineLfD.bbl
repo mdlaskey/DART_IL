@@ -21,15 +21,32 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{abbeel2007application}
-P.~Abbeel, A.~Coates, M.~Quigley, and A.~Y. Ng, ``An application of
-  reinforcement learning to aerobatic helicopter flight,'' \emph{NIPS},
-  vol.~19, p.~1, 2007.
+\bibitem{tensorflow2015-whitepaper}
+\BIBentryALTinterwordspacing
+M.~Abadi, A.~Agarwal, P.~Barham, E.~Brevdo, Z.~Chen, C.~Citro, G.~S. Corrado,
+  A.~Davis, J.~Dean, M.~Devin, S.~Ghemawat, I.~Goodfellow, A.~Harp, G.~Irving,
+  M.~Isard, Y.~Jia, R.~Jozefowicz, L.~Kaiser, M.~Kudlur, J.~Levenberg,
+  D.~Man\'{e}, R.~Monga, S.~Moore, D.~Murray, C.~Olah, M.~Schuster, J.~Shlens,
+  B.~Steiner, I.~Sutskever, K.~Talwar, P.~Tucker, V.~Vanhoucke, V.~Vasudevan,
+  F.~Vi\'{e}gas, O.~Vinyals, P.~Warden, M.~Wattenberg, M.~Wicke, Y.~Yu, and
+  X.~Zheng, ``{TensorFlow}: Large-scale machine learning on heterogeneous
+  systems,'' 2015, software available from tensorflow.org. [Online]. Available:
+  \url{http://tensorflow.org/}
+\BIBentrySTDinterwordspacing
 
 \bibitem{abbeel2008apprenticeship}
 P.~Abbeel, D.~Dolgov, A.~Y. Ng, and S.~Thrun, ``Apprenticeship learning for
   motion planning with application to parking lot navigation,'' in \emph{IROS
   2008. IEEE/RS}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE.
+
+\bibitem{akgun2012keyframe}
+B.~Akgun, M.~Cakmak, K.~Jiang, and A.~L. Thomaz, ``Keyframe-based learning from
+  demonstration,'' \emph{International Journal of Social Robotics}, vol.~4,
+  no.~4, pp. 343--355, 2012.
+
+\bibitem{akgun2012novel}
+B.~Akgun, K.~Subramanian, and A.~L. Thomaz, ``Novel interaction strategies for
+  learning from teleoperation.''
 
 \bibitem{anthony2009neural}
 M.~Anthony and P.~L. Bartlett, \emph{Neural network learning: Theoretical
@@ -117,12 +134,6 @@ J.~Schulman, J.~Ho, C.~Lee, and P.~Abbeel, ``Learning from demonstrations
 
 \bibitem{shalev2011online}
 S.~Shalev-Shwartz, ``Online learning and online convex optimization,'' 2011.
-
-\bibitem{van2010superhuman}
-J.~Van Den~Berg, S.~Miller, D.~Duckworth, H.~Hu, A.~Wan, X.-Y. Fu, K.~Goldberg,
-  and P.~Abbeel, ``Superhuman performance of surgical tasks by robots using
-  iterative learning from human-guided demonstrations,'' in \emph{ICRA, 2010
-  IEEE}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2010, pp. 2074--2081.
 
 \bibitem{vapnik1992principles}
 V.~Vapnik, ``Principles of risk minimization for learning theory,'' in
