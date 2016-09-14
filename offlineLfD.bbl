@@ -52,6 +52,11 @@ X.~Guo, S.~Singh, H.~Lee, R.~L. Lewis, and X.~Wang, ``Deep learning for
   real-time atari game play using offline monte-carlo tree search planning,''
   in \emph{NIPS}, 2014, pp. 3338--3346.
 
+\bibitem{he2012imitation}
+H.~He, J.~Eisner, and H.~Daume, ``Imitation learning by coaching,'' in
+  \emph{Advances in Neural Information Processing Systems}, 2012, pp.
+  3149--3157.
+
 \bibitem{kakade2009complexity}
 S.~M. Kakade, K.~Sridharan, and A.~Tewari, ``On the complexity of linear
   prediction: Risk bounds, margin bounds, and regularization,'' in
@@ -70,6 +75,14 @@ M.~Laskey, J.~Lee, C.~Chuck, D.~Gealy, W.~Hsieh, F.~T. Pokorny, A.~D. Dragan,
 M.~Laskey, S.~Staszak, W.~Y.-S. Hsieh, J.~Mahler, F.~T. Pokorny, A.~D. Dragan,
   and K.~Goldberg, ``Shiv: Reducing supervisor burden using support vectors for
   efficient learning from demonstrations in high dimensional state spaces.''
+
+\bibitem{mahler2014learning}
+J.~Mahler, S.~Krishnan, M.~Laskey, S.~Sen, A.~Murali, B.~Kehoe, S.~Patil,
+  J.~Wang, M.~Franklin, P.~Abbeel \emph{et~al.}, ``Learning accurate kinematic
+  control of cable-driven surgical robots using data cleaning and gaussian
+  process regression,'' in \emph{2014 IEEE International Conference on
+  Automation Science and Engineering (CASE)}.\hskip 1em plus 0.5em minus
+  0.4em\relax IEEE, 2014, pp. 532--539.
 
 \bibitem{pomerleau1989alvinn}
 D.~A. Pomerleau, ``Alvinn: An autonomous land vehicle in a neural network,''
@@ -96,6 +109,12 @@ B.~Sch{\"o}lkopf and A.~J. Smola, \emph{Learning with kernels: Support vector
   machines, regularization, optimization, and beyond}.\hskip 1em plus 0.5em
   minus 0.4em\relax MIT press, 2002.
 
+\bibitem{schulman2016learning}
+J.~Schulman, J.~Ho, C.~Lee, and P.~Abbeel, ``Learning from demonstrations
+  through the use of non-rigid registration,'' in \emph{Robotics
+  Research}.\hskip 1em plus 0.5em minus 0.4em\relax Springer, 2016, pp.
+  339--354.
+
 \bibitem{shalev2011online}
 S.~Shalev-Shwartz, ``Online learning and online convex optimization,'' 2011.
 
@@ -116,5 +135,9 @@ V.~Vapnik, ``Principles of risk minimization for learning theory,'' in
 \bibitem{verdu2014total}
 S.~Verd{\'u}, ``Total variation distance and the distribution of relative
   information.''\hskip 1em plus 0.5em minus 0.4em\relax Citeseer.
+
+\bibitem{zhang2016query}
+J.~Zhang and K.~Cho, ``Query-efficient imitation learning for end-to-end
+  autonomous driving,'' \emph{arXiv preprint arXiv:1605.06450}, 2016.
 
 \end{thebibliography}
