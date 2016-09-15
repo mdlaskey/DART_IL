@@ -279,14 +279,14 @@ estimating $p(\bx|\theta)$ itself.
 \noindent\textbf{Objective.} The objective of policy learning is to find a policy that minimizes some known reward function $R(\tau) = \sum^T_{t=1} r(\bx_t,\bu_t)$ of a trajectory $\tau$. The reward $r:\mathcal{X}\times \mathcal{U}\to \mathbb{R}$ is typically user defined and task specific. 
 For example in the task of grasping, the reward can be a binary measure of success.
 
-In our problem, we do not have access to the reward function itself. Instead, we only have access to 
+In our problem we,  do not have access to the reward function itself. Instead, we only have access to 
 a supervisor, $\pi_{\theta^*}$, where $\theta^*$ may not be contained in $\Theta$. A supervisor is chosen that can achieve a desired level of performance on the task.
 
 We measure the difference between controls using a surrogate loss $l : \mathcal{U} \times \mathcal{U} \rightarrow \mathbb{R}$~\cite{ross2010reduction,ross2010efficient}.
 The surrogate loss can either be an indicator function as in classification or a continuous measure on the sufficient statistics of $p(\bu|\bx,\theta)$.
 We measure total loss along a trajectory with respect to the supervisor's policy $\pi_{\theta^*}$ by $J(\theta, \tau) = \sum^T_{t=1} l(\pi_{\theta}(\bx_{t}),\pi_{\theta^*}(\bx_{t}))$.
 
-\noindent \textbf{LfD with \ns Sampling:} In \ns the supervisor provides the robot a set of $N$ demonstration trajectories $\lbrace \tau^1,...,\tau^N \rbrace$ sampled from $p(\tau | \theta^*)$.
+\noindent \textbf{LfD with \ns Sampling:} In \ns, the supervisor provides the robot a set of $N$ demonstration trajectories $\lbrace \tau^1,...,\tau^N \rbrace$ sampled from $p(\tau | \theta^*)$.
 This induces a training data set $\mathcal{D}$ of all state-control input pairs from the demonstrated trajectories.
 The goal is to find a parameter $\theta$ generates the sample demonstrations from the supervisor's policy.
 \ns frames this  question as maximizing the conditional likelihood of the sample demonstrations conditioned on a given parameter $\theta$. 
@@ -361,7 +361,7 @@ Finally, we compare HC and RC on a real task. We perform a pilot study with 10 p
 In this experiment, we hypothesize that on random problems with a perfect simulated supervisor, the performance gap of RC diminishes as the robot's policy becomes more expressive. 
 
 In Grid World, we have a robot that is trying to reach a goal state, at which it receives $+10$ reward. The robot receives $-10$ reward if it touches a penalty state. The robot also receives a $-0.02$ penalty for every blank state. The robot must learn to be robust to the noise in the dynamics, reach the goal state and then stay there.
-The robot has a state space of $(x,y)$ coordinates and a set of actions consisting of $\lbrace$Left, Right, Forward, Backward, Stay$\rbrace$ state. The grid size for the environment is $30 \times 30$. $20\%$ of randomly drawn states are marked as a penalty, while only one is a goal state. For the transition dynamics, $p(\bx_{t+1}|\bx_{t},\bu_t)$, the robot goes to an adjacent state different from the one desired uniformly at random with probability $0.2$. The time horizon for the policy is $T=30$. 
+The robot has a state space of $(x,y)$ coordinates and a set of actions consisting of $\lbrace$Left, Right, Forward, Backward, Stay$\rbrace$ state. The grid size for the environment is $15 \times 15$. $8\%$ of randomly drawn states are marked as a penalty, while only one is a goal state. For the transition dynamics, $p(\bx_{t+1}|\bx_{t},\bu_t)$, the robot goes to an adjacent state different from the one desired uniformly at random with probability $0.16$. The time horizon for the policy is $T=30$. 
 
 We use Value Iteration to compute an optimal supervisor. In all settings we provided RC with one initial demonstration from HC sampling before iteratively rolling out its policy. This initial demonstration set from HC sampling is common in methods like DAgger~\cite{ross2010reduction}.
 
@@ -379,19 +379,19 @@ As shown in Fig. \ref{fig:var}(b), RC and HC both converge to the supervisor at 
 
 
 \noindent \textbf{Noisy Supervisor:}
-Real supervisors will not be perfect. Thus, we study the effects of noise on the performance of the two sampling techniques. This is particularly important for HC, because even an expressive learner might need many more demonstrations when the supervision is noisy, perhaps making samples on the current learned policy more useful. Here we consider the case where noise is applied to observed label, thus the robot receive control labels that are $\bu = \pi_{\theta}(\bx) + \epsilon$,  where epsilon is an i.i.d distribution that selects a random control with probability $0.3$.
+Real supervisors will not be perfect. Thus, we study the effects of noise on the performance of the two sampling techniques. This is particularly important for HC, because even an expressive learner might need many more demonstrations when the supervision is noisy, perhaps making samples on the current learned policy more useful. Here we consider the case where noise is applied to observed label, thus the robot receives control labels that are $\bu = \pi_{\theta}(\bx) + \epsilon$,  where epsilon is an i.i.d distribution that selects a random control with probability $0.3$.
 
 We use decision trees of depth $100$, which due to its large function class is more susceptible to the noisy supervisor. We then compare the performance of HC vs. RC. As shown, both methods are able to converge to the expected supervisor's normalized performance, suggesting they can average out the noise in the labels with enough data. Although it takes more data than without noise, both methods (HC and RC) converge at a similar rate to the true expected supervisor. Of course, real supervisors are not necessarily i.i.d noisy, and our real-problem experiment compares the two methods in practice.
 
 \subsection{Algorithmic Convergence}
 In this experiment, we show an example in which HC converges to the supervisor's performance and RC does not. We construct an environment that is representative of our insight that in real problems the policy on \emph{all} states (including recovery behaviors) is more complex than the policy on the supervisor's distribution.
 
-We consider the example where a robot needs to learn to get to a location in a 2D continuous world domain. The robot is represented as a point mass with linear dynamics. 
+We consider the example where a robot needs to learn to get to a location in a 2D continuous world domain. The robot is represented as a point mass with discrete time double integrator with linear dynamics. 
 
 The environment contains two sets of dynamics (1 and 2): 
 $$\bx_{t+1} = A\bx_{t+1}+B_1\bu_t+w$$
 $$\bx_{t+1} = A\bx_{t+1}+B_2\bu_t + w$$
-where $w\sim \mathcal{N}(0,0.1 I)$. The state of the robot is $\bx = (x,y,v_x,v_y)$, or the coordinates and the velocity. The control inputs to the robot $\bu = (f_x,f_y)$, or the forces in the coordinate direction. The matrix $A$ is a $4\times4$ identity matrix plus the necessary two values to update the $x,y$ state by the velocity with a timestep of $1$. $B_1$ and $B_2$, correspond to a $4\times 2$ matrix that updates only the velocity for each axis independently. This update corresponds to $\mathbf{v} = \frac{1}{m} \mathbf{f}$, where $m$ is the mass of the robot.
+where $w\sim \mathcal{N}(0,0.1 I)$. The state of the robot is $\bx = (x,y,v_x,v_y)$, or the coordinates and the velocity. The control inputs to the robot $\bu = (f_x,f_y)$, or the forces in the coordinate direction. The matrix $A$ is a $4\times4$ identity matrix plus the necessary two values to update the $x,y$ state by the velocity with a timestep of $1$. $B_1$ and $B_2$, correspond to a $4\times 2$ matrix that updates only the velocity for each axis independently. This update corresponds to $\mathbf{v}_{t+1} = \mathbf{v}_t+\frac{1}{m} \mathbf{f}_t$, where $m$ is the mass of the robot.
 
 
 The dynamics for region 1 correspond to the point robot having a mass of $m=1$ and in region 2 the point robot has a larger mass of $m=4$. A target goal state lies at the origin $[0,0]$ and the robot starts out at the point $[-15,-10]$ with a velocity of zero. The boundary for region 1 and 2 lies at $x=12$ and $y=12$, where greater than indicates region 2. An illustration is shown in Fig. \ref{fig:p_mass}. The time horizon for the task is $T=35$. 
@@ -408,7 +408,7 @@ This prevents it from converging because it attempts to fit a single linear poli
 \caption{
     \footnotesize
 Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two regions with different dynamics. The supervisor is computed via infinite horizon LQG for each region, which results in two different linear matrices in region 1 and 2. Right: RC fails to converges because it is attempting to learn a policy across the two regions, whereas HC remains in region 1 and converges to the supervisor performance. }
-\vspace*{-1pt}
+\vspace*{-20pt}
 \label{fig:p_mass}
 \end{figure}
 
@@ -448,9 +448,9 @@ During training and testing the initial state distribution $p(\bx_0)$ consisted 
 
 Each participant trains the robot in both HC and RC sampling (a within-subjects design). In HC, we asked participants to provide 60 demonstrations to the robot using an Xbox Controller, as shown in Fig. \ref{fig:labeling}a. In RC, participants provided 20 initial demonstrations via the Xbox Controller, and then provided retroactive feedback for $K=2$ iterations of 20 demonstrations each.
 
-Retroactive feedback is provided through a labeling interface similar to Laskey et al. \cite{laskeyrobot}, illustrated in Fig \ref{fig:labeling}b. In this interface, we showed a video at half speed of the robot's rollout to the participant. They then use a mouse to provide feedback in the form of translation and rotation. We provide a virtual overlay so that they can see the magnitude of their given control. 
+Retroactive feedback is provided through a labeling interface similar to our previous work \cite{laskeyrobot}, illustrated in Fig \ref{fig:labeling}b. In this interface, we showed a video at half speed of the robot's rollout to the participant. They then use a mouse to provide feedback in the form of translation and rotation. We provide a virtual overlay so that they can see the magnitude of their given control. 
 
-We selected 10 UC Berkeley students as human subjects. The subjects were familiar with robotics, but not the learning algorithms behind the techniques. They first watched a trained robot perform the task successfully.  They then practiced providing feedback through RC sampling for 5 demonstrations and HC for 5 demonstrations. Next, each subject performed the first 20 demonstrations via HC sampling. Then they performed 40 HC demonstrations and 40 RC demonstrations in a counter-balanced order.  The experiment took 2 hours per person on average. 
+We selected 10 UC Berkeley students as human subjects. The subjects were familiar with robotics, but not the learning algorithms behind the techniques. They first watched a trained robot perform the task successfully.  They then practiced providing feedback through RC sampling for 5 demonstrations and HC for 5 demonstrations. Next, each subject performed the first 20 demonstrations via HC sampling. Then they performed 40 HC demonstrations and 40 RC demonstrations in a counter-balanced order.  The experiment took 2 hours per person on average. People were allowed to repeat both there RC and HC demonstrations, if they requested it. 
 
 \begin{figure}
 \centering
@@ -458,12 +458,13 @@ We selected 10 UC Berkeley students as human subjects. The subjects were familia
 \caption{
     \footnotesize
 Average success at the singulation task over the 10 human subjects as a function of number of demonstrations. Each policy is evaluated 30 times on the a held out set of test configurations. The first 20 rollouts are from the supervisor rolling out there policy and the next 40 are collected via retro-active feedback for RC and tele-operated demonstrations for HC. HC LfD shows a 20$\%$ improvement in success at the end. }
+\vspace*{-20pt}
 
 \label{fig:izzy_rw}
 \end{figure}
 
 In Fig. \ref{fig:izzy_rw} , we show the average performance of the policies trained with RC and HC LfD. Each policy is evaluated on a holdout set of 30 initial states sampled from the same distribution as training.
-The policies learned with RC have approximately $40\%$ probability of success versus $60\%$ for HC, and the result is statistically significant\mlnote{send data to Anca}.
+The policies learned with RC have approximately $40\%$ probability of success versus $60\%$ for HC.
 This suggests that HC may outperform RC when supervision is provided by actual human demonstrations.
 
 \subsection{Understanding RC Performance in Practice}
@@ -528,23 +529,25 @@ The RC approach is particularly appealing when the robot's policy is incapable o
 This intuition along with a theoretical analysis of Ross et al. ~\cite{ross2010reduction} has led to use of the RC approach~\cite{zhang2016query,he2012imitation,ross2013learning}.
 
 The analysis of RC LfD in \cite{ross2010reduction} is performed in the context of the regret framework of online learning. 
-In online learning, at each iteration $k \in \{1,\dots,n\}$ the algorithm chooses an action $\theta_k \in \Theta$ (e.g. a policy to roll out), and observes some loss $f_k(\theta_k)$. 
-Online learning is analyzed in the context of a regret guarantee: a function of $n$ (e.g. $\sqrt{n}$) that upper bounds the cumulative loss incurred by the algorithm relative to taking just the best single action in $\Theta$:
-
+In online learning, at each iteration $k \in \{1,\dots,N\}$ the algorithm chooses an action $\theta_k \in \Theta$ (e.g. a policy to roll out), and observes some loss $f_k(\theta_k)$. 
+Online learning is analyzed in the context of a regret guarantee: an upper bound (e.g. $\sqrt{N}$) on the cumulative loss incurred by the algorithm relative to taking just the best single action in $\Theta$:
 \begin{align*}
-\sup_{\theta \in \Theta} \sum_{k=1}^n f_k(\theta_k) - f_k(\theta).
+\sup_{\theta \in \Theta} \sum_{k=1}^N f_k(\theta_k) - f_k(\theta).
 \end{align*}
+In the context of robotics and specifically in the case of RC LfD, taking an action $\theta_k$ at iteration $k$ is rolling out a policy dictated by $\theta_k$ which induces a series of states $\bx_{k,1},\dots,\bx_{k,T}$ and the loss is evaluated with respect to {\em these} states.  
+Because these particular states could have been produced by a poor policy due to initialization, they could have little relevance to the task of interest and consequently, it makes little sense to compare to the policy that performs best on these particular states.
+What is important is the absolute performance of a policy on the task of interest. 
+In the notation of Ross et al.~\cite{ross2010reduction} this notion of relative regret is encoded in the $\epsilon_N$ error term that appears in their bounds and is defined relative to the particular set of rollouts observed by the RC LfD policy.
 
-For instance, in the context of linear binary classification $\theta_k$ could be a linear predictor and $f_k(\theta)= 1\{ y_k \neq \text{sign}(x_k^T\theta) \}$ where $(x_k,y_k)$ example-label pairs from some streaming dataset. 
-In this classification example, comparing to the best single $\theta \in \Theta$ that could have been played for all loss functions $f_1,f_2,\dots,f_n$ makes sense because the $f_k$ functions are presumably uncoupled from the actions taken $\{\theta_j\}_{j \leq k}$: $\inf_{\theta \in \Theta} \sum_{k=1}^n f_k(\theta)$ is just the familiar empirical risk minimizer. 
-However, in the context of robotics and specifically in the case of RC LfD, taking an action $\theta_k$ at iteration $k$ is rolling out a policy dictated by $\theta_k$ which induces a series of states $\bx_{k,1},\dots,\bx_{k,T}$ and the loss is evaluated with respect to {\em these} states.  
+As an example for why low-regret may be uninformative, consider a car-racing game where the car has constant speed and the policy only decides to go straight, left, or right at the current state. 
+Suppose at some point in the race the car encounters a ``v'' in the road where one path is a well-paved road and the other path is a muddy dirt road with obstacles. 
+The car will finish the race faster by taking the paved road, but due to either the stochastic dynamics or imperfectness of the supervisor it is possible that after just a small number of supervisor demonstrations given to the robot to initialize RC LfD, a poor initial policy will be learned that leads the car down the dirt road versus the paved road. 
+When this policy is rolled out the supervisor will penalize the decision at the time point of taking the dirt versus paved road. 
+But if the policy's actions agree with the supervisor once the car is on the dirt road (i.e. making the best of a bad situation) this policy will incur low-regret because the majority of the time the policy was acting in accordance with the supervisor.
+Thus, in this example a globally bad policy will be learned (because it took the dirt road instead of the paved road) but relative to the best policy acting on the dirt road, it performs pretty well. 
 
-Under these circumstances, a regret bound of this form is potentially not indicative of the absolute performance on the task.
-For instance, consider a car-racing game where the car has constant speed and the controller can only decide to go left and right. Suppose the game encounters a ``v'' in the road where one path is a well-paved road and the other path is a muddy dirt road with obstacles. Suppose the algorithm played a series of policies $\theta_1,\dots,\theta_k$ where each policy dictated that the car takes the dirt road. The instant that the algorithm made the wrong decision at the ``v'' would be penalized by the supervisor, but at every instance once the car is on the dirt path the car may be acting optimally, making the best of a bad situation (or worse, the supervisor focuses all its energy on teaching the car how to drive on a muddy dirt road). In this situation, obviously the policy never should have taken the car down the dirt path and should have stayed on the paved road resulting in a better time, but because the car acted optimally once it was on the dirt path, this dirt-road sequence of policies would have very low regret!
-Intuitively, RC LfD is performing a greedy strategy for optimization and has the potential to get stuck in local minima because the states induced by the played policy may not be informative to identifying global solutions.
-
-The next theorem formalizes this intuition.
-
+But more concerning than a potentially uninformative performance guarantee is that RC LfD is performing a greedy strategy for optimization and has the potential to get stuck in local minima.
+The next theorem shows an instance in which an initial policy can be different enough from the optimal policy that the states visited by the initial policy -- even with corrective feedback from the supervisor --  are not informative or relevant enough to the task to guide RC LfD to the optimal policy. 
 
 \begin{theorem}
 For a given environment (state space, action space, dynamics mapping state-action pairs to states, and a loss function) and policy class $\Theta$,
@@ -574,7 +577,7 @@ A Directed Acyclic Graph, where a robot is being taught by a supervisor to desce
 \begin{proof}
 Let $\{ \{ (\bx_{k,t},\bu_{k,t} \}_{t=0}^3 \}_{k=1}^N$ denote $N$ trajectories.
 Consider an environment with a deterministic initial state at the root of the DAG of Figure~\ref{fig:c_ex} so that $p(\bx_{k,0} = \texttt{root}) = 1$ for all $k$. 
-The space of policies are constant functions $\Theta = \{L,R\}$ where if $\theta=L$ then regardless of the state, the control input $\bu_{k,t}$ will be to take the left child (and analogously for $\theta=R$ taking the right child).
+The space of policies are constant functions $\Theta = \{L,R\}$ where if $\theta=L$ then regardless of the state, the control input $\bu_{k,t}$ will be to take the left child (and analogously for $\theta=R$ taking the right child). 
 For any state in the DAG with children, let $\phi(\bx_{k,t},\theta)$ denote the left child of $\bx_{k,t}$ if $\theta=L$ and the right child otherwise. 
 The dynamics are described as follows: for some $\mu \in (0,1/4]$ to be defined later, if $\theta=L$ and $\bx_{k,t}=\texttt{root}$ then $p(\bx_{k,1}=\phi(\bx_{k,0},R))=\mu$ and $p(\bx_{k,1}=\phi(\bx_{k,0},L))=1-\mu$, but if $\theta=R$ then the right child is chosen with probability $1$. If $\bx_{k,t} \neq \texttt{root}$ then $\bx_{k,t+1} = \phi(\bx_{k,t},\theta)$.
 
@@ -583,18 +586,19 @@ Finally, define the state loss function $\ell(\cdot,\cdot)$ as the $0/1$ loss so
 
 We can compute the true loss when the trajectories are generated by $\theta \in \{L,R\}$. Let the empirical distribution of observed states under a fixed action $\theta \in \{L,R\}$ be given by $p(\tau \mid \theta)$, then
 \begin{align*}
- E_{p(\tau \mid \theta=L) } J(\theta=L) &= p( \bx_{k,1} = \phi(\bx_{k,0},L) ) \cdot 0 + p( \bx_{k,1} = \phi(\bx_{k,0},R) ) \cdot 2  = 2 \mu\\
+ E_{p(\tau \mid \theta=L) } J(\theta=L) &= p( \bx_{k,1} = \phi(\bx_{k,0},L) ) \cdot 0 +\\
+ & p( \bx_{k,1} = \phi(\bx_{k,0},R) ) \cdot 2  = 2 \mu\\
    E_{p(\tau \mid \theta=R) } J(\theta=R) &= 1
 \end{align*}
 which implies that $\theta_* = L$ and performs strictly better than $R$ whenever $\mu < 1/2$.
 
 It follows by the stochastic dynamics that the demonstrated action sequence by the supervisor equals $\{L,R,R\}$ with probability $\mu$ and $\{L,L,L\}$ with probability $1-\mu$.
-After $m$ supervisor sequences, the expected number of $L$ actions is equal to $\mu+3(1-\mu)=3-2\mu$ while the expected number of $R$ actions is equal to just $2\mu$.
+After $m$ supervisor sequences, the expected number of $L$ actions is equal to $\mu+3(1-\mu)=3-2\mu$ while the expected number of $R$ actions is equal to just $2\mu$. 
 By the law of large numbers, if only supervisor sequences are given then $\arg\min_{\theta \in \{L,R\}} J_m(\theta) \rightarrow L = \theta^*$ as $m \rightarrow \infty$ since $3-2\mu>2\mu$ for all $\mu<1/2$. 
 In other words, $\theta_{HC}^N \rightarrow \theta^*$ as $N \rightarrow \infty$.
 
 We now turn our attention to $RC$'s policy.
-Note that if after $m$ supervisor action sequences we have that the number of observed $R$'s exceeds the number of observed $L$'s, then $RC$ policy will define $\theta_{RC}^m = R$. 
+Note that if after $m$ supervisor action sequences we have that the number of observed $R$'s exceeds the number of observed $L$'s, then $RC$ policy will define $\theta_{RC}^m = R$.  This proof assumes $\beta=0$ in the RC (DAgger) algorithm~\cite{ross2010reduction}, however it can be extended to include $\beta$ without loss of generality. 
 It is easy to see that a policy rolled out with $\theta=R$ will receive the supervisor's action sequence $\{L,R,R\}$ and thus $R$ will remain the majority vote and consequently $\theta_{RC}^N=R$ for all $N \geq m$.
 What remains is to lower bound the probability that given $m$ supervisor demonstrations that $\theta_{RC}^m = R$. 
 
@@ -606,7 +610,7 @@ Noting that $\sum_{k=1}^m Z_k$ is a binomial($m$,$\mu$) random variable, the pro
 \end{align*} 
 where we have used Slud's inequality \cite{slud1977} to lower bound a binomial tail by a Gaussian tail. 
 Setting $\mu=1/4$ we can further lower bound this probability by $\Phi\left( \frac{m + 2}{ \sqrt{3m/4}} \right) \geq c e^{-m}$ for some universal constant $c$.
-Consequently, with probability at least $c e^{-m}$ we have that $\lim_{N \rightarrow \infty} \theta_{RC}^N = R \neq \theta^*$ which implies that the expected loss of $\lim_{N \rightarrow \infty} \theta_{RC}^N$ must exceed the expected loss of $\theta_*=L$.
+Consequently, with probability at least $c e^{-m}$ we have that $\lim_{N \rightarrow \infty} \theta_{RC}^N = R \neq \theta^*$ which implies that the expected loss of $\lim_{N \rightarrow \infty} \theta_{RC}^N$ must exceed the expected loss of $\theta_*=L$. 
 \end{proof}
 
 
