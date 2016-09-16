@@ -311,7 +311,7 @@ The first step of any iteration $k$ is to compute a $\theta_k$ that minimizes su
 \theta_{k} = \underset{\theta}{\argmin} \: \sum_{i=1}^{N} \sum_{t=1}^T  l(\pi_{\theta}(\bx_{i,t}),\bu_{i,t}).
 \end{align}
 
-\noindent Note that equal weight is given to each example regardless of how likely they are under the current policy.
+\noindent Note that equal weight is given to each example regardless of how likely it is under the current policy.
  
 
  \subsubsection{Step 2}
@@ -321,7 +321,7 @@ $$D_{k+1}=\mathcal{D}_k \cup \{(\bx_t,\tilde{\bu_t})|t\in\{0,\ldots,T\}\} $$
 
 \noindent Steps 1 and 2 are repeated for $K$ iterations or until the robot has achieved sufficient performance on the
 task\footnote{In the original DAgger the policy rollout was stochastically mixed with the supervisor, thus with
-    probability $\beta$ it would either take the supervisor's action or the robots. The use of this stochastically mix
+    probability $\beta$ it would either take the supervisor's action or the robot's. The use of this stochastically mixed
     policy was for theoretical analysis and in practice, it was recommended to set $\beta = 0$ (i.e. RC Sampling only) to avoid biasing the
 sampling~\cite{NIPS2014_5421,ross2010reduction}}.
 
@@ -349,7 +349,7 @@ Finally, we compare HC and RC on a real task. We perform a pilot study with 10 p
 In this experiment, we hypothesize that on random problems with a perfect simulated supervisor, the performance gap of RC diminishes as the robot's policy becomes more expressive. 
 
 In Grid World, we have a robot that is trying to reach a goal state, at which it receives $+10$ reward. The robot receives $-10$ reward if it touches a penalty state. The robot also receives a $-0.02$ penalty for every blank state. The robot must learn to be robust to the noise in the dynamics, reach the goal state and then stay there.
-The robot has a state space of $(x,y)$ coordinates and a set of actions consisting of $\lbrace$Left, Right, Forward, Backward, Stay$\rbrace$ state. The grid size for the environment is $15 \times 15$. $8\%$ of randomly drawn states are marked as a penalty, while only one is a goal state. For the transition dynamics, $p(\bx_{t+1}|\bx_{t},\bu_t)$, the robot goes to an adjacent state different from the one desired uniformly at random with probability $0.16$. The time horizon for the policy is $T=30$. 
+The robot has a state space of $(x,y)$ coordinates and a set of actions consisting of $\lbrace$Left, Right, Forward, Backward, Stay$\rbrace$ state. The grid size for the environment is $15 \times 15$. $8\%$ of randomly drawn states are marked as a penalties, while only one is a goal state. For the transition dynamics, $p(\bx_{t+1}|\bx_{t},\bu_t)$, the robot goes to an adjacent state different from the one desired uniformly at random with probability $0.16$. The time horizon for the policy is $T=30$. 
 
 We use Value Iteration to compute an optimal supervisor. In all settings, we provided RC with one initial demonstration from HC sampling before iteratively rolling out its policy. This initial demonstration set from HC sampling is common in RC methods like DAgger~\cite{ross2010reduction}.
 
@@ -367,14 +367,14 @@ As shown in Fig. \ref{fig:var}(b), RC and HC both converge to the supervisor at 
 
 
 \noindent \textbf{Noisy Supervisor:}
-Real supervisors will not be perfect. Thus, we study the effects of noise on the performance of the two sampling techniques. This is particularly important for HC, because even an expressive learner might need many more demonstrations when the supervision is noisy, perhaps making samples on the current learned policy more useful. Here we consider the case where noise is applied to observed label, thus the robot receives control labels that are  a randomly sampled with probability $0.3$.
+Real supervisors will not be perfect. Thus, we study the effects of noise on the performance of the two sampling techniques. This is particularly important for HC, because even an expressive learner might need many more demonstrations when the supervision is noisy, perhaps making samples on the current learned policy more useful. Here we consider the case where noise is applied to the observed label, thus the robot receives control labels that are  a randomly sampled with probability $0.3$.
 
-We use decision trees of depth $100$. Due to the larger expressiveness of a decision tree it is more susceptible to over fitting.  We then compare the performance of HC vs. RC. As shown, both methods are able to converge to the expected supervisor's normalized performance, suggesting they can average out the noise in the labels with enough data. Although it takes more data than without noise, both methods (HC and RC) converge at a similar rate to the true expected supervisor. 
+We use the same decision trees with depth $100$. Due to the larger expressiveness of a decision tree it is more susceptible to over fitting.  We then compare the performance of HC vs. RC. As shown, both methods are able to converge to the expected supervisor's normalized performance, suggesting they can average out the noise in the labels with enough data. Although it takes more data than without noise, both methods (HC and RC) converge at a similar rate to the true expected supervisor. 
 
 \subsection{Algorithmic Convergence}
 In this experiment, we show an example in which HC converges to the supervisor's performance and RC does not. We construct an environment that is representative of our insight that in real problems the policy on \emph{all} states (including recovery behaviors) is more complex than the policy on the supervisor's distribution.
 
-We consider the example where a robot needs to learn to get to a location in a 2D continuous world domain. The robot is represented as a point mass with discrete time double integrator with linear dynamics. 
+We consider the example where a robot needs to learn to get to a location in a 2D continuous world domain. The robot is represented as a point mass with discrete time double integrator and linear dynamics. 
 
 The environment contains two sets of dynamics (1 and 2): 
 $$\bx_{t+1} = A\bx_{t}+B_1\bu_t+w$$
