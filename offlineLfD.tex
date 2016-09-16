@@ -184,8 +184,8 @@ HC and RC trajectories used to learn a robot singulation task: top view of 4 obj
 \label{fig:teaser}
 \end{figure}
 
-RC has significant advantages; it
-comes at a cost in practice. One cost is the challenge posed to
+While RC methods have significant advantages, it
+can come at a cost in practice. One cost is the challenge posed to
 a human supervisor. In RC methods, a human provides corrective feedback, retroactively, to the robot without observing the effect of
 their suggested control. This requires a human supervisor to
 predict how the world will change given a control instead of
@@ -276,10 +276,10 @@ $\pi_{\theta}$, we utilize the robot or a simulator to sample the resulting stoc
 estimating $p(\bx|\theta)$ itself.
 
 
-\noindent\textbf{Objective.} The objective of policy learning is to find a policy that minimizes some known reward function $R(\tau) = \sum^T_{t=1} r(\bx_t,\bu_t)$ of a trajectory $\tau$. The reward $r:\mathcal{X}\times \mathcal{U}\to \mathbb{R}$ is typically user defined and task specific. 
+\noindent\textbf{Objective.} The objective of policy learning is to find a policy that maximizes some known reward function $R(\tau) = \sum^T_{t=1} r(\bx_t,\bu_t)$ of a trajectory $\tau$. The reward $r:\mathcal{X}\times \mathcal{U}\to \mathbb{R}$ is typically user defined and task specific. 
 For example in the task of grasping, the reward can be a binary measure of success.
 
-In our problem we,  do not have access to the reward function itself. Instead, we only have access to 
+In our problem we do not have access to the reward function itself. Instead, we only have access to 
 a supervisor, $\pi_{\theta^*}$, where $\theta^*$ may not be contained in $\Theta$. A supervisor is chosen that can achieve a desired level of performance on the task.
 
 We measure the difference between controls using a surrogate loss $l : \mathcal{U} \times \mathcal{U} \rightarrow \mathbb{R}$~\cite{ross2010reduction,ross2010efficient}.
