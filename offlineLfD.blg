@@ -8,11 +8,10 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: references.bib
-You're missing a field part---line 790 of file references.bib
+You're missing a field part---line 805 of file references.bib
  :     title = 
  :             ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "dillmann1995acquisition"
 -- IEEEtranS.bst version 1.13 (2008/09/30) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
@@ -28,45 +27,45 @@ Warning--empty year in laskeyshiv
 Warning--empty year in ross2013learning
 
 Done.
-You've used 21 entries,
+You've used 22 entries,
             4498 wiz_defined-function locations,
-            1010 strings with 12135 characters,
-and the built_in function-call counts, 17763 in all, are:
-= -- 1518
-> -- 591
-< -- 102
-+ -- 303
-- -- 156
-* -- 918
-:= -- 2618
-add.period$ -- 45
-call.type$ -- 21
-change.case$ -- 140
-chr.to.int$ -- 258
-cite$ -- 30
-duplicate$ -- 1126
-empty$ -- 1347
-format.name$ -- 173
-if$ -- 3954
+            1016 strings with 12322 characters,
+and the built_in function-call counts, 18812 in all, are:
+= -- 1607
+> -- 619
+< -- 111
++ -- 318
+- -- 162
+* -- 970
+:= -- 2762
+add.period$ -- 48
+call.type$ -- 22
+change.case$ -- 146
+chr.to.int$ -- 282
+cite$ -- 31
+duplicate$ -- 1191
+empty$ -- 1433
+format.name$ -- 180
+if$ -- 4198
 int.to.chr$ -- 0
-int.to.str$ -- 21
-missing$ -- 199
-newline$ -- 88
-num.names$ -- 40
-pop$ -- 621
+int.to.str$ -- 22
+missing$ -- 209
+newline$ -- 91
+num.names$ -- 42
+pop$ -- 650
 preamble$ -- 1
-purify$ -- 119
+purify$ -- 124
 quote$ -- 2
-skip$ -- 1270
+skip$ -- 1347
 stack$ -- 0
-substring$ -- 730
-swap$ -- 806
-text.length$ -- 16
+substring$ -- 792
+swap$ -- 858
+text.length$ -- 17
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 230
+type$ -- 241
 warning$ -- 9
-while$ -- 80
-width$ -- 23
-write$ -- 202
+while$ -- 86
+width$ -- 24
+write$ -- 211
 (There was 1 error message)

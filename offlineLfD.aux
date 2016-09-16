@@ -40,13 +40,14 @@
 \citation{ross2010efficient}
 \citation{ross2013learning}
 \citation{kim2013maximum}
+\citation{duvallet2013imitation}
 \citation{laskeyrobot}
+\citation{ross2010reduction}
 \citation{he2012imitation}
 \citation{kim2013maximum}
 \citation{laskeyshiv}
 \citation{laskeyrobot}
 \citation{zhang2016query}
-\citation{ross2010reduction}
 \citation{akgun2012keyframe}
 \citation{akgun2012novel}
 \citation{argall2009survey}
@@ -68,20 +69,21 @@
 \newlabel{eq:super_objj}{{2}{3}{Step 1}{equation.3.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {III-.2}Step 2}{3}{subsubsection.3.0.2}}
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Empirical Analysis}{3}{section.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Policy Expressiveness}{3}{subsection.4.1}}
+\newlabel{sec:gdw}{{IV-A}{3}{Policy Expressiveness}{subsection.4.1}{}}
 \citation{ross2010reduction}
 \citation{ross2010efficient}
 \citation{ross2010reduction}
 \citation{ross2013learning}
 \citation{ross2010efficient}
 \citation{ross2010reduction}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  We compare RC and HC sampling for low- and high-expressiveness policy classes (a and b respectively) over 100 randomly generated 2D gridworld environments, as a function of the amount of data provided to them. RC outperforms in the low-expressive condition, but the performance gap is negligible in the high-expressive condition, when the policy class contains the expected supervisor policy. We also examine the case of noisy supervisor labels (c), in which both techniques take more data to converge, but again perform similarly. \relax }}{4}{figure.caption.2}}
-\newlabel{fig:var}{{2}{4}{\footnotesize We compare RC and HC sampling for low- and high-expressiveness policy classes (a and b respectively) over 100 randomly generated 2D gridworld environments, as a function of the amount of data provided to them. RC outperforms in the low-expressive condition, but the performance gap is negligible in the high-expressive condition, when the policy class contains the expected supervisor policy. We also examine the case of noisy supervisor labels (c), in which both techniques take more data to converge, but again perform similarly. \relax }{figure.caption.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Policy Expressiveness}{4}{subsection.4.1}}
-\newlabel{sec:gdw}{{IV-A}{4}{Policy Expressiveness}{subsection.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  We compare RC and HC LfD for low- and high-expressiveness policy classes (a and b respectively) over 100 randomly generated 2D gridworld environments, as a function of the amount of data provided to them. RC outperforms in the low-expressive condition, but the performance gap is negligible in the high-expressive condition, when the policy class contains the expected supervisor policy. We also examine the case of noisy supervisor labels (c), in which both techniques take more data to converge, but again perform similarly. \relax }}{4}{figure.caption.2}}
+\newlabel{fig:var}{{2}{4}{\footnotesize We compare RC and HC LfD for low- and high-expressiveness policy classes (a and b respectively) over 100 randomly generated 2D gridworld environments, as a function of the amount of data provided to them. RC outperforms in the low-expressive condition, but the performance gap is negligible in the high-expressive condition, when the policy class contains the expected supervisor policy. We also examine the case of noisy supervisor labels (c), in which both techniques take more data to converge, but again perform similarly. \relax }{figure.caption.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Algorithmic Convergence}{4}{subsection.4.2}}
 \citation{laskeyrobot}
 \citation{tensor}
 \citation{laskeyshiv}
+\citation{laskeyrobot}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the black circle. The world is divided into to two regions with different dynamics. The supervisor is computed via infinite horizon LQG for each region, which results in two different linear matrices in region 1 and 2. Right: RC fails to converges because it is attempting to learn a policy across the two regions, whereas HC remains in region 1 and converges to the supervisor performance. \relax }}{5}{figure.caption.3}}
 \newlabel{fig:p_mass}{{3}{5}{\footnotesize Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the black circle. The world is divided into to two regions with different dynamics. The supervisor is computed via infinite horizon LQG for each region, which results in two different linear matrices in region 1 and 2. Right: RC fails to converges because it is attempting to learn a policy across the two regions, whereas HC remains in region 1 and converges to the supervisor performance. \relax }{figure.caption.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-C}Real-World Problem}{5}{subsection.4.3}}
@@ -89,14 +91,14 @@
 \newlabel{fig:izzy_sing}{{4}{5}{\footnotesize Left: An example initial state the robot observes. The initial state can vary the relative position of the objects and pose of the pile. Right: A human is asked to singulate the object, which is to have the robot learn to push one object away from its neighbors. A successful singulation means at least one object has its center located 10 cm or more from all other object centers. \relax }{figure.caption.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Two ways to provide feedback to the robot. a)In HC sampling, the human teleoperates the robot and performs the desired task. For the singulation task, the human supervisor used an Xbox Controller. b) In RC sampling, the human observes a video of the robot's policy executing and applies retroactive feedback for what the robot should have done. In the image shown, the person is telling the robot to go backward towards the cluster. \relax }}{5}{figure.caption.5}}
 \newlabel{fig:labeling}{{5}{5}{\footnotesize Two ways to provide feedback to the robot. a)In HC sampling, the human teleoperates the robot and performs the desired task. For the singulation task, the human supervisor used an Xbox Controller. b) In RC sampling, the human observes a video of the robot's policy executing and applies retroactive feedback for what the robot should have done. In the image shown, the person is telling the robot to go backward towards the cluster. \relax }{figure.caption.5}{}}
-\citation{laskeyrobot}
 \citation{ross2010reduction}
-\citation{shalev2009mind}
+\citation{shalev2011online}
+\citation{ross2010reduction}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Average success at the singulation task over the 10 human subjects as a function of number of demonstrations. Each policy is evaluated 30 times on the a held out set of test configurations. The first 20 rollouts are from the supervisor rolling out there policy and the next 40 are collected via retro-active feedback for RC and tele-operated demonstrations for HC. HC LfD shows a 20$\%$ improvement in success at the end. \relax }}{6}{figure.caption.6}}
 \newlabel{fig:izzy_rw}{{6}{6}{\footnotesize Average success at the singulation task over the 10 human subjects as a function of number of demonstrations. Each policy is evaluated 30 times on the a held out set of test configurations. The first 20 rollouts are from the supervisor rolling out there policy and the next 40 are collected via retro-active feedback for RC and tele-operated demonstrations for HC. HC LfD shows a 20$\%$ improvement in success at the end. \relax }{figure.caption.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-D}Understanding RC Performance in Practice}{6}{subsection.4.4}}
 \@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  The average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 participants. The confidence intervals are standard error on the mean, which suggest that RC LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }}{6}{table.caption.7}}
 \newlabel{tab:opt-p-comparison}{{I}{6}{\footnotesize The average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 participants. The confidence intervals are standard error on the mean, which suggest that RC LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }{table.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-D}Understanding RC Performance in Practice}{6}{subsection.4.4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Results from the post analysis examining how well retroactive feedback matched teleoperation. The scatter plot shows the normalized angle of the control applied for both HC (teleoperation) and RC (retroactive). The large dispersion in the graph indicates that the five participants had a difficult time matching their retroactive and teleoperated controls. Two example trajectories are also shown. The black line indicates the path from teleoperation and the teal line is the direction and scaled magnitude of the feedback given. If they matched perfectly, the teal line would be tangent to the path. \relax }}{6}{figure.caption.8}}
 \newlabel{fig:izzy_traj}{{7}{6}{\footnotesize Results from the post analysis examining how well retroactive feedback matched teleoperation. The scatter plot shows the normalized angle of the control applied for both HC (teleoperation) and RC (retroactive). The large dispersion in the graph indicates that the five participants had a difficult time matching their retroactive and teleoperated controls. Two example trajectories are also shown. The black line indicates the path from teleoperation and the teal line is the direction and scaled magnitude of the feedback given. If they matched perfectly, the teal line would be tangent to the path. \relax }{figure.caption.8}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {V}Theoretical Analysis}{6}{section.5}}
@@ -105,7 +107,6 @@
 \citation{ross2010reduction}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  A Directed Acyclic Graph, where a robot is being taught by a supervisor to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the supervisor would select, either left or right, $\delimiter "4266308 L, R \delimiter "5267309 $. The HC method converges to the Orange path, which is optimal. While the RC method converges to the Teal path, because it tries to learn on examples from that side of the tree.\relax }}{7}{figure.caption.9}}
 \newlabel{fig:c_ex}{{8}{7}{\footnotesize A Directed Acyclic Graph, where a robot is being taught by a supervisor to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the supervisor would select, either left or right, $\lbrace L, R \rbrace $. The HC method converges to the Orange path, which is optimal. While the RC method converges to the Teal path, because it tries to learn on examples from that side of the tree.\relax }{figure.caption.9}{}}
-\citation{ross2010reduction}
 \citation{slud1977}
 \citation{ross2010efficient}
 \bibstyle{IEEEtranS}
@@ -115,22 +116,23 @@
 \bibcite{akgun2012keyframe}{3}
 \bibcite{akgun2012novel}{4}
 \bibcite{argall2009survey}{5}
-\bibcite{NIPS2014_5421}{6}
-\bibcite{he2012imitation}{7}
-\bibcite{kim2013maximum}{8}
-\bibcite{laskeyrobot}{9}
-\bibcite{laskeyshiv}{10}
-\bibcite{levine2015end}{11}
-\bibcite{mahler2014learning}{12}
-\bibcite{pomerleau1989alvinn}{13}
-\bibcite{ross2010efficient}{14}
-\bibcite{ross2010reduction}{15}
-\bibcite{ross2013learning}{16}
-\bibcite{schulman2016learning}{17}
-\bibcite{shalev2009mind}{18}
-\bibcite{slud1977}{19}
-\bibcite{vapnik1992principles}{20}
+\bibcite{dillmann1995acquisition}{6}
+\bibcite{NIPS2014_5421}{7}
+\bibcite{he2012imitation}{8}
+\bibcite{kim2013maximum}{9}
+\bibcite{laskeyrobot}{10}
+\bibcite{laskeyshiv}{11}
+\bibcite{levine2015end}{12}
+\bibcite{mahler2014learning}{13}
+\bibcite{pomerleau1989alvinn}{14}
+\bibcite{ross2010efficient}{15}
+\bibcite{ross2010reduction}{16}
+\bibcite{ross2013learning}{17}
+\bibcite{schulman2016learning}{18}
+\bibcite{shalev2009mind}{19}
+\bibcite{slud1977}{20}
+\bibcite{vapnik1992principles}{21}
+\bibcite{zhang2016query}{22}
 \@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Bound on Error for HC Lfd}{8}{subsection.5.2}}
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Discussion}{8}{section.6}}
 \@writefile{toc}{\contentsline {section}{References}{8}{section*.10}}
-\bibcite{zhang2016query}{21}

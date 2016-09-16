@@ -43,6 +43,12 @@ B.~D. Argall, S.~Chernova, M.~Veloso, and B.~Browning, ``A survey of robot
   learning from demonstration,'' \emph{Robotics and autonomous systems},
   vol.~57, no.~5, pp. 469--483, 2009.
 
+\bibitem{dillmann1995acquisition}
+R.~Dillmann, M.~Kaiser, and A.~Ude, ``Acquisition of elementary robot skills
+  from human demonstration,'' in \emph{International symposium on intelligent
+  robotics systems}.\hskip 1em plus 0.5em minus 0.4em\relax Citeseer, 1995, pp.
+  185--192.
+
 \bibitem{NIPS2014_5421}
 X.~Guo, S.~Singh, H.~Lee, R.~L. Lewis, and X.~Wang, ``Deep learning for
   real-time atari game play using offline monte-carlo tree search planning,''
