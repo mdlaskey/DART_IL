@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  15 SEP 2016 12:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  15 SEP 2016 17:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -892,20 +892,20 @@ File: microtype.cfg 2013/05/23 v2.5a microtype main configuration file (RS)
 (./offlineLfD.aux)
 \openout1 = `offlineLfD.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 144.
-LaTeX Font Info:    ... okay on input line 144.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 144.
-LaTeX Font Info:    ... okay on input line 144.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 144.
-LaTeX Font Info:    ... okay on input line 144.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 144.
-LaTeX Font Info:    ... okay on input line 144.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 144.
-LaTeX Font Info:    ... okay on input line 144.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 144.
-LaTeX Font Info:    ... okay on input line 144.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 144.
-LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
  ABD: EveryShipout initializing macros
 (/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -922,7 +922,7 @@ LaTeX Font Info:    ... okay on input line 144.
 \everyMPtoPDFconversion=\toks40
 )
 \AtBeginShipoutBox=\box51
-Package hyperref Info: Link coloring OFF on input line 144.
+Package hyperref Info: Link coloring OFF on input line 153.
  (/usr/local/texlive/2014/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -931,9 +931,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count182
 )
-LaTeX Info: Redefining \ref on input line 144.
-LaTeX Info: Redefining \pageref on input line 144.
-LaTeX Info: Redefining \nameref on input line 144.
+LaTeX Info: Redefining \ref on input line 153.
+LaTeX Info: Redefining \pageref on input line 153.
+LaTeX Info: Redefining \nameref on input line 153.
 
 (./offlineLfD.out) (./offlineLfD.out)
 \@outlinefile=\write4
@@ -968,7 +968,7 @@ LaTeX Info: Redefining \selectfont on input line 126.
 \RaggedRightParindent=\skip91
 \JustifyingParindent=\skip92
 )
-LaTeX Info: Redefining \microtypecontext on input line 144.
+LaTeX Info: Redefining \microtypecontext on input line 153.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -982,9 +982,41 @@ Package microtype Info: No adjustment of character kerning.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-ptm.cfg
 File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 )
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 157.
 
-LaTeX Warning: Citation `argall2009survey' on page 1 undefined on input line 17
-5.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
+(RS)
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 157.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 157.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 157.
+
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 157.
+
+Underfull \hbox (badness 1888) in paragraph at lines 157--157
+[][][]$[]$ \OT1/ptm/m/n/8 (+20) De-part-ment of Elec-tri-cal En-gi-neer-ing and
+ Com-puter Sci-ences;
+ []
 
 Package epstopdf Info: Source file: <f_figs/teaser.eps>
 (epstopdf)                    date: 2016-09-15 02:16:11
@@ -994,17 +1026,17 @@ Package epstopdf Info: Source file: <f_figs/teaser.eps>
 (epstopdf)                    size: 135124 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/teaser-eps-converte
 d-to.pdf f_figs/teaser.eps>
-(epstopdf)             \includegraphics on input line 185.
+(epstopdf)             \includegraphics on input line 184.
 Package epstopdf Info: Output file is already uptodate.
-<f_figs/teaser-eps-converted-to.pdf, id=75, 272.01625pt x 105.39375pt>
+<f_figs/teaser-eps-converted-to.pdf, id=71, 272.01625pt x 105.39375pt>
 File: f_figs/teaser-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/teaser-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/teaser-eps-converted-to.pdf used on input line 
-185.
+184.
 (pdftex.def)             Requested size: 252.94499pt x 98.00873pt.
 
-Overfull \hbox (7.22688pt too wide) in paragraph at lines 185--188
+Overfull \hbox (7.22688pt too wide) in paragraph at lines 184--187
  [] 
  []
 
@@ -1012,42 +1044,14 @@ Overfull \hbox (7.22688pt too wide) in paragraph at lines 185--188
 
 
  <./f_figs/teaser-eps-converted-to.pdf>]
-(/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-cmr.cfg
-File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
-(RS)
-)
-LaTeX Font Info:    Try loading font information for U+msa on input line 206.
-
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-(/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-msa.cfg
-File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 206.
-
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-(/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-msb.cfg
-File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-)
 
 LaTeX Warning: Citation `dillmann1995acquisition' on page 2 undefined on input 
-line 220.
-
-
-LaTeX Warning: Citation `argall2009survey' on page 2 undefined on input line 22
-0.
-
-
-LaTeX Warning: Citation `argall2009survey' on page 2 undefined on input line 23
-3.
+line 212.
 
 [2]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 319.
+(hyperref)                than one, level fixed on input line 311.
 
 Package epstopdf Info: Source file: <f_figs/var_grid.eps>
 (epstopdf)                    date: 2016-09-14 01:27:37
@@ -1057,24 +1061,21 @@ Package epstopdf Info: Source file: <f_figs/var_grid.eps>
 (epstopdf)                    size: 52422 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/var_grid-eps-conver
 ted-to.pdf f_figs/var_grid.eps>
-(epstopdf)             \includegraphics on input line 347.
+(epstopdf)             \includegraphics on input line 339.
 Package epstopdf Info: Output file is already uptodate.
 <f_figs/var_grid-eps-converted-to.pdf, id=110, 507.8975pt x 149.55875pt>
 File: f_figs/var_grid-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/var_grid-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/var_grid-eps-converted-to.pdf used on input lin
-e 347.
+e 339.
 (pdftex.def)             Requested size: 507.89627pt x 149.55838pt.
 
-Overfull \hbox (2.00627pt too wide) in paragraph at lines 347--351
+Overfull \hbox (2.00627pt too wide) in paragraph at lines 339--343
 [][] 
  []
 
-[3]
-Underfull \vbox (badness 6445) has occurred while \output is active []
-
- [4 <./f_figs/var_grid-eps-converted-to.pdf>]
+[3] [4 <./f_figs/var_grid-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <f_figs/p_mass.eps>
 (epstopdf)                    date: 2016-09-14 18:24:15
 (epstopdf)                    size: 488770 bytes
@@ -1083,16 +1084,20 @@ Package epstopdf Info: Source file: <f_figs/p_mass.eps>
 (epstopdf)                    size: 47466 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/p_mass-eps-converte
 d-to.pdf f_figs/p_mass.eps>
-(epstopdf)             \includegraphics on input line 407.
+(epstopdf)             \includegraphics on input line 399.
 Package epstopdf Info: Output file is already uptodate.
 
-<f_figs/p_mass-eps-converted-to.pdf, id=143, 233.87375pt x 100.375pt>
+<f_figs/p_mass-eps-converted-to.pdf, id=142, 233.87375pt x 100.375pt>
 File: f_figs/p_mass-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/p_mass-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/p_mass-eps-converted-to.pdf used on input line 
-407.
+399.
 (pdftex.def)             Requested size: 233.87315pt x 100.37474pt.
+
+
+LaTeX Warning: Citation `tensor' on page 5 undefined on input line 416.
+
 Package epstopdf Info: Source file: <f_figs/singulation.eps>
 (epstopdf)                    date: 2016-09-13 14:29:09
 (epstopdf)                    size: 582814 bytes
@@ -1101,15 +1106,14 @@ Package epstopdf Info: Source file: <f_figs/singulation.eps>
 (epstopdf)                    size: 62334 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/singulation-eps-con
 verted-to.pdf f_figs/singulation.eps>
-(epstopdf)             \includegraphics on input line 425.
+(epstopdf)             \includegraphics on input line 420.
 Package epstopdf Info: Output file is already uptodate.
-
-<f_figs/singulation-eps-converted-to.pdf, id=145, 222.8325pt x 115.43124pt>
+<f_figs/singulation-eps-converted-to.pdf, id=144, 222.8325pt x 115.43124pt>
 File: f_figs/singulation-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/singulation-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/singulation-eps-converted-to.pdf used on input 
-line 425.
+line 420.
 (pdftex.def)             Requested size: 222.83195pt x 115.43095pt.
 Package epstopdf Info: Source file: <f_figs/labeling.eps>
 (epstopdf)                    date: 2016-09-13 22:59:09
@@ -1119,15 +1123,15 @@ Package epstopdf Info: Source file: <f_figs/labeling.eps>
 (epstopdf)                    size: 128720 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/labeling-eps-conver
 ted-to.pdf f_figs/labeling.eps>
-(epstopdf)             \includegraphics on input line 436.
+(epstopdf)             \includegraphics on input line 431.
 Package epstopdf Info: Output file is already uptodate.
 
-<f_figs/labeling-eps-converted-to.pdf, id=146, 179.67125pt x 85.31876pt>
+<f_figs/labeling-eps-converted-to.pdf, id=145, 179.67125pt x 85.31876pt>
 File: f_figs/labeling-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/labeling-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/labeling-eps-converted-to.pdf used on input lin
-e 436.
+e 431.
 (pdftex.def)             Requested size: 179.67079pt x 85.31853pt.
  [5 <./f_figs/p_mass-eps-converted-to.pdf> <./f_figs/singulation-eps-converted-
 to.pdf> <./f_figs/labeling-eps-converted-to.pdf>]
@@ -1139,18 +1143,18 @@ Package epstopdf Info: Source file: <f_figs/izzy_reward.eps>
 (epstopdf)                    size: 21177 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/izzy_reward-eps-con
 verted-to.pdf f_figs/izzy_reward.eps>
-(epstopdf)             \includegraphics on input line 457.
+(epstopdf)             \includegraphics on input line 455.
 Package epstopdf Info: Output file is already uptodate.
 
-<f_figs/izzy_reward-eps-converted-to.pdf, id=186, 210.7875pt x 131.49126pt>
+<f_figs/izzy_reward-eps-converted-to.pdf, id=185, 210.7875pt x 131.49126pt>
 File: f_figs/izzy_reward-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/izzy_reward-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/izzy_reward-eps-converted-to.pdf used on input 
-line 457.
+line 455.
 (pdftex.def)             Requested size: 210.78699pt x 131.49092pt.
 
-Underfull \hbox (badness 1540) in paragraph at lines 484--484
+Underfull \hbox (badness 1540) in paragraph at lines 482--482
  []||
  []
 
@@ -1162,19 +1166,19 @@ Package epstopdf Info: Source file: <f_figs/cor_data.eps>
 (epstopdf)                    size: 228688 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/cor_data-eps-conver
 ted-to.pdf f_figs/cor_data.eps>
-(epstopdf)             \includegraphics on input line 502.
+(epstopdf)             \includegraphics on input line 500.
 Package epstopdf Info: Output file is already uptodate.
-<f_figs/cor_data-eps-converted-to.pdf, id=189, 236.885pt x 73.27374pt>
+<f_figs/cor_data-eps-converted-to.pdf, id=188, 236.885pt x 73.27374pt>
 File: f_figs/cor_data-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/cor_data-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/cor_data-eps-converted-to.pdf used on input lin
-e 502.
+e 500.
 (pdftex.def)             Requested size: 236.88441pt x 73.27354pt.
  [6 <./f_figs/izzy_reward-eps-converted-to.pdf> <./f_figs/cor_data-eps-converte
 d-to.pdf>]
 
-LaTeX Warning: Reference `' on page 7 undefined on input line 555.
+LaTeX Warning: Reference `' on page 7 undefined on input line 553.
 
 Package epstopdf Info: Source file: <f_figs/counter_exmp.eps>
 (epstopdf)                    date: 2016-09-14 17:38:56
@@ -1184,16 +1188,16 @@ Package epstopdf Info: Source file: <f_figs/counter_exmp.eps>
 (epstopdf)                    size: 16282 bytes
 (epstopdf)             Command: <repstopdf --outfile=f_figs/counter_exmp-eps-co
 nverted-to.pdf f_figs/counter_exmp.eps>
-(epstopdf)             \includegraphics on input line 568.
+(epstopdf)             \includegraphics on input line 566.
 Package epstopdf Info: Output file is already uptodate.
-<f_figs/counter_exmp-eps-converted-to.pdf, id=216, 231.86626pt x 104.39pt>
+<f_figs/counter_exmp-eps-converted-to.pdf, id=215, 231.86626pt x 104.39pt>
 File: f_figs/counter_exmp-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/counter_exmp-eps-converted-to.pdf>
 Package pdftex.def Info: f_figs/counter_exmp-eps-converted-to.pdf used on input
- line 568.
+ line 566.
 (pdftex.def)             Requested size: 231.86568pt x 104.38972pt.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 579.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 577.
 
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/ot1pcr.fd
@@ -1204,14 +1208,11 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
  [7 <./f_figs/counter_exmp-eps-converted-to.pdf>]
-Overfull \hbox (4.24582pt too wide) in paragraph at lines 610--610
+Overfull \hbox (4.24582pt too wide) in paragraph at lines 608--608
 [] 
  []
 
-
-LaTeX Warning: Citation `slud1977' on page 8 undefined on input line 611.
-
-(./offlineLfD.bbl [8]) [9]
+(./offlineLfD.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1223,16 +1224,14 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 681.
-[10
-
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 681.
+[8]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 639.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 639.
  (./offlineLfD.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 681.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 681.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 639.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 639.
 Package rerunfilecheck Info: File `offlineLfD.out' has not changed.
-(rerunfilecheck)             Checksum: EA56C421166537E90F90A20F2CDF757A;1044.
+(rerunfilecheck)             Checksum: A6084A6CA0538B22CC4502218016374C;995.
 
 
 LaTeX Warning: There were undefined references.
@@ -1240,16 +1239,16 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 681.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 639.
  ) 
 Here is how much of TeX's memory you used:
- 22262 strings out of 493117
- 398346 string characters out of 6135433
- 536993 words of memory out of 5000000
- 24962 multiletter control sequences out of 15000+600000
- 57594 words of font info for 265 fonts, out of 8000000 for 9000
+ 22278 strings out of 493117
+ 398863 string characters out of 6135433
+ 532363 words of memory out of 5000000
+ 25008 multiletter control sequences out of 15000+600000
+ 60918 words of font info for 270 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,16n,54p,1169b,475s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,16n,54p,2216b,348s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
 xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texl
@@ -1259,21 +1258,24 @@ e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/
 2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/20
 14/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2014
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2014/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2014/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2014/texmf-dist/fon
-ts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2014/texmf-dist
-/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/t
-ype1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/t
-imes/utmbi8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmr
-8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on offlineLfD.pdf (10 pages, 854767 bytes).
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2014/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2014/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2014/texmf-dist/font
+s/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2014/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type
+1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2014/texmf-dist/fonts/
+type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/ur
+w/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/ut
+mbi8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on offlineLfD.pdf (8 pages, 864484 bytes).
 PDF statistics:
- 366 PDF objects out of 1000 (max. 8388607)
- 297 compressed objects within 3 object streams
- 79 named destinations out of 1000 (max. 500000)
- 31933 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 342 PDF objects out of 1000 (max. 8388607)
+ 272 compressed objects within 3 object streams
+ 57 named destinations out of 1000 (max. 500000)
+ 34485 words of extra memory for PDF output out of 35830 (max. 10000000)
 

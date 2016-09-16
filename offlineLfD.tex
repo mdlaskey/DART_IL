@@ -135,12 +135,21 @@
 %\title{Iterative Imitation Learning with Reduced Human Supervision [v11]}
 %\title{SHIV:  Reducing Human Supervision for Robot adaptive Learning [v11]}
 
+  \setlength{\belowcaptionskip}{-2em}
+\setlength{\belowdisplayskip}{1pt} \setlength{\belowdisplayshortskip}{1pt}
+\setlength{\abovedisplayskip}{1pt} \setlength{\abovedisplayshortskip}{1pt}
+
 \title{Comparing Human-Centric and Robot-Centric \\
 Sampling for Robot Deep Learning from Demonstrations}
 
 
 
-\author{Michael Laskey, Caleb Chuck, Jonathan Lee, Jeffrey Mahler,\\ Sanjay Krishnan, Kevin Jamieson, Anca Dragan, Ken Goldberg}
+\author{Michael Laskey$^1$, Caleb Chuck$^1$, Jonathan Lee$^1$, Jeffrey Mahler$^1$,\\ Sanjay Krishnan$^1$, Kevin Jamieson$^1$, Anca Dragan$^1$, Ken Goldberg$^{1,2}$
+\thanks{$^1$ Department of Electrical Engineering and Computer Sciences; {\small \{mdlaskey, calebchuck, jonathan\textunderscore lee, jmahler,sanjaykrishnan, , anca\}@berkeley.edu} }%
+\thanks{$^2$ Department of Industrial Engineering and Operations Research; {\small goldberg@berkeley.edu}}%
+\thanks{$^{1-2}$ University of California, Berkeley;  Berkeley, CA 94720, USA}%
+}
+
 \begin{document}
 
 
@@ -340,13 +349,13 @@ We first provide an empirical comparison of HC and RC.
 We start with experiments in a Grid World environment, which enables us to vary the robot's policy class over a large number of randomly generated environments. Then we examine a linear dynamical system, which we use to exemplify a potential limitation in the ability of RC to match the supervisor's performance when it must learn complex recovery actions.
 Finally, we compare HC and RC on a real task. We perform a pilot study with 10 participants, who try to teach a robot how to singulate, or separate an object from clutter. We used DAgger as the example of an RC method in these experiments. 
 
-\subsection{Effect of Function Class}\label{sec:gdw}
+\subsection{Policy Expressiveness}\label{sec:gdw}
 In this experiment, we hypothesize that on random problems with a perfect simulated supervisor, the performance gap of RC diminishes as the robot's policy becomes more expressive. 
 
 In Grid World, we have a robot that is trying to reach a goal state, at which it receives $+10$ reward. The robot receives $-10$ reward if it touches a penalty state. The robot also receives a $-0.02$ penalty for every blank state. The robot must learn to be robust to the noise in the dynamics, reach the goal state and then stay there.
 The robot has a state space of $(x,y)$ coordinates and a set of actions consisting of $\lbrace$Left, Right, Forward, Backward, Stay$\rbrace$ state. The grid size for the environment is $15 \times 15$. $8\%$ of randomly drawn states are marked as a penalty, while only one is a goal state. For the transition dynamics, $p(\bx_{t+1}|\bx_{t},\bu_t)$, the robot goes to an adjacent state different from the one desired uniformly at random with probability $0.16$. The time horizon for the policy is $T=30$. 
 
-We use Value Iteration to compute an optimal supervisor. In all settings we provided RC with one initial demonstration from HC sampling before iteratively rolling out its policy. This initial demonstration set from HC sampling is common in methods like DAgger~\cite{ross2010reduction}.
+We use Value Iteration to compute an optimal supervisor. In all settings, we provided RC with one initial demonstration from HC sampling before iteratively rolling out its policy. This initial demonstration set from HC sampling is common in methods like DAgger~\cite{ross2010reduction}.
 
 We run all trials over 100 randomly generated environments.
 We measure normalized performance, where $1.0$ represents the expected cumulative reward of the optimal supervisor.
@@ -358,13 +367,13 @@ This outcome suggests that when the robot is not able to learn the supervisor's 
 \noindent \textbf{High Expressiveness:}
 We next consider the situation where the robot's policy class is more expressive. We use decision trees with a depth of $100$ to obtain a highly expressive function class. 
 
-As shown in Fig. \ref{fig:var}(b), RC and HC both converge to the supervisor at the same rate. This suggests that the advantage of using RC techniques diminishes once the robot's policy is more expressive. When the robot is better able to learn the supervisor policy, it is no longer as beneficial to obtain demonstrations specifically on states visited by the robot's current policy. Both RC and HC methods converge to the supervisor's performance, suggesting that the robot's policy class can represent the supervisor.
+As shown in Fig. \ref{fig:var}(b), RC and HC both converge to the supervisor at the same rate. This suggests that the advantage of using RC techniques diminishes once the robot's policy is more expressive. When the robot is better able to learn the supervisor policy, it is no longer as beneficial to obtain demonstrations specifically on states visited by the robot's current policy. Both RC and HC methods converge to the supervisor's performance. 
 
 
 \noindent \textbf{Noisy Supervisor:}
-Real supervisors will not be perfect. Thus, we study the effects of noise on the performance of the two sampling techniques. This is particularly important for HC, because even an expressive learner might need many more demonstrations when the supervision is noisy, perhaps making samples on the current learned policy more useful. Here we consider the case where noise is applied to observed label, thus the robot receives control labels that are $\bu = \pi_{\theta}(\bx) + \epsilon$,  where epsilon is an i.i.d distribution that selects a random control with probability $0.3$.
+Real supervisors will not be perfect. Thus, we study the effects of noise on the performance of the two sampling techniques. This is particularly important for HC, because even an expressive learner might need many more demonstrations when the supervision is noisy, perhaps making samples on the current learned policy more useful. Here we consider the case where noise is applied to observed label, thus the robot receives control labels that are  a randomly sampled with probability $0.3$.
 
-We use decision trees of depth $100$, which due to its large function class is more susceptible to the noisy supervisor. We then compare the performance of HC vs. RC. As shown, both methods are able to converge to the expected supervisor's normalized performance, suggesting they can average out the noise in the labels with enough data. Although it takes more data than without noise, both methods (HC and RC) converge at a similar rate to the true expected supervisor. Of course, real supervisors are not necessarily i.i.d noisy, and our real-problem experiment compares the two methods in practice.
+We use decision trees of depth $100$. Due to the larger expressiveness of a decision tree it is more susceptible to over fitting.  We then compare the performance of HC vs. RC. As shown, both methods are able to converge to the expected supervisor's normalized performance, suggesting they can average out the noise in the labels with enough data. Although it takes more data than without noise, both methods (HC and RC) converge at a similar rate to the true expected supervisor. 
 
 \subsection{Algorithmic Convergence}
 In this experiment, we show an example in which HC converges to the supervisor's performance and RC does not. We construct an environment that is representative of our insight that in real problems the policy on \emph{all} states (including recovery behaviors) is more complex than the policy on the supervisor's distribution.
@@ -396,12 +405,15 @@ Left: A 2D workspace where a point mass robot is taught to go to the green circl
 \end{figure}
 
 \subsection{Real-World Problem}
-Thus far we have seen that the advantage of RC over HC decreases as expressiveness increases on random toy problems. Next, we perform a pilot user study o n a real robot to test performance in practices.
-Participants teach the robot to perform a singulation task (i.e. separate an object from its neighbors), illustrated in Fig. \ref{fig:izzy_sing}. A successful singulation means at least one object has its center located 10 cm or more from all other object centers. 
+We have seen that the advantage of RC over HC decreases as expressiveness increases on random toy problems. Next, we perform a pilot user study on a real robot to test performance in practices.
+Participants teach the robot to perform a singulation task (i.e., separate an object from its neighbors), illustrated in Fig. \ref{fig:izzy_sing}. A successful singulation means at least one object has its center located 10 cm or more from all other object centers. 
 
-Our hypothesis is that HC will outperform RC in practices when using an expressive learner, for two reasons: 1) RC sampling will force the robot to try and learn more complex behavior. 2) Participants will struggle with providing retroactive feedback. 
+We hypothesize that HC will match the supervisor more accurately than RC in practice, because: 1)
+RC sampling will force the robot to try and learn more
+complex behavior, 2) participants will struggle with providing
+retroactive feedback.
 
-The robot has a two-dimensional control space, $\mathcal{U}$, of base rotation and arm extension. The state space of the environment, $\mathcal{X}$, is captured by an overhead Logitech C270 camera, which is positioned to capture the workspace that contains all cluttered objects and the robot arm.  The objects are red extruded polygons. We consider objects made of Medium Density Fiberboard with an average 4" diameter and 3" in height.  We use the current image of the environment as the state representation, which captures positional information. The policy is a deep neural network with the architecture from~\cite{laskeyrobot}. The network is trained using TensorFlow~\cite{tensorflow2015-whitepaper} on a Telsa K40 GPU. 
+The robot has a two-dimensional control space, $\mathcal{U}$, of base rotation and arm extension. The state space of the environment, $\mathcal{X}$, is captured by an overhead Logitech C270 camera, which is positioned to capture the workspace that contains all cluttered objects and the robot arm.  The objects are red extruded polygons. We consider objects made of Medium Density Fiberboard with an average 4" diameter and 3" in height.  We use the current image of the environment as the state representation, which captures positional information. The policy is a deep neural network with the architecture from~\cite{laskeyrobot}. The network is trained using TensorFlow~\cite{tensor} on a Telsa K40 GPU. 
 
 \begin{figure}
 \centering
@@ -420,20 +432,23 @@ Left: An example initial state the robot observes. The initial state can vary th
 \caption{
     \footnotesize
 Two ways to provide feedback to the robot. a)In HC sampling, the human teleoperates the robot and performs the desired task. For the singulation task, the human supervisor used an Xbox Controller. b) In RC sampling, the human observes a video of the robot's policy executing and applies retroactive feedback for what the robot should have done. In the image shown, the person is telling the robot to go backward towards the cluster.  }
-
+\vspace{-20pt}
 \label{fig:labeling}
 \end{figure}
 
 The robot is moved via positional control implemented with PID. Similar to \cite{laskeyshiv}, the control space $\mathcal{U}$ consists of bounded changes in rotation and translation. The control signals for each degree of freedom are continuous values with the following ranges: base rotation, $[-1.5^\circ,1.5^\circ]$, arm extension $[-1cm,1cm]$.
 
 \jmnote{Tense change here, fix at some point}
-During training and testing the initial state distribution $p(\bx_0)$ consisted of sampling the 2D pose of the object cluster from a multivariate Gaussian \mlnote{get numbers}.The relative position of the 4 objects is sampled from a uniform distribution. To help a human operator place objects in the correct pose, we used a virtual overall over the webcam.   
+During training and testing the initial state distribution $p(\bx_0)$ consisted of sampling the 2D pose of the object cluster from a multivariate Gaussian \mlnote{get numbers}.The relative position of the 4 objects is chosenly randomely. To help a human operator place objects in the correct pose, we used a virtual overall over the webcam.   
+
+We selected 10 UC Berkeley students as human subjects. The subjects were familiar with robotics, but not the learning algorithms behind the techniques. They first watched a trained robot perform the task successfully.  They then practiced providing feedback through RC sampling for 5 demonstrations and HC for 5 demonstrations. Next, each subject performed the first 20 demonstrations via HC sampling. Then they performed 40 HC demonstrations and 40 RC demonstrations in a counter-balanced order. In RC,  we chose $K=2$ iterations of 20 demonstrations each. The experiment took 2 hours per person on average. People were allowed to repeat both there RC and HC demonstrations, if they requested it. 
+
 
 Each participant trains the robot in both HC and RC sampling (a within-subjects design). In HC, we asked participants to provide 60 demonstrations to the robot using an Xbox Controller, as shown in Fig. \ref{fig:labeling}a. In RC, participants provided 20 initial demonstrations via the Xbox Controller, and then provided retroactive feedback for $K=2$ iterations of 20 demonstrations each.
 
 Retroactive feedback is provided through a labeling interface similar to our previous work \cite{laskeyrobot}, illustrated in Fig \ref{fig:labeling}b. In this interface, we showed a video at half speed of the robot's rollout to the participant. They then use a mouse to provide feedback in the form of translation and rotation. We provide a virtual overlay so that they can see the magnitude of their given control. 
 
-We selected 10 UC Berkeley students as human subjects. The subjects were familiar with robotics, but not the learning algorithms behind the techniques. They first watched a trained robot perform the task successfully.  They then practiced providing feedback through RC sampling for 5 demonstrations and HC for 5 demonstrations. Next, each subject performed the first 20 demonstrations via HC sampling. Then they performed 40 HC demonstrations and 40 RC demonstrations in a counter-balanced order.  The experiment took 2 hours per person on average. People were allowed to repeat both there RC and HC demonstrations, if they requested it. 
+
 
 \begin{figure}
 \centering
@@ -455,7 +470,7 @@ To better understand why RC performed worse than HC, we looked for the two cause
 
 \noindent\textbf{Policy Complexity: }We first analyzed the complexity of behaviors collected with RC sampling. In Fig. \ref{fig:teaser}c, we show trajectories collected on a single initial state during the study. As illustrated, HC sampling is concentrated around a path needed to singulate the bottom right object. However, RC sampling places the robot in a wide variety of states, some of which would require the robot learning how to move backward or rapidly change direction to recover. 
 
-To better analyze this, we examined the surrogate loss on a test set of 10 randomly selected trajectories from each supervisor's dataset.  As shown in Table 1, we observed the average test error over the policies trained with 60 demonstrations in both degrees of freedom (i.e. translation and rotation) is significantly higher.
+To better analyze this, we examined the surrogate loss on a test set of 10 randomly selected trajectories from each supervisor's dataset.  As shown in Table 1, we observed the average test error over the policies trained with 60 demonstrations in both degrees of freedom (i.e., translation and rotation) is significantly higher.
 This indicates that the RC policies had a harder time generalizing to unseen labels in their aggregate dataset on average, which may be due to the complexity of the corrective actions.
 
 \begin{table}[t]
@@ -487,7 +502,7 @@ RC LfD & $3.4 \pm 1.0$    & $0.014 \pm 0.003$ \\
     \footnotesize
     Results from the post analysis examining how well retroactive feedback matched teleoperation. The scatter plot shows the normalized angle of the control applied for both HC (teleoperation) and RC (retroactive).  The large dispersion in the graph indicates that the five participants had a difficult time matching their retroactive and teleoperated controls. Two example trajectories are also shown.  The black line indicates the path from teleoperation and the teal line is the direction and scaled magnitude of the feedback given. If they matched perfectly, the teal line would be tangent to the path. 
 }
-
+\vspace*{-15pt}
 \label{fig:izzy_traj}
 \end{figure}
 
@@ -526,7 +541,7 @@ As an example for why low-regret may be uninformative, consider a car-racing gam
 Suppose at some point in the race the car encounters a ``v'' in the road where one path is a well-paved road and the other path is a muddy dirt road with obstacles. 
 The car will finish the race faster by taking the paved road, but due to either the stochastic dynamics or imperfectness of the supervisor it is possible that after just a small number of supervisor demonstrations given to the robot to initialize RC LfD, a poor initial policy will be learned that leads the car down the dirt road versus the paved road. 
 When this policy is rolled out the supervisor will penalize the decision at the time point of taking the dirt versus paved road. 
-But if the policy's actions agree with the supervisor once the car is on the dirt road (i.e. making the best of a bad situation) this policy will incur low-regret because the majority of the time the policy was acting in accordance with the supervisor.
+But if the policy's actions agree with the supervisor once the car is on the dirt road (i.e., making the best of a bad situation) this policy will incur low-regret because the majority of the time the policy was acting in accordance with the supervisor.
 Thus, in this example a globally bad policy will be learned (because it took the dirt road instead of the paved road) but relative to the best policy acting on the dirt road, it performs pretty well. 
 
 But more concerning than a potentially uninformative performance guarantee is that RC LfD is performing a greedy strategy for optimization and has the potential to get stuck in local minima.
@@ -565,7 +580,7 @@ For any state in the DAG with children, let $\phi(\bx_{k,t},\theta)$ denote the 
 The dynamics are described as follows: for some $\mu \in (0,1/4]$ to be defined later, if $\theta=L$ and $\bx_{k,t}=\texttt{root}$ then $p(\bx_{k,1}=\phi(\bx_{k,0},R))=\mu$ and $p(\bx_{k,1}=\phi(\bx_{k,0},L))=1-\mu$, but if $\theta=R$ then the right child is chosen with probability $1$. If $\bx_{k,t} \neq \texttt{root}$ then $\bx_{k,t+1} = \phi(\bx_{k,t},\theta)$.
 
 Assume that the supervisor $\pi^*: \mathcal{X} \rightarrow \{L,R\}$ acts greedily according to the given rewards given in the DAG so that $\pi^*(\bx_{k,t})=L$ if the reward of the left child exceeds the right child and $\pi^*(\bx_{k,t})=R$ otherwise.
-Finally, define the state loss function $\ell(\cdot,\cdot)$ as the $0/1$ loss so that after $N$ trajectories, the loss is given as $J_N(\theta)=\sum_{k=1}^N \sum_{t=0}^2 \mathbf{1}\{ \pi^*(\bx_{k,t}) \neq \theta \}$ for all $\theta \in \{L,R\}$. Note that $\widehat{\theta}_N = \arg\min_{\theta \in \{L,R\}} J_N(\theta)$ is equivalent to looking at all actions by the supervisor over the states and taking the majority vote of $L$ versus $R$ (i.e. the states in which these actions are taken has no impact on the minimizer). Note that we have not yet specified how the states $\bx_{k,t}$ were generated. 
+Finally, define the state loss function $\ell(\cdot,\cdot)$ as the $0/1$ loss so that after $N$ trajectories, the loss is given as $J_N(\theta)=\sum_{k=1}^N \sum_{t=0}^2 \mathbf{1}\{ \pi^*(\bx_{k,t}) \neq \theta \}$ for all $\theta \in \{L,R\}$. Note that $\widehat{\theta}_N = \arg\min_{\theta \in \{L,R\}} J_N(\theta)$ is equivalent to looking at all actions by the supervisor over the states and taking the majority vote of $L$ versus $R$ (i.e., the states in which these actions are taken has no impact on the minimizer). Note that we have not yet specified how the states $\bx_{k,t}$ were generated. 
 
 We can compute the true loss when the trajectories are generated by $\theta \in \{L,R\}$. Let the empirical distribution of observed states under a fixed action $\theta \in \{L,R\}$ be given by $p(\tau \mid \theta)$, then
 \begin{align*}
@@ -602,13 +617,13 @@ Consequently, with probability at least $c e^{-m}$ we have that $\lim_{N \righta
 
 \
 \subsection{Bound on Error for HC Lfd}
-In the HC LfD setting a robot is trained on the states visited by the supervisor. However, at run time the robot may encounter a different distribution of states due to not perfectly matching the supervisor's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadratically (i.e. $O(T^2E_{p(\bx|\theta^*)} l(\theta^N)$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\theta^N) = E_{p(\tau|\theta^*)} J(\theta^N, \tau)$. We present a new analysis for a class of stochastic policies and  defined below that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\theta^N)})$ (See Supplement Material). 
+In the HC LfD setting a robot is trained on the states visited by the supervisor. However, at run time the robot may encounter a different distribution of states due to not perfectly matching the supervisor's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadratically (i.e., $O(T^2E_{p(\bx|\theta^*)} l(\theta^N)$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\theta^N) = E_{p(\tau|\theta^*)} J(\theta^N, \tau)$. We present a new analysis for a class of stochastic policies and  defined below that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\theta^N)})$ (See Supplement Material). 
 
 
 \section{Discussion}
  Our results suggest that the RC methods can have an overhead cost when being implemented on a real system. The cost can occur from either the robot observing complex recovery actions or retroactive feedback losing the intention of human supervisors. Fortunately, results suggest HC can achieve similar performance as the robot's policy becomes more expressive. 
 
-We note though there are limitations to using these very expressive models. The non-convex optimization required to train deep neural networks can be prone to a local minimum, which means learning error may not always be minimized. Furthermore, expressive models can be more susceptible to noise from humans than shallower function classes, which could require more data. 
+We note though there are limitations to using these very expressive policies. The non-convex optimization required to train deep neural networks can be prone to a local minimum, which means learning error may not always be minimized. Furthermore, expressive policies can be more susceptible to noise from humans than shallower function classes, which could require more data. 
 
 In future work, we will examine how to instruct human supervisors to provide better demonstrations, which may make them less noisy. Furthermore, we are interested in knowing exactly how much data is needed to achieve high reliability on tasks with significant variance in the initial state. A better theoretical understanding of the sample complexity associated with HC LfD can help answer this question. 
 
@@ -618,46 +633,6 @@ In future work, we will examine how to instruct human supervisors to provide bet
 \bibliographystyle{IEEEtranS}
 \bibliography{references}
 
-
-\appendix
-\mlnote{This will go into a supplement material. Kevin raises a good point that we shouldn't promote bounds with random variables in them. Theorem 6.1 shows exactly what that is a bad idea. We will save understanding how to get a data-dependent rate on this for future work}
-
- Define the surrogate loss as the squared euclidean norm, or $l(\pi_{\theta}(\bx),\pi_{\theta^*}(\bx)) = ||\pi_{\theta}(\bx_{i,t}) - \pi_{\theta^*}(\bx_{i,t})||_2$.We assume that the controls are be bounded and thus can be normalized such that the $l \in [0,1]$.  We are interested in the situation where the supervisor and robot policy are stochastic with a Normal Distribution (i.e. $p(\bu|\pi_{\theta}(\bx)) = \mathcal{N}(\pi_\theta(\bx),\sigma I)$. The interest in stochastic policies instead of deterministic is two-fold: 1) human supervisor can be noisy in nature and 2) due to noise in robot execution, such as cable coupling, the intended and actual control may differ in a stochastic way~\cite{mahler2014learning}. \mlnote{need to clarify what the generalization is} We show a generalization of this bound to any distribution in the exponential family in the supplement material.  Note Ross et al.~\cite{ross2010reduction} used a deterministic policy in their analysis, which may prohibit a direct comparison of rates. To be concise we refer to $J(\theta, \tau)$ as $J(\theta)$, dropping the reference to a trajectory.
-
-\begin{theorem}
-Given a policy $\pi_{\theta^N}$, the following is true 
-$$E_{p(\tau|\theta^n)} J(\theta^N) \leq T\sqrt{\frac{1}{4\sigma}E_{p(\tau|\theta^*)} J(\theta^N)}+E_{p(\tau|\theta^*)} J(\theta^N)$$
-\end{theorem}
-\begin{proof}
-For convenience we will write $E_{p(\tau|\theta)} = E_{\theta}$ and $l(\theta,\bx) = l(\theta)$. The proof follows by first deriving an upper bound on the worst case difference between the two quantities $E_{\theta^N} J(\theta^N) - E_{\theta^*} J(\theta^N) $. Then we leverage the intuition that if one is minimizing $E_{\theta^*} J(\theta^N) $, they are also decreasing the distance between the robot and supervisor's distributions. 
-
-\begin{align}
-&E_{\theta^N} J(\theta^N) - E_{\theta^*} J(\theta^N) \\
-&= T(\frac{1}{T}E_{\theta^N} J(\theta^N) -\frac{1}{T}E_{\theta^*} J(\theta^N)\\
-&\leq  T| | p(\tau|\theta^N) - p(\tau|\theta^*)||_{TV}\\
-&\leq T\sqrt{\frac{1}{2} D_{KL}(p(\tau|\theta^*),p(\tau|\theta^N))}
-\end{align}
-
- Line 6 leverages the fact that the worst case loss is bounded by $1$ and the definition of Total Variational distance. Line 7 uses Pinsker's inequality~\cite{verdu2014total}.
-
-
-\begin{align}
-&= T\sqrt{\frac{1}{2} E_{p(\theta^*)} \mbox{log} \frac{p(\tau|\theta^*)}{p(\tau|\theta^N)}}\\
-&= T\sqrt{\frac{1}{2} E_{p(\theta^*)} \sum^T_{t=1}\mbox{log} \frac{p(\bu_t|\bx_t,\theta^*)}{p(\bu_t|\bx_t,\theta^N)}}\\
-&= T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} \sum^T_{t=1} ||\bu_t- \pi_{\theta^N}(\bx_t)||_2^2 - ||\bu_t- \pi_{\theta^*}(\bx_t)||_2^2}\\
-&\leq T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} \sum^T_{t=1}  ||\pi_{\theta^*}(\bx_t) - \pi_{\theta^N}(\bx_t)||_2^2}\\
-&= T\sqrt{\frac{1}{4\sigma} E_{p(\theta^*)} J(\theta^N)}\\
-&= T\sqrt{T \frac{1}{4\sigma} E_{p(\bx|\theta^*)} l(\theta^N)}
-\end{align}
-
-Line 8,9 and 10 apply the definition of the KL-divergence, the markov chain and the normal distribution over $p(\bu_t|\bx_t,\theta)$. Line 11 applies the triangle inequality to upperbound by the defined surrogate loss. Line 12 applies the assumed definition of $J(\theta)$. Line 13 uses the notation of Ross et al.. 
-
-The intuition behind these steps is that difference between  the two distribution can be controlled via the surrogate loss on the expected supervisor. Thus, illustrating the closer the robot's policy matches the supervisor's policy on the supervisor's distribution, the smaller the total variational difference between the resulting two distributions will be. 
-\end{proof}
-  
-The above analysis demonstrates how the constant $T$ affects the bound in error. However, it is important to note that this is not the only variable that plays a role in performance. The size of the function class and number of demonstrations needed are are also important in determining how large $E_{p(\bx|\theta^*)} l(\theta^N)$ is. 
-
-Understanding how much data is needed to learn a function, is a well studied problem known as sample complexity analysis~\cite{anthony2009neural,bartlett2002rademacher,kakade2009complexity}. In this literature they use different metrics to describe the complexity of a function class and show rates on which a given function class would converge to the best in the set. We refer the reader to \cite{vapnik2013nature}, for a review of such topics. 
 
 
 

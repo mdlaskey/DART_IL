@@ -21,19 +21,6 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{tensorflow2015-whitepaper}
-\BIBentryALTinterwordspacing
-M.~Abadi, A.~Agarwal, P.~Barham, E.~Brevdo, Z.~Chen, C.~Citro, G.~S. Corrado,
-  A.~Davis, J.~Dean, M.~Devin, S.~Ghemawat, I.~Goodfellow, A.~Harp, G.~Irving,
-  M.~Isard, Y.~Jia, R.~Jozefowicz, L.~Kaiser, M.~Kudlur, J.~Levenberg,
-  D.~Man\'{e}, R.~Monga, S.~Moore, D.~Murray, C.~Olah, M.~Schuster, J.~Shlens,
-  B.~Steiner, I.~Sutskever, K.~Talwar, P.~Tucker, V.~Vanhoucke, V.~Vasudevan,
-  F.~Vi\'{e}gas, O.~Vinyals, P.~Warden, M.~Wattenberg, M.~Wicke, Y.~Yu, and
-  X.~Zheng, ``{TensorFlow}: Large-scale machine learning on heterogeneous
-  systems,'' 2015, software available from tensorflow.org. [Online]. Available:
-  \url{http://tensorflow.org/}
-\BIBentrySTDinterwordspacing
-
 \bibitem{abbeel2008apprenticeship}
 P.~Abbeel, D.~Dolgov, A.~Y. Ng, and S.~Thrun, ``Apprenticeship learning for
   motion planning with application to parking lot navigation,'' in \emph{IROS
@@ -48,21 +35,10 @@ B.~Akgun, M.~Cakmak, K.~Jiang, and A.~L. Thomaz, ``Keyframe-based learning from
 B.~Akgun, K.~Subramanian, and A.~L. Thomaz, ``Novel interaction strategies for
   learning from teleoperation.''
 
-\bibitem{anthony2009neural}
-M.~Anthony and P.~L. Bartlett, \emph{Neural network learning: Theoretical
-  foundations}.\hskip 1em plus 0.5em minus 0.4em\relax cambridge university
-  press, 2009.
-
-\bibitem{bartlett2002rademacher}
-P.~L. Bartlett and S.~Mendelson, ``Rademacher and gaussian complexities: Risk
-  bounds and structural results,'' \emph{Journal of Machine Learning Research},
-  vol.~3, no. Nov, pp. 463--482, 2002.
-
-\bibitem{duvallet2013imitation}
-F.~Duvallet, T.~Kollar, and A.~Stentz, ``Imitation learning for natural
-  language direction following through unknown environments,'' in
-  \emph{ICRA}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2013, pp.
-  1047--1053.
+\bibitem{argall2009survey}
+B.~D. Argall, S.~Chernova, M.~Veloso, and B.~Browning, ``A survey of robot
+  learning from demonstration,'' \emph{Robotics and autonomous systems},
+  vol.~57, no.~5, pp. 469--483, 2009.
 
 \bibitem{NIPS2014_5421}
 X.~Guo, S.~Singh, H.~Lee, R.~L. Lewis, and X.~Wang, ``Deep learning for
@@ -73,11 +49,6 @@ X.~Guo, S.~Singh, H.~Lee, R.~L. Lewis, and X.~Wang, ``Deep learning for
 H.~He, J.~Eisner, and H.~Daume, ``Imitation learning by coaching,'' in
   \emph{Advances in Neural Information Processing Systems}, 2012, pp.
   3149--3157.
-
-\bibitem{kakade2009complexity}
-S.~M. Kakade, K.~Sridharan, and A.~Tewari, ``On the complexity of linear
-  prediction: Risk bounds, margin bounds, and regularization,'' in
-  \emph{Advances in neural information processing systems}, 2009, pp. 793--800.
 
 \bibitem{kim2013maximum}
 B.~Kim and J.~Pineau, ``Maximum mean discrepancy imitation learning.'' in
@@ -121,31 +92,22 @@ S.~Ross, N.~Melik-Barkhudarov, K.~S. Shankar, A.~Wendel, D.~Dey, J.~A. Bagnell,
   environments,'' in \emph{ICRA, 2013 IEEE}.\hskip 1em plus 0.5em minus
   0.4em\relax IEEE.
 
-\bibitem{scholkopf2002learning}
-B.~Sch{\"o}lkopf and A.~J. Smola, \emph{Learning with kernels: Support vector
-  machines, regularization, optimization, and beyond}.\hskip 1em plus 0.5em
-  minus 0.4em\relax MIT press, 2002.
-
 \bibitem{schulman2016learning}
 J.~Schulman, J.~Ho, C.~Lee, and P.~Abbeel, ``Learning from demonstrations
   through the use of non-rigid registration,'' in \emph{Robotics
   Research}.\hskip 1em plus 0.5em minus 0.4em\relax Springer, 2016, pp.
   339--354.
 
-\bibitem{shalev2011online}
-S.~Shalev-Shwartz, ``Online learning and online convex optimization,'' 2011.
+\bibitem{slud1977}
+\BIBentryALTinterwordspacing
+E.~V. Slud, ``Distribution inequalities for the binomial law,'' \emph{Ann.
+  Probab.}, vol.~5, no.~3, pp. 404--412, 06 1977. [Online]. Available:
+  \url{http://dx.doi.org/10.1214/aop/1176995801}
+\BIBentrySTDinterwordspacing
 
 \bibitem{vapnik1992principles}
 V.~Vapnik, ``Principles of risk minimization for learning theory,'' in
   \emph{Advances in Neural Information Processing Systems}, 1992, pp. 831--838.
-
-\bibitem{vapnik2013nature}
-------, \emph{The nature of statistical learning theory}.\hskip 1em plus 0.5em
-  minus 0.4em\relax Springer Science \& Business Media, 2013.
-
-\bibitem{verdu2014total}
-S.~Verd{\'u}, ``Total variation distance and the distribution of relative
-  information.''\hskip 1em plus 0.5em minus 0.4em\relax Citeseer.
 
 \bibitem{zhang2016query}
 J.~Zhang and K.~Cho, ``Query-efficient imitation learning for end-to-end

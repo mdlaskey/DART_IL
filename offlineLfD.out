@@ -4,7 +4,7 @@
 \BOOKMARK [2][-]{subsubsection.3.0.1}{Step 1}{section.3}% 4
 \BOOKMARK [3][-]{subsubsection.3.0.2}{Step 2}{subsubsection.3.0.1}% 5
 \BOOKMARK [1][-]{section.4}{Empirical Analysis}{}% 6
-\BOOKMARK [2][-]{subsection.4.1}{Effect of Function Class}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Policy Expressiveness}{section.4}% 7
 \BOOKMARK [2][-]{subsection.4.2}{Algorithmic Convergence}{section.4}% 8
 \BOOKMARK [2][-]{subsection.4.3}{Real-World Problem}{section.4}% 9
 \BOOKMARK [2][-]{subsection.4.4}{Understanding RC Performance in Practice}{section.4}% 10
@@ -14,4 +14,3 @@
 \BOOKMARK [2][-]{subsection.6.2}{Bound on Error for HC Lfd}{section.6}% 14
 \BOOKMARK [1][-]{section.7}{Discussion}{}% 15
 \BOOKMARK [1][-]{section*.10}{References}{}% 16
-\BOOKMARK [1][-]{section*.11}{Appendix}{}% 17
