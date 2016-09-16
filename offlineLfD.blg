@@ -13,11 +13,11 @@ You're missing a field part---line 790 of file references.bib
  :             ,
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "dillmann1995acquisition"
-Warning--I didn't find a database entry for "tensorflow2015-whitepaper"
 -- IEEEtranS.bst version 1.13 (2008/09/30) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 ** Sorting version - not for normal IEEE work.
+Warning--to sort, need author, organization, or key in tensor
 Warning--empty year in abbeel2008apprenticeship
 Warning--empty booktitle in akgun2012novel
 Warning--empty year in akgun2012novel
@@ -28,45 +28,45 @@ Warning--empty year in laskeyshiv
 Warning--empty year in ross2013learning
 
 Done.
-You've used 18 entries,
+You've used 21 entries,
             4498 wiz_defined-function locations,
-            999 strings with 11806 characters,
-and the built_in function-call counts, 15739 in all, are:
-= -- 1342
-> -- 540
-< -- 91
-+ -- 276
-- -- 144
-* -- 825
-:= -- 2326
-add.period$ -- 39
-call.type$ -- 18
-change.case$ -- 125
-chr.to.int$ -- 228
-cite$ -- 26
-duplicate$ -- 988
-empty$ -- 1177
-format.name$ -- 159
-if$ -- 3496
+            1010 strings with 12135 characters,
+and the built_in function-call counts, 17763 in all, are:
+= -- 1518
+> -- 591
+< -- 102
++ -- 303
+- -- 156
+* -- 918
+:= -- 2618
+add.period$ -- 45
+call.type$ -- 21
+change.case$ -- 140
+chr.to.int$ -- 258
+cite$ -- 30
+duplicate$ -- 1126
+empty$ -- 1347
+format.name$ -- 173
+if$ -- 3954
 int.to.chr$ -- 0
-int.to.str$ -- 18
-missing$ -- 176
-newline$ -- 79
-num.names$ -- 36
-pop$ -- 547
+int.to.str$ -- 21
+missing$ -- 199
+newline$ -- 88
+num.names$ -- 40
+pop$ -- 621
 preamble$ -- 1
-purify$ -- 107
+purify$ -- 119
 quote$ -- 2
-skip$ -- 1117
+skip$ -- 1270
 stack$ -- 0
-substring$ -- 642
-swap$ -- 716
-text.length$ -- 15
+substring$ -- 730
+swap$ -- 806
+text.length$ -- 16
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 198
-warning$ -- 8
-while$ -- 72
-width$ -- 20
-write$ -- 179
+type$ -- 230
+warning$ -- 9
+while$ -- 80
+width$ -- 23
+write$ -- 202
 (There was 1 error message)

@@ -168,9 +168,9 @@ Motivated by recent advances in Deep Learning for robot control, this paper cons
 
 
 \section{Introduction} 
-For many sequential robot tasks such as driving, walking, and manipulation where the task dynamics and reward function are not precisely known, one promising approach is Learning from Demonstrations (LfD), where a robot learns to perform a task using examples provided by a human supervisor \cite{pomerleau1989alvinn,abbeel2008apprenticeship,argall2009survey,ross2010reduction,laskeyshiv}. It is well-known that depending on the complexity of the task and the complexity of the learning model, LfD can require many demonstrations, i.e. have low sample efficiency. Learning algorithms such as DAgger have been shown to increase sample efficiency for linear models. An emerging class of highly non-linear learning models such as Deep Learning Networks and decision trees with thousands of parameters have also been shown to increase sample efficiency.  Understanding the relative benefits of the learning algorithm vs the learning model motivates a study of DAgger-like methods in the context of Deep Learning from Demonstrations (DLfD).
+For many sequential robot tasks such as driving, walking, and manipulation where the task dynamics are unknown and the reward function is delayed, one promising approach is Learning from Demonstrations (LfD), where a robot learns to perform a task using examples provided by a human supervisor \cite{pomerleau1989alvinn,abbeel2008apprenticeship,argall2009survey,ross2010reduction,laskeyshiv}.  Learning algorithms such as DAgger have been shown to increase robot performance for a given number of demonstrations. The performance increase has been attributed to the robot visiting states it is more likley to see due to learning error.  An emerging class of more expressive learning models such as Deep Learning Networks and decision trees may help alleviate this learning error during though~\cite{levine2015end}.  Understanding the relative benefits of the learning algorithm vs the learning model motivates a study of DAgger-like methods in the context of Deep Learning from Demonstrations (DLfD).
 
-We consider two classes of learning algorithms that differ in how they acquire demonstrations. ``Human-Centric" (HC) sampling is the standard supervised learning algorithm, where a human supervisor demonstrates the task by tele-operating the robot to provide trajectories consisting of state-action pairs.  ``Robot-Centric" (RC) sampling is an increasingly popular alternative used in algorithms such as DAgger, where a human supervisor observes the robot executing a learned policy and retro-actively provides corrective control labels for each state visited ~\cite{ross2010efficient,ross2010reduction,laskeyrobot,laskeyshiv,he2012imitation}.  
+We consider two classes of learning algorithms that differ in how they acquire demonstrations. ``Human-Centric" (HC) sampling is the standard supervised learning algorithm, where a human supervisor demonstrates the task by tele-operating the robot to provide trajectories consisting of state-action pairs.~\cite{argall2009survey}.``Robot-Centric" (RC) sampling is an increasingly popular alternative used in algorithms such as DAgger, where a human supervisor observes the robot executing a learned policy and retro-actively provides corrective control labels for each state visited ~\cite{ross2010efficient,ross2010reduction,laskeyrobot,laskeyshiv,he2012imitation}.  
 
 RC sampling can be tedious for human supervisors and prone to mislabeling.  RC sampling can also reduce sample efficiency because it repeatedly visits areas of the state space that are avoided once the task is learned. Although RC sampling can be superior to HC sampling for standard learning models such as linear SVMs, HC sampling may perform equally well or better with emerging classes of highly-expressive learning models such as deep learning and hyper-parametric decision trees.
 
@@ -185,21 +185,37 @@ HC and RC trajectories used to learn a robot singulation task: top view of 4 obj
 \label{fig:teaser}
 \end{figure}
 
-Although RC can be more efficient for linear learning models, it requires the human supervisor to estimate the best control for counter-intuitive states which can be tedious and prone to error.  RC sampling also visits states that may not be useful after the task is learned. For example, consider the task of singulating an object from a set of objects on a table (Fig. \ref{fig:teaser}). Standard demonstrations involve moving forward and from side to side to push obstacles out of the way. However, when the robot during learning makes large errors (Fig. \ref{fig:teaser}(right)), counter-intuitive recovery motions will be required.  This can delay or prevent convergence.
+Our insight is that while RC has significant advantages, it
+comes at a cost in practice. One cost is the challenge posed to
+a human supervisor. In RC methods, a human provides retro-
+active feedback to the robot without observing the effect of
+their suggested control. This requires a human supervisor to
+predict how the world will change given a control instead of
+operating the robot with a feedback loop, potentially leading
+to poor labels.
+
+A second cost is that RC sampling collects labels on states
+that occur due to previous errors. These states may require
+more complex corrective actions that do not occur when the
+supervisor performs the task. For example, consider the task
+of singulating an object from a set of objects on a table (Fig.
+1). Standard demonstrations involve moving forward and from
+side to side to push obstacles out of the way. However, if
+the robot makes errors and ends up in a failure state (Fig.
+1(right)), then more complex maneuvers will be required.
+A potential outcome of this effect is the robot’s policy can
+incur larger learning error and not be able to recover the
+supervisor’s policy.
  
-This paper explores the value of this extra overhead for emerging classes of highly-expressive models such as deep learning and decision trees. These learners can more quickly and accurately learn the supervisor policy compared to less expressive learners such as linear models~\cite{vapnik1992principles}.
+This paper explores the value of this extra overhead for emerging classes of highly-expressive models such as deep learning and decision trees. These learners can reduce error in learning and converge to the supervisor's policy~\cite{vapnik1992principles}.
 
 We first perform experiments with a simulated grid world. By varying the expressiveness of the robot's policy, we find on 100 randomly generated grid world environments that the performance gap between the two methods diminishes as the expressiveness is increased. Next, using a point mass control example, we find that RC sampling can fail to converge in cases when HC converges.
 
 We then compare the two in physical experiments. We performed a pilot study with 10 members of the lab.
 In this experiment, each human used RC and HC sampling to train a Zymark robot to singulate an object. We observed a statistically significant gap in the average performance of the policies trained by the two approaches. For $60$  trajectories, RC had a success rate of $40\%$ compared with  $60\%$, for HC. We studied the data to identify possible reasons for this difference and found that with RC, control labels provided by the students were highly inconsistent.
 
-%, suggesting that RC is more difficult for human supervisors. We also found that the RC policy had a higher test loss than the HC policy, suggesting that examples collected with RC sampling are more difficult to learn.
-%In our post analysis, we examine how well people could match their controls in retroactive feedback compared to teleoperation. Furthermore, we analyze a held out test set's surrogate loss to explain how well the policy learned can generalize to unseen data. A higher test loss can indicate harder to learn examples were in the dataset. 
+We finally provide a  study of the  theory that motivates RC methods.  First, we review the online optimization literature from which the theory stems. Then we prove by construction that there exist a class of examples where HC converges to the supervisor, but RC may not
 
-We also provide two theoretical contributions consistent with these results. First, we prove by construction that there exist a class of examples where HC converges but RC may not.  We also contribute a new analysis for the error accumulation in HC sampling for  squared Euclidean loss and normally distributed stochastic policies, which demonstrates a tighter bound than shown in prior work~\cite{ross2010efficient}. 
-
-%move to Conclusion: Overall, our results suggest that for highly expressive deep learners, it may be more advantageous to get demonstrations using HC sampling than to ask the human supervisor for retroactive feedback along the robot's current policy.
 
 
 \section{Related Work}
@@ -207,7 +223,7 @@ Below we summarize related work in HC and RC LfD and their theoretical insights.
 
 \noindent \textbf {\ns}  Pormeleau et al. used \ns to train a neural network to drive a car on the highway via demonstrations provided by a supervisor. To reduce the number of examples needed to perform a task, they synthetically generated images of the road and following labels~\cite{pomerleau1989alvinn}.  A similar approach was used by Dilmann et al. to teach a robot to insert perform peg-in-hole using a neural network controller~\cite{dillmann1995acquisition}. Schulman et al. used HC LfD for rope tying using kernelized interpolation as the policy class~\cite{schulman2016learning}.  A comprehensive list of HC LfD techniques can be found here~\cite{argall2009survey}. 
 
-Ross et al. examined \ns  derived that the error in the worst case from this approach can go quadratic in the time horizon, $T$~\cite{ross2010efficient}. The intuition behind this analysis is that if the distribution induced by the robot's policy is different than the supervisor's, the robot could incur the maximum error. Expressive policies can manage constant $T$ factors by achieving very low training error. We also show that a rate of $T\sqrt{T}$ is achievable for stochastic policies. 
+Ross et al. examined \ns  derived that the error in the worst case from this approach can go quadratic in the time horizon, $T$~\cite{ross2010efficient}. The intuition behind this analysis is that if the distribution induced by the robot's policy is different than the supervisor's, the robot could incur the maximum error. Expressive policies can help manage this term, $T$ , by achieving very low training error. 
 
 \noindent \textbf{\nc}
 \nc has been used in numerous robotic examples, including flying a quadcopter through a forest where the state space is image data taken from an onboard sensor~\cite{ross2013learning}. Other successful examples have been teaching a robotic wheelchair to navigate to target positions~\cite{kim2013maximum}, teaching a robot to follow verbal instructions to navigate across an office building {duvallet2013imitation} and teaching a robot to grasp in clutter~\cite{laskeyrobot}.
@@ -215,12 +231,10 @@ Ross et al. examined \ns  derived that the error in the worst case from this app
 Algorithmic extensions to \nc have also been recently made, such as forcing the supervisor to provide controls that are easier for the robot to learn from~\cite{he2012imitation}.  Kim et al. proposed only to query the supervisor in states that the robot is uncertain~\cite{kim2013maximum} . Laskey et al. extended this approach to high-dimensional states~\cite{laskeyshiv}. Laskey et al. examined a hierarchy of supervisors (ranked by quality)  to reduce the burden on an expert demonstrator~\cite{laskeyrobot}. Zhang and Cho trained a classifier to detect when \nc would encounter dangerous states during policy execution~\cite{zhang2016query}.
 
 Ross et al.~\cite{ross2010reduction} analyze RC sampling as online optimization. The propose DAgger, an RC sampling algorithm, and show that the error for the robot's policy is linear in $T$ for strongly convex losses (i.e.  regularized linear or kernelized regression). 
-However, the error also depends on the expected loss on the data collected during RC, which may be high due to observing complex recovery behaviors. We analyze this effect and show how it can prevent RC from converging to the supervisor's policy in Section \ref{sec:PS}
+However, the error also depends on the expected loss on the data collected during RC, which may be high due to observing complex recovery behaviors. We analyze this effect and show how it can prevent RC from converging to the supervisor's policy in Section \ref{sec:PS}.
 
 \textbf{LfD Interfaces:}
-Standard techniques for providing demonstrations to a robot are teleoperation, kinesthetic and waypoint specification~\cite{akgun2012keyframe,akgun2012novel,argall2009survey}. Kinesthetic teaching is defined as moving the robot body via a human exerting force on the robot itself. Teleoperation uses an interface such as a joystick or video game controller to control the position of the robot end effector. Waypoint specification, or Keyframes, has a human select positions in the space that the robot needs to visit. These methods are forms of HC sampling because the human guides the robot through the task. 
-
-Previous work has studied these HC sampling techniqes~\cite{akgun2012keyframe,akgun2012novel} relative to each other. However, in our analysis look specifically at teleoperation and compare it to RC's form of retroactive feedback. 
+Standard techniques for providing demonstrations to a robot are teleoperation, kinesthetic and waypoint specification~\cite{akgun2012keyframe,akgun2012novel,argall2009survey}. Kinesthetic teaching is defined as moving the robot body via a human exerting force on the robot itself. Teleoperation uses an interface such as a joystick or video game controller to control the position of the robot end effector. Waypoint specification, or Keyframes, has a human select positions in the space that the robot needs to visit. These methods are forms of HC sampling because the human guides the robot through the task.  In our analysis look specifically at teleoperation and compare it to RC's form of retroactive feedback. 
 
 \section{Problem Statement and Background}\label{sec:PS}
 The objective of LfD is to learn a policy that matches that of the supervisor on a specified task that demonstrations are collected on.
@@ -274,22 +288,10 @@ We measure the difference between controls using a surrogate loss $l : \mathcal{
 The surrogate loss can either be an indicator function as in classification or a continuous measure on the sufficient statistics of $p(\bu|\bx,\theta)$.
 We measure total loss along a trajectory with respect to the supervisor's policy $\pi_{\theta^*}$ by $J(\theta, \tau) = \sum^T_{t=1} l(\pi_{\theta}(\bx_{t}),\pi_{\theta^*}(\bx_{t}))$.
 
-\noindent \textbf{LfD with \ns Sampling:} In \ns, the supervisor provides the robot a set of $N$ demonstration trajectories $\lbrace \tau^1,...,\tau^N \rbrace$ sampled from $p(\tau | \theta^*)$.
+\noindent \textbf{LfD with \ns Sampling:} In HC, the supervisor provides the robot a set of $N$ demonstration trajectories $\lbrace \tau^1,...,\tau^N \rbrace$ sampled from $p(\tau | \theta^*)$.
 This induces a training data set $\mathcal{D}$ of all state-control input pairs from the demonstrated trajectories.
-The goal is to find a parameter $\theta$ generates the sample demonstrations from the supervisor's policy.
-\ns frames this  question as maximizing the conditional likelihood of the sample demonstrations conditioned on a given parameter $\theta$. 
+The goal is to find the $\theta^N$ that minimizes the empirical risk, or sample estimate of the expectation. 
 
-$$\underset{\theta}{\mbox{max}} \prod^N_{n=1} p(\bx_{0,n}) \prod^T_{t=1} p(\bx_{t+1,n}|\bx_{t,n},\bu_{t,n})p(\bu_{t,n}|\bx_{t,n},\theta)$$
-
-It is common to optimize the conditional log-likelihood, which maintains the same solution but breaks up the product terms into sums. 
-
-\begin{equation}\label{eq:m_likeli_obj}
-\underset{\theta}{\mbox{max}} \sum^N_{n=1}\sum^T_{t=1}\mbox{log }p(\bu_{t,n}|\bx_{t,n},\theta)
-\end{equation}
-\noindent We note that the dynamics and initial state distributions are dropped in this objective because they are conditionally independent of $\theta$, once the controls are observed. 
-
-Traditionally maximizing the probability of a given control from the supervisor has been viewed as minimization the surrogate loss $l$~\cite{ross2010reduction,ross2010efficient}.
-This rewrites the objective as follows: 
 
 \begin{equation}\label{eq:main_obj}
 \theta^N = \underset{\theta}{\mbox{argmin }} \sum \limits_{i=1}^N J(\theta, \tau_i).
@@ -377,8 +379,8 @@ In this experiment, we show an example in which HC converges to the supervisor's
 We consider the example where a robot needs to learn to get to a location in a 2D continuous world domain. The robot is represented as a point mass with discrete time double integrator with linear dynamics. 
 
 The environment contains two sets of dynamics (1 and 2): 
-$$\bx_{t+1} = A\bx_{t+1}+B_1\bu_t+w$$
-$$\bx_{t+1} = A\bx_{t+1}+B_2\bu_t + w$$
+$$\bx_{t+1} = A\bx_{t}+B_1\bu_t+w$$
+$$\bx_{t+1} = A\bx_{t}+B_2\bu_t + w$$
 where $w\sim \mathcal{N}(0,0.1 I)$. The state of the robot is $\bx = (x,y,v_x,v_y)$, or the coordinates and the velocity. The control inputs to the robot $\bu = (f_x,f_y)$, or the forces in the coordinate direction. The matrix $A$ is a $4\times4$ identity matrix plus the necessary two values to update the $x,y$ state by the velocity with a timestep of $1$. $B_1$ and $B_2$, correspond to a $4\times 2$ matrix that updates only the velocity for each axis independently. This update corresponds to $\mathbf{v}_{t+1} = \mathbf{v}_t+\frac{1}{m} \mathbf{f}_t$, where $m$ is the mass of the robot.
 
 
@@ -395,7 +397,7 @@ This prevents it from converging because it attempts to fit a single linear poli
 \includegraphics{f_figs/p_mass.eps}
 \caption{
     \footnotesize
-Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the blue circle. The world is divided into to two regions with different dynamics. The supervisor is computed via infinite horizon LQG for each region, which results in two different linear matrices in region 1 and 2. Right: RC fails to converges because it is attempting to learn a policy across the two regions, whereas HC remains in region 1 and converges to the supervisor performance. }
+Left: A 2D workspace where a point mass robot is taught to go to the green circle starting from the black circle. The world is divided into to two regions with different dynamics. The supervisor is computed via infinite horizon LQG for each region, which results in two different linear matrices in region 1 and 2. Right: RC fails to converges because it is attempting to learn a policy across the two regions, whereas HC remains in region 1 and converges to the supervisor performance. }
 \vspace*{-20pt}
 \label{fig:p_mass}
 \end{figure}
@@ -434,13 +436,11 @@ Two ways to provide feedback to the robot. a)In HC sampling, the human teleopera
 
 The robot is moved via positional control implemented with PID. Similar to \cite{laskeyshiv}, the control space $\mathcal{U}$ consists of bounded changes in rotation and translation. The control signals for each degree of freedom are continuous values with the following ranges: base rotation, $[-1.5^\circ,1.5^\circ]$, arm extension $[-1cm,1cm]$.
 
-\jmnote{Tense change here, fix at some point}
 During training and testing the initial state distribution $p(\bx_0)$ consisted of sampling the translation of the cluster from a multivariate isotropic Gaussian with variance of $20$cm and the rotation was selected uniformly from the range $[-15^\circ,15^\circ]$. The relative position of the 4 objects is chosen randomly. To help a human operator place objects in the correct pose, we used a virtual overall over the webcam.   
 
-We selected 10 UC Berkeley students as human subjects. The subjects were familiar with robotics, but not the learning algorithms behind the techniques. They first watched a trained robot perform the task successfully.  They then practiced providing feedback through RC sampling for 5 demonstrations and HC for 5 demonstrations. Next, each subject performed the first 20 demonstrations via HC sampling. Then they performed 40 HC demonstrations and 40 RC demonstrations in a counter-balanced order. In RC,  we chose $K=2$ iterations of 20 demonstrations each. The experiment took 2 hours per person on average. People were allowed to repeat both there RC and HC demonstrations, if they requested it. 
+We selected 10 UC Berkeley students as human subjects. The subjects were familiar with robotics, but not the learning algorithms behind the techniques. They first watched a trained robot perform the task successfully.  They then practiced providing feedback through RC sampling for 5 demonstrations and HC for 5 demonstrations. Next, each subject performed the first 20 demonstrations via HC sampling. They then performed 40 HC demonstrations and 40 RC demonstrations in a counter-balanced order. In RC, we chose $K=2$ iterations of 20 demonstrations each. The experiment took 2 hours per person on average. People were allowed to repeat both there RC and HC demonstrations, if they requested it. 
 
-
-Each participant trains the robot in both HC and RC sampling (a within-subjects design). In HC, we asked participants to provide 60 demonstrations to the robot using an Xbox Controller, as shown in Fig. \ref{fig:labeling}a. In RC, participants provided 20 initial demonstrations via the Xbox Controller, and then provided retroactive feedback for $K=2$ iterations of 20 demonstrations each.
+Each participant trained the robot in both HC and RC sampling (a within-subjects design). In HC, we asked participants to provide 60 demonstrations to the robot using an Xbox Controller, as shown in Fig. \ref{fig:labeling}a. In RC, participants provided 20 initial demonstrations via the Xbox Controller, and then provided retroactive feedback for $K=2$ iterations of 20 demonstrations each.
 
 Retroactive feedback is provided through a labeling interface similar to our previous work \cite{laskeyrobot}, illustrated in Fig \ref{fig:labeling}b. In this interface, we showed a video at half speed of the robot's rollout to the participant. They then use a mouse to provide feedback in the form of translation and rotation. We provide a virtual overlay so that they can see the magnitude of their given control. 
 
@@ -515,14 +515,8 @@ To better understand the empirical results from above, we contribute new theoret
 
 
 \subsection{Algorithm Consistency}\label{sec:consistent}
-In this section we work towards a fuller understanding of the tradeoffs between HC and RC. 
-One of the motivations for the use of the RC LfD algorithm is that the feedback from the supervisor is being provided for the trajectory that is the result of executing the latest learned policy.
-That is, instead of the supervisor repeatedly demonstrating the task over and over to the robot without any corrective feedback to the robot's learned policy (as is done in HC LfD), at each time in RC LfD the robot attempts the task with what knowledge it has gained about the task so far and the supervisor provides feedback on this attempt. 
-The RC approach is particularly appealing when the robot's policy is incapable of matching the supervisor's demonstrations exactly.  
-This intuition along with a theoretical analysis of Ross et al. ~\cite{ross2010reduction} has led to use of the RC approach~\cite{zhang2016query,he2012imitation,ross2013learning}.
-
-The analysis of RC LfD in \cite{ross2010reduction} is performed in the context of the regret framework of online learning. 
-In online learning, at each iteration $k \in \{1,\dots,N\}$ the algorithm chooses an action $\theta_k \in \Theta$ (e.g. a policy to roll out), and observes some loss $f_k(\theta_k)$. 
+In this section we work towards a fuller understanding of the tradeoffs between HC and RC. The analysis of RC LfD in \cite{ross2010reduction} is performed in the context of the regret framework of online learning. 
+In online learning, at each iteration $k \in \{1,\dots,N\}$ the algorithm chooses an action $\theta_k \in \Theta$ (e.g. a policy to roll out)~\cite{shalev2009mind}, and observes some loss $f_k(\theta_k)$. 
 Online learning is analyzed in the context of a regret guarantee: an upper bound (e.g. $\sqrt{N}$) on the cumulative loss incurred by the algorithm relative to taking just the best single action in $\Theta$:
 \begin{align*}
 \sup_{\theta \in \Theta} \sum_{k=1}^N f_k(\theta_k) - f_k(\theta).
@@ -607,7 +601,7 @@ Consequently, with probability at least $c e^{-m}$ we have that $\lim_{N \righta
 \end{proof}
 
 \subsection{Bound on Error for HC Lfd}
-In the HC LfD setting a robot is trained on the states visited by the supervisor. However, at run time the robot may encounter a different distribution of states due to not perfectly matching the supervisor's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadratically (i.e., $O(T^2E_{p(\bx|\theta^*)} l(\theta^N)$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\theta^N) = E_{p(\tau|\theta^*)} J(\theta^N, \tau)$. We present a new analysis for a class of stochastic policies and  defined below that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\theta^N)})$ (See Supplement Material). 
+In the HC LfD setting a robot is trained on the states visited by the supervisor. However, at run time the robot may encounter a different distribution of states due to not perfectly matching the supervisor's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadratically (i.e., $O(T^2E_{p(\bx|\theta^*)} l(\theta^N)$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\theta^N) = E_{p(\tau|\theta^*)} J(\theta^N, \tau)$. We present a new analysis for a class of stochastic policies that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\theta^N)})$ (See Supplement Material at \url{http://berkeleyautomation.github.io/lfd_icra2017/}).  
 
 
 \section{Discussion}

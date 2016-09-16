@@ -21,6 +21,9 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{tensor}
+``Tensor flow,'' \url{https://www.tensorflow.org/}.
+
 \bibitem{abbeel2008apprenticeship}
 P.~Abbeel, D.~Dolgov, A.~Y. Ng, and S.~Thrun, ``Apprenticeship learning for
   motion planning with application to parking lot navigation,'' in \emph{IROS
@@ -64,6 +67,10 @@ M.~Laskey, S.~Staszak, W.~Y.-S. Hsieh, J.~Mahler, F.~T. Pokorny, A.~D. Dragan,
   and K.~Goldberg, ``Shiv: Reducing supervisor burden using support vectors for
   efficient learning from demonstrations in high dimensional state spaces.''
 
+\bibitem{levine2015end}
+S.~Levine, C.~Finn, T.~Darrell, and P.~Abbeel, ``End-to-end training of deep
+  visuomotor policies,'' \emph{arXiv preprint arXiv:1504.00702}, 2015.
+
 \bibitem{mahler2014learning}
 J.~Mahler, S.~Krishnan, M.~Laskey, S.~Sen, A.~Murali, B.~Kehoe, S.~Patil,
   J.~Wang, M.~Franklin, P.~Abbeel \emph{et~al.}, ``Learning accurate kinematic
@@ -97,6 +104,11 @@ J.~Schulman, J.~Ho, C.~Lee, and P.~Abbeel, ``Learning from demonstrations
   through the use of non-rigid registration,'' in \emph{Robotics
   Research}.\hskip 1em plus 0.5em minus 0.4em\relax Springer, 2016, pp.
   339--354.
+
+\bibitem{shalev2009mind}
+S.~Shalev-Shwartz and S.~M. Kakade, ``Mind the duality gap: Logarithmic regret
+  algorithms for online optimization,'' in \emph{Advances in Neural Information
+  Processing Systems}, 2009, pp. 1457--1464.
 
 \bibitem{slud1977}
 \BIBentryALTinterwordspacing
