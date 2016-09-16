@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  15 SEP 2016 20:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  15 SEP 2016 21:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1181,9 +1181,6 @@ e 496.
 (pdftex.def)             Requested size: 236.88441pt x 73.27354pt.
  [6 <./f_figs/izzy_reward-eps-converted-to.pdf> <./f_figs/cor_data-eps-converte
 d-to.pdf>]
-
-LaTeX Warning: Reference `' on page 7 undefined on input line 542.
-
 Package epstopdf Info: Source file: <f_figs/counter_exmp.eps>
 (epstopdf)                    date: 2016-09-14 17:38:56
 (epstopdf)                    size: 324334 bytes
@@ -1194,7 +1191,8 @@ Package epstopdf Info: Source file: <f_figs/counter_exmp.eps>
 nverted-to.pdf f_figs/counter_exmp.eps>
 (epstopdf)             \includegraphics on input line 555.
 Package epstopdf Info: Output file is already uptodate.
-<f_figs/counter_exmp-eps-converted-to.pdf, id=208, 231.86626pt x 104.39pt>
+
+<f_figs/counter_exmp-eps-converted-to.pdf, id=209, 231.86626pt x 104.39pt>
 File: f_figs/counter_exmp-eps-converted-to.pdf Graphic file (type pdf)
 
 <use f_figs/counter_exmp-eps-converted-to.pdf>
@@ -1245,10 +1243,10 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 623.
  ) 
 Here is how much of TeX's memory you used:
- 22292 strings out of 493117
- 398980 string characters out of 6135433
+ 22291 strings out of 493117
+ 398978 string characters out of 6135433
  533591 words of memory out of 5000000
- 25008 multiletter control sequences out of 15000+600000
+ 25007 multiletter control sequences out of 15000+600000
  61476 words of font info for 278 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,16n,54p,2407b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1275,10 +1273,10 @@ type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/ut
 mbi8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
 </usr/local/texlive/2014/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on offlineLfD.pdf (9 pages, 871448 bytes).
+Output written on offlineLfD.pdf (9 pages, 871485 bytes).
 PDF statistics:
- 345 PDF objects out of 1000 (max. 8388607)
- 274 compressed objects within 3 object streams
+ 346 PDF objects out of 1000 (max. 8388607)
+ 275 compressed objects within 3 object streams
  59 named destinations out of 1000 (max. 500000)
  34477 words of extra memory for PDF output out of 35830 (max. 10000000)
 
