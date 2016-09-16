@@ -450,7 +450,7 @@ Retroactive feedback is provided through a labeling interface similar to our pre
 \caption{
     \footnotesize
 Average success at the singulation task over the 10 human subjects as a function of number of demonstrations. Each policy is evaluated 30 times on the a held out set of test configurations. The first 20 rollouts are from the supervisor rolling out there policy and the next 40 are collected via retro-active feedback for RC and tele-operated demonstrations for HC. HC LfD shows a 20$\%$ improvement in success at the end. }
-\vspace*{-20pt}
+\vspace*{-8pt}
 
 \label{fig:izzy_rw}
 \end{figure}
@@ -602,12 +602,11 @@ Consequently, with probability at least $c e^{-m}$ we have that $\lim_{N \righta
 In the HC LfD setting a robot is trained on the states visited by the supervisor. However, at run time the robot may encounter a different distribution of states due to not perfectly matching the supervisor's policy. Ross et al. showed that given a time horizon, $T$, the worst case error scales quadratically (i.e., $O(T^2E_{p(\bx|\theta^*)} l(\theta^N)$) when executing the robot's policy~\cite{ross2010efficient}. Note according to the notation of Ross et al., $TE_{p(\bx|\theta^*)} l(\theta^N) = E_{p(\tau|\theta^*)} J(\theta^N, \tau)$. We present a new analysis for a class of stochastic policies that shows a rate of $O(T\sqrt{TE_{p(\bx|\theta^*)} l(\theta^N)})$ (See Supplement Material at \url{http://berkeleyautomation.github.io/lfd_icra2017/}).  
 
 
-\section{Discussion}
- Our results suggest that the RC methods can have an overhead cost when being implemented on a real system. The cost can occur from either the robot observing complex recovery actions or retroactive feedback losing the intention of human supervisors. Fortunately, results suggest HC can achieve similar performance as the robot's policy becomes more expressive. 
+\section{Discussion and Future Work}
 
-We note though there are limitations to using these very expressive policies. The non-convex optimization required to train deep neural networks can be prone to a local minimum, which means learning error may not always be minimized. Furthermore, expressive policies can be more susceptible to noise from humans than shallower function classes, which could require more data. 
+Motivated by recent advances in Deep Learning from Demonstrations for robot control, this paper reconsiders HC and RC sampling in this context, finding that policies learned with HC sampling perform equally well or better with emerging classes of highly-expressive learning models such as deep learning and hyper-parametric decision trees and can avoid some of the drawbacks of RC sampling.  
 
-In future work, we will examine how to instruct human supervisors to provide better demonstrations, which may make them less noisy. Furthermore, we are interested in knowing exactly how much data is needed to achieve high reliability on tasks with significant variance in the initial state. A better theoretical understanding of the sample complexity associated with HC LfD can help answer this question. 
+It is important to note that there are challenges to using such highly- expressive policies. The non-convex optimization required to train deep neural networks can be prone to noise and local minima that can delay or prevent convergence.  In future work, we will explore these effects and how sample complexity grows with variance in the initial state. We are also curious if HRI can lead to methods that allow human supervisors to provide more accurate demonstrations.  
 
 
 
