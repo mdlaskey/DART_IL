@@ -71,7 +71,6 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {III-.1}Step 1}{3}{subsubsection.3.0.1}}
 \newlabel{eq:super_objj}{{3}{3}{Step 1}{equation.3.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {III-.2}Step 2}{3}{subsubsection.3.0.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Empirical Analysis}{3}{section.4}}
 \citation{ross2010reduction}
 \citation{ross2010efficient}
 \citation{ross2010reduction}
@@ -80,6 +79,7 @@
 \citation{ross2010reduction}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  We compare RC and HC sampling for low- and high-expressiveness policy classes (a and b respectively) over 100 randomly generated 2D gridworld environments, as a function of the amount of data provided to them. RC outperforms in the low-expressive condition, but the performance gap is negligible in the high-expressive condition, when the policy class contains the expected supervisor policy. We also examine the case of noisy supervisor labels (c), in which both techniques take more data to converge, but again perform similarly. \relax }}{4}{figure.caption.2}}
 \newlabel{fig:var}{{2}{4}{\footnotesize We compare RC and HC sampling for low- and high-expressiveness policy classes (a and b respectively) over 100 randomly generated 2D gridworld environments, as a function of the amount of data provided to them. RC outperforms in the low-expressive condition, but the performance gap is negligible in the high-expressive condition, when the policy class contains the expected supervisor policy. We also examine the case of noisy supervisor labels (c), in which both techniques take more data to converge, but again perform similarly. \relax }{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Empirical Analysis}{4}{section.4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Policy Expressiveness}{4}{subsection.4.1}}
 \newlabel{sec:gdw}{{IV-A}{4}{Policy Expressiveness}{subsection.4.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Algorithmic Convergence}{4}{subsection.4.2}}
@@ -94,10 +94,6 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Two ways to provide feedback to the robot. a)In HC sampling, the human teleoperates the robot and performs the desired task. For the singulation task, the human supervisor used an Xbox Controller. b) In RC sampling, the human observes a video of the robot's policy executing and applies retroactive feedback for what the robot should have done. In the image shown, the person is telling the robot to go backward towards the cluster. \relax }}{5}{figure.caption.5}}
 \newlabel{fig:labeling}{{5}{5}{\footnotesize Two ways to provide feedback to the robot. a)In HC sampling, the human teleoperates the robot and performs the desired task. For the singulation task, the human supervisor used an Xbox Controller. b) In RC sampling, the human observes a video of the robot's policy executing and applies retroactive feedback for what the robot should have done. In the image shown, the person is telling the robot to go backward towards the cluster. \relax }{figure.caption.5}{}}
 \citation{laskeyrobot}
-\citation{ross2010reduction}
-\citation{zhang2016query}
-\citation{he2012imitation}
-\citation{ross2013learning}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Average success at the singulation task over the 10 human subjects as a function of number of demonstrations. Each policy is evaluated 30 times on the a held out set of test configurations. The first 20 rollouts are from the supervisor rolling out there policy and the next 40 are collected via retro-active feedback for RC and tele-operated demonstrations for HC. HC LfD shows a 20$\%$ improvement in success at the end. \relax }}{6}{figure.caption.6}}
 \newlabel{fig:izzy_rw}{{6}{6}{\footnotesize Average success at the singulation task over the 10 human subjects as a function of number of demonstrations. Each policy is evaluated 30 times on the a held out set of test configurations. The first 20 rollouts are from the supervisor rolling out there policy and the next 40 are collected via retro-active feedback for RC and tele-operated demonstrations for HC. HC LfD shows a 20$\%$ improvement in success at the end. \relax }{figure.caption.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-D}Understanding RC Performance in Practice}{6}{subsection.4.4}}
@@ -105,12 +101,15 @@
 \newlabel{tab:opt-p-comparison}{{I}{6}{\footnotesize The average surrogate loss on a held out set of 10 demonstrations from the the total 60 demonstrations collected for each 10 participants. The confidence intervals are standard error on the mean, which suggest that RC LfD obtains a statistically significant higher surrogate loss in both degrees of freedom, forward and rotation. \relax }{table.caption.7}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  Results from the post analysis examining how well retroactive feedback matched teleoperation. The scatter plot shows the normalized angle of the control applied for both HC (teleoperation) and RC (retroactive). The large dispersion in the graph indicates that the five participants had a difficult time matching their retroactive and teleoperated controls. Two example trajectories are also shown. The black line indicates the path from teleoperation and the teal line is the direction and scaled magnitude of the feedback given. If they matched perfectly, the teal line would be tangent to the path. \relax }}{6}{figure.caption.8}}
 \newlabel{fig:izzy_traj}{{7}{6}{\footnotesize Results from the post analysis examining how well retroactive feedback matched teleoperation. The scatter plot shows the normalized angle of the control applied for both HC (teleoperation) and RC (retroactive). The large dispersion in the graph indicates that the five participants had a difficult time matching their retroactive and teleoperated controls. Two example trajectories are also shown. The black line indicates the path from teleoperation and the teal line is the direction and scaled magnitude of the feedback given. If they matched perfectly, the teal line would be tangent to the path. \relax }{figure.caption.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Theoretical Analysis}{6}{section.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Theoretical Analysis}{6}{section.6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {VI-A}Algorithm Consistency}{6}{subsection.6.1}}
-\newlabel{sec:consistent}{{VI-A}{6}{Algorithm Consistency}{subsection.6.1}{}}
+\citation{ross2010reduction}
+\citation{zhang2016query}
+\citation{he2012imitation}
+\citation{ross2013learning}
 \citation{ross2010reduction}
 \citation{ross2010reduction}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Theoretical Analysis}{7}{section.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-A}Algorithm Consistency}{7}{subsection.5.1}}
+\newlabel{sec:consistent}{{V-A}{7}{Algorithm Consistency}{subsection.5.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces  \relax \fontsize  {8}{9pt}\selectfont  A Directed Acyclic Graph, where a robot is being taught by a supervisor to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the supervisor would select, either left or right, $\delimiter "4266308 L, R \delimiter "5267309 $. The HC method converges to the Orange path, which is optimal. While the RC method converges to the Teal path, because it tries to learn on examples from that side of the tree.\relax }}{7}{figure.caption.9}}
 \newlabel{fig:c_ex}{{8}{7}{\footnotesize A Directed Acyclic Graph, where a robot is being taught by a supervisor to descend down and achieve maximum cumulative reward, which is shown via the numbers on each branch. Each node has the action the supervisor would select, either left or right, $\lbrace L, R \rbrace $. The HC method converges to the Orange path, which is optimal. While the RC method converges to the Teal path, because it tries to learn on examples from that side of the tree.\relax }{figure.caption.9}{}}
 \citation{ross2010reduction}
@@ -125,6 +124,9 @@
 \bibcite{NIPS2014_5421}{5}
 \bibcite{he2012imitation}{6}
 \bibcite{kim2013maximum}{7}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Bound on Error for HC Lfd}{8}{subsection.5.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Discussion}{8}{section.6}}
+\@writefile{toc}{\contentsline {section}{References}{8}{section*.10}}
 \bibcite{laskeyrobot}{8}
 \bibcite{laskeyshiv}{9}
 \bibcite{mahler2014learning}{10}
@@ -136,6 +138,3 @@
 \bibcite{slud1977}{16}
 \bibcite{vapnik1992principles}{17}
 \bibcite{zhang2016query}{18}
-\@writefile{toc}{\contentsline {subsection}{\numberline {VI-B}Bound on Error for HC Lfd}{8}{subsection.6.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Discussion}{8}{section.7}}
-\@writefile{toc}{\contentsline {section}{References}{8}{section*.10}}

@@ -135,10 +135,6 @@
 %\title{Iterative Imitation Learning with Reduced Human Supervision [v11]}
 %\title{SHIV:  Reducing Human Supervision for Robot adaptive Learning [v11]}
 
-  \setlength{\belowcaptionskip}{-2em}
-\setlength{\belowdisplayskip}{1pt} \setlength{\belowdisplayshortskip}{1pt}
-\setlength{\abovedisplayskip}{1pt} \setlength{\abovedisplayshortskip}{1pt}
-
 \title{Comparing Human-Centric and Robot-Centric \\
 Sampling for Robot Deep Learning from Demonstrations}
 
@@ -513,11 +509,10 @@ We measured the correlation between the controls applied via retroactive feedbac
 
 In Fig. \ref{fig:izzy_traj} we plot the control angle from HC sampling versus the control angle from RC sampling, showing that the two are not correlated. We also show two trajectories that a participant teleoperated with their retroactive labels overlayed, both of which suggest disagreement between the teleoperated and retroactive controls. Overall, our analysis suggests that RC sampling can lose the intent of the human supervisor. 
 
-\section{Theoretical Analysis}
-To better understand the empirical results from above, we contribute new theoretical analysis on RC and HC LfD. In this section, we first show the existence of environments where HC converges to the supervisor but RC does not. Then we present a new analysis of the accumulation of error for \ns. 
-
 
 \section{Theoretical Analysis} 
+To better understand the empirical results from above, we contribute new theoretical analysis on RC and HC LfD. In this section, we first show the existence of environments where HC converges to the supervisor but RC does not. Then we present a new analysis of the accumulation of error for \ns. 
+
 
 \subsection{Algorithm Consistency}\label{sec:consistent}
 In this section we work towards a fuller understanding of the tradeoffs between HC and RC. 
